@@ -25,7 +25,6 @@ namespace WEBUIautomation
                         return null;
                 });
                 
-                //var header = Driver.Instance.FindElement(By.CssSelector("h1.alm-masthead-view-title.visible-desktop-minimum.visible-desktop-low.ng-binding"));
                 if (header1.Text == "ALM")
                     return true;
                 else

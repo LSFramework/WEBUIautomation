@@ -37,11 +37,6 @@ namespace WEBUIautomation
         public static void Authenticate()
         {
             Driver.Instance.FindElement(By.CssSelector(".btn.btn-primary.pull-right")).Click();
-            /*Thread.Sleep(2000);
-            var submitButton = Driver.Instance.FindElement(By.CssSelector(".control-group.ng-scope .btn.btn-primary.pull-right"));
-            if (!submitButton.Enabled)
-                submitButton.Click();
-            */
         }
 
         public static void SelectDomain(string domain)
