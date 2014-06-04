@@ -32,5 +32,11 @@ namespace WEBUItests
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
             
         }
+        //is it necessary ?
+        [TestCleanup]
+        public void Cleanup()
+        {
+            Driver.Cleanup();
+        }
     }
 }
