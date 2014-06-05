@@ -11,17 +11,9 @@ namespace WEBUIautomation
 {
     public class LoginPage
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
+        //Use these variables for verifications
         public static string domainName { get; private set; }
         public static string projectName { get; private set; }
-=======
-=======
->>>>>>> 6eb813ab15dd0b62143f04de68a520cd6c9b50c7
-        //Use these variables for verifications
-        private static string domainName;
-        private static string projectName;
->>>>>>> 6eb813ab15dd0b62143f04de68a520cd6c9b50c7
 
         //Opening the ALM main page. Click on the WEBUI link
         public static void SelectWebui()

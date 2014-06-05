@@ -15,17 +15,9 @@ namespace WEBUIautomation
         {
             get
             {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                var header = Driver.Instance.FindElementAndWait(By.XPath("//div[@class='alm-masthead-view-title-container']"), 10);
-=======
-=======
->>>>>>> 6eb813ab15dd0b62143f04de68a520cd6c9b50c7
-
+                
                 //Need to move the 'wait' in a separate method or class
-
-                var header = Driver.Instance.FindAndWait(By.XPath("//div[@class='alm-masthead-view-title-container']"), 1);
->>>>>>> 6eb813ab15dd0b62143f04de68a520cd6c9b50c7
+                var header = Driver.Instance.FindElementAndWait(By.XPath("//div[@class='alm-masthead-view-title-container']"), 10);
                 if (header.Text == "ALM" || header.Text == "Application Lifecycle Management")
                     return true;
                 else
@@ -33,7 +25,6 @@ namespace WEBUIautomation
             }
         }
 
-<<<<<<< HEAD
         public static string GetDomainName
         {
             get
@@ -48,26 +39,6 @@ namespace WEBUIautomation
             {
                 var title = Driver.Instance.FindElement(By.XPath("//button[@class='no-button dropdown-toggle']"));
                 return title.Text.Remove(0,title.Text.IndexOf("/"));
-=======
-                /*
-
-                WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
-
-                var header1 = wait.Until<IWebElement>(d =>
-                {
-                    var headers = Driver.Instance.FindElements();
-                    if (headers.Count > 0)
-                        return headers[0];
-                    else
-                        return null;
-                });
-
-                if (header1.Text == "ALM" || header1.Text == "Application Lifecycle Management")
-                    return true;
-                else
-                    return false;
-                 */ 
->>>>>>> 6eb813ab15dd0b62143f04de68a520cd6c9b50c7
             }
         }
 
