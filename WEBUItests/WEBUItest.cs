@@ -8,13 +8,14 @@ using WEBUIautomation;
 
 namespace WEBUItests
 {
-    class WEBUItest
+    public class WEBUItest
     {
         [TestInitialize]
         public void Initialize()
         {
             Driver.Initialize();
         }
+
 
         [TestCleanup]
         public void Cleanup()

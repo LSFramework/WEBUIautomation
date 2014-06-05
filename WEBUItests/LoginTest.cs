@@ -16,14 +16,14 @@ namespace WEBUItests
             
             LoginPage.EnterName("sa");
             LoginPage.EnterPassword("");
-<<<<<<< HEAD
+
             LoginPage.Authenticate();
             LoginPage.SelectDomain("HANAN");
             LoginPage.SelectProject("hanan_drop_9");
             LoginPage.Submit();
 
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
-=======
+
             LoginPage.Authenticate();            
             LoginPage.SelectDomain("HANAN");
             LoginPage.SelectProject("hanan_drop_9");            
@@ -31,13 +31,6 @@ namespace WEBUItests
 
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
             
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            Driver.Cleanup();
->>>>>>> d5e65a9e7b4a4a40172443e8d44bd17e8b2b27d0
         }
 
     }
