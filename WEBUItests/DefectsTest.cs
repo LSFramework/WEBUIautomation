@@ -13,6 +13,7 @@ namespace WEBUItests
         [TestMethod]
         public void Post_Defect()
         {
+            LoginPage.FlowLogin("sa", "", "VITALII", "vproj");
             DefectsPage.GoTo();
 
             Assert.IsTrue(DefectsPage.IsAt, "failed to login");
