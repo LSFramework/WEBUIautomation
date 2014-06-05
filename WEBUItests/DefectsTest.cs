@@ -8,13 +8,13 @@ using WEBUIautomation;
 
 namespace WEBUItests
 {
-    class DefectsTest
+    class DefectsTest : WEBUItest
     {
         [TestMethod]
         public void Post_Defect()
         {
             LoginPage.FlowLogin("sa", "", "VITALII", "vproj");
-            DefectsPage.GoTo();
+           /* DefectsPage.GoTo();
 
             Assert.IsTrue(DefectsPage.IsAt, "failed to login");
 
@@ -24,7 +24,7 @@ namespace WEBUItests
                 .Add();
 
             Assert.AreEqual(DefectsPage.NewDefect, DefectsPage.LastCreatedDefect, "Defect is not created");
-
+            */
         }
     }
 }

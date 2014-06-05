@@ -57,5 +57,16 @@ namespace WEBUIautomation
         {
             Driver.Instance.FindElement(By.XPath("//button/translate[@key ='lg:web-ui-login-login']")).Click();
         }
+
+        public static void FlowLogin(string username, string password, string domain, string project)
+        {
+            LoginPage.SelectWebui();
+            LoginPage.EnterName(username);
+            LoginPage.EnterPassword(password);
+            LoginPage.Authenticate();
+            LoginPage.SelectDomain(domain);
+            LoginPage.SelectProject(project);
+            LoginPage.Submit();
+        }
     }
 }

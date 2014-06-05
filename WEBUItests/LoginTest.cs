@@ -8,8 +8,6 @@ namespace WEBUItests
     [TestClass]
     public class LoginTest : WEBUItest
     {
-
-
         [TestMethod]
         public void Login_In_Webui()
         {
