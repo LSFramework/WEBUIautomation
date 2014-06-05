@@ -16,8 +16,11 @@ namespace WEBUIautomation
             get
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 var header = Driver.Instance.FindElementAndWait(By.XPath("//div[@class='alm-masthead-view-title-container']"), 10);
 =======
+=======
+>>>>>>> 6eb813ab15dd0b62143f04de68a520cd6c9b50c7
 
                 //Need to move the 'wait' in a separate method or class
 
