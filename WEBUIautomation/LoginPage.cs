@@ -11,9 +11,11 @@ namespace WEBUIautomation
 {
     public class LoginPage
     {
+        //Use these variables for verifications
         private static string domainName;
         private static string projectName;
 
+        //Opening the ALM main page. Click on the WEBUI link
         public static void SelectWebui()
         {
             Driver.Instance.Navigate().GoToUrl("http://myd-vm00944.hpswlabs.adapps.hp.com:8080/qcbin");
@@ -21,6 +23,7 @@ namespace WEBUIautomation
             Driver.Instance.FindElement(By.XPath("//a[@href='ui']")).Click();
         }
 
+        //Enter name credenatials
         public static void EnterName(string name)
         {
             //var nameField = Driver.Instance.FindElement(By.CssSelector("#inputUsername"));
@@ -29,6 +32,7 @@ namespace WEBUIautomation
             nameField.SendKeys(name);
         }
 
+        //Enter password credentials
         public static void EnterPassword(string pass)
         {
             //var passField = Driver.Instance.FindElement(By.CssSelector("#inputPassword"));
@@ -37,6 +41,7 @@ namespace WEBUIautomation
             passField.SendKeys(pass);
         }
 
+        //Click on the 'Authenticate button'
         public static void Authenticate()
         {
             //Driver.Instance.FindElement(By.CssSelector(".btn.btn-primary.pull-right")).Click();
@@ -50,6 +55,7 @@ namespace WEBUIautomation
             */
         }
 
+        //Select 'Domain' from a dropdown list
         public static void SelectDomain(string domain)
         {
             Driver.Instance.FindElement(By.XPath("//*[@id='s2id_autogen1']")).Click();
@@ -57,6 +63,7 @@ namespace WEBUIautomation
             Driver.Instance.FindElement(By.XPath("//*[@id='select2-drop']//div[contains(text(), '" + domain + "')]")).Click();
         }
 
+        //Select 'Project' from a dropdown list
         public static void SelectProject(string project)
         {
             Driver.Instance.FindElement(By.XPath("//*[@id='s2id_autogen3']")).Click();
@@ -64,6 +71,7 @@ namespace WEBUIautomation
             Driver.Instance.FindElement(By.XPath("//*[@id='select2-drop']//div[contains(text(), '" + project + "')]")).Click();
         }
 
+        //Cick on the 'submit' button
         public static void Submit()
         {
             Driver.Instance.FindElement(By.XPath("//button/translate[@key ='lg:web-ui-login-login']")).Click();
