@@ -17,7 +17,41 @@ namespace WEBUIautomation
         IWebElement FindElementAndWait(By by, Int32 seconds);
      }
 
-    public class ExtDriver : FirefoxDriver, IExtWebDriver
+    public class ExtFirefoxDriver : FirefoxDriver, IExtWebDriver
+    {
+        public IWebElement FindElementAndWait(By m, Int32 seconds)
+        {
+            WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
+            var element = wait.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(m);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+    }
+
+    public class ExtInternetExplorerDriver : InternetExplorerDriver, IExtWebDriver
+    {
+        public IWebElement FindElementAndWait(By m, Int32 seconds)
+        {
+            WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
+            var element = wait.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(m);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+    }
+
+    public class ExtChromeDriver : ChromeDriver, IExtWebDriver
     {
         public IWebElement FindElementAndWait(By m, Int32 seconds)
         {

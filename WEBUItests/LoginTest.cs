@@ -26,6 +26,12 @@ namespace WEBUItests
             LoginPage.Submit();
 
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
+            Assert.IsTrue(DashboardPage.CheckDomainAndProject(LoginPage.domainName,LoginPage.projectName), "wrong domain/project");
+
+            DashboardPage.ChangeProjectDomain("E2E","OLEG");
+
+            Assert.IsTrue(DashboardPage.IsAt, "failed to login");
+            Assert.IsTrue(DashboardPage.CheckDomainAndProject(DashboardPage.GetDomainName, DashboardPage.GetProjectName), "wrong domain/project");
             
         }
 

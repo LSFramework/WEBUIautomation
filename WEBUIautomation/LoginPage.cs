@@ -11,8 +11,8 @@ namespace WEBUIautomation
 {
     public class LoginPage
     {
-        private static string domainName;
-        private static string projectName;
+        public static string domainName { get; private set; }
+        public static string projectName { get; private set; }
 
         public static void SelectWebui()
         {
