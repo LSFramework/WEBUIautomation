@@ -12,23 +12,20 @@ using System.Threading;
 
 namespace WEBUIautomation
 {
-    public class Driver : IExtWebDriver
+    public interface IExtWebDriver : IWebDriver
     {
-        public static IWebDriver Instance { get; private set; }
-
-        WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
-
-        public static void Initialize()
-        {
-            Instance = new FirefoxDriver();
-            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
-        }
-
+        IWebElement FindElementAndWait(By by, Int32 seconds);
+     }
+/*
+    public class ExtDriver : IExtWebDriver
+    {
+        
         public IWebElement FindElementAndWait(By m, Int32 seconds)
         {
+            WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
             var element = wait.Until<IWebElement>(d =>
             {
-                var elements = Instance.FindElements(m);
+                var elements = Driver.Instance.FindElements(m);
                 if (elements.Count > 0)
                     return elements[0];
                 else
@@ -36,11 +33,7 @@ namespace WEBUIautomation
             });
             return element;
         }
-    
-        public static void Cleanup()
-        {
-            if (Instance != null)
-                Instance.Dispose();
-        }
+         
     }
+*/
 }
