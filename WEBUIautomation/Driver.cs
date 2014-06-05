@@ -14,17 +14,16 @@ namespace WEBUIautomation
 {
     public class Driver
     {
-        public static IWebDriver Instance { get; private set; }
+        public static IExtWebDriver Instance { get; private set; }
 
         public static void Initialize()
         {
-            Instance = new FirefoxDriver();
+            Instance = new ExtDriver();
             Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
         }
 
         public static void Cleanup()
         {
-            //test name for method
             if (Instance != null)
                 Instance.Dispose();
         }

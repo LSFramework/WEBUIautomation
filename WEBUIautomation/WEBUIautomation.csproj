@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="DashboardPage.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="ExtDriver.cs" />
     <Compile Include="LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

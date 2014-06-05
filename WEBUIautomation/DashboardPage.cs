@@ -15,24 +15,33 @@ namespace WEBUIautomation
         {
             get
             {
+<<<<<<< HEAD
                 //Need to move the 'wait' in a separate method or class
+=======
+                var header = Driver.Instance.FindAndWait(By.XPath("//div[@class='alm-masthead-view-title-container']"), 1);
+                if (header.Text == "ALM" || header.Text == "Application Lifecycle Management")
+                    return true;
+                else
+                    return false;
+
+                /*
+>>>>>>> d5e65a9e7b4a4a40172443e8d44bd17e8b2b27d0
                 WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
 
                 var header1 = wait.Until<IWebElement>(d =>
                 {
-                    //var headers = Driver.Instance.FindElements(By.CssSelector("h1.alm-masthead-view-title.visible-desktop-minimum.visible-desktop-low.ng-binding"));
-                    var headers = Driver.Instance.FindElements(By.XPath("//div[@class='alm-masthead-view-title-container']"));
+                    var headers = Driver.Instance.FindElements();
                     if (headers.Count > 0)
                         return headers[0];
                     else
                         return null;
                 });
 
-                //var header = Driver.Instance.FindElement(By.CssSelector("h1.alm-masthead-view-title.visible-desktop-minimum.visible-desktop-low.ng-binding"));
                 if (header1.Text == "ALM" || header1.Text == "Application Lifecycle Management")
                     return true;
                 else
                     return false;
+                 */ 
             }
         }
     }
