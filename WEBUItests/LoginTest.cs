@@ -6,13 +6,9 @@ using System.Threading;
 namespace WEBUItests
 {
     [TestClass]
-    public class LoginTest
+    public class LoginTest : WEBUItest
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-            Driver.Initialize();
-        }
+
 
         [TestMethod]
         public void Login_In_Webui()
@@ -21,12 +17,11 @@ namespace WEBUItests
             LoginPage.EnterName("sa");
             LoginPage.EnterPassword("");
             LoginPage.Authenticate();
-            LoginPage.SelectDomain("HANAN");
-            LoginPage.SelectProject("hanan_drop_9");
+            LoginPage.SelectDomain("VITALII");
+            LoginPage.SelectProject("vproj");
             LoginPage.Submit();
 
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
-            
-        }
+         }
     }
 }

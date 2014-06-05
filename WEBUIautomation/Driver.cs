@@ -22,5 +22,10 @@ namespace WEBUIautomation
            Instance = new FirefoxDriver();
            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
        }
+
+       public static void Close()
+       {
+           Instance.Dispose();
+       }
     }
 }
