@@ -20,19 +20,15 @@ namespace WEBUItests
             LoginPage.SelectWebui();
             LoginPage.EnterName("sa");
             LoginPage.EnterPassword("");
-            LoginPage.Authenticate();
-            
+            LoginPage.Authenticate();            
             LoginPage.SelectDomain("HANAN");
-
-            LoginPage.SelectProject("hanan_drop_9");
-            
+            LoginPage.SelectProject("hanan_drop_9");            
             LoginPage.Submit();
 
-            //Thread.Sleep(5000);
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
             
         }
-        //is it necessary ?
+
         [TestCleanup]
         public void Cleanup()
         {
