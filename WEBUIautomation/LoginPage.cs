@@ -16,7 +16,7 @@ namespace WEBUIautomation
 
         public static void SelectWebui()
         {
-            Driver.Instance.Navigate().GoToUrl("http://myd-vm00944.hpswlabs.adapps.hp.com:8080/qcbin");
+            Driver.Instance.Navigate().GoToUrl("http://myd-vm04041.hpswlabs.adapps.hp.com:8080/qcbin");
             Driver.Instance.FindElement(By.XPath("//a[text()='ALM Web Client']")).Click();
         }
 
