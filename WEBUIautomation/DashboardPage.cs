@@ -15,6 +15,7 @@ namespace WEBUIautomation
         {
             get
             {
+                //wait
                 WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
                 var header1 = wait.Until<IWebElement>(d =>
                 {
