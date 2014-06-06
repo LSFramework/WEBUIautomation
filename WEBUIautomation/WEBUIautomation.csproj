@@ -50,6 +50,7 @@
     <Compile Include="Driver.cs" />
     <Compile Include="ExtDriver.cs" />
     <Compile Include="LoginPage.cs" />
+    <Compile Include="Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

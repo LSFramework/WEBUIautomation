@@ -11,14 +11,10 @@ namespace WEBUIautomation
 {
     public class LoginPage
     {
-        //Use these variables for verifications
-        public static string domainName { get; private set; }
-        public static string projectName { get; private set; }
-
         //Opening the ALM main page. Click on the WEBUI link
-        public static void SelectWebui()
+        public static void SelectWebui(string Server, string Port="8080")
         {
-            Driver.Instance.Navigate().GoToUrl("http://myd-vm00944.hpswlabs.adapps.hp.com:8080/qcbin");
+            Driver.Instance.Navigate().GoToUrl(Server+":"+ Port +"/qcbin");
             Driver.Instance.FindElement(By.XPath("//a[@href='ui']")).Click();
         }
 
@@ -48,7 +44,6 @@ namespace WEBUIautomation
         public static void SelectDomain(string domain)
         {
             Driver.Instance.FindElement(By.XPath("//*[@id='s2id_autogen1']")).Click();
-            domainName = domain;
             Driver.Instance.FindElement(By.XPath("//*[@id='select2-drop']//div[contains(text(), '" + domain + "')]")).Click();
         }
 
@@ -56,7 +51,6 @@ namespace WEBUIautomation
         public static void SelectProject(string project)
         {
             Driver.Instance.FindElement(By.XPath("//*[@id='s2id_autogen3']")).Click();
-            projectName = project;
             Driver.Instance.FindElement(By.XPath("//*[@id='select2-drop']//div[contains(text(), '" + project + "')]")).Click();
         }
 

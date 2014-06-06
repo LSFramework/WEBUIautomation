@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -37,13 +38,13 @@ namespace WEBUIautomation
             get
             {
                 var title = Driver.Instance.FindElement(By.XPath("//button[@class='no-button dropdown-toggle']"));
-                return title.Text.Remove(0,title.Text.IndexOf("/"));
+                return title.Text.Remove(0,title.Text.IndexOf("/")+1);
             }
         }
 
-        public static bool CheckDomainAndProject(string domain, string project)
+        public static bool CheckValidLogin(string domain, string project)
         {
-            var title = Driver.Instance.FindElement(By.XPath("//button[@class='no-button dropdown-toggle']"));
+            var title = Driver.Instance.FindElementAndWait(By.XPath("//button[@class='no-button dropdown-toggle']"),10);
             if (title.Text.Contains(domain) && title.Text.Contains(project))
                 return true;
             else
@@ -56,7 +57,10 @@ namespace WEBUIautomation
             if (domain == "default domain")
                 domain = title.Text.Remove(title.Text.IndexOf("/"));
             title.Click();
-            Driver.Instance.FindElement(By.XPath("//li[@ng-repeat='domain in domains']/a[contains(.,'" + domain + "')]")).Click();
+
+            Actions action = new Actions(Driver.Instance);
+            Actions hoverOverProjectMenu = action.MoveToElement(Driver.Instance.FindElement(By.XPath("//li[@ng-repeat='domain in domains']/a[contains(.,'" + domain + "')]")));
+            hoverOverProjectMenu.Perform();
             Driver.Instance.FindElement(By.XPath("//li[@ng-repeat='project in domain.projects']/a[contains(@href,'" + domain + "') and contains(@href,'" + project + "')]")).Click();
         }
     }

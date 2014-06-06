@@ -15,7 +15,7 @@ namespace WEBUIautomation
         public static void Initialize()
         {
             Instance = new ExtFirefoxDriver();
-            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
+            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(3));
         }
 
         public static void Cleanup()

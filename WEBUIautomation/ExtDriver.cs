@@ -11,16 +11,16 @@ namespace WEBUIautomation
     public interface IExtWebDriver : IWebDriver
     {
         IWebElement FindElementAndWait(By by, Int32 seconds);
-     }
+    }
 
     public class ExtFirefoxDriver : FirefoxDriver, IExtWebDriver
     {
-        public IWebElement FindElementAndWait(By m, Int32 seconds)
+        public IWebElement FindElementAndWait(By by, Int32 seconds)
         {
-            WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(seconds));
             var element = wait.Until<IWebElement>(d =>
             {
-                var elements = Driver.Instance.FindElements(m);
+                var elements = Driver.Instance.FindElements(by);
                 if (elements.Count > 0)
                     return elements[0];
                 else
@@ -32,12 +32,12 @@ namespace WEBUIautomation
 
     public class ExtInternetExplorerDriver : InternetExplorerDriver, IExtWebDriver
     {
-        public IWebElement FindElementAndWait(By m, Int32 seconds)
+        public IWebElement FindElementAndWait(By by, Int32 seconds)
         {
-            WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(seconds));
             var element = wait.Until<IWebElement>(d =>
             {
-                var elements = Driver.Instance.FindElements(m);
+                var elements = Driver.Instance.FindElements(by);
                 if (elements.Count > 0)
                     return elements[0];
                 else
@@ -49,12 +49,12 @@ namespace WEBUIautomation
 
     public class ExtChromeDriver : ChromeDriver, IExtWebDriver
     {
-        public IWebElement FindElementAndWait(By m, Int32 seconds)
+        public IWebElement FindElementAndWait(By by, Int32 seconds)
         {
-            WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(seconds));
             var element = wait.Until<IWebElement>(d =>
             {
-                var elements = Driver.Instance.FindElements(m);
+                var elements = Driver.Instance.FindElements(by);
                 if (elements.Count > 0)
                     return elements[0];
                 else
