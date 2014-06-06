@@ -21,8 +21,7 @@ namespace WEBUItests
 
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
             Assert.AreEqual(DashboardPage.Project, "vproj", "Wrong project");
-         
-            
+                  
         }
 
     }
