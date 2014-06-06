@@ -16,7 +16,7 @@ namespace WEBUItests
             LoginPage.EnterPassword("");
 
             LoginPage.Authenticate();
-            LoginPage.SelectDomain("HANAN");
+            LoginPage.SelectDomain("VITALII");
             LoginPage.SelectProject("hanan_drop_9");
             LoginPage.Submit();
 
