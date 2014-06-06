@@ -1,14 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WEBUIautomation;
-using System.Threading;
 
 namespace WEBUItests
 {
     [TestClass]
     public class LoginTest : WEBUItest
     {
-
         [TestMethod]
         public void Login_In_Webui()
         {
@@ -23,20 +21,17 @@ namespace WEBUItests
             LoginPage.Submit();
 
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
+            Assert.IsTrue(DashboardPage.CheckDomainAndProject(LoginPage.domainName,LoginPage.projectName), "wrong domain/project");            
+        }
 
-            LoginPage.Authenticate();            
-            LoginPage.SelectDomain("HANAN");
-            LoginPage.SelectProject("hanan_drop_9");            
-            LoginPage.Submit();
-
-            Assert.IsTrue(DashboardPage.IsAt, "failed to login");
-            Assert.IsTrue(DashboardPage.CheckDomainAndProject(LoginPage.domainName,LoginPage.projectName), "wrong domain/project");
-
-            DashboardPage.ChangeProjectDomain("E2E","OLEG");
+        [TestMethod]
+        public void Change_ProjectDomain()
+        {
+            Login_In_Webui();
+            DashboardPage.ChangeProjectDomain("E2E", "OLEG");
 
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
             Assert.IsTrue(DashboardPage.CheckDomainAndProject(DashboardPage.GetDomainName, DashboardPage.GetProjectName), "wrong domain/project");
-            
         }
 
     }

@@ -14,8 +14,7 @@ namespace WEBUIautomation
         public static bool IsAt
         {
             get
-            {
-                
+            {                
                 //Need to move the 'wait' in a separate method or class
                 var header = Driver.Instance.FindElementAndWait(By.XPath("//div[@class='alm-masthead-view-title-container']"), 10);
                 if (header.Text == "ALM" || header.Text == "Application Lifecycle Management")
