@@ -16,7 +16,7 @@ namespace WEBUIautomation
 
         public static void SelectWebui()
         {
-            Driver.Instance.Navigate().GoToUrl("http://myd-vm00944.hpswlabs.adapps.hp.com:8080/qcbin");
+            Driver.Instance.Navigate().GoToUrl("http://myd-vm04041.hpswlabs.adapps.hp.com:8080/qcbin");
             Driver.Instance.FindElement(By.XPath("//a[text()='ALM Web Client']")).Click();
         }
 
@@ -37,11 +37,6 @@ namespace WEBUIautomation
         public static void Authenticate()
         {
             Driver.Instance.FindElement(By.CssSelector(".btn.btn-primary.pull-right")).Click();
-            /*Thread.Sleep(2000);
-            var submitButton = Driver.Instance.FindElement(By.CssSelector(".control-group.ng-scope .btn.btn-primary.pull-right"));
-            if (!submitButton.Enabled)
-                submitButton.Click();
-            */
         }
 
         public static void SelectDomain(string domain)
