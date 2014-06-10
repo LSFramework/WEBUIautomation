@@ -1,5 +1,5 @@
 <Properties>
-	<Server>http://myd-vm04041.hpswlabs.adapps.hp.com</Server>
+	<Server>http://myd-vm04186.hpswlabs.adapps.hp.com</Server>
 	<Port>8080</Port>
 	<UserName>sa</UserName>
 	<UserPasswod></UserPasswod>
