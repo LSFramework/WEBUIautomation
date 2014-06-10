@@ -46,7 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DashboardPage.cs" />
+    <Compile Include="AlmHeader.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="ExtDriver.cs" />
     <Compile Include="LoginPage.cs" />

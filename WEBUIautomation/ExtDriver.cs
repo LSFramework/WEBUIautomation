@@ -67,6 +67,11 @@ namespace WEBUIautomation
 
     public class ExtRemoteWebDriver : RemoteWebDriver, IExtWebDriver
     {
+        public ExtRemoteWebDriver(ICapabilities desiredCapabilities) : base (desiredCapabilities) { }
+        public ExtRemoteWebDriver(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities) : base (commandExecutor, desiredCapabilities) { }
+        public ExtRemoteWebDriver(Uri remoteAddress, ICapabilities desiredCapabilities) : base (remoteAddress, desiredCapabilities) { }
+        public ExtRemoteWebDriver(Uri remoteAddress, ICapabilities desiredCapabilities, TimeSpan commandTimeout) : base (remoteAddress, desiredCapabilities, commandTimeout) { }
+
         public IWebElement FindElementAndWait(By by, Int32 seconds)
         {
             WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(seconds));

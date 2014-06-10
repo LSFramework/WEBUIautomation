@@ -47,19 +47,34 @@ namespace WEBUIautomation
         {
             get
             {
-                var title = Driver.Instance.FindElement(By.XPath("//button[@class='no-button dropdown-toggle']"));
-                return title.Text.Remove(title.Text.IndexOf("/"));
+                var title = Driver.Instance.FindElementAndWait(By.XPath("//div[@class='fixed-menu-width-content']/a"),10);
+                return title.Text;
             }
+        }
+
+        public static bool CheckValidUsername(string username)
+        {
+            string title = GetUsername;
+            if (title.Contains(username))
+                return true;
+            else
+                return false;
         }
 
         public static bool CheckValidLogin(string domain, string project)
         {
-            var title = Driver.Instance.FindElementAndWait(By.XPath("//button[@class='no-button dropdown-toggle']"),10);
+            var title = Driver.Instance.FindElementAndWait(By.XPath("//button[@class='no-button dropdown-toggle']"), 10);
             if (title.Text.Contains(domain) && title.Text.Contains(project))
                 return true;
             else
                 return false;
         }
+
+        public static void Logout()
+        {
+            Driver.Instance.FindElement(By.XPath("//li[@class='alm-masthead-view-navigation-link-logout']")).Click();
+        }
+        
 
         public static void ChangeProjectDomain(string project, string domain = "default domain")
         {

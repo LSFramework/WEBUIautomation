@@ -18,7 +18,7 @@ namespace WEBUItests
         [TestCleanup]
         public void Cleanup()
         {
-            Driver.Cleanup();
+            //Driver.Cleanup();
         }
     }
 }
