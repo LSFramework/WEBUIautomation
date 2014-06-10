@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace WEBUIautomation
 {
-    public class DashboardPage
+    public class AlmHeader
     {
         //Verfication that Login was successful
         public static bool IsAt
@@ -33,12 +33,22 @@ namespace WEBUIautomation
                 return title.Text.Remove(title.Text.IndexOf("/"));
             }
         }
+
         public static string GetProjectName
         {
             get
             {
                 var title = Driver.Instance.FindElement(By.XPath("//button[@class='no-button dropdown-toggle']"));
                 return title.Text.Remove(0,title.Text.IndexOf("/")+1);
+            }
+        }
+
+        public static string GetUsername
+        {
+            get
+            {
+                var title = Driver.Instance.FindElement(By.XPath("//button[@class='no-button dropdown-toggle']"));
+                return title.Text.Remove(title.Text.IndexOf("/"));
             }
         }
 
