@@ -18,8 +18,11 @@ namespace WEBUIautomation
       
        public static void Initialize()
        {
-           Instance = new ExtFirefoxDriver();
-           Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(3));
+           if(Instance == null)
+           {
+               Instance = new ExtFirefoxDriver();
+               Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(3));
+           }
        }
 
        public static void Cleanup()
@@ -30,13 +33,12 @@ namespace WEBUIautomation
 
        public static void Close()
        {
-           Thread.Sleep(3000);
            Instance.Dispose();
        }
 
        public static void Wait(int seconds)
        {
-           Thread.Sleep(seconds * 1000);
+           Thread.Sleep(TimeSpan.FromSeconds(seconds));
        }
     }
 }

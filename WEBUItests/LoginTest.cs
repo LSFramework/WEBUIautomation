@@ -10,8 +10,7 @@ namespace WEBUItests
         [TestMethod]
         public void Login_In_Webui()
         {
-            LoginPage.SelectWebui(Properties.QCServer);
-
+            LoginPage.GoTo(Properties.QCServer);
             LoginPage.EnterName(Properties.UserName);
             LoginPage.EnterPassword(Properties.UserPasswod);
 
@@ -29,7 +28,7 @@ namespace WEBUItests
         [TestMethod]
         public void Change_ProjectDomain()
         {
-            Login_In_Webui();
+            LoginPage.LoginFlow();
             AlmHeader.ChangeProjectDomain("vuds_1", "ALEXG");
 
             Assert.IsTrue(AlmHeader.IsAt, "failed to login");

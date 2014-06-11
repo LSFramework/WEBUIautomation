@@ -24,7 +24,6 @@ namespace WEBUIautomation
                     return false;
             }
         }
-
         public static string GetDomainName
         {
             get
@@ -33,7 +32,6 @@ namespace WEBUIautomation
                 return title.Text.Remove(title.Text.IndexOf("/"));
             }
         }
-
         public static string GetProjectName
         {
             get
@@ -42,7 +40,6 @@ namespace WEBUIautomation
                 return title.Text.Remove(0,title.Text.IndexOf("/")+1);
             }
         }
-
         public static string GetUsername
         {
             get
@@ -50,24 +47,6 @@ namespace WEBUIautomation
                 var title = Driver.Instance.FindElementAndWait(By.XPath("//div[@class='fixed-menu-width-content']/a"),10);
                 return title.Text;
             }
-        }
-
-        public static void Logout()
-        {
-            Driver.Instance.FindElement(By.XPath("//li[@class='alm-masthead-view-navigation-link-logout']")).Click();
-        }
-
-        public static void ChangeProjectDomain(string project, string domain = "default domain")
-        {
-            var title = Driver.Instance.FindElement(By.XPath("//button[@class='no-button dropdown-toggle']"));
-            if (domain == "default domain")
-                domain = title.Text.Remove(title.Text.IndexOf("/"));
-            title.Click();
-
-            Actions action = new Actions(Driver.Instance);
-            Actions hoverOverProjectMenu = action.MoveToElement(Driver.Instance.FindElement(By.XPath("//li[@ng-repeat='domain in domains']/a[contains(.,'" + domain + "')]")));
-            hoverOverProjectMenu.Perform();
-            Driver.Instance.FindElement(By.XPath("//li[@ng-repeat='project in domain.projects']/a[contains(@href,'" + domain + "') and contains(@href,'" + project + "')]")).Click();
         }
 
         public static bool ValidateUsername(string username)
@@ -93,5 +72,25 @@ namespace WEBUIautomation
             });
             return element;
         }
+
+        public static void Logout()
+        {
+            Driver.Instance.FindElement(By.XPath("//li[@class='alm-masthead-view-navigation-link-logout']")).Click();
+        }
+
+        public static void ChangeProjectDomain(string project, string domain = "default domain")
+        {
+            var title = Driver.Instance.FindElementAndWait(By.XPath("//button[@class='no-button dropdown-toggle']"),10);
+            if (domain == "default domain")
+                domain = title.Text.Remove(title.Text.IndexOf("/"));
+            title.Click();
+
+            Actions action = new Actions(Driver.Instance);
+            Actions hoverOverProjectMenu = action.MoveToElement(Driver.Instance.FindElement(By.XPath("//li[@ng-repeat='domain in domains']/a[contains(.,'" + domain + "')]")));
+            hoverOverProjectMenu.Perform();
+            Driver.Instance.FindElement(By.XPath("//li[@ng-repeat='project in domain.projects']/a[contains(@href,'" + domain + "') and contains(@href,'" + project + "')]")).Click();
+        }
+
+
     }
 }

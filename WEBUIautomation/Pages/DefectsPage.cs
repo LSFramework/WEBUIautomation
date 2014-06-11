@@ -12,7 +12,7 @@ namespace WEBUIautomation
         public static void GoTo()
         {
             Driver.Instance.FindElement(By.XPath("//a[@class='dropdown-toggle ng-binding']")).Click();
-            Driver.Instance.FindElement(By.XPath("//ul[@class='dropdown-menu']//a[contains(text(), 'Defects')]")).Click();
+            //Driver.Instance.FindElement(By.XPath("//ul[@class='dropdown-menu']//a[contains(text(), 'Defects')]")).Click();
         }
 
         public static void AddDefect(string summary, string severity)

@@ -62,12 +62,12 @@ namespace WEBUIautomation
 
         public static void LoginFlow()
         {
-            LoginPage.GoTo("myd-vm04186");
-            LoginPage.EnterName("sa");
-            LoginPage.EnterPassword("");
+            LoginPage.GoTo(Properties.QCServer);
+            LoginPage.EnterName(Properties.UserName);
+            LoginPage.EnterPassword(Properties.UserPasswod);
             LoginPage.Authenticate();
-            LoginPage.SelectDomain("VITALII");
-            LoginPage.SelectProject("vproj");
+            LoginPage.SelectDomain(Properties.Domain);
+            LoginPage.SelectProject(Properties.ProjectName);
             LoginPage.Submit();
         }
 
