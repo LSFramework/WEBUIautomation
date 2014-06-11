@@ -57,9 +57,19 @@ namespace WEBUIautomation
             else
                 return false;
         }
-
         public static bool ValidateLogin(string domain, string project)
         {
+            var element = DriverWait.Instance.Until<bool>(d =>
+            {
+                var title = Driver.Instance.FindElementAndWait(By.XPath("//button[@class='no-button dropdown-toggle']"), 10);
+                if (title.Text.Contains(domain) && title.Text.Contains(project))
+                    return true;
+                else
+                    return false;
+            });
+            return element;
+
+            /*
             WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
             var element = wait.Until<bool>(d =>
             {
@@ -71,13 +81,13 @@ namespace WEBUIautomation
                     return false;
             });
             return element;
+             */ 
         }
 
         public static void Logout()
         {
             Driver.Instance.FindElement(By.XPath("//li[@class='alm-masthead-view-navigation-link-logout']")).Click();
         }
-
         public static void ChangeProjectDomain(string project, string domain = "default domain")
         {
             var title = Driver.Instance.FindElementAndWait(By.XPath("//button[@class='no-button dropdown-toggle']"),10);
@@ -90,7 +100,5 @@ namespace WEBUIautomation
             hoverOverProjectMenu.Perform();
             Driver.Instance.FindElement(By.XPath("//li[@ng-repeat='project in domain.projects']/a[contains(@href,'" + domain + "') and contains(@href,'" + project + "')]")).Click();
         }
-
-
     }
 }
