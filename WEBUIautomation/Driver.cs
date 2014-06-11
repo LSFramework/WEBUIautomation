@@ -27,5 +27,16 @@ namespace WEBUIautomation
            if (Instance != null)
                Instance.Dispose();
        }
+
+       public static void Close()
+       {
+           Thread.Sleep(3000);
+           Instance.Dispose();
+       }
+
+       public static void Wait(int seconds)
+       {
+           Thread.Sleep(seconds * 1000);
+       }
     }
 }

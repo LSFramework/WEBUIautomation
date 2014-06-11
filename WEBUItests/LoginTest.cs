@@ -23,6 +23,7 @@ namespace WEBUItests
             Assert.IsTrue(AlmHeader.IsAt, "failed to login");
             Assert.IsTrue(AlmHeader.ValidateUsername(Properties.UserName), "wrong username");
             Assert.IsTrue(AlmHeader.ValidateLogin(Properties.Domain, Properties.ProjectName), "wrong domain/project");
+
         }
         
         [TestMethod]
@@ -35,6 +36,5 @@ namespace WEBUItests
             Assert.IsTrue(AlmHeader.ValidateUsername(Properties.UserName), "wrong username");
             Assert.IsTrue(AlmHeader.ValidateLogin("ALEXG", "vuds_1"), "wrong domain/project");
         }        
-
     }
 }

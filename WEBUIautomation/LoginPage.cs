@@ -12,7 +12,7 @@ namespace WEBUIautomation
     public class LoginPage
     {
         //Opening the ALM main page. Click on the WEBUI link
-        public static void SelectWebui(string Server, string Port="8080")
+        public static void GoTo(string Server, string Port="8080")
         {
             Driver.Instance.Navigate().GoToUrl(Server+":"+ Port +"/qcbin");
             Driver.Instance.FindElement(By.XPath("//a[@href='ui']")).Click();
@@ -58,6 +58,28 @@ namespace WEBUIautomation
         public static void Submit()
         {
             Driver.Instance.FindElement(By.XPath("//button/translate[@key ='lg:web-ui-login-login']")).Click();
+        }
+
+        public static void LoginFlow()
+        {
+            LoginPage.GoTo("myd-vm04186");
+            LoginPage.EnterName("sa");
+            LoginPage.EnterPassword("");
+            LoginPage.Authenticate();
+            LoginPage.SelectDomain("VITALII");
+            LoginPage.SelectProject("vproj");
+            LoginPage.Submit();
+        }
+
+        public static void LoginFlow(string ALMaddress, string name, string pass, string domain, string proj)
+        {
+            LoginPage.GoTo(ALMaddress);
+            LoginPage.EnterName(name);
+            LoginPage.EnterPassword(pass);
+            LoginPage.Authenticate();
+            LoginPage.SelectDomain(domain);
+            LoginPage.SelectProject(proj);
+            LoginPage.Submit();
         }
     }
 }
