@@ -47,9 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DashboardPage.cs" />
+    <Compile Include="DefectsPage.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequirementsPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

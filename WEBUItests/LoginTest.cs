@@ -11,7 +11,7 @@ namespace WEBUItests
         [TestMethod]
         public void Login_In_Webui()
         {
-            LoginPage.SelectWebui();
+            LoginPage.GoTo("myd-vm04186");
             LoginPage.EnterName("sa");
             LoginPage.EnterPassword("");
             LoginPage.Authenticate();
