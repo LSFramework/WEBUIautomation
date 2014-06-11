@@ -8,5 +8,6 @@ namespace WEBUIautomation
 {
     public class RequirementsPage
     {
+        //test Stas
     }
 }
