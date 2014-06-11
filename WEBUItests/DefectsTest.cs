@@ -17,11 +17,14 @@ namespace WEBUItests
             //Login in WEBui
             LoginPage.LoginFlow();
 
-            Driver.Wait(3);            
-            //Open the Defects page
-            DefectsPage.GoTo();            
-            //Defect creation flow
-            DefectsPage.AddDefect("defect2", "3-High");
+           //Open the Defects page
+            DefectsPage.GoTo();
+            
+            //Defect creation flow with chained method
+            DefectsPage.AddDefectDialog()
+                .SetSummary("defect2")
+                .SetSeverity("3-High")
+                .Add();
             
             //Verify by summary that we created the defect 
             //Assert.AreEqual(DefectsPage.LatestDefectSummary, "", "failed to create the defect");

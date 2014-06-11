@@ -52,6 +52,11 @@
     <Compile Include="Driver\ExtDriver.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Properties.cs" />
+    <Compile Include="DashboardPage.cs" />
+    <Compile Include="DefectsPage.cs" />
+    <Compile Include="Driver.cs" />
+    <Compile Include="DriverWait.cs" />
+    <Compile Include="LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\RequirementsPage.cs" />
   </ItemGroup>

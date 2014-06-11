@@ -12,6 +12,7 @@ namespace WEBUItests
         {
             Properties.Read();
             Driver.Initialize();
+            DriverWait.Initialize(10);
         }
 
         [TestCleanup]
