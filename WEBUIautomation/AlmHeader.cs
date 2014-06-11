@@ -52,29 +52,10 @@ namespace WEBUIautomation
             }
         }
 
-        public static bool CheckValidUsername(string username)
-        {
-            string title = GetUsername;
-            if (title.Contains(username))
-                return true;
-            else
-                return false;
-        }
-
-        public static bool CheckValidLogin(string domain, string project)
-        {
-            var title = Driver.Instance.FindElementAndWait(By.XPath("//button[@class='no-button dropdown-toggle']"), 10);
-            if (title.Text.Contains(domain) && title.Text.Contains(project))
-                return true;
-            else
-                return false;
-        }
-
         public static void Logout()
         {
             Driver.Instance.FindElement(By.XPath("//li[@class='alm-masthead-view-navigation-link-logout']")).Click();
         }
-        
 
         public static void ChangeProjectDomain(string project, string domain = "default domain")
         {
@@ -87,6 +68,30 @@ namespace WEBUIautomation
             Actions hoverOverProjectMenu = action.MoveToElement(Driver.Instance.FindElement(By.XPath("//li[@ng-repeat='domain in domains']/a[contains(.,'" + domain + "')]")));
             hoverOverProjectMenu.Perform();
             Driver.Instance.FindElement(By.XPath("//li[@ng-repeat='project in domain.projects']/a[contains(@href,'" + domain + "') and contains(@href,'" + project + "')]")).Click();
+        }
+
+        public static bool ValidateUsername(string username)
+        {
+            string title = GetUsername;
+            if (title.Contains(username))
+                return true;
+            else
+                return false;
+        }
+
+        public static bool ValidateLogin(string domain, string project)
+        {
+            WebDriverWait wait = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(10));
+            var element = wait.Until<bool>(d =>
+            {
+
+                var title = Driver.Instance.FindElementAndWait(By.XPath("//button[@class='no-button dropdown-toggle']"), 10);
+                if (title.Text.Contains(domain) && title.Text.Contains(project))
+                    return true;
+                else
+                    return false;
+            });
+            return element;
         }
     }
 }
