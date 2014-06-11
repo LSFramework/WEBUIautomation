@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\AlmHeader.cs" />
+    <Compile Include="Pages\DashboardPage.cs" />
     <Compile Include="Pages\DefectsPage.cs" />
     <Compile Include="Driver\Driver.cs" />
     <Compile Include="Driver\ExtDriver.cs" />
