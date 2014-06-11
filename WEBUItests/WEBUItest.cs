@@ -14,6 +14,7 @@ namespace WEBUItests
         public void Initialize()
         {
             Driver.Initialize();
+            DriverWait.Initialize(10);
         }
 
 
