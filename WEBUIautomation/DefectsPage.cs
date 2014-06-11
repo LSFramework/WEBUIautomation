@@ -13,13 +13,12 @@ namespace WEBUIautomation
     {
         public static void GoTo()
         {
-
             var pageName = DriverWait.Instance.Until<IWebElement>(d => {
-                var elements = Driver.Instance.FindElements(By.XPath("//a[@class='dropdown-toggle ng-binding']"));
-                if (elements.Count > 0)
-                    return elements[0];
-                else
-                    return null;
+            var elements = Driver.Instance.FindElements(By.XPath("//a[@class='dropdown-toggle ng-binding']"));
+            if (elements.Count > 0)
+                return elements[0];
+            else
+                return null;
             }); 
                 
             if (pageName.Text == "Defects")
@@ -52,9 +51,9 @@ namespace WEBUIautomation
     {
         public DefectsCommand()
         {
-            Driver.Wait(3);
+            //Driver.Wait(3);
             Driver.Instance.FindElement(By.XPath("//li[@class='add-entity-button ng-scope']/button")).Click();
-            Driver.Wait(3);
+            //Driver.Wait(3);
         }
 
         public DefectsCommand SetSummary(string summary)
