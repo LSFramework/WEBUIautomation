@@ -19,16 +19,15 @@ namespace WEBUItests
              RequirementsPage.GoTo();
              
              //Defect creation flow
-             RequirementsPage.AddReq();
-             /*
-             RequirementsPage.SetName("");
-             RequirementsPage.SetParent("");
-             RequirementsPage.setType("");
-             RequirementsPage.ClickAdd();
+             RequirementsPage.AddReq()
+                 .SetName("req2")
+                 //.SetParent("Functional")
+                 .SetType("Functional")
+                 .ClickAdd();
              
              //Verify by summary that we created the defect 
-             Assert.AreEqual(RequirementsPage.LatestReqName, "", "failed to create the defect");
-             */
+             //Assert.AreEqual(RequirementsPage.LatestReqName, "", "failed to create the defect");
+             
          }
     }
 }
