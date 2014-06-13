@@ -50,6 +50,7 @@
     <Compile Include="DefectsPage.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="DriverWait.cs" />
+    <Compile Include="ExtDriver.cs" />
     <Compile Include="LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequirementsPage.cs" />
