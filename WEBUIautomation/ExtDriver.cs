@@ -11,10 +11,7 @@ namespace WEBUIautomation
     {
         public interface IWebDriverExt : IWebDriver
         {
-            public IWebElement findElementAndWait(By by, int seconds)
-            { 
-                
-            }
+            public IWebElement findElementAndWait(By by, int seconds);
         }
     }
 }
