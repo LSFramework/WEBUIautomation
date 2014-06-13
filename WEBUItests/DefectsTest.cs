@@ -21,7 +21,7 @@ namespace WEBUItests
             DefectsPage.GoTo();
             
             //Defect creation flow
-            //DefectsPage.AddDefect("defect1", "3-High");
+            //DefectsPage.AddDefectFlow("defect1", "3-High");
 
             //Defect creation flow with chained method
             DefectsPage.AddDefectDialog()
