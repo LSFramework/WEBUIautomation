@@ -10,7 +10,7 @@ namespace WEBUIautomation
 {
     public class RequirementsPage
     {
-        /*
+        
         [FindsBy(How = How.XPath, Using = "//li[@class='add-entity-button ng-scope']/button")]
         private IWebElement addReqButton;
 
@@ -25,7 +25,7 @@ namespace WEBUIautomation
 
         [FindsBy(How = How.XPath, Using = "//button[@class='dialog-btn-primary no-button'][translate[@key='entity-form-add']]")]
         private IWebElement addButton;
-        */
+        
 
         public static void GoTo()
         {
@@ -43,11 +43,12 @@ namespace WEBUIautomation
                 pageName.Click();
                 Driver.Instance.FindElement(By.XPath("//ul[@class='dropdown-menu']//a[contains(text(), 'Requirements')]")).Click();
             }
-            //PageFactory.InitElements(Driver.Instance, new RequirementsPage());
+            
         }
 
-        public static RequirementsCommand AddReq()
+        public RequirementsCommand AddReq()
         {
+            //PageFactory.InitElements(Driver.Instance, new RequirementsCommand());
             return new RequirementsCommand();
         }
 
@@ -55,6 +56,7 @@ namespace WEBUIautomation
         {
             public RequirementsCommand()
             {
+                
                 Driver.Instance.FindElement(By.XPath("//li[@class='add-entity-button ng-scope']/button")).Click();
             }
 
