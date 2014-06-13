@@ -8,24 +8,27 @@ using WEBUIautomation;
 
 namespace WEBUItests
 {
-     public class RequirementsTest : WEBUItest
+    [TestClass] 
+    public class RequirementsTest : WEBUItest
     {
          [TestMethod]
          public void Create_Requirement()
          {
-             
+             LoginPage.LoginFlow();
              //Open the Defects page
              RequirementsPage.GoTo();
-             /*
+             
              //Defect creation flow
-             RequirementsPage.AddReq()
-                 .SetName("ReqHello")
-                 .SetParent("")
-                 .ClickAdd();
-
+             RequirementsPage.AddReq();
+             /*
+             RequirementsPage.SetName("");
+             RequirementsPage.SetParent("");
+             RequirementsPage.setType("");
+             RequirementsPage.ClickAdd();
+             
              //Verify by summary that we created the defect 
              Assert.AreEqual(RequirementsPage.LatestReqName, "", "failed to create the defect");
-              */
+             */
          }
     }
 }
