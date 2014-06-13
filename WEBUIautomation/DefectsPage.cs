@@ -21,7 +21,7 @@ namespace WEBUIautomation
                     return null;
             }); 
                 
-            if (pageName.Text == "Defects")
+            if (pageName.Text != "Defects")
             {
                 pageName.Click();
                 Driver.Instance.FindElement(By.XPath("//ul[@class='dropdown-menu']//a[contains(text(), 'Defects')]")).Click();
