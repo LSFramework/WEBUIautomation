@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WEBUIautomation
 {
-    
+    //Class to use Explicit Wait when finding elements
     public class DriverWait
     {
         public static WebDriverWait Instance { get; private set; }
@@ -16,7 +16,6 @@ namespace WEBUIautomation
         {
             Instance = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(seconds));
         }
-
 
     }
     

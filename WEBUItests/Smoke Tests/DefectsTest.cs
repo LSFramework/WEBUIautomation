@@ -25,7 +25,7 @@ namespace WEBUItests
 
             //Defect creation flow with chained method
             DefectsPage.AddDefectDialog()
-                .SetSummary("defect2")
+                .SetSummary("defect3")
                 .SetSeverity("3-High")
                 .Add();
             
