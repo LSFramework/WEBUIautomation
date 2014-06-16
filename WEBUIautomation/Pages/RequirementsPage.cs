@@ -46,7 +46,7 @@ namespace WEBUIautomation
             
         }
 
-        public RequirementsCommand AddReq()
+        public static RequirementsCommand AddReq()
         {
             //PageFactory.InitElements(Driver.Instance, new RequirementsCommand());
             return new RequirementsCommand();

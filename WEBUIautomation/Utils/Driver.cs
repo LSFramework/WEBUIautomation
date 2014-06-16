@@ -9,16 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
 using System.Threading;
+using WEBUIautomation.Utils;
 
 namespace WEBUIautomation
 {
     public class Driver
     {
-       public static IWebDriver Instance { get; private set;}
+       public static IWebDriverExt Instance { get; private set;}
 
        public static void Initialize()
        {
-           Instance = new FirefoxDriver();
+           Instance = new FirefoxDriverExt();
            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
        }
 

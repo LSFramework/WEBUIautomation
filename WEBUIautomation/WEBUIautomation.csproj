@@ -49,6 +49,7 @@
     <Compile Include="Pages\DashboardPage.cs" />
     <Compile Include="Pages\DefectsPage.cs" />
     <Compile Include="Utils\Driver.cs" />
+    <Compile Include="Utils\DriverExt.cs" />
     <Compile Include="Utils\DriverWait.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
