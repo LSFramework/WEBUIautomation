@@ -14,6 +14,16 @@ namespace WEBUIautomation.Pages
             OpenPage(page.ToString());
         }
 
+        public static void GoTo(Configuration configuration)
+        {
+            OpenPage(configuration.ToString());
+        }
+
+        public static void GoTo(Help help)
+        {
+            OpenPage(help.ToString());
+        }
+
         private static void OpenPage(string inputPage)
         {
             var pageName = Driver.Instance.FindElementAndWait(By.XPath("//a[@class='dropdown-toggle ng-binding']"));
@@ -34,5 +44,21 @@ namespace WEBUIautomation.Pages
         Defects,
         Home,
         Requirements
+    }
+
+    public enum Configuration
+    {
+        Customization,
+        User_Settings
+    }
+
+    public enum Help
+    {
+        Help_on_Requirements,
+        Help_on_Defects,
+        Help_on_Customization,
+        Help_Center,
+        Send_feedback,
+        About
     }
 }

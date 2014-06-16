@@ -19,6 +19,8 @@ namespace WEBUItests
              //Open the Defects page
              //RequirementsPage.GoTo();
              Navigation.GoTo(Pages.Requirements);
+             //Navigation.GoTo(Help.About);
+             //Navigation.GoTo(Configuration.Customization);
 
              //Defect creation flow
              RequirementsPage.AddReq()
