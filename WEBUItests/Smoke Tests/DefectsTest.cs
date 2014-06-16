@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WEBUIautomation;
+using WEBUIautomation.Pages;
 
 namespace WEBUItests
 {
@@ -18,7 +19,8 @@ namespace WEBUItests
             LoginPage.LoginFlow();
 
            //Open the Defects page
-            DefectsPage.GoTo();
+            //DefectsPage.GoTo();
+            Navigation.GoTo(Pages.Defects);
             
             //Defect creation flow
             //DefectsPage.AddDefectFlow("defect1", "3-High");

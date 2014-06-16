@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WEBUIautomation;
+using WEBUIautomation.Pages;
 
 namespace WEBUItests
 {
@@ -16,15 +17,16 @@ namespace WEBUItests
          {
              LoginPage.LoginFlow();
              //Open the Defects page
-             RequirementsPage.GoTo();
-             
+             //RequirementsPage.GoTo();
+             Navigation.GoTo(Pages.Requirements);
+
              //Defect creation flow
              RequirementsPage.AddReq()
                  .SetName("req2")
                  //.SetParent("Functional")
                  .SetType("Functional")
                  .ClickAdd();
-             
+
              //Verify by summary that we created the defect 
              //Assert.AreEqual(RequirementsPage.LatestReqName, "", "failed to create the defect");
              
