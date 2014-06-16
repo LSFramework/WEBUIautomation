@@ -10,7 +10,7 @@ namespace WEBUIautomation
 {
     public class RequirementsPage
     {
-        
+        /*
         [FindsBy(How = How.XPath, Using = "//li[@class='add-entity-button ng-scope']/button")]
         private IWebElement addReqButton;
 
@@ -25,7 +25,7 @@ namespace WEBUIautomation
 
         [FindsBy(How = How.XPath, Using = "//button[@class='dialog-btn-primary no-button'][translate[@key='entity-form-add']]")]
         private IWebElement addButton;
-        
+        */
 
         public static void GoTo()
         {
