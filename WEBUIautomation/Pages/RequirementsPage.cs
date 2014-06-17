@@ -29,6 +29,10 @@ namespace WEBUIautomation
 
         public static void GoTo()
         {
+
+            var pageName = Driver.Instance.FindElementAndWait(By.XPath("//a[@class='dropdown-toggle ng-binding']"), 5);
+            
+            /*
             var pageName = DriverWait.Instance.Until<IWebElement>(d =>
             {
                 var elements = Driver.Instance.FindElements(By.XPath("//a[@class='dropdown-toggle ng-binding']"));
@@ -37,7 +41,7 @@ namespace WEBUIautomation
                 else
                     return null;
             });
-
+            */
             if (pageName.Text != "Requirements")
             {
                 pageName.Click();

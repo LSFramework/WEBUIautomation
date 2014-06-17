@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace WEBUIautomation.Utils
 {
+
     //extended IWebDriver interface with FindElementAndWait method
     public interface IWebDriverExt : IWebDriver
     {
@@ -50,4 +51,6 @@ namespace WEBUIautomation.Utils
             return element;
         }
     }
+
+
 }

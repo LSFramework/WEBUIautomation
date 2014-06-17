@@ -54,9 +54,7 @@ namespace WEBUIautomation
     {
         public DefectsCommand()
         {
-            //Driver.Wait(3);
             Driver.Instance.FindElement(By.XPath("//li[@class='add-entity-button ng-scope']/button")).Click();
-            //Driver.Wait(3);
         }
 
         public DefectsCommand SetSummary(string summary)

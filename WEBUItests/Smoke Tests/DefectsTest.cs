@@ -21,6 +21,8 @@ namespace WEBUItests
            //Open the Defects page
             //DefectsPage.GoTo();
             Navigation.GoTo(Pages.Defects);
+
+            //Navigation.GoTo(Pages.Requirements);
             
             //Defect creation flow
             //DefectsPage.AddDefectFlow("defect1", "3-High");
@@ -30,6 +32,8 @@ namespace WEBUItests
                 .SetSummary("defect3")
                 .SetSeverity("3-High")
                 .Add();
+
+            Navigation.GoTo(Pages.Login);
             
             //Verify by summary that we created the defect 
             //Assert.AreEqual(DefectsPage.LatestDefectSummary, "", "failed to create the defect");

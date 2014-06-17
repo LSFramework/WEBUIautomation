@@ -26,14 +26,27 @@ namespace WEBUIautomation.Pages
 
         private static void OpenPage(string inputPage)
         {
-            var pageName = Driver.Instance.FindElementAndWait(By.XPath("//a[@class='dropdown-toggle ng-binding']"));
-            if (pageName.Text != inputPage)
+            if (inputPage != "Login")
             {
-                pageName.Click();
-                var listItem = Driver.Instance.FindElement(By.XPath("//a[@data-toggle='dropdown']/following-sibling::ul[@class='dropdown-menu']//a[contains(text(), '" + inputPage + "')]"));
-                listItem.Click();
+                var pageName = Driver.Instance.FindElementAndWait(By.XPath("//a[@class='dropdown-toggle ng-binding']"), 15);
+                if (pageName.Text != inputPage)
+                {
+                    pageName.Click();
+                    var listItem = Driver.Instance.FindElement(By.XPath("//a[@data-toggle='dropdown']/following-sibling::ul[@class='dropdown-menu']//a[contains(text(), '" + inputPage + "')]"));
+                    listItem.Click();
+                }
+                Driver.Instance.FindElementAndWait(By.XPath("//div[@class='alm-splitter-ui-view-container ng-scope']/ui-view/div[div]"), 10);
+                //Driver.Wait(2);
             }
-            Driver.Wait(2);
+            else
+            {
+                Logout();
+            }
+        }
+
+        private static void Logout()
+        {
+            Driver.Instance.FindElementAndWait(By.XPath("//a[@translate='masthead-logout']")).Click();
         }
 
         private static void OpenHelp(string inputPage)
