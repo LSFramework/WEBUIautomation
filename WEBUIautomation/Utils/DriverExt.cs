@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -52,5 +53,38 @@ namespace WEBUIautomation.Utils
         }
     }
 
+    //extended Diver class with FindElementAndWait method
+    public class ChromeDriverExt : ChromeDriver, IWebDriverExt
+    {
+        //public ChromeDriverExt(string path): base(string path);
+        //Using default WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by)
+        {
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
 
+        //Can specify WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by, int seconds)
+        {
+            DriverWait.Instance.Timeout = TimeSpan.FromSeconds(seconds);
+
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+    }
 }

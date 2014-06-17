@@ -19,7 +19,7 @@ namespace WEBUIautomation
 
        public static void Initialize()
        {
-           Instance = new FirefoxDriverExt();
+           Instance = new ChromeDriverExt();
            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(2));
        }
 
