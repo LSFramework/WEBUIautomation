@@ -36,6 +36,11 @@ namespace WEBUIautomation.Pages
             Driver.Wait(2);
         }
 
+        private static void OpenHelp(string inputPage)
+        { }
+
+        private static void OpenConfig(string inputPage)
+        { }
     }
     
     public enum Pages
