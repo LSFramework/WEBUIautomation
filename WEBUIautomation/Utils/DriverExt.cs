@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace WEBUIautomation.Utils
         IWebElement FindElementAndWait(By by, int seconds);
     }
 
-    //extended Diver class with FindElementAndWait method
+    //extended FirefoxDriver class with FindElementAndWait method
     public class FirefoxDriverExt : FirefoxDriver, IWebDriverExt
     {
         //Using default WebDriverWait timeout
@@ -53,7 +54,7 @@ namespace WEBUIautomation.Utils
         }
     }
 
-    //extended Diver class with FindElementAndWait method
+    //extended ChromeDriver class with FindElementAndWait method
     public class ChromeDriverExt : ChromeDriver, IWebDriverExt
     {
         //Constructor inherited from the base class
@@ -88,4 +89,41 @@ namespace WEBUIautomation.Utils
             return element;
         }
     }
+
+    //extended InternetExplorerDriver class with FindElementAndWait method
+    public class InternetExplorerDriverExt : InternetExplorerDriver, IWebDriverExt
+    {
+        //Constructor inherited from the base class
+        public InternetExplorerDriverExt(string path) : base(path) { }
+        //Using default WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by)
+        {
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+
+        //Can specify WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by, int seconds)
+        {
+            DriverWait.Instance.Timeout = TimeSpan.FromSeconds(seconds);
+
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+    }
+
 }
