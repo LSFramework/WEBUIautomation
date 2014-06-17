@@ -56,6 +56,7 @@ namespace WEBUIautomation.Utils
     //extended Diver class with FindElementAndWait method
     public class ChromeDriverExt : ChromeDriver, IWebDriverExt
     {
+        //Constructor inherited from the base class
         public ChromeDriverExt(string path) : base(path) { }
         //Using default WebDriverWait timeout
         public IWebElement FindElementAndWait(By by)
