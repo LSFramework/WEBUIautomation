@@ -80,6 +80,8 @@ namespace WEBUIautomation
             LoginPage.SelectDomain(domain);
             LoginPage.SelectProject(proj);
             LoginPage.Submit();
+
+            
         }
     }
 }

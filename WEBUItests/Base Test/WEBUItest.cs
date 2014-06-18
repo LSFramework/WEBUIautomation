@@ -18,7 +18,8 @@ namespace WEBUItests
         [TestCleanup]
         public void Close()
         {
-            Driver.Close();
+            Driver.Wait(5);
+            //Driver.Close();
         }
     }
 }
