@@ -15,6 +15,7 @@ namespace WEBUItests
             LoginPage.EnterPassword(Properties.UserPasswod);
 
             LoginPage.Authenticate();
+            Driver.Wait(1);
             LoginPage.SelectDomain(Properties.Domain);
             LoginPage.SelectProject(Properties.ProjectName);
             LoginPage.Submit();
