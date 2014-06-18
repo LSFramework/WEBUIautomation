@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -126,4 +127,43 @@ namespace WEBUIautomation.Utils
         }
     }
 
+    //extended RemoteDriver class with FindElementAndWait method
+    public class RemoteWebDriverExt : RemoteWebDriver, IWebDriverExt
+    {
+        //Constructor inherited from the base class
+        public RemoteWebDriverExt(ICapabilities desiredCapabilities) : base (desiredCapabilities) { }
+        public RemoteWebDriverExt(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities) : base (commandExecutor, desiredCapabilities) { }
+        public RemoteWebDriverExt(Uri remoteAddress, ICapabilities desiredCapabilities) : base (remoteAddress, desiredCapabilities) { }
+        public RemoteWebDriverExt(Uri remoteAddress, ICapabilities desiredCapabilities, TimeSpan commandTimeout) : base (remoteAddress, desiredCapabilities, commandTimeout) { }
+
+        //Using default WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by)
+        {
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+
+        //Can specify WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by, int seconds)
+        {
+            DriverWait.Instance.Timeout = TimeSpan.FromSeconds(seconds);
+
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+    }
 }

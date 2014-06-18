@@ -30,8 +30,7 @@ namespace WEBUItests
                  .ClickAdd();
 
              //Verify by summary that we created the defect 
-             //Assert.AreEqual(RequirementsPage.LatestReqName, "", "failed to create the defect");
-             
+             //Assert.AreEqual(RequirementsPage.LatestReqName, "", "failed to create the defect");             
          }
     }
 }

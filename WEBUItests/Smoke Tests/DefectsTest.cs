@@ -22,14 +22,6 @@ namespace WEBUItests
             //DefectsPage.GoTo();
             Navigation.GoTo(Pages.Defects);
 
-            //Navigation.GoTo(Pages.Requirements);
-            
-<<<<<<< HEAD:WEBUItests/DefectsTest.cs
-=======
-            //Defect creation flow
-            //DefectsPage.AddDefectFlow("defect1", "3-High");
-
->>>>>>> origin/master:WEBUItests/Smoke Tests/DefectsTest.cs
             //Defect creation flow with chained method
             DefectsPage.AddDefectDialog()
                 .SetSummary("defect3")
@@ -39,8 +31,7 @@ namespace WEBUItests
             Navigation.GoTo(Pages.Login);
             
             //Verify by summary that we created the defect 
-            //Assert.AreEqual(DefectsPage.LatestDefectSummary, "", "failed to create the defect");
-             
+            //Assert.AreEqual(DefectsPage.LatestDefectSummary, "", "failed to create the defect");             
         }
     }
 }

@@ -19,14 +19,21 @@ namespace WEBUIautomation
 
        public static void Initialize()
        {
-           Instance = new InternetExplorerDriverExt(@"C:\Utils");
-           Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(2));
+           if (Instance == null)
+           {
+               //Instance = new InternetExplorerDriverExt(@"C:\Utils");
+               Instance = new FirefoxDriverExt();
+               Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
+           }
        }
 
        public static void Close()
        {
-           Thread.Sleep(3000);
-           Instance.Dispose();
+           if (Instance != null)
+           {
+               Thread.Sleep(3000);
+               Instance.Dispose();
+           }           
        }
 
        public static void Wait(int seconds)

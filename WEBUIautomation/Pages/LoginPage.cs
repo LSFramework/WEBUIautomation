@@ -12,9 +12,9 @@ namespace WEBUIautomation
     public class LoginPage
     {
         //Opening the ALM main page. Click on the WEBUI link
-        public static void GoTo(string Server, string Port="8080")
+        public static void GoTo(string Server, string Port = "8080")
         {
-            Driver.Instance.Navigate().GoToUrl(Server+":"+ Port +"/qcbin");
+            Driver.Instance.Navigate().GoToUrl(Server + ":" + Port + "/qcbin");
             Driver.Instance.FindElement(By.XPath("//a[@href='ui']")).Click();
         }
 
@@ -80,8 +80,6 @@ namespace WEBUIautomation
             LoginPage.SelectDomain(domain);
             LoginPage.SelectProject(proj);
             LoginPage.Submit();
-
-            
         }
     }
 }

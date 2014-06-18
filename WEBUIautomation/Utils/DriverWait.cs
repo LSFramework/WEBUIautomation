@@ -14,7 +14,8 @@ namespace WEBUIautomation
 
         public static void Initialize(int seconds)
         {
-            Instance = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(seconds));
+            if (Instance == null)
+                Instance = new WebDriverWait(Driver.Instance, TimeSpan.FromSeconds(seconds));
         }
 
     }
