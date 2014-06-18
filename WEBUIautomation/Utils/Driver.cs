@@ -21,7 +21,7 @@ namespace WEBUIautomation
 
        public static void Initialize()
        {
-           var firingDriver = new EventFiringWebDriverExt(new FirefoxDriverExt());
+           var firingDriver = new EventFiringWebDriverExt(new PhantomJSDriverExt(@"C:\Utils"));
            firingDriver.ExceptionThrown += Snapshot.TakeScreenshotOnException;
            
            Instance = firingDriver;
@@ -30,7 +30,6 @@ namespace WEBUIautomation
 
        public static void Close()
        {
-           //Thread.Sleep(3000);
            Instance.Dispose();
        }
 
