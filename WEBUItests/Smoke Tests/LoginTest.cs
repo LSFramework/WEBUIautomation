@@ -17,7 +17,8 @@ namespace WEBUItests
             LoginPage.EnterPassword("");
             LoginPage.Authenticate();
             LoginPage.SelectDomain("VITALII");
-            LoginPage.SelectProject("vproj1");
+            LoginPage.SelectProject("vproj");
+            Snapshot.Take();
             LoginPage.Submit();
              
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");

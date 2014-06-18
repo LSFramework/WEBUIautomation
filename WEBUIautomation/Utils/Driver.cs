@@ -21,7 +21,7 @@ namespace WEBUIautomation
 
        public static void Initialize()
        {
-           var firingDriver = new EventFiringWebDriverExt(new PhantomJSDriverExt(@"C:\Utils"));
+           var firingDriver = new EventFiringWebDriverExt(new InternetExplorerDriverExt(@"C:\Utils"));
            firingDriver.ExceptionThrown += Snapshot.TakeScreenshotOnException;
            
            Instance = firingDriver;
