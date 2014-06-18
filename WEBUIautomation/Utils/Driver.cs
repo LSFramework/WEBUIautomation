@@ -10,19 +10,22 @@ using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
 using System.Threading;
 using WEBUIautomation.Utils;
+using System.IO;
 
 namespace WEBUIautomation
 {
     public class Driver
     {
+       private static string startupPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName, "drivers");
        public static IWebDriverExt Instance { get; private set;}
 
        public static void Initialize()
        {
            if (Instance == null)
            {
+               Instance = new ChromeDriverExt(startupPath);
                //Instance = new InternetExplorerDriverExt(@"C:\Utils");
-               Instance = new FirefoxDriverExt();
+               //Instance = new FirefoxDriverExt();
                Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
            }
        }

@@ -19,7 +19,7 @@ namespace WEBUItests
         public void Close()
         {
             Driver.Wait(5);
-            //Driver.Close();
+            Driver.Close();
         }
     }
 }
