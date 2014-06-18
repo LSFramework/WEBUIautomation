@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WEBUIautomation;
 using System.Threading;
+using WEBUIautomation.Utils;
 
 namespace WEBUItests
 {
@@ -16,12 +17,12 @@ namespace WEBUItests
             LoginPage.EnterPassword("");
             LoginPage.Authenticate();
             LoginPage.SelectDomain("VITALII");
-            LoginPage.SelectProject("vproj");
+            LoginPage.SelectProject("vproj1");
             LoginPage.Submit();
-
+             
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
             Assert.AreEqual(DashboardPage.Project, "vproj", "Wrong project");
-                  
+                            
         }
 
     }

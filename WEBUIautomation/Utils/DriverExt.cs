@@ -2,6 +2,8 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.PhantomJS;
+using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -126,4 +128,75 @@ namespace WEBUIautomation.Utils
         }
     }
 
+    //extended InternetExplorerDriver class with FindElementAndWait method
+    public class PhantomJSDriverExt : PhantomJSDriver, IWebDriverExt
+    {
+        //Constructor inherited from the base class
+        public PhantomJSDriverExt(string path) : base(path) { }
+        //Using default WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by)
+        {
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+
+        //Can specify WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by, int seconds)
+        {
+            DriverWait.Instance.Timeout = TimeSpan.FromSeconds(seconds);
+
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+    }
+
+    //extended EventFiringWebDriver class with FindElementAndWait method
+    public class EventFiringWebDriverExt : EventFiringWebDriver, IWebDriverExt
+    {
+        //Constructor inherited from the base class
+        public EventFiringWebDriverExt(IWebDriver parentDriver) : base(parentDriver) { }
+        //Using default WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by)
+        {
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+
+        //Can specify WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by, int seconds)
+        {
+            DriverWait.Instance.Timeout = TimeSpan.FromSeconds(seconds);
+
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+            return element;
+        }
+    }
 }

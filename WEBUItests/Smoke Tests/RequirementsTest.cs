@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WEBUIautomation;
 using WEBUIautomation.Pages;
+using WEBUIautomation.Utils;
 
 namespace WEBUItests
 {
@@ -21,7 +22,7 @@ namespace WEBUItests
              Navigation.GoTo(Pages.Requirements);
              //Navigation.GoTo(Help.About);
              //Navigation.GoTo(Configuration.Customization);
-
+             Snapshot.Take();  
              //Defect creation flow
              RequirementsPage.AddReq()
                  .SetName("req2")

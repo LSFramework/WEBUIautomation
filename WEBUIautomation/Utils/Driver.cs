@@ -2,6 +2,7 @@
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.PhantomJS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
 using System.Threading;
 using WEBUIautomation.Utils;
+using OpenQA.Selenium.Support.Events;
 
 namespace WEBUIautomation
 {
@@ -19,13 +21,16 @@ namespace WEBUIautomation
 
        public static void Initialize()
        {
-           Instance = new InternetExplorerDriverExt(@"C:\Utils");
+           var firingDriver = new EventFiringWebDriverExt(new FirefoxDriverExt());
+           firingDriver.ExceptionThrown += Snapshot.TakeScreenshotOnException;
+           
+           Instance = firingDriver;
            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(2));
        }
 
        public static void Close()
        {
-           Thread.Sleep(3000);
+           //Thread.Sleep(3000);
            Instance.Dispose();
        }
 
