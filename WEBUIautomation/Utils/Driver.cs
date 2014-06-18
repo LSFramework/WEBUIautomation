@@ -23,7 +23,7 @@ namespace WEBUIautomation
            {
                //Instance = new InternetExplorerDriverExt(@"C:\Utils");
                Instance = new FirefoxDriverExt();
-               Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
+               Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
            }
        }
 
