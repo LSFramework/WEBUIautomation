@@ -19,37 +19,47 @@ namespace WEBUIautomation
 {
     public class Driver
     {
-       public static IWebDriverExt Instance { get; private set;}
-       //public static ICapabilities Capabilities { get; private set; }
+        public static IWebDriverExt Instance { get; private set;}
+        //public static ICapabilities Capabilities { get; private set; }
 
-       public static void Initialize()
-       {
-           var firingDriver = new EventFiringWebDriverExt(new InternetExplorerDriverExt(@"C:\Utils"));
-           firingDriver.ExceptionThrown += Snapshot.TakeScreenshotOnException;
+        public static void Initialize()
+        {
+            
+            var snap = new Snapshot();
+            var firingDriver = new EventFiringWebDriverExt(new FirefoxDriverExt());
 
-           Instance = firingDriver;
-           Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(2));
-           
-       }
+            //Adding TakeScreenshotOnException event to Driver ExceptionThrown listener
+            firingDriver.ExceptionThrown += snap.TakeScreenshotOnException;
 
-       public static void SetBrowserResolution(int width, int height)
-       {
-           Instance.Manage().Window.Position = new Point(0, 0);
-           Instance.Manage().Window.Size = new Size(width, height);
-           //Instance.Manage().Window.Maximize();
-       }
+            //Initializing WebDriver object
+            Instance = firingDriver;
 
-       public static void BrowserMaximize()
-       {
-           Instance.Manage().Window.Maximize();
-       }
+            //Setting Implicit Wait timeout
+            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));
+        }
 
-       public static void Close()
-       {
-           Instance.Dispose();
-       }
+        //Set Browser resolution
+        public static void SetBrowserResolution(int width, int height)
+        {
+            Instance.Manage().Window.Position = new Point(0, 0);
+            Instance.Manage().Window.Size = new Size(width, height);
+            //Instance.Manage().Window.Maximize();
+        }
 
-       public static void Wait(int seconds)
+        //Maximize Browser window
+        public static void BrowserMaximize()
+        {
+            Instance.Manage().Window.Maximize();
+        }
+
+        //Close Driver
+        public static void Close()
+        {
+            Instance.Dispose();
+        }
+        
+        //Thread sleep
+        public static void Wait(int seconds)
        {
            Thread.Sleep(seconds * 1000);
        }

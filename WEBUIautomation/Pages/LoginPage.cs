@@ -14,6 +14,7 @@ namespace WEBUIautomation
         private static string domainName;
         private static string projectName;
 
+        //Need to move the method to Navigation class
         public static void GoTo(string almAddress)
         {
             Driver.Instance.Navigate().GoToUrl("http://" + almAddress + ".hpswlabs.adapps.hp.com:8080/qcbin");
