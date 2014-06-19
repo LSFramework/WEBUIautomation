@@ -14,7 +14,7 @@ namespace WEBUItests
         public void Initialize()
         {
             Driver.Initialize();
-            DriverWait.Initialize(5);
+            DriverWait.Initialize(2);
             Driver.BrowserMaximize();
         }
 

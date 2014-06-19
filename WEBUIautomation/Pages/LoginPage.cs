@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ namespace WEBUIautomation
             Driver.Instance.FindElement(By.XPath("//*[@id='s2id_autogen3']")).Click();
             projectName = project;
             Driver.Instance.FindElement(By.XPath("//*[@id='select2-drop']//div[contains(text(), '" + project + "')]")).Click();
+            
         }
 
         public static void Submit()

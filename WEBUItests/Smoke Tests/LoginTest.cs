@@ -20,7 +20,7 @@ namespace WEBUItests
             LoginPage.SelectProject("vproj");
             Snapshot.Take();
             LoginPage.Submit();
-             
+
             Assert.IsTrue(DashboardPage.IsAt, "failed to login");
             Assert.AreEqual(DashboardPage.Project, "vproj", "Wrong project");
                             
