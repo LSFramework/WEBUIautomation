@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace WEBUIautomation.Utils
 {
-    public static class Snapshot
+    //Class to take screenshots
+    public class Snapshot
     {
         //Creating the screenshots
         public static void Take()
@@ -39,7 +40,8 @@ namespace WEBUIautomation.Utils
             //ss.ToString();
         }
 
-        public static void TakeScreenshotOnException(object sender, WebDriverExceptionEventArgs e)
+        //Event for taking screenshots
+        public void TakeScreenshotOnException(object sender, WebDriverExceptionEventArgs e)
         {
             //Take();
             Screenshot ss = ((ITakesScreenshot)Driver.Instance).GetScreenshot();
@@ -53,5 +55,6 @@ namespace WEBUIautomation.Utils
             ss.SaveAsFile("C:\\Utils\\" + "Snapshot_on_exception_" + /*browserName +*/ currentTime + ".png", System.Drawing.Imaging.ImageFormat.Png);
             //ss.ToString();
         }
+
     }
 }

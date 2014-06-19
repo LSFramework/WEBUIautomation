@@ -26,7 +26,6 @@ namespace WEBUItests
              //Defect creation flow
              RequirementsPage.AddReq()
                  .SetName("req2")
-                 //.SetParent("Functional")
                  .SetType("Functional")
                  .ClickAdd();
 
