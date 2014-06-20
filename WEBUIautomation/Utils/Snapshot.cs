@@ -47,12 +47,20 @@ namespace WEBUIautomation.Utils
             Screenshot ss = ((ITakesScreenshot)Driver.Instance).GetScreenshot();
             //StackTrace stackTrace = new StackTrace();
             //string methodName = stackTrace.GetFrame(1).GetMethod().Name;
-            string currentTime = DateTime.Now.ToShortTimeString().Replace(":", "_");
+            string currentTime = DateTime.Now.ToLongTimeString().Replace(":", "_");
+            string snapshotFolder = "Tests_Snapshots";
+            string projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            string newPath = Path.Combine(projectPath, snapshotFolder);
+            
+            if (!File.Exists(newPath))
+            {
+                Directory.CreateDirectory(newPath);
+            }
             //string browserName = Driver.Capabilities.BrowserName; 
             //System.Console.WriteLine(methodName);
             //string screenshot = ss.AsBase64EncodedString;
             //byte[] screenshotAsByteArray = ss.AsByteArray;
-            ss.SaveAsFile("C:\\Utils\\" + "Snapshot_on_exception_" + /*browserName +*/ currentTime + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            ss.SaveAsFile(newPath + @"\" + "Exception_" + /*browserName +*/ currentTime + ".png", System.Drawing.Imaging.ImageFormat.Png);
             //ss.ToString();
         }
 

@@ -64,7 +64,7 @@ namespace WEBUIautomation
         public static void LoginFlow()
         {
             LoginPage.GoTo("myd-vm04186");
-            LoginPage.EnterName("sa");
+            LoginPage.EnterName("sa1");
             LoginPage.EnterPassword("");
             LoginPage.Authenticate();
             LoginPage.SelectDomain("VITALII");
