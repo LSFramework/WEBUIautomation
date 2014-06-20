@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WEBUIautomation.Utils
@@ -47,21 +48,27 @@ namespace WEBUIautomation.Utils
             Screenshot ss = ((ITakesScreenshot)Driver.Instance).GetScreenshot();
             //StackTrace stackTrace = new StackTrace();
             //string methodName = stackTrace.GetFrame(1).GetMethod().Name;
-            string currentTime = DateTime.Now.ToLongTimeString().Replace(":", "_");
-            string snapshotFolder = "Tests_Snapshots";
-            string projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            string newPath = Path.Combine(projectPath, snapshotFolder);
-            
-            if (!File.Exists(newPath))
-            {
-                Directory.CreateDirectory(newPath);
-            }
+            string currentTime = Regex.Replace(DateTime.Now.ToLongTimeString(), @"[\: ]", "_");
             //string browserName = Driver.Capabilities.BrowserName; 
             //System.Console.WriteLine(methodName);
             //string screenshot = ss.AsBase64EncodedString;
             //byte[] screenshotAsByteArray = ss.AsByteArray;
-            ss.SaveAsFile(newPath + @"\" + "Exception_" + /*browserName +*/ currentTime + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            ss.SaveAsFile(CreateFolder() + @"\" + "Exception_" + /*browserName +*/ currentTime + ".png", System.Drawing.Imaging.ImageFormat.Png);
             //ss.ToString();
+        }
+
+        private string CreateFolder()
+        {
+            string snapshotFolder = "Tests_Snapshots";
+            string projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            string newPath = Path.Combine(projectPath, snapshotFolder);
+
+            if (!File.Exists(newPath))
+            {
+                Directory.CreateDirectory(newPath);
+            }
+
+            return newPath;
         }
 
     }
