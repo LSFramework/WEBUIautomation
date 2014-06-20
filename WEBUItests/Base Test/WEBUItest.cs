@@ -15,7 +15,7 @@ namespace WEBUItests
         {
             Driver.Initialize();
             DriverWait.Initialize(2);
-            Driver.BrowserMaximize();
+            Driver.SetBrowserResolution(2560, 1440);
         }
 
 

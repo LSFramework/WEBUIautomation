@@ -128,7 +128,7 @@ namespace WEBUIautomation.Utils
         }
     }
 
-    //extended InternetExplorerDriver class with FindElementAndWait method
+    //extended PhantomJSDriver class with FindElementAndWait method
     public class PhantomJSDriverExt : PhantomJSDriver, IWebDriverExt
     {
         //Constructor inherited from the base class

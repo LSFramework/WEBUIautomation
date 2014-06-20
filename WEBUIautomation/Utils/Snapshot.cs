@@ -14,30 +14,35 @@ namespace WEBUIautomation.Utils
     //Class to take screenshots
     public class Snapshot
     {
+        static string snapshotFolder = "Tests_Snapshots";
+        static string projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+        static string newPath = Path.Combine(projectPath, snapshotFolder);
+
         //Creating the screenshots
         public static void Take()
         {
             Screenshot ss = ((ITakesScreenshot)Driver.Instance).GetScreenshot();
             StackTrace stackTrace = new StackTrace();
             string methodName = stackTrace.GetFrame(1).GetMethod().Name;
-            string currentTime = DateTime.Now.ToShortTimeString().ToString().Replace(":","_");
+            string currentTime = Regex.Replace(DateTime.Now.ToLongTimeString(), @"[\: ]", "_");
             //System.Console.WriteLine(methodName);
             //string screenshot = ss.AsBase64EncodedString;
             //byte[] screenshotAsByteArray = ss.AsByteArray;
-            ss.SaveAsFile("C:\\Utils\\" + methodName + "_" + currentTime + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            ss.SaveAsFile(CreateFolder() + @"\" + methodName + "_" + currentTime + ".png", System.Drawing.Imaging.ImageFormat.Png);
             //ss.ToString();
         }
 
         public static void Take(string name)
         {
             Screenshot ss = ((ITakesScreenshot)Driver.Instance).GetScreenshot();
+            string currentTime = Regex.Replace(DateTime.Now.ToLongTimeString(), @"[\: ]", "_");
             //StackTrace stackTrace = new StackTrace();
             //string methodName = stackTrace.GetFrame(1).GetMethod().Name;
             //string currentTime = DateTime.Now.ToShortTimeString().ToString().Replace(":", "_");
             //System.Console.WriteLine(methodName);
             //string screenshot = ss.AsBase64EncodedString;
             //byte[] screenshotAsByteArray = ss.AsByteArray;
-            ss.SaveAsFile("C:\\Utils\\" + name +".png", System.Drawing.Imaging.ImageFormat.Png);
+            ss.SaveAsFile(CreateFolder() + @"\" + name + "_" + currentTime + ".png", System.Drawing.Imaging.ImageFormat.Png);
             //ss.ToString();
         }
 
@@ -57,12 +62,8 @@ namespace WEBUIautomation.Utils
             //ss.ToString();
         }
 
-        private string CreateFolder()
+        private static string CreateFolder()
         {
-            string snapshotFolder = "Tests_Snapshots";
-            string projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            string newPath = Path.Combine(projectPath, snapshotFolder);
-
             if (!File.Exists(newPath))
             {
                 Directory.CreateDirectory(newPath);

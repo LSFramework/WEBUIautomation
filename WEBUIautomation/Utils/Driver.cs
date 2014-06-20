@@ -25,7 +25,7 @@ namespace WEBUIautomation
         public static void Initialize()
         {
             var snap = new Snapshot();
-            var firingDriver = new EventFiringWebDriverExt(new ChromeDriverExt(@"C:\Utils"));
+            var firingDriver = new EventFiringWebDriverExt(new FirefoxDriverExt(/*@"C:\Utils"*/));
 
             //Adding TakeScreenshotOnException event to Driver ExceptionThrown listener
             firingDriver.ExceptionThrown += snap.TakeScreenshotOnException;

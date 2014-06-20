@@ -13,7 +13,8 @@ namespace WEBUItests
         public void Login_In_Webui()
         {
             LoginPage.GoTo("myd-vm04186");
-            LoginPage.EnterName("sa1");
+            LoginPage.EnterName("sa");
+            Snapshot.Take("snapshot1");
             LoginPage.EnterPassword("");
             LoginPage.Authenticate();
             LoginPage.SelectDomain("VITALII");
