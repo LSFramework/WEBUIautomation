@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WEBUIautomation;
+using WEBUIautomation.Utils;
 
 namespace WEBUItests
 {
@@ -14,6 +15,7 @@ namespace WEBUItests
         public void Initialize()
         {
             Driver.Initialize();
+            Properties.Create();
             DriverWait.Initialize(2);
             Driver.BrowserMaximize();
         }
