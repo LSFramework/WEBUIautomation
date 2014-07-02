@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using WEBUIautomation.Utils;
 
 namespace WEBUIautomation
 {
@@ -17,9 +18,9 @@ namespace WEBUIautomation
         private static string projectName;
 
         //Need to move the method to Navigation class
-        public static void GoTo(string almAddress)
+        public static void GoTo(string almAddress, string almPort)
         {
-            Driver.Instance.Navigate().GoToUrl("http://" + almAddress + ".hpswlabs.adapps.hp.com:8080/qcbin");
+            Driver.Instance.Navigate().GoToUrl(almAddress + @":" + almPort + @"/qcbin/");
             Driver.Instance.FindElement(By.XPath("//a[text()='ALM Web Client']")).Click();
         }
 
@@ -46,7 +47,7 @@ namespace WEBUIautomation
         {
             //using Actions class
             Actions action = new Actions(Driver.Instance);
-            var domainLink = Driver.Instance.FindElement(By.XPath("//*[@id='s2id_autogen1']"));
+            var domainLink = Driver.Instance.FindElementAndWait(By.XPath("//*[@id='s2id_autogen1']/a"));
             action.MoveToElement(domainLink).Build().Perform();
             domainLink.Click();
             domainName = domain;
@@ -70,18 +71,18 @@ namespace WEBUIautomation
 
         public static void LoginFlow()
         {
-            LoginPage.GoTo("myd-vm00450");
-            LoginPage.EnterName("sa");
-            LoginPage.EnterPassword("");
+            LoginPage.GoTo(Properties.QCServer, Properties.ServerPort);
+            LoginPage.EnterName(Properties.UserName);
+            LoginPage.EnterPassword(Properties.UserPassword);
             LoginPage.Authenticate();
-            LoginPage.SelectDomain("OLEG");
-            LoginPage.SelectProject("rest");
+            LoginPage.SelectDomain(Properties.DomainName);
+            LoginPage.SelectProject(Properties.ProjectName);
             LoginPage.Submit();
         }
 
-        public static void LoginFlow(string ALMaddress, string name, string pass, string domain, string proj)
+        public static void LoginFlow(string almAddress, string almPort, string name, string pass, string domain, string proj)
         {
-            LoginPage.GoTo(ALMaddress);
+            LoginPage.GoTo(almAddress, almPort);
             LoginPage.EnterName(name);
             LoginPage.EnterPassword(pass);
             LoginPage.Authenticate();

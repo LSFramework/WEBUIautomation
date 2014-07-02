@@ -12,13 +12,13 @@ namespace WEBUItests
         [TestMethod]
         public void Login_In_Webui()
         {
-            LoginPage.GoTo("myd-vm04186");
-            LoginPage.EnterName("sa");
+            LoginPage.GoTo(Properties.QCServer, Properties.ServerPort);
+            LoginPage.EnterName(Properties.UserName);
             Snapshot.Take("snapshot1");
-            LoginPage.EnterPassword("");
+            LoginPage.EnterPassword(Properties.UserPassword);
             LoginPage.Authenticate();
-            LoginPage.SelectDomain("VITALII");
-            LoginPage.SelectProject("vproj");
+            LoginPage.SelectDomain(Properties.DomainName);
+            LoginPage.SelectProject(Properties.ProjectName);
             Snapshot.Take();
             LoginPage.Submit();
 

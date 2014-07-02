@@ -1,11 +1,9 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<products>
-  <product id="01">
-    <Name>Java</Name>
-    <Price>Free</Price>
-  </product>
-  <product id="02">
-    <Name>C#</Name>
-    <Price>Free</Price>
-  </product>
-</products>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<properties>
+  <Server>http://myd-vm00450.hpswlabs.adapps.hp.com</Server>
+  <Port>8080</Port>
+  <UserName>sa</UserName>
+  <UserPasswod></UserPasswod>
+  <Domain>OLEG</Domain>
+  <Project>rest</Project>
+</properties>

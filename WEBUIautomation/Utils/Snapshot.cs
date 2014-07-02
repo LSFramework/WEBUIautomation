@@ -51,7 +51,7 @@ namespace WEBUIautomation.Utils
         {
             //Take();
             Screenshot ss = ((ITakesScreenshot)Driver.Instance).GetScreenshot();
-            //StackTrace stackTrace = new StackTrace();
+            //StackTrace stackTrace = new StackTrace();%
             //string methodName = stackTrace.GetFrame(1).GetMethod().Name;
             string currentTime = Regex.Replace(DateTime.Now.ToLongTimeString(), @"[\: ]", "_");
             //string browserName = Driver.Capabilities.BrowserName; 
