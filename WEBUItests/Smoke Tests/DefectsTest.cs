@@ -31,6 +31,7 @@ namespace WEBUItests
             DefectsPage.AddDefectDialog()
                 .SetSummary("defect3")
                 .SetSeverity("3-High")
+                .DragNameFromCalendar()
                 .Add();
 
             Navigation.GoTo(Pages.Login);

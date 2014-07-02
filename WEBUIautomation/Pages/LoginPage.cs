@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -43,16 +44,22 @@ namespace WEBUIautomation
 
         public static void SelectDomain(string domain)
         {
-            Driver.Instance.FindElement(By.XPath("//*[@id='s2id_autogen1']")).Click();
+            //using Actions class
+            Actions action = new Actions(Driver.Instance);
+            var domainLink = Driver.Instance.FindElement(By.XPath("//*[@id='s2id_autogen1']"));
+            action.MoveToElement(domainLink).Build().Perform();
+            domainLink.Click();
             domainName = domain;
-            Driver.Instance.FindElement(By.XPath("//*[@id='select2-drop']//div[contains(text(), '"+ domain +"')]")).Click();
+            
+            domainLink = Driver.Instance.FindElement(By.XPath("//*[contains(@id, 'select2-result-label')][contains(text(), '" + domain + "')]"));
+            domainLink.Click();
         }
 
         public static void SelectProject(string project)
         {
             Driver.Instance.FindElement(By.XPath("//*[@id='s2id_autogen3']")).Click();
             projectName = project;
-            Driver.Instance.FindElement(By.XPath("//*[@id='select2-drop']//div[contains(text(), '" + project + "')]")).Click();
+            Driver.Instance.FindElement(By.XPath("//*[@id='select2-chosen-4'][contains(text(), '" + project + "')]")).Click();
             
         }
 
@@ -63,12 +70,12 @@ namespace WEBUIautomation
 
         public static void LoginFlow()
         {
-            LoginPage.GoTo("myd-vm04186");
-            LoginPage.EnterName("sa1");
+            LoginPage.GoTo("myd-vm00450");
+            LoginPage.EnterName("sa");
             LoginPage.EnterPassword("");
             LoginPage.Authenticate();
-            LoginPage.SelectDomain("VITALII");
-            LoginPage.SelectProject("vproj");
+            LoginPage.SelectDomain("OLEG");
+            LoginPage.SelectProject("rest");
             LoginPage.Submit();
         }
 

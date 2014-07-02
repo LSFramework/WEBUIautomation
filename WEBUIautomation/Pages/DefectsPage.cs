@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -69,10 +70,22 @@ namespace WEBUIautomation
             return this;
         }
 
+        public DefectsCommand DragNameFromCalendar()
+        {
+            Actions builder = new Actions(Driver.Instance);
+            Driver.Instance.FindElement(By.XPath("//input[contains(@ng-click, 'openDatePicker')]")).Click();
+            var someDate = Driver.Instance.FindElement(By.XPath("//table[@class='ui-datepicker-calendar']//a[contains(@class, 'ui-state-active')]"));
+            var description = Driver.Instance.FindElement(By.XPath("//div[@class='alm-ckeditor alm-ckeditor-container ng-scope']//p"));
+
+            builder.DragAndDrop(someDate, description);
+            return this;
+        }
+
         public void Add()
         {
             Driver.Instance.FindElement(By.XPath("//button[@class='dialog-btn-primary no-button'][translate[@key='entity-form-add']]")).Click();
         }
+
     }
 
 }
