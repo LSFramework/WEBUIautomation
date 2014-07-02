@@ -74,10 +74,18 @@ namespace WEBUIautomation
         {
             Actions builder = new Actions(Driver.Instance);
             Driver.Instance.FindElement(By.XPath("//input[contains(@ng-click, 'openDatePicker')]")).Click();
+            //Actions builder = new Actions(Driver.Instance);
+            //Driver.Instance.FindElement(By.XPath("//input[contains(@ng-click, 'openDatePicker')]")).Click();
             var someDate = Driver.Instance.FindElement(By.XPath("//table[@class='ui-datepicker-calendar']//a[contains(@class, 'ui-state-active')]"));
             var description = Driver.Instance.FindElement(By.XPath("//div[@class='alm-ckeditor alm-ckeditor-container ng-scope']//p"));
 
-            builder.DragAndDrop(someDate, description);
+            builder.ClickAndHold(someDate)
+                .MoveToElement(description)
+                .Release()
+                .Build()
+                .Perform();
+
+            //builder.DragAndDrop(someDate, description);
             return this;
         }
 

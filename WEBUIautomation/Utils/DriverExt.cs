@@ -26,6 +26,9 @@ namespace WEBUIautomation.Utils
     //extended FirefoxDriver class with FindElementAndWait method
     public class FirefoxDriverExt : FirefoxDriver, IWebDriverExt
     {
+        public FirefoxDriverExt() : base() { }
+        public FirefoxDriverExt(FirefoxProfile profile) : base(profile) { }
+
         //Using default WebDriverWait timeout
         public IWebElement FindElementAndWait(By by)
         {

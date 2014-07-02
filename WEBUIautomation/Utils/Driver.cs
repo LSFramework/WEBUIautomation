@@ -24,8 +24,12 @@ namespace WEBUIautomation
 
         public static void Initialize()
         {
+
+            //FirefoxProfile properties = new FirefoxProfile();
+            //properties.SetPreference("webdriver.log.file", "/tmp/firefox_console");
+
             var snap = new Snapshot();
-            var firingDriver = new EventFiringWebDriverExt(new FirefoxDriverExt(/*@"C:\Utils"*/));
+            var firingDriver = new EventFiringWebDriverExt(new FirefoxDriverExt());
 
             //Adding TakeScreenshotOnException event to Driver ExceptionThrown listener
             firingDriver.ExceptionThrown += snap.TakeScreenshotOnException;
