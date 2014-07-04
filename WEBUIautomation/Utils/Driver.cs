@@ -28,14 +28,22 @@ namespace WEBUIautomation
             //FirefoxProfile properties = new FirefoxProfile();
             //properties.SetPreference("webdriver.log.file", "/tmp/firefox_console");
 
-            var snap = new Snapshot();
-            var firingDriver = new EventFiringWebDriverExt(new FirefoxDriverExt());
+            //Object for Snapshot class
+            //var snap = new Snapshot();
+            //Object for Logger class
+            //var logger = new Logger();
+            //Binding driver to the EventFiringDriver
+            //var firingDriver = new EventFiringWebDriverExt(new FirefoxDriverExt());
 
             //Adding TakeScreenshotOnException event to Driver ExceptionThrown listener
-            firingDriver.ExceptionThrown += snap.TakeScreenshotOnException;
+            //firingDriver.ExceptionThrown += snap.TakeScreenshotOnException;
+            //Adding LogOnException event to Driver ExceptionThrown listener
+            //firingDriver.ExceptionThrown += logger.LogOnException;
 
             //Initializing WebDriver object
-            Instance = firingDriver;
+            //Instance = firingDriver;
+
+            Instance = new FirefoxDriverExt();
 
             //Setting Implicit Wait timeout
             Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));

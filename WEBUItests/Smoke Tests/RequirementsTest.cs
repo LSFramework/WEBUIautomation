@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ using WEBUIautomation.Utils;
 
 namespace WEBUItests
 {
-    [TestClass] 
+    [TestFixture] 
     public class RequirementsTest : WEBUItest
     {
-         [TestMethod]
+         [Test]
          public void Create_Requirement()
          {
              LoginPage.LoginFlow();

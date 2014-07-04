@@ -19,7 +19,7 @@ namespace WEBUIautomation.Utils
         static string newPath = Path.Combine(projectPath, snapshotFolder);
 
         //Creating the screenshots
-        public static void Take()
+        public static string Take()
         {
             Screenshot ss = ((ITakesScreenshot)Driver.Instance).GetScreenshot();
             StackTrace stackTrace = new StackTrace();
@@ -29,6 +29,7 @@ namespace WEBUIautomation.Utils
             //string screenshot = ss.AsBase64EncodedString;
             //byte[] screenshotAsByteArray = ss.AsByteArray;
             ss.SaveAsFile(CreateFolder() + @"\" + methodName + "_" + currentTime + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            return CreateFolder() + @"\" + methodName + "_" + currentTime + ".png";
             //ss.ToString();
         }
 

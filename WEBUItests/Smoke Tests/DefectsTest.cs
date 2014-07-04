@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ using WEBUIautomation.Pages;
 
 namespace WEBUItests
 {
-    [TestClass]
+    [TestFixture]
     public class DefectsTest : WEBUItest
     {
-        [TestMethod]
+        [Test]
         public void Create_Defect()
         {
             //Login in WEBui
