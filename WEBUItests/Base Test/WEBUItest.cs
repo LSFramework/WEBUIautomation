@@ -16,18 +16,18 @@ namespace WEBUItests
         public void Initialize()
         {
             Logger.Log("Starting Test Set", Logger.msgType.Message);
-            //Driver.Initialize();
+            Driver.Initialize();
             Properties.Create();
             Properties.Read();
-            //DriverWait.Initialize(2);
-            //Driver.BrowserMaximize();
+            DriverWait.Initialize(2);
+            Driver.BrowserMaximize();
             
         }
 
         [SetUp]
         public void SetUp()
         {
-            LocalDriverManager.GetDriver();
+            //LocalDriverManager.GetDriver();
             Logger.Log("Starting Test: " + NUnit.Framework.TestContext.CurrentContext.Test.Name, Logger.msgType.Message);
         }
 
@@ -48,7 +48,7 @@ namespace WEBUItests
         [TestFixtureTearDown]
         public void Cleanup()
         {
-            //Driver.Close();
+            Driver.Close();
         }
     }
 }
