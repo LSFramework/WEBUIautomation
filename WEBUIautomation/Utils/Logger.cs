@@ -22,7 +22,8 @@ namespace WEBUIautomation.Utils
         {
             Message,
             Warning,
-            Error
+            Error,
+            Passed
         }
 
         //Creating the screenshots
@@ -42,6 +43,9 @@ namespace WEBUIautomation.Utils
                         break;
                     case msgType.Error:
                         logStream.WriteLine(DateTime.Now.ToString() + " <font color='red'><b>" + sMessage + "</b></font><br>");
+                        break;
+                    case msgType.Passed:
+                        logStream.WriteLine(DateTime.Now.ToString() + " <font color='green'><b>" + sMessage + "</b></font><br>");
                         break;
                 }
 

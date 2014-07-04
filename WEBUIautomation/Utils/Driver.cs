@@ -25,8 +25,8 @@ namespace WEBUIautomation
         public static void Initialize()
         {
 
-            //FirefoxProfile properties = new FirefoxProfile();
-            //properties.SetPreference("webdriver.log.file", "/tmp/firefox_console");
+            FirefoxProfile properties = new FirefoxProfile();
+            properties.SetPreference("profile", "default");
 
             //Object for Snapshot class
             //var snap = new Snapshot();
@@ -43,7 +43,7 @@ namespace WEBUIautomation
             //Initializing WebDriver object
             //Instance = firingDriver;
 
-            Instance = new FirefoxDriverExt();
+            Instance = new FirefoxDriverExt(properties);
 
             //Setting Implicit Wait timeout
             Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));

@@ -49,7 +49,7 @@ namespace WEBUIautomation.Utils
         }
     }
 
-    public class DriverListener : ITestAction 
+    public class WebDriverListener : ITestAction 
     {
         public ActionTargets Targets { get { return ActionTargets.Test | ActionTargets.Suite; } }
 

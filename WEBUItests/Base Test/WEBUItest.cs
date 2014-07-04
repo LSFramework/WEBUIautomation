@@ -16,17 +16,18 @@ namespace WEBUItests
         public void Initialize()
         {
             Logger.Log("Starting Test Set", Logger.msgType.Message);
-            Driver.Initialize();
+            //Driver.Initialize();
             Properties.Create();
             Properties.Read();
-            DriverWait.Initialize(2);
-            Driver.BrowserMaximize();
-            //LocalDriverManager.GetDriver();
+            //DriverWait.Initialize(2);
+            //Driver.BrowserMaximize();
+            
         }
 
         [SetUp]
         public void SetUp()
         {
+            LocalDriverManager.GetDriver();
             Logger.Log("Starting Test: " + NUnit.Framework.TestContext.CurrentContext.Test.Name, Logger.msgType.Message);
         }
 
@@ -35,16 +36,19 @@ namespace WEBUItests
         {
             if (NUnit.Framework.TestContext.CurrentContext.Result.Status == TestStatus.Failed)
             {
-                Logger.Log("The step: " + NUnit.Framework.TestContext.CurrentContext.Test.Name + " failed!",  Logger.msgType.Error);
+                Logger.Log("The step: " + NUnit.Framework.TestContext.CurrentContext.Test.Name + " failed!", Logger.msgType.Error);
                 Logger.Log("Snapshot is: " + Snapshot.Take(), Logger.msgType.Error);
             }
-            Logger.Log("Test Finished! ", Logger.msgType.Message);
+            else
+            {
+                Logger.Log("Test Finished! ", Logger.msgType.Passed);
+            }
         }
 
         [TestFixtureTearDown]
         public void Cleanup()
         {
-            Driver.Close();
+            //Driver.Close();
         }
     }
 }
