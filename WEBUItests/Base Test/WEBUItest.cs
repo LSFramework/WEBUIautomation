@@ -21,6 +21,7 @@ namespace WEBUItests
             Properties.Read();
             DriverWait.Initialize(2);
             Driver.BrowserMaximize();
+            //LocalDriverManager.GetDriver();
         }
 
         [SetUp]
