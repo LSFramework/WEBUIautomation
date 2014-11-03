@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <properties>
-  <Server>http://myd-vm00450.hpswlabs.adapps.hp.com</Server>
+  <Server>http://myd-vm07272.hpswlabs.adapps.hp.com</Server>
   <Port>8080</Port>
   <UserName>sa</UserName>
   <UserPasswod></UserPasswod>
-  <Domain>EVGENY</Domain>
-  <Project>EVGENY_PC</Project>
+  <Domain>VITALII</Domain>
+  <Project>vproj</Project>
 </properties>

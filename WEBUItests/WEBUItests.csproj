@@ -69,11 +69,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Smoke Tests\DefectsTest.cs" />
-    <Compile Include="Smoke Tests\LoginInParallels.cs" />
-    <Compile Include="Smoke Tests\LoginTest.cs" />
+    <Compile Include="PSearch.cs" />
+    <Compile Include="Smoke Tests\MyPC\CreatePerformanceTest.cs" />
+    <Compile Include="Smoke Tests\WebUI\DefectsTest.cs" />
+    <Compile Include="Smoke Tests\MyPC\LoginInMypc.cs" />
+    <Compile Include="Smoke Tests\WebUI\LoginInParallels.cs" />
+    <Compile Include="Smoke Tests\WebUI\LoginTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Smoke Tests\RequirementsTest.cs" />
+    <Compile Include="Smoke Tests\WebUI\RequirementsTest.cs" />
     <Compile Include="Base Test\WEBUItest.cs" />
   </ItemGroup>
   <ItemGroup>

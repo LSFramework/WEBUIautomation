@@ -48,7 +48,8 @@ namespace WEBUItests
         [TestFixtureTearDown]
         public void Cleanup()
         {
-            Driver.Close();
+            Driver.Wait(3);
+            //Driver.Close();
         }
     }
 }

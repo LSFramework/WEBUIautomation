@@ -52,6 +52,7 @@
     <Compile Include="Pages\DashboardPage.cs" />
     <Compile Include="Pages\DefectsPage.cs" />
     <Compile Include="Pages\Navigation.cs" />
+    <Compile Include="Pages\PLoginPage.cs" />
     <Compile Include="Utils\Driver.cs" />
     <Compile Include="Utils\DriverExt.cs" />
     <Compile Include="Utils\DriverWait.cs" />

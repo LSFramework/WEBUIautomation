@@ -43,6 +43,22 @@ namespace WEBUIautomation.Utils
             return element;
         }
 
+        public bool IsElementPresent(By by, int seconds)
+        {
+            DriverWait.Instance.Timeout = TimeSpan.FromSeconds(seconds);
+
+            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            {
+                var elements = Driver.Instance.FindElements(by);
+                if (elements.Count > 0)
+                    return elements[0];
+                else
+                    return null;
+            });
+
+            return element != null;
+        }
+
         //Can specify WebDriverWait timeout
         public IWebElement FindElementAndWait(By by, int seconds)
         {
@@ -67,9 +83,9 @@ namespace WEBUIautomation.Utils
         //Using default WebDriverWait timeout
         public IWebElement FindElementAndWait(By by)
         {
-            var element = DriverWait.Instance.Until<IWebElement>(d =>
+            var element = DriverWait.Instance.Until<IWebElement>(driver =>
             {
-                var elements = Driver.Instance.FindElements(by);
+                var elements = driver.FindElements(by);
                 if (elements.Count > 0)
                     return elements[0];
                 else

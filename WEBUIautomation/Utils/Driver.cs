@@ -43,7 +43,7 @@ namespace WEBUIautomation
             //Initializing WebDriver object
             //Instance = firingDriver;
 
-            Instance = new FirefoxDriverExt(properties);
+            Instance = new ChromeDriverExt(@"C:\Utils");
 
             //Setting Implicit Wait timeout
             Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));
