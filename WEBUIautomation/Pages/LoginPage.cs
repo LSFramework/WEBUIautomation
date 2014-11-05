@@ -76,7 +76,7 @@ namespace WEBUIautomation
             Driver.Instance.FindElement(By.XPath("//input[@id='ctl00_PageContent_btnLogin']")).Click();
 
             //Getting focus on the MyPC popup window
-            Driver.Wait(5);
+            Driver.Wait(8);
             do
             {
                 afterPopup = Driver.Instance.WindowHandles.ToList();
@@ -84,14 +84,15 @@ namespace WEBUIautomation
 
             var result = afterPopup.Except(beforePopup).ToList();
             Driver.Instance.SwitchTo().Window(result[0]);
-            Driver.Wait(3);
-
+            //Driver.Wait(3);
+            
+            /*
             Actions mouse = new Actions(Driver.Instance);
             mouse.MoveToElement(Driver.Instance.FindElement(By.XPath("//div[contains(@ng-class, 'selectedLink_TestMgmt')]")))
                 .MoveToElement(Driver.Instance.FindElementAndWait(By.XPath("//div[contains(@ng-class, 'selectedLink_TestMgmt')]//li[contains(text(), 'Test Plan')]")))
                 .Click()
                 .Build().Perform();
-            
+            */
         }
 
         public static void LoginFlow()

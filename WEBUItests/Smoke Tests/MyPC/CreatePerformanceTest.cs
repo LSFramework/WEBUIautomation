@@ -15,7 +15,10 @@ namespace WEBUItests.Smoke_Tests.MyPC
         public void createPerfTest()
         {
             LoginPage.LoginFlow();
-            Navigation.GoTo(Pages.Defects);
+            Navigation.GoTo(Pages.Topologies);
+            Driver.Wait(7);
+            Assert.AreEqual("Topologies", Navigation.CurrentPageTitle);
+            //Navigation.Logout();
         }
     }
 }
