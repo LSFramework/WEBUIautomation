@@ -24,7 +24,6 @@ namespace WEBUItests.Smoke_Tests
             LoginPage.SelectProject(Properties.ProjectName);
             //Snapshot.Take();
             LoginPage.Submit();
-
             //Assert.AreEqual();
         }
     }

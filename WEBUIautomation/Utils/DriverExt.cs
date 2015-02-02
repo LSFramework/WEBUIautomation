@@ -29,8 +29,7 @@ namespace WEBUIautomation.Utils
         public FirefoxDriverExt() : base() { }
         public FirefoxDriverExt(FirefoxProfile profile) : base(profile) { }
 
-        //Using default WebDriverWait timeout
-        public IWebElement FindElementAndWait(By by)
+        private static IWebElement FindElementByLocator(By by)
         {
             var element = DriverWait.Instance.Until<IWebElement>(d =>
             {
@@ -43,34 +42,26 @@ namespace WEBUIautomation.Utils
             return element;
         }
 
+        //Using default WebDriverWait timeout
+        public IWebElement FindElementAndWait(By by)
+        {
+            var element = FindElementByLocator(by);
+            return element;
+        }
+
         public bool IsElementPresent(By by, int seconds)
         {
             DriverWait.Instance.Timeout = TimeSpan.FromSeconds(seconds);
-
-            var element = DriverWait.Instance.Until<IWebElement>(d =>
-            {
-                var elements = Driver.Instance.FindElements(by);
-                if (elements.Count > 0)
-                    return elements[0];
-                else
-                    return null;
-            });
-
+            var element = FindElementByLocator(by);
             return element != null;
         }
+
 
         //Can specify WebDriverWait timeout
         public IWebElement FindElementAndWait(By by, int seconds)
         {
             DriverWait.Instance.Timeout = TimeSpan.FromSeconds(seconds);
-
-            var element = DriverWait.Instance.Until<IWebElement>(d => {
-                var elements = Driver.Instance.FindElements(by);
-                if (elements.Count > 0)
-                    return elements[0];
-                else
-                    return null;
-            });
+            var element = FindElementByLocator(by);
             return element;
         }
     }

@@ -64,7 +64,7 @@ namespace WEBUIautomation.Utils
                 {
                     XDocument xdoc = new XDocument(
                         new XElement("properties",
-                            new XElement("Server", "http://myd-vm00450.hpswlabs.adapps.hp.com"),
+                            new XElement("Server", "http://myd-vm03805"),
                             new XElement("Port", "8080"),
                             new XElement("UserName", "sa"),
                             new XElement("UserPasswod", ""),

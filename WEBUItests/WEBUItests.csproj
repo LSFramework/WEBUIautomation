@@ -69,7 +69,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="PSearch.cs" />
     <Compile Include="Smoke Tests\MyPC\CreatePerformanceTest.cs" />
     <Compile Include="Smoke Tests\WebUI\DefectsTest.cs" />
     <Compile Include="Smoke Tests\MyPC\LoginInMypc.cs" />
