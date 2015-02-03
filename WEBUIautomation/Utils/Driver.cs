@@ -24,7 +24,6 @@ namespace WEBUIautomation
 
         public static void Initialize()
         {
-
             FirefoxProfile properties = new FirefoxProfile();
             properties.SetPreference("profile", "default");
 

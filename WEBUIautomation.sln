@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBUIautomation", "WEBUIautomation\WEBUIautomation.csproj", "{B41AA1F1-F477-437B-9465-B2D99FF89EFD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBUItests", "WEBUItests\WEBUItests.csproj", "{550B5C1F-033B-4886-94EA-F4F07BCF88E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBPages", "WEBPages\WEBPages.csproj", "{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +21,10 @@ Global
 		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

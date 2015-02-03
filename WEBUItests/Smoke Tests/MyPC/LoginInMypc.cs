@@ -1,11 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WEBUIautomation;
 using WEBUIautomation.Utils;
+using WEBPages.Pages;
 
 namespace WEBUItests.Smoke_Tests
 {
@@ -15,16 +10,14 @@ namespace WEBUItests.Smoke_Tests
         [Test]
         public void Login_In_MyPC()
         {
-            LoginPage.GoTo(Properties.QCServer, Properties.ServerPort);
-            LoginPage.EnterName(Properties.UserName);
-            //Snapshot.Take("snapshot1");
-            LoginPage.EnterPassword(Properties.UserPassword);
-            LoginPage.Authenticate();
-            LoginPage.SelectDomain(Properties.DomainName);
-            LoginPage.SelectProject(Properties.ProjectName);
-            //Snapshot.Take();
-            LoginPage.Submit();
-            //Assert.AreEqual();
+            ALMainPage.GoToMyPC(Properties.QCServer, Properties.ServerPort);            
+            MyPCLoginPage.EnterName(Properties.UserName);        
+            MyPCLoginPage.EnterPassword(Properties.UserPassword);
+            MyPCLoginPage.Authenticate();
+            MyPCLoginPage.SelectDomain(Properties.DomainName);
+            MyPCLoginPage.SelectProject(Properties.ProjectName);            
+            MyPCLoginPage.Submit();
+            MyPCNavigation.Logout();
         }
     }
 }
