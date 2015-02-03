@@ -65,8 +65,7 @@ namespace WEBUIautomation
             Driver.Instance.FindElement(By.XPath("//*[@id='ctl00_PageContent_ddlProjects_Input']")).Click();
             projectName = project;
             Driver.Wait(2);
-            Driver.Instance.FindElement(By.XPath("//*[@id='ctl00_PageContent_ddlProjects_DropDown']//li[contains(text(), '" + project + "')]")).Click();
-            
+            Driver.Instance.FindElement(By.XPath("//*[@id='ctl00_PageContent_ddlProjects_DropDown']//li[contains(text(), '" + project + "')]")).Click();          
         }
 
         public static void Submit()
@@ -89,8 +88,8 @@ namespace WEBUIautomation
             Actions mouse = new Actions(Driver.Instance);
             mouse.MoveToElement(Driver.Instance.FindElement(By.XPath("//div[contains(@ng-class, 'selectedLink_TestMgmt')]")))
                 .MoveToElement(Driver.Instance.FindElementAndWait(By.XPath("//div[contains(@ng-class, 'selectedLink_TestMgmt')]//li[contains(text(), 'Test Plan')]")))
-                .Click()
-                .Build().Perform();
+                .Click()            
+                .Build().Perform();           
             
         }
 
@@ -113,9 +112,7 @@ namespace WEBUIautomation
             LoginPage.Authenticate();
             LoginPage.SelectDomain(domain);
             LoginPage.SelectProject(proj);
-            LoginPage.Submit();
-
-            
+            LoginPage.Submit();            
         }
     }
 }

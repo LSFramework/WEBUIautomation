@@ -12,8 +12,8 @@ namespace WEBUIautomation
     public class DashboardPage
     {
 
-        public static string Project { 
-            
+        public static string Project 
+        { 
             get
             {
                 var projectName = Driver.Instance.FindElement(By.XPath("//button[@class='no-button dropdown-toggle']"));
@@ -42,7 +42,5 @@ namespace WEBUIautomation
                     return false;
             } 
         }
-
-        
     }
 }

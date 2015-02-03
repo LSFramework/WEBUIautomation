@@ -24,7 +24,6 @@ namespace WEBUIautomation
 
         public static void Initialize()
         {
-
             FirefoxProfile properties = new FirefoxProfile();
             properties.SetPreference("profile", "default");
 
@@ -43,7 +42,7 @@ namespace WEBUIautomation
             //Initializing WebDriver object
             //Instance = firingDriver;
 
-            Instance = new ChromeDriverExt(@"C:\Utils");
+            Instance = new ChromeDriverExt(@"C:\GitHub\WEBUIautomation\WEBUIautomation\Utils");
 
             //Setting Implicit Wait timeout
             Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));

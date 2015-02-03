@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace WEBUIautomation
 {
+    using WEBUIautomation.Utils;
     public class DefectsPage
     {
         public static void GoTo()
