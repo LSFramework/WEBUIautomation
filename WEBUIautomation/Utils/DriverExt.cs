@@ -51,6 +51,7 @@ namespace WEBUIautomation.Utils
             DriverWait.Instance.Timeout = TimeSpan.FromSeconds(seconds);
             return FindElementByLocator(iWebDriverExt, by);
         }
+
     }
 
     //extended FirefoxDriver class with FindElementAndWait method
@@ -60,6 +61,7 @@ namespace WEBUIautomation.Utils
         public FirefoxDriverExt(FirefoxProfile profile) : base(profile) { }
     }
 
+    
     //extended ChromeDriver class with FindElementAndWait method
     public class ChromeDriverExt : ChromeDriver, IWebDriverExt
     {
