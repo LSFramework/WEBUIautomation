@@ -21,7 +21,6 @@ namespace WEBUItests
             Properties.Read();
             DriverWait.Initialize(2);
             Driver.BrowserMaximize();
-            
         }
 
         [SetUp]
@@ -29,6 +28,7 @@ namespace WEBUItests
         {
             //LocalDriverManager.GetDriver();
             Logger.Log("Starting Test: " + NUnit.Framework.TestContext.CurrentContext.Test.Name, Logger.msgType.Message);
+
         }
 
         [TearDown]

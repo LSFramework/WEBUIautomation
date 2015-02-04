@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <properties>
+<<<<<<< HEAD
+  <Server>http://myd-vm03805.hpswlabs.adapps.hp.com</Server>
+=======
   <Server>http://myd-vm03805</Server>
+>>>>>>> origin/PC_1250
   <Port>8080</Port>
   <UserName>sa</UserName>
   <UserPasswod></UserPasswod>
