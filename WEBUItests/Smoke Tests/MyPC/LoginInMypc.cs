@@ -3,12 +3,19 @@ using WEBUIautomation.Utils;
 using WEBPages.Pages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using WEBUIautomation;
+using System;
+using System.Threading;
 
 namespace WEBUItests.Smoke_Tests
 {
     [TestFixture]
     public class LoginInMypc : WEBUItest
     {
+
+        const string pathToScript = @"C:\ins\CloudSanityScript.zip";
+
+
         [Test]
         public void Login_In_MyPC()
         {
@@ -18,11 +25,15 @@ namespace WEBUItests.Smoke_Tests
             MyPCLoginPage.PasswordField.Clear();
             MyPCLoginPage.PasswordField.SendKeys(Properties.UserPassword);
             MyPCLoginPage.AuthenticateBtn.Click();
-            MyPCLoginPage.SelectDomain(Properties.DomainName);
-            MyPCLoginPage.SelectProject(Properties.ProjectName);
+            MyPCLoginPage.DomainSelector.Click();
+            MyPCLoginPage.Domains_DropDown.SelectItem(Properties.DomainName).Click();
+            MyPCLoginPage.ProjectSelector.Click();
+            MyPCLoginPage.Projects_DropDown.SelectItem(Properties.ProjectName).Click();           
             MyPCLoginPage.LoginBtn.Click();
             MyPCNavigation.SwitchToPopup();
-            MyPCNavigation.LogoutBtn.Click();
+            TestPlan.CreateNewFolder("Tests3");            
+            TestPlan.UploadScript(pathToScript);
+            //TestPlan.CreateNewTest("performance test");
         }
     }
 }

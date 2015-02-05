@@ -7,65 +7,77 @@ using WEBUIautomation;
 using WEBUIautomation.Utils;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using WEBPages.Properties;
+
 
 namespace WEBPages.Pages
 {
     //Contains the methods to complete Login MyPC
     public class MyPCLoginPage
     {
+        # region Xpaths values as constants
+        const string CssUserNameSelector = @"#ctl00_PageContent_txtUserName";
+        const string CssPasswordSelector = @"#ctl00_PageContent_txtPassword";
+
+        const string CssBtnAuthSelector	= @"#ctl00_PageContent_btnAuthenticate";        
+            
+        const string xPathDomainSelector =  @"//*[@id='ctl00_PageContent_ddlDomains_Input']";
+        const string xPathProjectSelector = @"//*[@id='ctl00_PageContent_ddlProjects_Input']";
+
+        const string xPathProjectsDropDownList = @".//*[@id='ctl00_PageContent_ddlProjects_DropDown']/div/ul";
+        const string xPathDomainsDropDownList = @".//*[@id='ctl00_PageContent_ddlDomains_DropDown']/div/ul";
+
+        const string xPathLoginBtn = @"//input[@id='ctl00_PageContent_btnLogin']";
+
+        #endregion
+
         public static IWebElement LoginBtn
-        {get {return Driver.Instance.FindElement(By.XPath(Resources.xPathLoginBtn));}}
+        {get {return Driver.Instance.FindElement(By.XPath(xPathLoginBtn));}}
 
         public static IWebElement UserNameField
-        { get{ return Driver.Instance.FindElement(By.CssSelector(Resources.CssUserNameSelector));} }
+        { get{ return Driver.Instance.FindElement(By.CssSelector(CssUserNameSelector));} }
 
         public static IWebElement PasswordField
-        { get { return Driver.Instance.FindElement(By.CssSelector(Resources.CssPasswordSelector)); } }
+        { get { return Driver.Instance.FindElement(By.CssSelector(CssPasswordSelector)); } }
 
         public static IWebElement AuthenticateBtn
-        { get { return Driver.Instance.FindElement(By.CssSelector(Resources.CssBtnAuthSelector)); } }
+        { get { return Driver.Instance.FindElement(By.CssSelector(CssBtnAuthSelector)); } }
 
         public static IWebElement DomainSelector
-        { get { return Driver.Instance.FindElementAndWait(By.XPath(Resources.xPathDomainSelector)); } }
-        
-
-        public static void EnterName(string name)
         {
-            var nameField = Driver.Instance.FindElement(By.CssSelector(Resources.CssUserNameSelector));
-            nameField.Clear();
-            nameField.SendKeys(name);
+            get
+            {
+               Driver.Wait(2);
+               return Driver.Instance.FindElementAndWait(By.XPath(xPathDomainSelector));        
+            }
         }
 
-        public static void EnterPassword(string pass)
+        public static IWebElement Domains_DropDown
         {
-            var passField = Driver.Instance.FindElement(By.CssSelector(Resources.CssPasswordSelector));
-            passField.Clear();
-            passField.SendKeys(pass);
+            get 
+            { 
+                Driver.Wait(2);
+                return Driver.Instance.FindElementAndWait(By.XPath(xPathDomainsDropDownList)); 
+            } 
         }
 
-        public static void Authenticate()
+        public static IWebElement ProjectSelector
         {
-            Driver.Instance.FindElement(By.CssSelector(Resources.CssBtnAuthSelector)).Click();
+            get
+            {
+                Driver.Wait(2);
+                return Driver.Instance.FindElementAndWait(By.XPath(xPathProjectSelector));
+            }
         }
 
-        public static void SelectDomain(string domain)
+        public static IWebElement Projects_DropDown
         {
-            Driver.Wait(4);
-            var domainLink = Driver.Instance.FindElementAndWait(By.XPath(Resources.xPathDomainSelector));
-            domainLink.Click();
-
-            domainLink = Driver.Instance.FindElementAndWait(By.XPath(Resources.xPathDomainsDropDownList + domain + "')]"));
-            Driver.Wait(1);
-            domainLink.Click();
-        }
-
-        public static void SelectProject(string project)
-        {
-            Driver.Wait(2);
-            Driver.Instance.FindElement(By.XPath(Resources.xPathProjectSelector)).Click();
-            Driver.Wait(2);
-            Driver.Instance.FindElement(By.XPath(Resources.xPathProjectsDropDownList + project + "')]")).Click();
-        }             
+            get
+            {
+                Driver.Wait(2);
+                return Driver.Instance.FindElementAndWait(By.XPath(xPathProjectsDropDownList));
+            }
+        }                    
     }
+
+    
 }

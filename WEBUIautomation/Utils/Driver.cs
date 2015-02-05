@@ -42,7 +42,7 @@ namespace WEBUIautomation
             //Initializing WebDriver object
             //Instance = firingDriver;
 
-            Instance = new ChromeDriverExt(@"C:\GitHub\WEBUIautomation\WEBUIautomation\Utils");
+            Instance = new ChromeDriverExt(@"C:\Utils");
             //Instance = new FirefoxDriverExt();
 
             //Setting Implicit Wait timeout

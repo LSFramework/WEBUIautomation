@@ -52,6 +52,25 @@ namespace WEBUIautomation.Utils
             return FindElementByLocator(iWebDriverExt, by);
         }
 
+        public static IWebElement FindElementAndWait(this IWebElement iWebElement, By by)
+        {
+            return Driver.Instance.FindElementAndWait(by);
+        }
+
+        public static IWebElement SelectItem(this IWebElement iWebElement, string itemLocator)
+        {
+            return Driver.Instance.FindElementAndWait(By.XPath("//li[contains(text(), '" + itemLocator + "')]"));
+        }
+
+        public static IWebElement SelectItem(this IWebElement iWebElement, string itemLocator, string tagName)
+        {
+            return Driver.Instance.FindElementAndWait(By.XPath(@"//" + tagName + "[contains(text(), '" + itemLocator + "')]"));
+        }
+
+        public static IWebElement SelectItem(this IWebElement iWebElement, string itemLocator, string tagName, string propertyName)
+        {
+            return Driver.Instance.FindElementAndWait(By.XPath(@"//"+tagName+ "[contains(@" + propertyName+",'"+itemLocator+"')]"));
+        }
     }
 
     //extended FirefoxDriver class with FindElementAndWait method
