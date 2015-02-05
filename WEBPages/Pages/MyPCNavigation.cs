@@ -13,9 +13,23 @@ namespace WEBPages.Pages
 {
     public class MyPCNavigation
     {
-        public static void Logout()
-        {
-            Driver.Instance.FindElementAndWait(By.XPath(Resources.XPathLogoutBtn)).Click();          
+
+        public static IWebElement LogoutBtn
+        { 
+            get 
+            {
+                return Driver.Instance.FindElementAndWait(By.XPath(Resources.XPathLogoutBtn)); 
+            } 
         }
+
+        public static void SwitchToPopup()
+        {
+            do
+            {
+               IList<string> afterPopup = Driver.Instance.WindowHandles.ToList();
+            } while (Driver.Instance.WindowHandles.ToList().Count <= 1);
+            Driver.Instance.SwitchTo().Window(Driver.Instance.WindowHandles.Last());
+        }
+            
     }
 }

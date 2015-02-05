@@ -14,8 +14,21 @@ namespace WEBPages.Pages
     //Contains the methods to complete Login MyPC
     public class MyPCLoginPage
     {
+        public static IWebElement LoginBtn
+        {get {return Driver.Instance.FindElement(By.XPath(Resources.xPathLoginBtn));}}
 
-        private static List<string> beforePopup, afterPopup;
+        public static IWebElement UserNameField
+        { get{ return Driver.Instance.FindElement(By.CssSelector(Resources.CssUserNameSelector));} }
+
+        public static IWebElement PasswordField
+        { get { return Driver.Instance.FindElement(By.CssSelector(Resources.CssPasswordSelector)); } }
+
+        public static IWebElement AuthenticateBtn
+        { get { return Driver.Instance.FindElement(By.CssSelector(Resources.CssBtnAuthSelector)); } }
+
+        public static IWebElement DomainSelector
+        { get { return Driver.Instance.FindElementAndWait(By.XPath(Resources.xPathDomainSelector)); } }
+        
 
         public static void EnterName(string name)
         {
@@ -53,24 +66,6 @@ namespace WEBPages.Pages
             Driver.Instance.FindElement(By.XPath(Resources.xPathProjectSelector)).Click();
             Driver.Wait(2);
             Driver.Instance.FindElement(By.XPath(Resources.xPathProjectsDropDownList + project + "')]")).Click();
-        }
-
-        public static void Submit()
-        {
-            beforePopup = Driver.Instance.WindowHandles.ToList();
-            Driver.Wait(2);
-            Driver.Instance.FindElement(By.XPath(Resources.xPathLoginBtn)).Click();
-
-            //Getting focus on the MyPC popup window
-            Driver.Wait(5);
-            do
-            {
-                afterPopup = Driver.Instance.WindowHandles.ToList();
-            } while (Driver.Instance.WindowHandles.ToList().Count <= 1);
-
-            var result = afterPopup.Except(beforePopup).ToList();
-            Driver.Instance.SwitchTo().Window(result[0]);
-            Driver.Wait(3);       
-        }               
+        }             
     }
 }

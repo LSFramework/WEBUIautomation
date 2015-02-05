@@ -65,6 +65,10 @@ namespace WEBUIautomation.Utils
         public FirefoxDriverExt(FirefoxProfile profile) : base(profile) { }
     }
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> origin/PC_1250
     //extended ChromeDriver class with FindElementAndWait method
     public class ChromeDriverExt : ChromeDriver, IWebDriverExt
     {

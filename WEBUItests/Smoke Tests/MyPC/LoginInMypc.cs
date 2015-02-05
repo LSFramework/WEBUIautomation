@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using WEBUIautomation.Utils;
 using WEBPages.Pages;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace WEBUItests.Smoke_Tests
 {
@@ -10,14 +12,17 @@ namespace WEBUItests.Smoke_Tests
         [Test]
         public void Login_In_MyPC()
         {
-            ALMainPage.GoToMyPC(Properties.QCServer, Properties.ServerPort);            
-            MyPCLoginPage.EnterName(Properties.UserName);        
-            MyPCLoginPage.EnterPassword(Properties.UserPassword);
-            MyPCLoginPage.Authenticate();
+            ALMainPage.GoToMyPC(Properties.QCServer, Properties.ServerPort);
+            MyPCLoginPage.UserNameField.Clear();
+            MyPCLoginPage.UserNameField.SendKeys(Properties.UserName);
+            MyPCLoginPage.PasswordField.Clear();
+            MyPCLoginPage.PasswordField.SendKeys(Properties.UserPassword);
+            MyPCLoginPage.AuthenticateBtn.Click();
             MyPCLoginPage.SelectDomain(Properties.DomainName);
-            MyPCLoginPage.SelectProject(Properties.ProjectName);            
-            MyPCLoginPage.Submit();
-            MyPCNavigation.Logout();
+            MyPCLoginPage.SelectProject(Properties.ProjectName);
+            MyPCLoginPage.LoginBtn.Click();
+            MyPCNavigation.SwitchToPopup();
+            MyPCNavigation.LogoutBtn.Click();
         }
     }
 }
