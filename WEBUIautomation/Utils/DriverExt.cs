@@ -32,6 +32,10 @@ namespace WEBUIautomation.Utils
                 else
                     return null;
             });
+
+            //Draw a border around found element
+            ((IJavaScriptExecutor)Driver.Instance).ExecuteScript("arguments[0].style.border='3px solid yellow'", element);
+
             return element;
         }
 
@@ -52,13 +56,6 @@ namespace WEBUIautomation.Utils
             return FindElementByLocator(iWebDriverExt, by);
         }
 
-    }
-
-    //extended FirefoxDriver class with FindElementAndWait method
-    public class FirefoxDriverExt : FirefoxDriver, IWebDriverExt
-    {
-        public FirefoxDriverExt() : base() { }
-        public FirefoxDriverExt(FirefoxProfile profile) : base(profile) { }
     }
 
     //extended FirefoxDriver class with FindElementAndWait method
