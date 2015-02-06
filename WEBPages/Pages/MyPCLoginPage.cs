@@ -15,16 +15,16 @@ namespace WEBPages.Pages
     public class MyPCLoginPage
     {
         public static IWebElement LoginBtn
-        {get {return Driver.Instance.FindElement(By.XPath(Resources.xPathLoginBtn));}}
+        {get {return Driver.Instance.FindElement(By.XPath(Resources.xPathLoginBtn), "red");}}
 
         public static IWebElement UserNameField
-        { get{ return Driver.Instance.FindElement(By.CssSelector(Resources.CssUserNameSelector));} }
+        { get { return Driver.Instance.FindElement(By.CssSelector(Resources.CssUserNameSelector), "red"); } }
 
         public static IWebElement PasswordField
-        { get { return Driver.Instance.FindElement(By.CssSelector(Resources.CssPasswordSelector)); } }
+        { get { return Driver.Instance.FindElement(By.CssSelector(Resources.CssPasswordSelector), "red"); } }
 
         public static IWebElement AuthenticateBtn
-        { get { return Driver.Instance.FindElement(By.CssSelector(Resources.CssBtnAuthSelector)); } }
+        { get { return Driver.Instance.FindElement(By.CssSelector(Resources.CssBtnAuthSelector), "red"); } }
 
         public static IWebElement DomainSelector
         { get { return Driver.Instance.FindElementAndWait(By.XPath(Resources.xPathDomainSelector)); } }

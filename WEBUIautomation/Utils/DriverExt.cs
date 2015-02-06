@@ -39,6 +39,17 @@ namespace WEBUIautomation.Utils
             return element;
         }
 
+        //FindElement method with an element highlight
+        public static IWebElement FindElement(this IWebDriverExt iWebDriverExt, By by, String color)
+        {
+            var element = Driver.Instance.FindElement(by);
+            
+            //Draw a border around found element
+            ((IJavaScriptExecutor)Driver.Instance).ExecuteScript("arguments[0].style.border='3px solid " + color + "'", element);
+            
+            return element;
+        }
+
         public static IWebElement FindElementAndWait(this IWebDriverExt iWebDriverExt, By by)
         {
             return  FindElementByLocator(iWebDriverExt,by);            
@@ -65,10 +76,6 @@ namespace WEBUIautomation.Utils
         public FirefoxDriverExt(FirefoxProfile profile) : base(profile) { }
     }
 
-<<<<<<< HEAD
-=======
-    
->>>>>>> origin/PC_1250
     //extended ChromeDriver class with FindElementAndWait method
     public class ChromeDriverExt : ChromeDriver, IWebDriverExt
     {
