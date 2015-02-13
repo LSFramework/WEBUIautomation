@@ -98,6 +98,9 @@ namespace WEBPages.Pages
             public static IWebElement SelectBtn
             { get { return Driver.Instance.FindElementAndWait(By.XPath(@".//span[contains(@class,'ruFileWrap ruStyled')]")); } }
 
+            public static IWebElement CloseBtn
+            { get { return Driver.Instance.FindElementAndWait(By.XPath(@".//*[@id='ctl00_PageContent_btnClose']")); } }
+
 
             public static void SendPathToWindow(string path)
             {
@@ -155,11 +158,15 @@ namespace WEBPages.Pages
             Tree.SelectItem("Tests", "span").Click();
             UploadScriptBtn.Click();
             MyPCNavigation.SwitchToDefaultContent();
-            MyPCNavigation.SwitchToFrame(@"//iframe[contains(@ng-src,'UploadScripts.aspx')]");
+            MyPCNavigation.SwitchToFrame(@"//iframe[contains(@ng-src,'UploadScripts.aspx')]");           
             UploadScriptDialog.SelectBtn.Click();
             Thread.Sleep(1000);
             UploadScriptDialog.SendPathToWindow(pathToScript);
             UploadScriptDialog.UploadBtn.Click();
+            System.Threading.Thread.Sleep(3000);
+            UploadScriptDialog.CloseBtn.Click();
+            MyPCNavigation.SwitchToMainTab();
+            MyPCNavigation.SwitchToDefaultContent();
         }
 
         #endregion        

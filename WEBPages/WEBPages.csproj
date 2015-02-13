@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\ALMainPage.cs" />
+    <Compile Include="Pages\DesignLoadTest.cs" />
     <Compile Include="Pages\MyPCLoginPage.cs" />
     <Compile Include="Pages\MyPCNavigation.cs" />
     <Compile Include="Pages\Pages.cs" />

@@ -15,12 +15,11 @@ namespace WEBPages.Pages
         #region xPath constatnts
         const string xPathLogoutBtn = @".//*[@id='MastheadDiv']/div[1]/div[2]/div[7]";
         const string xPathTestMgmt = @"//div[contains(@ng-class, 'selectedLink_TestMgmt')]";
-        
 
         #endregion
 
         public static IWebElement LogoutBtn
-        { get {return Driver.Instance.FindElementAndWait(By.XPath(xPathLogoutBtn)); } }
+        { get { return Driver.Instance.FindElementAndWait(By.XPath(xPathLogoutBtn)); } }
 
         public static IWebElement TestManagement
         { get { return Driver.Instance.FindElementAndWait(By.XPath(xPathTestMgmt)); } }
@@ -49,10 +48,12 @@ namespace WEBPages.Pages
 
             do
             {
-               IList<string> afterPopup = Driver.Instance.WindowHandles.ToList();
+                IList<string> afterPopup = Driver.Instance.WindowHandles.ToList();
             } while (Driver.Instance.WindowHandles.ToList().Count == before);
 
             Driver.Instance.SwitchTo().Window(Driver.Instance.WindowHandles.Last());
         }
+
     }
+    
 }
