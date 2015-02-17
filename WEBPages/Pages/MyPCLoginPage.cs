@@ -31,22 +31,22 @@ namespace WEBPages.Pages
         #endregion
 
         public static IWebElement LoginBtn
-        {get {return Driver.Instance.FindElement(By.XPath(xPathLoginBtn));}}
+        {get {return Driver.Instance.FindElementAndWait(By.XPath(xPathLoginBtn));}}
 
         public static IWebElement UserNameField
-        { get{ return Driver.Instance.FindElement(By.CssSelector(CssUserNameSelector));} }
+        { get { return Driver.Instance.FindElementAndWait(By.CssSelector(CssUserNameSelector)); } }
 
         public static IWebElement PasswordField
-        { get { return Driver.Instance.FindElement(By.CssSelector(CssPasswordSelector)); } }
+        { get { return Driver.Instance.FindElementAndWait(By.CssSelector(CssPasswordSelector)); } }
 
         public static IWebElement AuthenticateBtn
-        { get { return Driver.Instance.FindElement(By.CssSelector(CssBtnAuthSelector)); } }
+        { get { return Driver.Instance.FindElementAndWait(By.CssSelector(CssBtnAuthSelector)); } }
 
         public static IWebElement DomainSelector
         {
             get
             {
-               Driver.Wait(2);
+               Driver.Wait(1);
                return Driver.Instance.FindElementAndWait(By.XPath(xPathDomainSelector));        
             }
         }
@@ -55,7 +55,7 @@ namespace WEBPages.Pages
         {
             get 
             { 
-                Driver.Wait(2);
+                Driver.Wait(1);
                 return Driver.Instance.FindElementAndWait(By.XPath(xPathDomainsDropDownList)); 
             } 
         }
@@ -64,7 +64,7 @@ namespace WEBPages.Pages
         {
             get
             {
-                Driver.Wait(2);
+                Driver.Wait(1);
                 return Driver.Instance.FindElementAndWait(By.XPath(xPathProjectSelector));
             }
         }
@@ -73,7 +73,7 @@ namespace WEBPages.Pages
         {
             get
             {
-                Driver.Wait(2);
+                Driver.Wait(1);
                 return Driver.Instance.FindElementAndWait(By.XPath(xPathProjectsDropDownList));
             }
         }                    

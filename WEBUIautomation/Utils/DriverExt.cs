@@ -34,18 +34,18 @@ namespace WEBUIautomation.Utils
             });
 
             //Draw a border around found element
-            ((IJavaScriptExecutor)Driver.Instance).ExecuteScript("arguments[0].style.border='3px solid yellow'", element);
+            Highlight(element);
 
             return element;
         }
 
         //FindElement method with an element highlight
-        public static IWebElement FindElement(this IWebDriverExt iWebDriverExt, By by, String color)
+        public static IWebElement FindElement(this IWebDriverExt iWebDriverExt, By by, int ms=10)
         {
             var element = Driver.Instance.FindElement(by);
             
             //Draw a border around found element
-            ((IJavaScriptExecutor)Driver.Instance).ExecuteScript("arguments[0].style.border='3px solid " + color + "'", element);
+            Highlight(element, ms);
             
             return element;
         }
@@ -96,6 +96,22 @@ namespace WEBUIautomation.Utils
                     iWebDriverExt.SwitchTo().Frame(frame);
                     break;
                 }           
+        }
+
+        //Highlight a found element
+        public static void Highlight(this IWebElement element, int ms = 10)
+        {
+            try
+            {
+                var jsDriver = ((IJavaScriptExecutor)Driver.Instance);
+                var originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
+                jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
+                Driver.Wait(ms/1000);
+                jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", element);
+            }
+            catch (Exception)
+            { 
+            }
         }
     }
 
