@@ -12,9 +12,7 @@ namespace WEBUItests.Smoke_Tests
     [TestFixture]
     public class LoginInMypc : WEBUItest
     {
-
         const string pathToScript = @"C:\ins\CloudSanityScript.zip";
-
 
         [Test]
         public void Login_In_MyPC()
@@ -31,12 +29,14 @@ namespace WEBUItests.Smoke_Tests
             MyPCLoginPage.Projects_DropDown.SelectItem(Properties.ProjectName).Click();           
             MyPCLoginPage.LoginBtn.Click();
             MyPCNavigation.SwitchToPopup();
-            //TestPlan.CreateNewFolder("Tests3");            
-            //TestPlan.UploadScript(pathToScript);
+            TestPlan.CreateNewFolder("tests");
+            TestPlan.CreateNewFolder("scripts");
+            TestPlan.UploadScript(pathToScript);
             TestPlan.CreateNewTest("performance test1");
             System.Threading.Thread.Sleep(3000);
-            //MyPCNavigation.SwitchToFrame("Workload.aspx");          
-            DesignLoadTest.SelectWorkloadType();
+            DesignLoadTest.WorkloadTypeDialog.btnOK.Click();
+            DesignLoadTest.Tabs.tabGroupsAndWorkload.Click();
+           
         }
         
     }

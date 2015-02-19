@@ -13,42 +13,59 @@ namespace WEBPages.Pages
 {
     public class TestPlan
     {
+        private const string position="MainTab";
+        private static IWebDriverExt _mainTab = Driver.Instance;
 
+        private static IWebDriverExt mainTab
+        {
+            get
+            {
+                if (_mainTab.CurrentFrame != By.Id(position))
+                {
+                    _mainTab.SwitchTo().DefaultContent();
+                    MyPCNavigation.TestManagement.Click();
+                    MyPCNavigation.TestManagement.SelectItem("Test Plan").Click();
+                    _mainTab = Driver.Instance.SwitchToFrame(By.Id(position));
+                }
+                return _mainTab;
+            }
+        }
+        
         #region The containers of UI elements
 
         public static IWebElement Tree
-        { get { return Driver.Instance.FindElementAndWait(By.XPath(@".//*[@id='divTestPlanTree']")); } }
+        { get { return mainTab.FindElementAndWait(By.Id("divTestPlanTree"));} }
 
-        public static IWebElement TreeToolBar
-        { get { return Driver.Instance.FindElementAndWait(By.XPath(@".//*[contains(@id,'TestPlanTreeControl_GenericTreeView1_toolbar')]")); } }
+        //public static IWebElement TreeToolBar
+        //{ get { return mainTab.FindElementAndWait(By.XPath(@".//*[contains(@id,'TestPlanTreeControl_GenericTreeView1_toolbar')]")); } }
         
         #endregion
 
         #region Test Plan Tree toolbar buttons
 
         public static IWebElement CreateNewFolderBtn
-        { get { return TreeToolBar.SelectItem("New Folder", "a", "title"); } }
+        { get { return Tree.SelectItem("New Folder", "a", "title"); } }
 
         public static IWebElement UploadScriptBtn
-        { get { return TreeToolBar.SelectItem("Upload Script", "img", "alt"); } }
+        { get { return Tree.SelectItem("Upload Script", "img", "alt"); } }
 
         public static IWebElement CreateTestBtn
-        { get { return TreeToolBar.SelectItem("New Test", "img", "alt"); } }
+        { get { return Tree.SelectItem("New Test", "img", "alt"); } }
         
         public static IWebElement DeleteBtn
-        { get { return TreeToolBar.SelectItem("Delete", "img", "alt"); } }
+        { get { return Tree.SelectItem("Delete", "img", "alt"); } }
        
         public static IWebElement CopyBtn
-        { get { return TreeToolBar.SelectItem("Copy", "img", "alt"); } }
+        { get { return Tree.SelectItem("Copy", "img", "alt"); } }
 
         public static IWebElement CutBtn
-        { get { return TreeToolBar.SelectItem("Cut", "img", "alt"); } }
+        { get { return Tree.SelectItem("Cut", "img", "alt"); } }
 
         public static IWebElement PasteBtn
-        { get { return TreeToolBar.SelectItem("Paste", "img", "alt"); } }
+        { get { return Tree.SelectItem("Paste", "img", "alt"); } }
 
         public static IWebElement RefreshBtn
-        { get { return TreeToolBar.SelectItem("Refresh All", "img", "alt"); } }
+        { get { return Tree.SelectItem("Refresh All", "img", "alt"); } }
         
         #endregion
 
@@ -59,13 +76,13 @@ namespace WEBPages.Pages
         public static class CreateNewTestFolderDialog
         {
             public static IWebElement FolderNameTxtBox
-            { get { return Driver.Instance.FindElementAndWait(By.XPath(".//*[@id='ctl00_ctl00_PageContent_DialogContent_TxtTestFolderName']")); } }
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_DialogContent_TxtTestFolderName")); } }
 
             public static IWebElement BtnOk
-            { get { return Driver.Instance.FindElementAndWait(By.XPath(".//*[@id='ctl00_ctl00_PageContent_DialogActions_btnOK']")); } }
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_DialogActions_btnOK")); } }
 
             public static IWebElement BtnClose
-            { get { return Driver.Instance.FindElementAndWait(By.XPath(".//*[@id='ctl00_ctl00_PageContent_btnClose']']")); } }            
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_btnClose")); } }            
         }
 
         #endregion
@@ -74,12 +91,21 @@ namespace WEBPages.Pages
 
         public static class CreateNewTestDialog
         {
-            public static IWebElement FolderNameTxtBox
-            { get { return Driver.Instance.FindElementAndWait(By.XPath(".//*[@id='ctl00_ctl00_PageContent_DialogContent_txtNewTestName']")); } }
+            public static IWebElement txtNewTestName
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_DialogContent_txtNewTestName")); } }
 
-            public static IWebElement BtnOk
-            { get { return Driver.Instance.FindElementAndWait(By.XPath(".//*[@id='ctl00_ctl00_PageContent_DialogActions_btnCreateNewOK']")); } }
+            public static IWebElement TestSetTree_ComboTree
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_DialogContent_TestSetTree_ComboTree")); } }
+                        
+            public static IWebElement btnCreateNewOK
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_DialogActions_btnCreateNewOK")); } }
+           
+            public static IWebElement btnClose
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_btnClose")); } }
             
+            public static IWebElement btnHelp
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_btnHelp")); } }
+                                                                     
         }
 
         #endregion
@@ -90,16 +116,16 @@ namespace WEBPages.Pages
         {
 
             public static IWebElement ScriptPathTextBox
-            { get { return Driver.Instance.FindElementAndWait(By.XPath(@".//*[@id='ctl00_PageContent_RadUpload1TextBox1']")); } }
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_RadUpload1TextBox1")); } }
 
             public static IWebElement UploadBtn
-            { get { return Driver.Instance.FindElementAndWait(By.XPath(@"//*[@id='ctl00_PageContent_SubmitButton']")); } }
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_SubmitButton")); } }
 
             public static IWebElement SelectBtn
             { get { return Driver.Instance.FindElementAndWait(By.XPath(@".//span[contains(@class,'ruFileWrap ruStyled')]")); } }
 
             public static IWebElement CloseBtn
-            { get { return Driver.Instance.FindElementAndWait(By.XPath(@".//*[@id='ctl00_PageContent_btnClose']")); } }
+            { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_btnClose")); } }
 
 
             public static void SendPathToWindow(string path)
@@ -117,56 +143,39 @@ namespace WEBPages.Pages
 
         public static void CreateNewFolder(string folderName)
         {
-            MyPCNavigation.SwitchToDefaultContent();
-            MyPCNavigation.TestManagement.Click();
-            MyPCNavigation.TestManagement.SelectItem("Test Plan").Click();
-            MyPCNavigation.SwitchToMainTab();
             Tree.SelectItem("Subject", "span").Click();
             CreateNewFolderBtn.Click();
-            MyPCNavigation.SwitchToDefaultContent();
-            MyPCNavigation.SwitchToFrame(@"//iframe[contains(@ng-src,'CreateNewTestFolder.aspx')]");
+            Driver.Instance.SwitchToDefaultContent();
+            Driver.Instance.SwitchToFrame(By.XPath(@"//iframe[contains(@ng-src,'CreateNewTestFolder.aspx')]"));
             CreateNewTestFolderDialog.FolderNameTxtBox.SendKeys(folderName);
             CreateNewTestFolderDialog.BtnOk.Click();
-            MyPCNavigation.SwitchToMainTab();
-            MyPCNavigation.SwitchToDefaultContent();
+            Driver.Wait(2);
         }
 
         public static void CreateNewTest(string testName)
         {
-            MyPCNavigation.SwitchToDefaultContent();
-            MyPCNavigation.TestManagement.Click();
-            MyPCNavigation.TestManagement.SelectItem("Test Plan").Click();
-            MyPCNavigation.SwitchToMainTab();
             Tree.SelectItem("Subject", "span").Click();
-            Tree.SelectItem("Tests", "span").Click();
+            Tree.SelectItem("tests", "span").Click();
             CreateTestBtn.Click();
-            MyPCNavigation.SwitchToDefaultContent();
-            MyPCNavigation.SwitchToFrame(@"//iframe[contains(@ng-src,'CreateNewTest.aspx')]");
-            CreateNewTestDialog.FolderNameTxtBox.SendKeys(testName);
-            CreateNewTestDialog.BtnOk.Click();
-            MyPCNavigation.SwitchToMainTab();
-            MyPCNavigation.SwitchToDefaultContent();
+            Driver.Instance.SwitchToDefaultContent();
+            Driver.Instance.SwitchToFrame(By.XPath(@"//iframe[contains(@ng-src,'CreateNewTest.aspx')]"));
+            CreateNewTestDialog.txtNewTestName.SendKeys(testName);
+            CreateNewTestDialog.btnCreateNewOK.Click();            
         }
 
         public static void UploadScript(string pathToScript)
         {
-            MyPCNavigation.SwitchToDefaultContent();
-            MyPCNavigation.TestManagement.Click();
-            MyPCNavigation.TestManagement.SelectItem("Test Plan").Click();
-            MyPCNavigation.SwitchToMainTab();
             Tree.SelectItem("Subject", "span").Click();
-            Tree.SelectItem("Tests", "span").Click();
+            Tree.SelectItem("scripts", "span").Click();
             UploadScriptBtn.Click();
-            MyPCNavigation.SwitchToDefaultContent();
-            MyPCNavigation.SwitchToFrame(@"//iframe[contains(@ng-src,'UploadScripts.aspx')]");           
+            Driver.Instance.SwitchToDefaultContent();
+            Driver.Instance.SwitchToFrame(By.XPath(@"//iframe[contains(@ng-src,'UploadScripts.aspx')]"));           
             UploadScriptDialog.SelectBtn.Click();
             Thread.Sleep(1000);
             UploadScriptDialog.SendPathToWindow(pathToScript);
             UploadScriptDialog.UploadBtn.Click();
             System.Threading.Thread.Sleep(3000);
-            UploadScriptDialog.CloseBtn.Click();
-            MyPCNavigation.SwitchToMainTab();
-            MyPCNavigation.SwitchToDefaultContent();
+            UploadScriptDialog.CloseBtn.Click();          
         }
 
         #endregion        

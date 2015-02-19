@@ -52,15 +52,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\DashboardPage.cs" />
-    <Compile Include="Pages\DefectsPage.cs" />
-    <Compile Include="Pages\Navigation.cs" />
     <Compile Include="Utils\Driver.cs" />
     <Compile Include="Utils\DriverExt.cs" />
     <Compile Include="Utils\DriverWait.cs" />
-    <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pages\RequirementsPage.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\Parallel.cs" />
     <Compile Include="Utils\Properties.cs" />
