@@ -13,45 +13,47 @@ namespace WEBPages.Pages
     public class MyPCNavigation
     {
         #region xPath constatnts
+
+        const string xPathHome = @".//span[contains(@class, 'IconContainer IconHome')]";
         const string xPathLogoutBtn = @".//*[@id='MastheadDiv']/div[1]/div[2]/div[7]";
-        const string xPathTestMgmt = @"//div[contains(@ng-class, 'selectedLink_TestMgmt')]";
+        const string xPathTestMgmt = @".//span[contains(@local-string, 'testManagement')]";
 
         #endregion
 
+        static string position = "MastheadDiv";
+
+        static IWebDriverExt driver = Driver.Instance;
+
+        static IWebDriverExt mainPage
+        {
+            get {
+                if (driver.CurrentFrame != (By.Id(position)))
+                { 
+                    driver.SwitchToDefaultContent(); 
+                }
+                return driver;            
+            }
+        }
+
         public static IWebElement LogoutBtn
-        { get { return Driver.Instance.FindElementAndWait(By.XPath(xPathLogoutBtn)); } }
+        { get { return mainPage.FindElementAndWait(By.XPath(xPathHome)); } }
+
+        public static IWebElement Home
+        { get { return mainPage.FindElementAndWait(By.XPath(xPathTestMgmt)); } }
 
         public static IWebElement TestManagement
-        { get { return Driver.Instance.FindElementAndWait(By.XPath(xPathTestMgmt)); } }
+        { get { return mainPage.FindElementAndWait(By.XPath(xPathTestMgmt)); } }
 
-        public static void SwitchToDefaultContent()
-        {
-            Driver.Instance.SwitchTo().DefaultContent();
-            Driver.Wait(2);
-        }
-
-        public static void SwitchToMainTab()
-        {
-            Driver.Instance.SwitchTo().DefaultContent();
-            Driver.Instance.SwitchTo().Frame("MainTab");
-            Driver.Wait(2);
-        }
-
-        public static void SwitchToFrame(string frameLocator)
-        {
-            Driver.Instance.SwitchTo().Frame(Driver.Instance.FindElementAndWait(By.XPath(frameLocator)));
-        }
+        
 
         public static void SwitchToPopup()
         {
-            int before = Driver.Instance.WindowHandles.ToList().Count;
+            int before = driver.WindowHandles.ToList().Count;
 
-            do
-            {
-                IList<string> afterPopup = Driver.Instance.WindowHandles.ToList();
-            } while (Driver.Instance.WindowHandles.ToList().Count == before);
+            do { IList<string> afterPopup = driver.WindowHandles.ToList(); }
+            while (driver.WindowHandles.ToList().Count == before);
 
-            Driver.Instance.SwitchTo().Window(Driver.Instance.WindowHandles.Last());
+            driver.SwitchTo().Window(Driver.Instance.WindowHandles.Last());
         }
 
     }
