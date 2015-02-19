@@ -9,69 +9,9 @@ using WEBUIautomation.Utils;
 
 namespace WEBPages.Pages
 {
-    public class DesignLoadTest
+    public partial class DesignLoadTest
     {
         #region DLT Frames
-
-        public class WorkloadTypeDialog
-        {
-            static string position = @"//frame[contains(@src,'Workload.aspx')]";
-            
-            static IWebDriverExt _dialog=Driver.Instance;
-
-            static IWebDriverExt dialog
-            {
-                get{
-                    if (_dialog.CurrentFrame != By.XPath(position))
-                    {
-                        _dialog.SwitchToDefaultContent();
-                        _dialog.SwitchToFrame(By.XPath(@"//iframe[contains(@ng-src,'PreManageLoadTest.aspx')]"));
-                        _dialog.SwitchToFrame(By.XPath(position));
-                    }
-                    return _dialog;
-                }
-            }
-
-            #region Content to select WorkloadType
-            
-            public static IWebElement imgBtnSimpleByLT
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_imgBtnSimpleByLT']")); } }
-
-            public static IWebElement chkSimpleByLTByNumber
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_chkSimpleByLTByNumber']")); } }
-            
-            public static IWebElement chkSimpleByLTByPrecentage
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_chkSimpleByLTByPrecentage']")); } }
-            
-            public static IWebElement imgBtnSimpleByGroup
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_imgBtnSimpleByGroup']")); } }
-            
-            public static IWebElement imgBtnComplexByLT
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_imgBtnComplexByLT']")); } }
-
-            public static IWebElement chkComplexByLTByNumber
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_chkComplexByLTByNumber']")); } }
-
-            public static IWebElement chkComplexByLTByPrecentage
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_chkComplexByLTByPrecentage']")); } }
-            public static IWebElement imgBtnComplexByGroup
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_imgBtnComplexByGroup']")); } }
-            
-            #endregion
-
-            #region Actions Pane
-            
-            public static IWebElement btnOK
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_btnOk']")); } }
-
-            public static IWebElement btnCancel
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_btnCancel'] ")); } }
-            
-            public static IWebElement btnHelp
-            { get { return dialog.FindElementAndWait(By.XPath(".//*[@id='ctl00_PageContent_WorkloadTypeDialog_C_WorkloadCntrl_btnHelp'] ")); } }
-
-            #endregion  Actions Pane
-        }
 
         public class Tabs
         {
@@ -158,24 +98,24 @@ namespace WEBPages.Pages
 
         public class GroupsAndWorkloadPane
         {
-            private const string position =  @"//frame[contains(@src,'Workload.aspx')]";
-            private static IWebDriverExt _panelWorkLoadAndController = Driver.Instance;
+            const string position =  @"//frame[contains(@src,'Workload.aspx')]";
+            static IWebDriverExt _panel = Driver.Instance;
             
-            private static IWebDriverExt panelWorkLoadAndController 
+            static IWebDriverExt panel 
             {
                 get {
-                    if (_panelWorkLoadAndController.CurrentFrame == By.XPath(position))
-                        return _panelWorkLoadAndController;
-                    else
+                    if (_panel.CurrentFrame != By.XPath(position))                    
                     {
                         Tabs.tabGroupsAndWorkload.Click();
                         Driver.Instance.SwitchToDefaultContent();
                         Driver.Instance.SwitchToFrame(By.XPath(@"//iframe[contains(@ng-src,'PreManageLoadTest.aspx')]"));
-                        return _panelWorkLoadAndController = Driver.Instance.SwitchToFrame(By.XPath(position));   
+                        _panel = Driver.Instance.SwitchToFrame(By.XPath(position));   
                     }                    
+                     return _panel;
                 }
             }
         }
+       
         #endregion DLT Frames
     }
 }

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Pages\ALMainPage.cs" />
     <Compile Include="Pages\DesignLoadTest.cs" />
+    <Compile Include="Pages\DesignLoadTest.WorkloadTypeDialog.cs" />
     <Compile Include="Pages\MyPCLoginPage.cs" />
     <Compile Include="Pages\MyPCNavigation.cs" />
     <Compile Include="Pages\Pages.cs" />
@@ -56,6 +57,9 @@
       <Project>{b41aa1f1-f477-437b-9465-b2d99ff89efd}</Project>
       <Name>WEBUIautomation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

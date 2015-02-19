@@ -158,18 +158,18 @@ namespace WEBPages.Pages
             Tree.SelectItem("tests", "span").Click();
             CreateTestBtn.Click();
             Driver.Instance.SwitchToDefaultContent();
-            Driver.Instance.SwitchToFrame(By.XPath(@"//iframe[contains(@ng-src,'CreateNewTest.aspx')]"));
+            Driver.Instance.SwitchToFrame(By.XPath(@".//iframe[contains(@ng-src,'CreateNewTest.aspx')]"));
             CreateNewTestDialog.txtNewTestName.SendKeys(testName);
             CreateNewTestDialog.btnCreateNewOK.Click();            
         }
 
-        public static void UploadScript(string pathToScript)
+        public static void UploadScript(string pathToScript, string ScriptFolder)
         {
             Tree.SelectItem("Subject", "span").Click();
-            Tree.SelectItem("scripts", "span").Click();
+            Tree.SelectItem(ScriptFolder, "span").Click();
             UploadScriptBtn.Click();
             Driver.Instance.SwitchToDefaultContent();
-            Driver.Instance.SwitchToFrame(By.XPath(@"//iframe[contains(@ng-src,'UploadScripts.aspx')]"));           
+            Driver.Instance.SwitchToFrame(By.XPath(@".//iframe[contains(@ng-src,'UploadScripts.aspx')]"));           
             UploadScriptDialog.SelectBtn.Click();
             Thread.Sleep(1000);
             UploadScriptDialog.SendPathToWindow(pathToScript);

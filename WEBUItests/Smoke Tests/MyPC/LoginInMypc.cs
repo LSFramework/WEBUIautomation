@@ -14,6 +14,10 @@ namespace WEBUItests.Smoke_Tests
     {
         const string pathToScript = @"C:\ins\CloudSanityScript.zip";
 
+
+        string scriptFolder = "scripts" + Guid.NewGuid().ToString();
+        string testFolder = "tests" + Guid.NewGuid().ToString();
+        string testName = "test1" + Guid.NewGuid().ToString();
         [Test]
         public void Login_In_MyPC()
         {
@@ -29,10 +33,17 @@ namespace WEBUItests.Smoke_Tests
             MyPCLoginPage.Projects_DropDown.SelectItem(Properties.ProjectName).Click();           
             MyPCLoginPage.LoginBtn.Click();
             MyPCNavigation.SwitchToPopup();
+<<<<<<< HEAD
             TestPlan.CreateNewFolder("tests_" + Guid.NewGuid().ToString());
             TestPlan.CreateNewFolder("scripts_" + Guid.NewGuid().ToString());
             TestPlan.UploadScript(pathToScript);
             TestPlan.CreateNewTest("performance_test1_" + Guid.NewGuid().ToString());
+=======
+            TestPlan.CreateNewFolder(testFolder);
+            TestPlan.CreateNewFolder(scriptFolder);
+            TestPlan.UploadScript(pathToScript, scriptFolder);
+            TestPlan.CreateNewTest(testName);
+>>>>>>> origin/PC_1250
             System.Threading.Thread.Sleep(3000);
             DesignLoadTest.WorkloadTypeDialog.btnOK.Click();
             DesignLoadTest.Tabs.tabGroupsAndWorkload.Click();
