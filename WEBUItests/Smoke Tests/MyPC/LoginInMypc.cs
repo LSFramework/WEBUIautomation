@@ -29,10 +29,10 @@ namespace WEBUItests.Smoke_Tests
             MyPCLoginPage.Projects_DropDown.SelectItem(Properties.ProjectName).Click();           
             MyPCLoginPage.LoginBtn.Click();
             MyPCNavigation.SwitchToPopup();
-            TestPlan.CreateNewFolder("tests");
-            TestPlan.CreateNewFolder("scripts");
+            TestPlan.CreateNewFolder("tests_" + Guid.NewGuid().ToString());
+            TestPlan.CreateNewFolder("scripts_" + Guid.NewGuid().ToString());
             TestPlan.UploadScript(pathToScript);
-            TestPlan.CreateNewTest("performance test1");
+            TestPlan.CreateNewTest("performance_test1_" + Guid.NewGuid().ToString());
             System.Threading.Thread.Sleep(3000);
             DesignLoadTest.WorkloadTypeDialog.btnOK.Click();
             DesignLoadTest.Tabs.tabGroupsAndWorkload.Click();

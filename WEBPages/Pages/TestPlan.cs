@@ -146,7 +146,7 @@ namespace WEBPages.Pages
             Tree.SelectItem("Subject", "span").Click();
             CreateNewFolderBtn.Click();
             Driver.Instance.SwitchToDefaultContent();
-            Driver.Instance.SwitchToFrame(By.XPath(@"//iframe[contains(@ng-src,'CreateNewTestFolder.aspx')]"));
+            Driver.Instance.SwitchToFrame(By.XPath(@".//iframe[contains(@ng-src,'CreateNewTestFolder.aspx')]"));
             CreateNewTestFolderDialog.FolderNameTxtBox.SendKeys(folderName);
             CreateNewTestFolderDialog.BtnOk.Click();
             Driver.Wait(2);
