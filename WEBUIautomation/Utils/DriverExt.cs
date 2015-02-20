@@ -132,12 +132,12 @@ namespace WEBUIautomation.Utils
         }
 
         //Wait until element is visible
-        public static IWebElement WaitForVisible(this IWebElement element, By by, int timeout = 1)
+        public static IWebElement WaitForVisible(this IWebDriverExt driver, By by, int timeout = 1)
         {
             var then = DateTime.Now.AddSeconds(timeout);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
-                var eles = Driver.Instance.FindElements(by);
+                var eles = driver.FindElements(by);
                 if (eles.Count > 0 && eles[0].Displayed)
                     return eles[0];
             }
