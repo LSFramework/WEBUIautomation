@@ -13,11 +13,11 @@ namespace WEBUItests.Smoke_Tests
     public class LoginInMypc : WEBUItest
     {
         const string pathToScript = @"C:\ins\CloudSanityScript.zip";
+        string scriptFolder = "scripts_" + Guid.NewGuid().ToString();
+        string testFolder = "tests_" + Guid.NewGuid().ToString();
+        string testName = "test_" + Guid.NewGuid().ToString();
+        string expScriptName = "CloudSanityScript";
 
-
-        string scriptFolder = "scripts" + Guid.NewGuid().ToString();
-        string testFolder = "tests" + Guid.NewGuid().ToString();
-        string testName = "test1" + Guid.NewGuid().ToString();
         [Test]
         public void Login_In_MyPC()
         {
@@ -36,11 +36,15 @@ namespace WEBUItests.Smoke_Tests
             TestPlan.CreateNewFolder(testFolder);
             TestPlan.CreateNewFolder(scriptFolder);
             TestPlan.UploadScript(pathToScript, scriptFolder);
-            TestPlan.CreateNewTest(testName);
+            TestPlan.CreateNewTest(testName, testFolder);
             System.Threading.Thread.Sleep(3000);
-            DesignLoadTest.WorkloadTypeDialog.btnOK.Click();
+            DesignLoadTest.Workload.WorkloadTypeDialog.btnOK.Click();
             DesignLoadTest.Tabs.tabGroupsAndWorkload.Click();
-           
+            DesignLoadTest.Workload.ScriptsTreeSlidingPane.SelectScript(expScriptName, scriptFolder);
+            DesignLoadTest.Workload.GroupsAndWorkloadPane.row0GroupsGrid.Click();           
+            DesignLoadTest.Workload.GroupsAndWorkloadPane.inputNumberOfLGs.SendKeys("1");
+            DesignLoadTest.Workload.GroupsAndWorkloadPane.row0GroupsGrid.Click();
+            DesignLoadTest.ActionsFrame.btnSave.Click();                    
         }
         
     }

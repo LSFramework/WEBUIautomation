@@ -104,7 +104,7 @@ namespace WEBUIautomation.Utils
             return Driver.Instance.FindElementAndWait(By.XPath(@"//" + tagName + "[contains(@" + propertyName + ",'" + itemLocator + "')]"));
         }
 
-<<<<<<< HEAD
+
         public static void GoToFrame(this IWebDriverExt iWebDriverExt,string tag, string attribute, string frameLocator)
         {
             IList<IWebElement> frames = iWebDriverExt.FindElements(By.TagName(tag));
@@ -131,8 +131,7 @@ namespace WEBUIautomation.Utils
             { 
             }
         }
-=======
->>>>>>> origin/PC_1250
+
     }
 
     #region IWebDriverExt instances implementations for some browsers
@@ -158,6 +157,7 @@ namespace WEBUIautomation.Utils
     {
         //Constructor inherited from the base class
         public InternetExplorerDriverExt(string path) : base(path) { }
+        public InternetExplorerDriverExt(string path, InternetExplorerOptions options) : base(path, options) { }
         public By CurrentFrame { get; set; }
     }
 
