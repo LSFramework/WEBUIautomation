@@ -152,10 +152,10 @@ namespace WEBPages.Pages
             Driver.Wait(2);
         }
 
-        public static void CreateNewTest(string testName)
+        public static void CreateNewTest(string testName, string testFolder)
         {
             Tree.SelectItem("Subject", "span").Click();
-            Tree.SelectItem("tests", "span").Click();
+            Tree.SelectItem(testFolder, "span").Click();
             CreateTestBtn.Click();
             Driver.Instance.SwitchToDefaultContent();
             Driver.Instance.SwitchToFrame(By.XPath(@".//iframe[contains(@ng-src,'CreateNewTest.aspx')]"));

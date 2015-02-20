@@ -45,7 +45,8 @@ namespace WEBUIautomation
             //Initializing WebDriver object
             //Instance = firingDriver;
 
-            Instance = new ChromeDriverExt(@"C:\Utils");
+            //Instance = new ChromeDriverExt(@"C:\Utils");
+            Instance = new InternetExplorerDriverExt(@"C:\Utils", ieOptions);
             //Instance = new InternetExplorerDriverExt(@"C:\Utils", ieOptions);
             //Instance = new FirefoxDriverExt();
 

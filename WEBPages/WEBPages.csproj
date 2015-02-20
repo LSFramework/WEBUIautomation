@@ -45,10 +45,13 @@
   <ItemGroup>
     <Compile Include="Pages\ALMainPage.cs" />
     <Compile Include="Pages\DesignLoadTest.cs" />
-    <Compile Include="Pages\DesignLoadTest.WorkloadTypeDialog.cs" />
+    <Compile Include="Pages\DLT\WorkloadTypeDialog.cs" />
+    <Compile Include="Pages\DLT\SummaryGeneralDetails.cs" />
+    <Compile Include="Pages\DLT\GroupsAndWorkloadPane.cs" />
     <Compile Include="Pages\MyPCLoginPage.cs" />
     <Compile Include="Pages\MyPCNavigation.cs" />
     <Compile Include="Pages\Pages.cs" />
+    <Compile Include="Pages\DLT\ScriptsTreeSlidingPane.cs" />
     <Compile Include="Pages\TestPlan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,9 +60,6 @@
       <Project>{b41aa1f1-f477-437b-9465-b2d99ff89efd}</Project>
       <Name>WEBUIautomation</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
