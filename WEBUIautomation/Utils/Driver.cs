@@ -27,9 +27,9 @@ namespace WEBUIautomation
             FirefoxProfile properties = new FirefoxProfile();
             properties.SetPreference("profile", "default");
 
-
             InternetExplorerOptions ieOptions = new InternetExplorerOptions();
             ieOptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+
             //Object for Snapshot class
             //var snap = new Snapshot();
             //Object for Logger class
@@ -47,6 +47,7 @@ namespace WEBUIautomation
 
             //Instance = new ChromeDriverExt(@"C:\Utils");
             Instance = new InternetExplorerDriverExt(@"C:\Utils", ieOptions);
+            //Instance = new InternetExplorerDriverExt(@"C:\Utils", ieOptions);
             //Instance = new FirefoxDriverExt();
 
             //Setting Implicit Wait timeout

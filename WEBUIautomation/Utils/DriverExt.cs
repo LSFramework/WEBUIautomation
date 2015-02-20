@@ -104,7 +104,6 @@ namespace WEBUIautomation.Utils
             return Driver.Instance.FindElementAndWait(By.XPath(@"//" + tagName + "[contains(@" + propertyName + ",'" + itemLocator + "')]"));
         }
 
-
         public static void GoToFrame(this IWebDriverExt iWebDriverExt,string tag, string attribute, string frameLocator)
         {
             IList<IWebElement> frames = iWebDriverExt.FindElements(By.TagName(tag));
@@ -130,6 +129,20 @@ namespace WEBUIautomation.Utils
             catch (Exception)
             { 
             }
+        }
+
+        //Wait until element is visible
+        public static IWebElement WaitForVisible(this IWebDriverExt iWebDriverExt, By by, int timeout = 1)
+        {
+            var then = DateTime.Now.AddSeconds(timeout);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var eles = iWebDriverExt.FindElements(by);
+                if (eles.Count > 0 && eles[0].Displayed)
+                    return eles[0];
+            }
+            throw new ElementNotVisibleException(string.Format("Element ({0}) was not visible after {1} seconds",
+                by.ToString(), timeout));
         }
 
     }
