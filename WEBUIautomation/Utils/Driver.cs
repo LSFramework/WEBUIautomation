@@ -29,6 +29,7 @@ namespace WEBUIautomation
 
             InternetExplorerOptions ieOptions = new InternetExplorerOptions();
             ieOptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+            ieOptions.EnsureCleanSession = true;
 
             //Object for Snapshot class
             //var snap = new Snapshot();
@@ -45,8 +46,7 @@ namespace WEBUIautomation
             //Initializing WebDriver object
             //Instance = firingDriver;
 
-            //Instance = new ChromeDriverExt(@"C:\Utils");
-            Instance = new InternetExplorerDriverExt(@"C:\Utils", ieOptions);
+            Instance = new ChromeDriverExt(@"C:\Utils");
             //Instance = new InternetExplorerDriverExt(@"C:\Utils", ieOptions);
             //Instance = new FirefoxDriverExt();
 
