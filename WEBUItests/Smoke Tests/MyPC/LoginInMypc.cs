@@ -6,22 +6,34 @@ using OpenQA.Selenium.Interactions;
 using WEBUIautomation;
 using System;
 using System.Threading;
+using WEBUItests.Base_Test;
 
 namespace WEBUItests.Smoke_Tests
 {
     [TestFixture]
     public class LoginInMypc : WEBUItest
     {
+        const string expMyPcOpened = ".//*[@id='MastheadDiv']/div[1]/div[1]/span";
+        const string expMyPCLogin = "Performance Center";
+        const string expTestSaved = @".//*[@id='ctl00_PageContent_lblStatus'][contains(text(),'Test saved')]";
+
         const string pathToScript = @"C:\ins\CloudSanityScript.zip";
+                
         string scriptFolder = "scripts_" + Guid.NewGuid().ToString();
         string testFolder = "tests_" + Guid.NewGuid().ToString();
         string testName = "test_" + Guid.NewGuid().ToString();
         string expScriptName = "CloudSanityScript";
 
+
         [Test]
-        public void Login_In_MyPC()
+        public void Test1Go_To_MyPC()
         {
             ALMainPage.GoToMyPC(Properties.QCServer, Properties.ServerPort);
+            Assert.AreEqual(expMyPCLogin, Driver.Instance.Title);
+            }
+        [Test]
+        public void Test2Login_To_MyPC()
+        {
             MyPCLoginPage.UserNameField.Clear();
             MyPCLoginPage.UserNameField.SendKeys(Properties.UserName);
             MyPCLoginPage.PasswordField.Clear();
@@ -33,6 +45,12 @@ namespace WEBUItests.Smoke_Tests
             MyPCLoginPage.Projects_DropDown.SelectItem(Properties.ProjectName).Click();           
             MyPCLoginPage.LoginBtn.Click();
             MyPCNavigation.SwitchToPopup();
+            Assert.AreEqual(true, Driver.Instance.IsElementPresent(By.XPath(expMyPcOpened), 10));
+        }
+
+        [Test]
+        public void Test3CreateTestPlanHierarchy()
+        {
             TestPlan.CreateNewFolder(testFolder);
             TestPlan.CreateNewFolder(scriptFolder);
             TestPlan.UploadScript(pathToScript, scriptFolder);
@@ -41,11 +59,12 @@ namespace WEBUItests.Smoke_Tests
             DesignLoadTest.Workload.WorkloadTypeDialog.btnOK.Click();
             DesignLoadTest.Tabs.tabGroupsAndWorkload.Click();
             DesignLoadTest.Workload.ScriptsTreeSlidingPane.SelectScript(expScriptName, scriptFolder);
-            DesignLoadTest.Workload.GroupsAndWorkloadPane.row0GroupsGrid.Click();           
+            DesignLoadTest.Workload.GroupsAndWorkloadPane.row0GroupsGrid.Click();
+            DesignLoadTest.Workload.ScriptsTreeSlidingPane.CloseScriptsTree();
             DesignLoadTest.Workload.GroupsAndWorkloadPane.inputNumberOfLGs.SendKeys("1");
             DesignLoadTest.Workload.GroupsAndWorkloadPane.row0GroupsGrid.Click();
-            DesignLoadTest.ActionsFrame.btnSave.Click();                    
+            DesignLoadTest.ActionsFrame.btnSave.Click();
+            Assert.AreEqual(true, Driver.Instance.IsElementPresent(By.XPath(expTestSaved), 10));       
         }
-        
     }
 }

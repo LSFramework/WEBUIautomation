@@ -24,7 +24,7 @@ namespace WEBUIautomation.Utils
     {
         private static IWebElement FindElementByLocator(this IWebDriverExt iWebDriverExt, By by)
         {
-            WebDriverWait wait = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(20));
             IWebElement element = wait.Until(d =>
             {
                 var elements = d.FindElements(by);

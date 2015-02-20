@@ -21,6 +21,8 @@ namespace WEBPages.Pages
                 static IWebElement ScriptsTree
                 { get { return WorkloadFrame.FindElementAndWait(By.Id("ctl00_PageContent_TreeSlidingPane")); } }
 
+                static IWebElement btnCloseTree
+                { get { return WorkloadFrame.FindElementAndWait(By.Id("SelectScripts")); } }
                 public static void SelectScript(string scriptName, string scriptFolder)
                 {
                     Actions action = new Actions(WorkloadFrame);
@@ -29,6 +31,10 @@ namespace WEBPages.Pages
                     action.MoveToElement(ScriptsTree.SelectItem(scriptName, "span")).DoubleClick().Build().Perform();
                 }
 
+                public static void CloseScriptsTree()
+                {
+                    btnCloseTree.Click();                
+                }
                 #endregion
             }
         }

@@ -76,6 +76,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Base Test\WebDriverSourceAttribute.cs" />
     <Compile Include="Smoke Tests\MyPC\CreatePerformanceTest.cs" />
     <Compile Include="Smoke Tests\MyPC\LoginInMypc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

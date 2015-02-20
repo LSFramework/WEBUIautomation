@@ -62,6 +62,7 @@
     <Compile Include="Utils\Snapshot.cs" />
     <Compile Include="Utils\Storage.cs" />
     <Compile Include="Utils\TestInfo.cs" />
+    <Compile Include="Utils\WebDriverFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
