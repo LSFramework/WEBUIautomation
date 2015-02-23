@@ -22,9 +22,26 @@ namespace WEBUIautomation.Utils
 
     public static class RemoteWebDriverExt
     {
+       
         private static IWebElement FindElementByLocator(this IWebDriverExt iWebDriverExt, By by)
         {
-            WebDriverWait wait = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(10));
+            Func<IWebDriver, bool> predicate = (x) =>
+            {
+                try
+                {
+                    IWebElement elementThatOnlyAppearsOnPostback = iWebDriverExt.FindElement(by);
+                    return true;
+                }
+                catch (NoSuchElementException)
+                {
+                    return false;
+                }
+            };
+
+            WebDriverWait wait = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(20));
+            wait.Until(predicate);
+            wait.Until(ExpectedConditions.ElementExists(by));
+            wait.Until(ExpectedConditions.ElementIsVisible(by));
             IWebElement element = wait.Until(d =>
             {
                 var elements = d.FindElements(by);
@@ -32,13 +49,14 @@ namespace WEBUIautomation.Utils
                     return elements[0];
                 else
                     return null;
-            } );
-
+            });
             //Draw a border around found element
             Highlight(element);
 
-            return element;// iWebDriverExt.FindElement(by); ;
+            return element;
         }
+
+
 
         //FindElement method with an element highlight
         public static IWebElement FindElement(this IWebDriverExt iWebDriverExt, By by, int ms=10)
@@ -116,7 +134,7 @@ namespace WEBUIautomation.Utils
         }
 
         //Highlight a found element
-        public static void Highlight(this IWebElement element, int ms = 10)
+        public static void Highlight(this IWebElement element, int ms = 20)
         {
             try
             {
@@ -131,19 +149,6 @@ namespace WEBUIautomation.Utils
             }
         }
 
-        //Wait until element is visible
-        public static IWebElement WaitForVisible(this IWebDriverExt driver, By by, int timeout = 1)
-        {
-            var then = DateTime.Now.AddSeconds(timeout);
-            for (var now = DateTime.Now; now < then; now = DateTime.Now)
-            {
-                var eles = driver.FindElements(by);
-                if (eles.Count > 0 && eles[0].Displayed)
-                    return eles[0];
-            }
-            throw new ElementNotVisibleException(string.Format("Element ({0}) was not visible after {1} seconds",
-                by.ToString(), timeout));
-        }
 
     }
 

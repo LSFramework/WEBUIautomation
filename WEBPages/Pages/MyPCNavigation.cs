@@ -17,6 +17,7 @@ namespace WEBPages.Pages
         const string xPathHome = @".//span[contains(@class, 'IconContainer IconHome')]";
         const string xPathLogoutBtn = @".//*[@id='MastheadDiv']/div[1]/div[2]/div[7]";
         const string xPathTestMgmt = @".//span[contains(@local-string, 'testManagement')]";
+        const string xPathCloseDLT = @".//div[contains(@class, 'xButtonWrapper')]";
 
         #endregion
 
@@ -56,6 +57,10 @@ namespace WEBPages.Pages
             driver.SwitchTo().Window(Driver.Instance.WindowHandles.Last());
         }
 
+        public static void CloseDLT_Tab()
+        {
+            mainPage.FindElementAndWait(By.XPath(xPathCloseDLT)).Click();
+        }
     }
     
 }
