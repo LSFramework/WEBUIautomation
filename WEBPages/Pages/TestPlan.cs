@@ -174,7 +174,7 @@ namespace WEBPages.Pages
             Thread.Sleep(1000);
             UploadScriptDialog.SendPathToWindow(pathToScript);
             UploadScriptDialog.UploadBtn.Click();
-            System.Threading.Thread.Sleep(3000);
+            Driver.Wait(3);
             UploadScriptDialog.CloseBtn.Click();          
         }
 

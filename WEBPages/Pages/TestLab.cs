@@ -28,5 +28,21 @@ namespace WEBPages.Pages
                 return _mainTab;
             }
         }
+
+        private static IWebElement TestSetToolbar
+        { get { return mainTab.FindElementAndWait(By.Id("ctl00_PageContent_WebPartManager1_wp900837272_0a97c3a4_ee43_474f_a160_c828cba88f1d_toolbar")); } }
+
+        public static IWebElement btnAssignTest
+        { get { return TestSetToolbar.FindElementAndWait(By.XPath(@".//a[contains(@title, 'Assign Test to TestSet')]")); } }
+
+        public static IWebElement btnRunTest
+        { get { return TestSetToolbar.FindElementAndWait(By.XPath(@".//span[contains(text(), 'Run Test')]")); } } 
+
+
+        public static void SelectTestInGrid(string testName)
+        {
+            mainTab.FindElementAndWait(By.XPath(@".//*[contains(text(), '" + testName + "')]")).Click();
+        }
+
     }
 }

@@ -46,7 +46,8 @@ namespace WEBPages.Pages
         {
             get
             {
-               Driver.Wait(1);
+              // Driver.Wait(1);
+              // Driver.Instance.WaitForVisible(By.XPath(xPathDomainSelector), 10);
                return Driver.Instance.FindElementAndWait(By.XPath(xPathDomainSelector));        
             }
         }
@@ -55,7 +56,8 @@ namespace WEBPages.Pages
         {
             get 
             { 
-                Driver.Wait(1);
+               // Driver.Wait(1);
+                //Driver.Instance.WaitForVisible(By.XPath(xPathDomainsDropDownList),10);
                 return Driver.Instance.FindElementAndWait(By.XPath(xPathDomainsDropDownList)); 
             } 
         }
@@ -64,7 +66,8 @@ namespace WEBPages.Pages
         {
             get
             {
-                Driver.Wait(1);
+                //Driver.Wait(1);
+                //Driver.Instance.WaitForVisible(By.XPath(xPathProjectSelector), 10);
                 return Driver.Instance.FindElementAndWait(By.XPath(xPathProjectSelector));
             }
         }
@@ -73,7 +76,8 @@ namespace WEBPages.Pages
         {
             get
             {
-                Driver.Wait(1);
+                //Driver.Wait(1);
+                //Driver.Instance.WaitForVisible(By.XPath(xPathProjectsDropDownList), 10);
                 return Driver.Instance.FindElementAndWait(By.XPath(xPathProjectsDropDownList));
             }
         }                    

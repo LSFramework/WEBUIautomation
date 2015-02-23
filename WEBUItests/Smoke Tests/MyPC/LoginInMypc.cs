@@ -6,7 +6,6 @@ using OpenQA.Selenium.Interactions;
 using WEBUIautomation;
 using System;
 using System.Threading;
-using WEBUItests.Base_Test;
 
 namespace WEBUItests.Smoke_Tests
 {
@@ -36,8 +35,8 @@ namespace WEBUItests.Smoke_Tests
         {
             MyPCLoginPage.UserNameField.Clear();
             MyPCLoginPage.UserNameField.SendKeys(Properties.UserName);
-            MyPCLoginPage.PasswordField.Clear();
-            MyPCLoginPage.PasswordField.SendKeys(Properties.UserPassword);
+            //MyPCLoginPage.PasswordField.Clear();
+            //MyPCLoginPage.PasswordField.SendKeys(Properties.UserPassword);
             MyPCLoginPage.AuthenticateBtn.Click();
             MyPCLoginPage.DomainSelector.Click();
             MyPCLoginPage.Domains_DropDown.SelectItem(Properties.DomainName).Click();
@@ -64,7 +63,26 @@ namespace WEBUItests.Smoke_Tests
             DesignLoadTest.Workload.GroupsAndWorkloadPane.inputNumberOfLGs.SendKeys("1");
             DesignLoadTest.Workload.GroupsAndWorkloadPane.row0GroupsGrid.Click();
             DesignLoadTest.ActionsFrame.btnSave.Click();
-            Assert.AreEqual(true, Driver.Instance.IsElementPresent(By.XPath(expTestSaved), 10));       
+            Assert.AreEqual(true, Driver.Instance.IsElementPresent(By.XPath(expTestSaved), 10));
+            MyPCNavigation.CloseDLT_Tab();
         }
+
+        [Test]
+        public void Test4AssignTestToTestSet()
+        {
+            TestLab.btnAssignTest.Click();
+            AssignTestDialog.ComboTreeInput.Click();
+            AssignTestDialog.SelectTest(testName, testFolder);
+            AssignTestDialog.btnOk.Click();
+        }
+
+        [Test]
+        public void Test5RunTest()
+        {
+            TestLab.SelectTestInGrid(testName);
+            TestLab.btnRunTest.Click();
+        }
+
+
     }
 }
