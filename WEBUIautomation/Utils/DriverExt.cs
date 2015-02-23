@@ -20,7 +20,7 @@ namespace WEBUIautomation.Utils
         By CurrentFrame { get; set; }
     }
 
-    public static class RemoteWebDriverExt
+    public static class WebDriverExt
     {
        
         private static IWebElement FindElementByLocator(this IWebDriverExt iWebDriverExt, By by)
@@ -56,18 +56,16 @@ namespace WEBUIautomation.Utils
             return element;
         }
 
-
-
         //FindElement method with an element highlight
-        public static IWebElement FindElement(this IWebDriverExt iWebDriverExt, By by, int ms=10)
-        {
-            var element = Driver.Instance.FindElement(by);
+        //public static IWebElement FindElement(this IWebDriverExt iWebDriverExt, By by, int ms=10)
+        //{
+        //    var element = Driver.Instance.FindElement(by);
             
-            //Draw a border around found element
-            Highlight(element, ms);
+        //    //Draw a border around found element
+        //   // Highlight(element, ms);
             
-            return element;
-        }
+        //    return element;
+        //}
 
         public static IWebElement FindElementAndWait(this IWebDriverExt iWebDriverExt, By by)
         {

@@ -26,10 +26,7 @@ namespace WEBUIautomation
         {
             FirefoxProfile properties = new FirefoxProfile();
             properties.SetPreference("profile", "default");
-
             
-            
-
             //Object for Snapshot class
             //var snap = new Snapshot();
             //Object for Logger class
@@ -45,8 +42,8 @@ namespace WEBUIautomation
             //Initializing WebDriver object
             //Instance = firingDriver;
 
-           // Instance = new ChromeDriverExt(@"C:\Utils");
-            Instance = StartIEDriver();
+            Instance = new ChromeDriverExt(@"C:\Utils");
+            //Instance = StartIEDriver();
               //new InternetExplorerDriverExt(@"C:\Utils", ieOptions);            
             //Instance = new FirefoxDriverExt();
 

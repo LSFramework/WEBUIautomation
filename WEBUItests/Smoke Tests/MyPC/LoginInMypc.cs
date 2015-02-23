@@ -29,14 +29,14 @@ namespace WEBUItests.Smoke_Tests
         {
             ALMainPage.GoToMyPC(Properties.QCServer, Properties.ServerPort);
             Assert.AreEqual(expMyPCLogin, Driver.Instance.Title);
-            }
-        [Test]
-        public void Test2Login_To_MyPC()
-        {
+        //    }
+        //[Test]
+        //public void Test2Login_To_MyPC()
+        //{
             MyPCLoginPage.UserNameField.Clear();
             MyPCLoginPage.UserNameField.SendKeys(Properties.UserName);
-            //MyPCLoginPage.PasswordField.Clear();
-            //MyPCLoginPage.PasswordField.SendKeys(Properties.UserPassword);
+            MyPCLoginPage.PasswordField.Clear();
+            MyPCLoginPage.PasswordField.SendKeys(Properties.UserPassword);
             MyPCLoginPage.AuthenticateBtn.Click();
             MyPCLoginPage.DomainSelector.Click();
             MyPCLoginPage.Domains_DropDown.SelectItem(Properties.DomainName).Click();
@@ -45,11 +45,11 @@ namespace WEBUItests.Smoke_Tests
             MyPCLoginPage.LoginBtn.Click();
             MyPCNavigation.SwitchToPopup();
             Assert.AreEqual(true, Driver.Instance.IsElementPresent(By.XPath(expMyPcOpened), 10));
-        }
+        //}
 
-        [Test]
-        public void Test3CreateTestPlanHierarchy()
-        {
+        //[Test]
+        //public void Test3CreateTestPlanHierarchy()
+        //{
             TestPlan.CreateNewFolder(testFolder);
             TestPlan.CreateNewFolder(scriptFolder);
             TestPlan.UploadScript(pathToScript, scriptFolder);
@@ -65,20 +65,21 @@ namespace WEBUItests.Smoke_Tests
             DesignLoadTest.ActionsFrame.btnSave.Click();
             Assert.AreEqual(true, Driver.Instance.IsElementPresent(By.XPath(expTestSaved), 10));
             MyPCNavigation.CloseDLT_Tab();
-        }
+        //}
 
-        [Test]
-        public void Test4AssignTestToTestSet()
-        {
+        //[Test]
+        //public void Test4AssignTestToTestSet()
+        //{
             TestLab.btnAssignTest.Click();
             AssignTestDialog.ComboTreeInput.Click();
             AssignTestDialog.SelectTest(testName, testFolder);
             AssignTestDialog.btnOk.Click();
-        }
+            Driver.Wait(1);
+        //}
 
-        [Test]
-        public void Test5RunTest()
-        {
+        //[Test]
+        //public void Test5RunTest()
+        //{
             MyPCNavigation.btnRefresh.Click();
             TestLab.SelectTestInGrid(testName);
             TestLab.btnRunTest.Click();

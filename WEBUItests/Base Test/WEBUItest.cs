@@ -49,7 +49,7 @@ namespace WEBUItests
         public void Cleanup()
         {
             Driver.Wait(3);
-            Driver.Close();
+           // Driver.Close();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace WEBPages.Pages
         { get { return mainPage.FindElementAndWait(By.XPath(xPathHome)); } }
 
         public static IWebElement btnRefresh
-        { get { return mainPage.FindElementAndWait(By.XPath(".//div[contains(@class, 'btnRefresh')]")); } }
+        { get { return mainPage.FindElementAndWait(By.XPath(".//div[contains(@ng-click, 'Refresh()')]")); } }
 
         public static IWebElement Home
         { get { return mainPage.FindElementAndWait(By.XPath(xPathTestMgmt)); } }

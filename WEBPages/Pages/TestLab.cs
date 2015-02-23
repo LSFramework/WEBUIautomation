@@ -41,7 +41,7 @@ namespace WEBPages.Pages
 
         public static void SelectTestInGrid(string testName)
         {
-            mainTab.FindElementAndWait(By.XPath(@".//*[contains(text(), '" + testName + "')]")).Click();
+            mainTab.FindElementAndWait(By.Id("ctl00_PageContent_iPC_A_Zone")).FindElementAndWait(By.XPath(@"//td[contains(text(), '" + testName + "')]")).Click();
         }
 
     }
