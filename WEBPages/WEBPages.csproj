@@ -46,6 +46,7 @@
     <Compile Include="Pages\ALMainPage.cs" />
     <Compile Include="Pages\AssignTestDialog.cs" />
     <Compile Include="Pages\DesignLoadTest.cs" />
+    <Compile Include="Pages\StartRunDialog.cs" />
     <Compile Include="Pages\TestLab.cs" />
     <Compile Include="Pages\DLT\WorkloadTypeDialog.cs" />
     <Compile Include="Pages\DLT\SummaryGeneralDetails.cs" />

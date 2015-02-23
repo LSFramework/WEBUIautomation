@@ -28,7 +28,7 @@ namespace WEBUIautomation
             properties.SetPreference("profile", "default");
 
             
-            ieOptions.EnsureCleanSession = true;
+            
 
             //Object for Snapshot class
             //var snap = new Snapshot();

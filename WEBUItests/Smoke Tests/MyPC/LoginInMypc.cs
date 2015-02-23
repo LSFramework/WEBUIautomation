@@ -79,10 +79,10 @@ namespace WEBUItests.Smoke_Tests
         [Test]
         public void Test5RunTest()
         {
+            MyPCNavigation.btnRefresh.Click();
             TestLab.SelectTestInGrid(testName);
             TestLab.btnRunTest.Click();
+            StartRunDialog.btnRun.Click();
         }
-
-
     }
 }
