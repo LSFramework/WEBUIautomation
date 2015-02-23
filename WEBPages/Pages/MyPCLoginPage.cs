@@ -46,7 +46,7 @@ namespace WEBPages.Pages
         {
             get
             {
-               //Driver.Wait(1);
+               Driver.Wait(1);
                Driver.Instance.WaitForVisible(By.XPath(xPathDomainSelector), 5);
                return Driver.Instance.FindElementAndWait(By.XPath(xPathDomainSelector));        
             }
@@ -56,7 +56,7 @@ namespace WEBPages.Pages
         {
             get 
             { 
-                //Driver.Wait(1);
+                Driver.Wait(1);
                 Driver.Instance.WaitForVisible(By.XPath(xPathDomainsDropDownList), 5);
                 return Driver.Instance.FindElementAndWait(By.XPath(xPathDomainsDropDownList)); 
             } 
