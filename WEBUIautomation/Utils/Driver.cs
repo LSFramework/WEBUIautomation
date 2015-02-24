@@ -42,8 +42,8 @@ namespace WEBUIautomation
             //Initializing WebDriver object
             //Instance = firingDriver;
 
-            Instance = new ChromeDriverExt(@"C:\Utils");
-            //Instance = StartIEDriver();
+            //Instance = new ChromeDriverExt(@"C:\Utils");
+            Instance = StartIEDriver();
               //new InternetExplorerDriverExt(@"C:\Utils", ieOptions);            
             //Instance = new FirefoxDriverExt();
 
@@ -80,7 +80,7 @@ namespace WEBUIautomation
         //Close Driver
         public static void Close()
         {
-            Instance.Dispose();
+            Instance.Quit();
         }
         
         //Thread sleep

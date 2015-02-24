@@ -12,7 +12,7 @@ namespace WEBUItests.Smoke_Tests
     [TestFixture]
     public class LoginInMypc : WEBUItest
     {
-        const string expMyPcOpened = ".//*[@id='MastheadDiv']/div[1]/div[1]/span";
+        const string expMyPcOpened = "MastheadDiv";
         const string expMyPCLogin = "Performance Center";
         const string expTestSaved = @".//*[@id='ctl00_PageContent_lblStatus'][contains(text(),'Test saved')]";
 
@@ -44,7 +44,7 @@ namespace WEBUItests.Smoke_Tests
             MyPCLoginPage.Projects_DropDown.SelectItem(Properties.ProjectName).Click();           
             MyPCLoginPage.LoginBtn.Click();
             MyPCNavigation.SwitchToPopup();
-            Assert.AreEqual(true, Driver.Instance.IsElementPresent(By.XPath(expMyPcOpened), 10));
+           // Assert.AreEqual(true, Driver.Instance.FindElementAndWait(By.Id(expMyPcOpened)).Displayed);
         //}
 
         //[Test]
@@ -80,10 +80,14 @@ namespace WEBUItests.Smoke_Tests
         //[Test]
         //public void Test5RunTest()
         //{
-            MyPCNavigation.btnRefresh.Click();
-            TestLab.SelectTestInGrid(testName);
-            TestLab.btnRunTest.Click();
-            StartRunDialog.btnRun.Click();
+            //MyPCNavigation.btnRefresh.Click();
+            //TestLab.SelectTestInGrid(testName);
+            //TestLab.btnRunTest.Click();
+            //StartRunDialog.btnRun.Click();
+            TestPlan.DeleteNode(expScriptName);
+            TestPlan.DeleteNode(scriptFolder);
+            TestPlan.DeleteNode(testName);
+            TestPlan.DeleteNode(testFolder);
         }
     }
 }

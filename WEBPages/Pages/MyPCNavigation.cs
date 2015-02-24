@@ -16,7 +16,7 @@ namespace WEBPages.Pages
 
         const string xPathHome = @".//span[contains(@class, 'IconContainer IconHome')]";
         const string xPathLogoutBtn = @".//*[@id='MastheadDiv']/div[1]/div[2]/div[7]";
-        const string xPathTestMgmt = @".//span[contains(@local-string, 'testManagement')]";
+        const string xPathTestMgmt = @".//*[@id='MastheadDiv']/div[3]/div/div[2]/span[1]";
         const string xPathCloseDLT = @".//div[contains(@class, 'xButtonWrapper')]";
 
         #endregion

@@ -8,15 +8,16 @@ using WEBUIautomation;
 using WEBUIautomation.Utils;
 using System.Windows.Forms;
 using System.Threading;
+using OpenQA.Selenium.Interactions;
 
 namespace WEBPages.Pages
 {
     public class TestPlan
     {
-        private const string position="MainTab";
-        private static IWebDriverExt _mainTab = Driver.Instance;
+        const string position="MainTab";
+        static IWebDriverExt _mainTab = Driver.Instance;
 
-        private static IWebDriverExt mainTab
+        static IWebDriverExt mainTab
         {
             get
             {
@@ -35,11 +36,11 @@ namespace WEBPages.Pages
 
         public static IWebElement Tree
         { get { return mainTab.FindElementAndWait(By.Id("divTestPlanTree"));} }
-
-        //public static IWebElement TreeToolBar
-        //{ get { return mainTab.FindElementAndWait(By.XPath(@".//*[contains(@id,'TestPlanTreeControl_GenericTreeView1_toolbar')]")); } }
         
         #endregion
+
+        public static IWebElement txtFindNode
+        { get {return Tree.FindElementAndWait(By.Id("ctl00_PageContent_WebPartManager1_wp2108003362_5646e8c3_cc63_4bc6_9810_7580ae3300e4_TestPlanTreeControl_GenericTreeView1_RadTextBox1")); } }
 
         #region Test Plan Tree toolbar buttons
 
@@ -163,10 +164,10 @@ namespace WEBPages.Pages
             CreateNewTestDialog.btnCreateNewOK.Click();            
         }
 
-        public static void UploadScript(string pathToScript, string ScriptFolder)
+        public static void UploadScript(string pathToScript, string scriptFolder)
         {
             Tree.SelectItem("Subject", "span").Click();
-            Tree.SelectItem(ScriptFolder, "span").Click();
+            Tree.SelectItem(scriptFolder, "span").Click();
             UploadScriptBtn.Click();
             Driver.Instance.SwitchToDefaultContent();
             Driver.Instance.SwitchToFrame(By.XPath(@".//iframe[contains(@ng-src,'UploadScripts.aspx')]"));           
@@ -176,6 +177,16 @@ namespace WEBPages.Pages
             UploadScriptDialog.UploadBtn.Click();
             Driver.Wait(3);
             UploadScriptDialog.CloseBtn.Click();          
+        }
+
+        public static void DeleteNode(string node)
+        {
+            txtFindNode.SendKeys(node);
+            RefreshBtn.Click();
+            Tree.SelectItem(node,"span").Click();
+            DeleteBtn.Click();
+            System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+            Driver.Wait(2);        
         }
 
         #endregion        
