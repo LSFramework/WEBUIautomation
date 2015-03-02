@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.PhantomJS;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -182,6 +183,15 @@ namespace WEBUIautomation.Utils
     {
         //Constructor inherited from the base class
         public PhantomJSDriverExt(string path) : base(path) { }
+        public By CurrentFrame { get; set; }
+    }
+
+    //extended PhantomJSDriver class with FindElementAndWait method
+    public class RemoteWebDriverExt : RemoteWebDriver, IWebDriverExt
+    {
+        //Constructor inherited from the base class
+        public RemoteWebDriverExt(ICapabilities capabilities) : base(capabilities) { }
+        public RemoteWebDriverExt(Uri remoteAddress, ICapabilities capabilities) : base(remoteAddress, capabilities) { }
         public By CurrentFrame { get; set; }
     }
 

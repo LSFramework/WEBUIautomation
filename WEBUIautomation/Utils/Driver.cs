@@ -44,8 +44,10 @@ namespace WEBUIautomation
 
             //Instance = new ChromeDriverExt(@"C:\Utils");
             Instance = StartIEDriver();
-              //new InternetExplorerDriverExt(@"C:\Utils", ieOptions);            
+            //new InternetExplorerDriverExt(@"C:\Utils", ieOptions);            
             //Instance = new FirefoxDriverExt();
+            //Instance = new RemoteWebDriverExt(new Uri("http://myd-vm03440.hpswlabs.adapps.hp.com:4444/wd/hub"), DesiredCapabilities.Firefox());
+
 
             //Setting Implicit Wait timeout
             Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));
