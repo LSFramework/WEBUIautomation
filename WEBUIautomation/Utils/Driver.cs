@@ -1,32 +1,30 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.PhantomJS;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium.Support.UI;
 using System.Threading;
-using WEBUIautomation.Utils;
-using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium.Remote;
 using System.Drawing;
 
-namespace WEBUIautomation
+namespace WEBUIautomation.Utils
 {
     public class Driver
     {
         public static IWebDriverExt Instance { get; private set;}
-        //public static ICapabilities Capabilities { get; private set; }
+        
+        public static ICapabilities Capabilities
+        {
+            get
+            {
+                return (Instance as RemoteWebDriver).Capabilities;
+            }
+        }
 
         public static void Initialize()
         {
             FirefoxProfile properties = new FirefoxProfile();
             properties.SetPreference("profile", "default");
-            
+            Instance = WebDriverBrowser.LaunchBrowser(Browser.IE);
+            #region
             //Object for Snapshot class
             //var snap = new Snapshot();
             //Object for Logger class
@@ -43,32 +41,26 @@ namespace WEBUIautomation
             //Instance = firingDriver;
 
             //Instance = new ChromeDriverExt(@"C:\Utils");
-            Instance = StartIEDriver();
+            //Instance = StartIEDriver();
               //new InternetExplorerDriverExt(@"C:\Utils", ieOptions);            
             //Instance = new FirefoxDriverExt();
 
             //Setting Implicit Wait timeout
+            #endregion
             Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));
         }
 
-        private static IWebDriverExt StartIEDriver()
+        public static void Initialize(Browser browser)
         {
-            InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-            ieOptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
-            ieOptions.EnsureCleanSession = true;
-            var driver = new InternetExplorerDriverExt(@"C:\Utils", ieOptions);
-            driver.Close();
-            driver = new InternetExplorerDriverExt(@"C:\Utils", ieOptions);
-            return driver;
+            Instance = WebDriverBrowser.LaunchBrowser(browser);
         }
-
+        
 
         //Set Browser resolution
         public static void SetBrowserResolution(int width, int height)
         {
             Instance.Manage().Window.Position = new Point(0, 0);
-            Instance.Manage().Window.Size = new Size(width, height);
-            //Instance.Manage().Window.Maximize();
+            Instance.Manage().Window.Size = new Size(width, height);            
         }
 
         //Maximize Browser window
@@ -81,6 +73,8 @@ namespace WEBUIautomation
         public static void Close()
         {
             Instance.Quit();
+            Instance.Dispose();
+            Instance = null;
         }
         
         //Thread sleep

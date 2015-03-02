@@ -16,8 +16,8 @@ namespace WEBUIautomation.Utils
             IWebDriver driver = null;
             if (browserName.ToLower().Contains("firefox"))
             {
-                Driver.Initialize();
-                //driver = new FirefoxDriverExt();
+               // Driver.Initialize();
+                driver = new FirefoxDriverExt();
                 return Driver.Instance;
             }
             if (browserName.ToLower().Contains("internet"))

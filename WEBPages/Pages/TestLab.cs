@@ -36,7 +36,7 @@ namespace WEBPages.Pages
         { get { return TestSetToolbar.FindElementAndWait(By.XPath(@".//a[contains(@title, 'Assign Test to TestSet')]")); } }
 
         public static IWebElement btnRunTest
-        { get { return TestSetToolbar.FindElementAndWait(By.XPath(@".//span[contains(text(), 'Run Test')]")); } } 
+        { get { return TestSetToolbar.FindElementAndWait(By.XPath(@".//img[contains(@alt, 'Run Test')]")); } } 
 
 
         public static void SelectTestInGrid(string testName)

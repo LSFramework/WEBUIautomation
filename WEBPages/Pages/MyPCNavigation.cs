@@ -37,13 +37,13 @@ namespace WEBPages.Pages
         }
 
         public static IWebElement LogoutBtn
-        { get { return mainPage.FindElementAndWait(By.XPath(xPathHome)); } }
+        { get { return mainPage.FindElementAndWait(By.XPath(xPathLogoutBtn)); } }
 
         public static IWebElement btnRefresh
         { get { return mainPage.FindElementAndWait(By.XPath(".//div[contains(@ng-click, 'Refresh()')]")); } }
 
         public static IWebElement Home
-        { get { return mainPage.FindElementAndWait(By.XPath(xPathTestMgmt)); } }
+        { get { return mainPage.FindElementAndWait(By.XPath(xPathHome)); } }
 
         public static IWebElement TestManagement
         { get { return mainPage.FindElementAndWait(By.XPath(xPathTestMgmt)); } }

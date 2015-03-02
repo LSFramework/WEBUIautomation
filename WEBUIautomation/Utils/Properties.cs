@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
+
 namespace WEBUIautomation.Utils
 {
     //Create XML properties file to read from
@@ -18,6 +19,8 @@ namespace WEBUIautomation.Utils
         public static string UserPassword { get; private set; }
         public static string DomainName { get; private set; }
         public static string ProjectName { get; private set; }
+
+       // public static IEnumerable<Browser> Browsers { get; private set; }
 
         private static string startupPath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName, "properties.xml");
 
@@ -79,7 +82,6 @@ namespace WEBUIautomation.Utils
                     Environment.Exit(0);
                 }
             }
-            
         }
         
         public static void Read()

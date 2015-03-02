@@ -182,11 +182,17 @@ namespace WEBPages.Pages
         public static void DeleteNode(string node)
         {
             txtFindNode.SendKeys(node);
-            RefreshBtn.Click();
+            txtFindNode.Clear();
+            txtFindNode.SendKeys(node);
             Tree.SelectItem(node,"span").Click();
             DeleteBtn.Click();
             System.Windows.Forms.SendKeys.SendWait("{ENTER}");
             Driver.Wait(2);        
+        }
+
+        public static void CleanTestPlanTree()
+        {
+ 
         }
 
         #endregion        

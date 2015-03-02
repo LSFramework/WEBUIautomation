@@ -27,7 +27,9 @@ namespace WEBPages.Pages
         { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_btnAuthenticate")); } }
 
         public static IWebElement DomainSelector
-        {get {return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_ddlDomains_Input")); }}
+        {get {
+            
+            return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_ddlDomains_Input")); }}
 
         public static IWebElement Domains_DropDown
         {get{ return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_ddlDomains_DropDown")); } }
