@@ -42,7 +42,6 @@ namespace WEBUIautomation.Utils
 
             //Instance = new ChromeDriverExt(@"C:\Utils");
             //Instance = StartIEDriver();
-              //new InternetExplorerDriverExt(@"C:\Utils", ieOptions);            
             //Instance = new FirefoxDriverExt();
 
             //Setting Implicit Wait timeout
