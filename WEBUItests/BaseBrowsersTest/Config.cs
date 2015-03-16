@@ -53,7 +53,7 @@ namespace WEBUItests.BaseBrowsersTest
             if(browser!="null")browsers.Add(browser);
 
 
-            //Read first 5 possible keys on below format from .config
+            //Reads first 5 possible keys on below format from .config
             ///<add key="Browser1" value="Chrome" />
             ///<add key="Browser2" value="Firefox" />
             ///<add key="Browser3" value="IE" />
@@ -64,7 +64,7 @@ namespace WEBUItests.BaseBrowsersTest
                 
                 //if value exists and it is a browser
                 if (browser != "null" && Enum.TryParse<Browser>(browser, out browserResult))
-                    browsers.Add(browser);
+                        browsers.Add(browser);
             }
             
             //If .config is empty 

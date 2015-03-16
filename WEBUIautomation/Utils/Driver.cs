@@ -19,6 +19,7 @@ namespace WEBUIautomation.Utils
             }
         }
 
+        // TO BE DELETED
         public static void Initialize()
         {
             FirefoxProfile properties = new FirefoxProfile();
@@ -52,8 +53,8 @@ namespace WEBUIautomation.Utils
         public static void Initialize(Browser browser)
         {
             Instance = WebDriverBrowser.LaunchBrowser(browser);
+            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));
         }
-        
 
         //Set Browser resolution
         public static void SetBrowserResolution(int width, int height)

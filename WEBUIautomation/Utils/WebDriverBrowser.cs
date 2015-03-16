@@ -27,13 +27,24 @@ namespace WEBUIautomation
             switch (browser)
             {
                 case Browser.IE:
+
                     driver = StartIEDriver();
+                    
                     break;
-                case Browser.Chrome:
+
+                case Browser.Chrome:                                
+
                     driver = new ChromeDriverExt(@"C:\Utils");
+                    
                     break;
+
                 default:
-                    driver = new FirefoxDriverExt();
+                       
+                       FirefoxProfile profile = new FirefoxProfile();
+                       profile.SetPreference("profile", "default");
+                       var capabilities = new DesiredCapabilities();
+                       driver = new FirefoxDriverExt(capabilities);                 
+                        
                     break;
             }
 

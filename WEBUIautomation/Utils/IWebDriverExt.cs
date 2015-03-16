@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.PhantomJS;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Events;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace WEBUIautomation.Utils
     {
         public FirefoxDriverExt() : base() { }
         public FirefoxDriverExt(FirefoxProfile profile) : base(profile) { }
+        public FirefoxDriverExt(DesiredCapabilities capabilities) : base(capabilities) { }
         public By CurrentFrame { get; set; }
     }
 
@@ -33,6 +35,7 @@ namespace WEBUIautomation.Utils
     {
         //Constructor inherited from the base class
         public ChromeDriverExt(string path) : base(path) { }
+        public ChromeDriverExt(string path, ChromeOptions options) : base(path, options) { }     
         public By CurrentFrame { get; set; }
     }
 

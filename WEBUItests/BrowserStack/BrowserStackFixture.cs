@@ -27,16 +27,16 @@ namespace WEBUItests.BrowserStack
         public BrowserStackFixture(Type fixtureType): base(fixtureType)
         {
             BrowserStackFixtureAttribute attr = (BrowserStackFixtureAttribute)Reflect.GetAttribute(fixtureType, typeof(BrowserStackFixtureAttribute).FullName, true);
+            
+            this.Fixture = Reflect.Construct(fixtureType);     
 
-            this.Fixture = Reflect.Construct(fixtureType);
-           
             MethodInfo method = Reflect.GetNamedMethod(fixtureType, attr.Argument);
+        
+            Params = (List<string>)method.Invoke(null, null);                
 
-            this.Arguments = (List<string>)method.Invoke(null, null);
-
-            foreach (string argument in this.Arguments)
+            foreach (string param in Params)
             {
-                this.Add(new BrowserStackFixture(fixtureType, argument));
+                this.Add(new BrowserStackFixture(fixtureType, param));
             }
         }
 
@@ -45,33 +45,31 @@ namespace WEBUItests.BrowserStack
         /// Initializes an instance of this class.
         /// </summary>
         /// <param name="fixtureType">The type of the test fixture</param>
-        /// <param name="argument">The argument to pass to the Test Fixture Set Up method</param>
-        public BrowserStackFixture(Type fixtureType, string argument) : base(fixtureType)
+        /// <param name="param">The argument to pass to the Test Fixture Set Up method</param>
+        public BrowserStackFixture(Type fixtureType, string param) : base(fixtureType)
         {
-            this.Fixture = Reflect.Construct(fixtureType);
-            ModifyTestName(this.TestName, argument);
-            this.Argument = argument;
-
-            this.fixtureTearDownMethods = Reflect.GetMethodsWithAttribute(fixtureType, NUnitFramework.FixtureTearDownAttribute, true);
-            this.fixtureSetUpMethods = Reflect.GetMethodsWithAttribute(fixtureType, NUnitFramework.FixtureSetUpAttribute, true);
+            this.Fixture = Reflect.Construct(fixtureType); 
+            this.Param = param;            
+            ModifyTestName(this.TestName, param);            
+            this.fixtureTearDownMethods = Reflect.GetMethodsWithAttribute(fixtureType, NUnitFramework.FixtureTearDownAttribute, true);           
             this.setUpMethods = Reflect.GetMethodsWithAttribute(fixtureType, NUnitFramework.SetUpAttribute, true);
             this.tearDownMethods = Reflect.GetMethodsWithAttribute(fixtureType, NUnitFramework.TearDownAttribute, true);            
 
             foreach (MethodInfo method in Reflect.GetMethodsWithAttribute(fixtureType, NUnitFramework.TestAttribute, true))
             {
                 NUnitTestMethod methodTest = new NUnitTestMethod(method);
-                ModifyTestName(methodTest.TestName, argument);
+                ModifyTestName(methodTest.TestName, param);
                 this.Add(methodTest);
-            }
+            }            
         }
 
         /// <summary>
         /// Gets the argument under which this test fixture was created.
         /// This is <c>null</c> for the root test suite.
         /// </summary>
-        public string Argument { get; private set; }
+        private string Param { get; set; }
 
-        private List<string> Arguments { get; set; }
+        private List<string> Params { get; set; }
         
         /// <summary>
         /// Performs a one-time set-up for this test suite.
@@ -86,18 +84,18 @@ namespace WEBUItests.BrowserStack
             base.DoOneTimeSetUp(suiteResult);
             try
             {
-                if (Argument != null)
-                {
-                   //foreach (MethodInfo setupMethod in Reflect.GetMethodsWithAttribute(FixtureType, NUnitFramework.FixtureSetUpAttribute, true))
-                    MethodInfo setupMethod = Reflect.GetNamedMethod(FixtureType, "FixtureSetUp");
+                if (this.Param != null)
+                {            
+                    foreach (MethodInfo setupMethod in Reflect.GetMethodsWithAttribute(FixtureType, NUnitFramework.FixtureSetUpAttribute, true))
                     {
                         if (setupMethod.GetParameters().Length == 1)
                         {
-                            Reflect.InvokeMethod(setupMethod, this.Fixture, Argument);
+                            Reflect.InvokeMethod(setupMethod, this.Fixture, this.Param);
                         }
-                    }
+                    }                   
                 }
-            }
+            }      
+           
             catch (Exception innerException)
             {
                 if (innerException is NUnitException || innerException is TargetInvocationException)
@@ -131,9 +129,8 @@ namespace WEBUItests.BrowserStack
                     }
                 }
             }
+           
         }
-
-
 
         private static void ModifyTestName(TestName name, string argument)
         {
@@ -144,8 +141,6 @@ namespace WEBUItests.BrowserStack
         private static string ModifyName(string originalName, string argument)
         {
             return string.Format("{0} ({1})", originalName, argument);
-        }
-
-        
+        }        
     }
 }

@@ -15,7 +15,7 @@ namespace WEBUIautomation.Utils
 {
     public static class WebDriverExt
     {
-       
+
         private static IWebElement FindElementByLocator(this IWebDriverExt iWebDriverExt, By by, int seconds=20)
         {
             Func<IWebDriver, bool> predicate = (x) =>
@@ -27,7 +27,7 @@ namespace WEBUIautomation.Utils
                 }
                 catch (NoSuchElementException){return false;}
             };
-
+         
             WebDriverWait wait = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(seconds));
             wait.Until(driver => ((IJavaScriptExecutor)iWebDriverExt).ExecuteScript("return document.readyState").Equals("complete"));
             wait.Until(predicate);
@@ -40,7 +40,6 @@ namespace WEBUIautomation.Utils
             return element;
         }
 
-
         public static IWebElement FindElementAndWait(this IWebDriverExt iWebDriverExt, By by)
         {
             return  FindElementByLocator(iWebDriverExt, by);            
@@ -48,7 +47,16 @@ namespace WEBUIautomation.Utils
 
         public static bool IsElementPresent(this IWebDriverExt iWebDriverExt, By by, int seconds)
         {
-            return FindElementByLocator(iWebDriverExt, by, seconds) != null;      
+            //return FindElementByLocator(iWebDriverExt, by, seconds) != null;      
+            try
+            {
+                IWebElement elementThatOnlyAppearsOnPostback = iWebDriverExt.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException) 
+            { 
+                return false; 
+            }
         }
 
         public static IWebElement FindElementAndWait(this IWebDriverExt iWebDriverExt, By by, int seconds)
@@ -58,7 +66,7 @@ namespace WEBUIautomation.Utils
 
         public static IWebDriverExt SwitchToFrame(this IWebDriverExt iWebDriverExt, By by)
         {
-            Driver.Wait(1);
+            //Driver.Wait(1);
             IWebElement frame = iWebDriverExt.FindElementAndWait(by);
             iWebDriverExt.SwitchTo().Frame(frame);
             iWebDriverExt.CurrentFrame = by;             
@@ -72,8 +80,6 @@ namespace WEBUIautomation.Utils
             return iWebDriverExt;
         }
 
-        
-
         public static void GoToFrame(this IWebDriverExt iWebDriverExt,string tag, string attribute, string frameLocator)
         {
             IList<IWebElement> frames = iWebDriverExt.FindElements(By.TagName(tag));
@@ -84,9 +90,6 @@ namespace WEBUIautomation.Utils
                     break;
                 }           
         }
-
-        
-
 
     }
 

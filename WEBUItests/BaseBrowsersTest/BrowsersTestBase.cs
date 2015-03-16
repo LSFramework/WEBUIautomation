@@ -10,45 +10,55 @@ using WEBUIautomation.Utils;
 using WEBUItests.BaseBrowsersTest;
 using WEBUItests.BrowserStack;
 
+
 namespace WEBUItests
 {
-    
     [BrowserStackFixture("BrowserProvider")]
     public abstract class BrowsersTestBase
     {
-        protected Browser defaultBrowser;   
-
-        protected void FixtureSetUp(string browser)
-        {
-            Logger.Log("Starting Test Set on " + browser, Logger.msgType.Message);
-            defaultBrowser = WebDriverBrowser.getBrowserFromString(browser);            
-        }
-
-        [TestFixtureSetUp]
-        protected void TestFixtureSetUp()
-        {
-            Properties.Create();
-            Properties.Read();
-            Driver.Initialize(defaultBrowser);
-        }
+        /// <summary>
+        /// Constant marker of a browser to be used in an instance of inherited class
+        /// </summary>
+        public Browser defaultBrowser{get;set;}
 
         /// <summary>
         ///  Gets info from WEBUItests.config file
         /// </summary>
         /// <returns>Returns set of brosers to testing</returns>
-        public static List<string> BrowserProvider()
+        public static List<string> BrowserProvider() { return Config.BrowsersSet; }
+        
+
+        /// <summary>
+        /// The method will be called from BrowserTestFixture class 
+        /// to create instances of a class that inherites this class
+        /// with parameter <browser> from <BrowserProvider>
+        /// </summary>
+        /// <param name="browser"></param>
+        [TestFixtureSetUp]
+        protected void FixtureSetUp(string browser)
         {
-            return Config.BrowsersSet;
+            defaultBrowser = WebDriverBrowser.getBrowserFromString(browser);
+            Logger.Log("Starting Test Set on " + defaultBrowser, Logger.msgType.Message);
+            Driver.Initialize(defaultBrowser);
+            Driver.BrowserMaximize();
+            Properties.Create();
+            Properties.Read();
         }
+
+        //[TestFixtureSetUp]
+        //protected void thisFixtureSetUp()        
+        //{
+        //    Logger.Log("Starting Test Set on " + defaultBrowser, Logger.msgType.Message);            
+        //    Driver.Initialize(defaultBrowser);
+        //    Driver.BrowserMaximize();
+        //    Properties.Create();
+        //    Properties.Read();
+        //}
+
 
         [SetUp]
         public void SetUp()
         {
-            if(Driver.Instance==null)
-            {
-                Driver.Initialize(Browser.Firefox);
-                Driver.BrowserMaximize();
-            }    
             Logger.Log("Starting Test: " + NUnit.Framework.TestContext.CurrentContext.Test.Name, Logger.msgType.Message);
         }
 

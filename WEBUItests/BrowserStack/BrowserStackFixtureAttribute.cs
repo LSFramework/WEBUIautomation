@@ -9,7 +9,7 @@ namespace WEBUItests.BrowserStack
 {
     /// <summary>
     /// Marks a class as a test fixture that can be run multiple times.
-    /// The class must have a TestFixtureSetUp method that accepts a single argument.
+    /// The class must have a FixtureSetUp method that accepts a single argument.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public class BrowserStackFixtureAttribute : Attribute

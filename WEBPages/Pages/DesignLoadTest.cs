@@ -15,7 +15,8 @@ namespace WEBPages.Pages
 
         //Here is main DLT Frame that contains tree of frames to work 
 
-        static string position = @".//iframe[contains(@ng-src,'PreManageLoadTest.aspx')]";
+        const string position = @".//iframe[contains(@ng-src,'PreManageLoadTest.aspx')]";
+        
         static IWebDriverExt driver = Driver.Instance;
 
         static IWebDriverExt MainDLTFrame

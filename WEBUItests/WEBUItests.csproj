@@ -51,6 +51,12 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
+    <Reference Include="TechTalk.SpecFlow">
+      <HintPath>..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
+    <Reference Include="TestStack.BDDfy">
+      <HintPath>..\packages\TestStack.BDDfy.4.1.0\lib\NET40\TestStack.BDDfy.dll</HintPath>
+    </Reference>
     <Reference Include="WebDriver, Version=2.44.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Selenium.WebDriver.2.44.0\lib\net40\WebDriver.dll</HintPath>
@@ -77,6 +83,7 @@
     <Compile Include="BrowserStack\BrowserStackFixtureAddin.cs" />
     <Compile Include="BrowserStack\BrowserStackFixtureAttribute.cs" />
     <Compile Include="BaseBrowsersTest\BrowsersTestBase.cs" />
+    <Compile Include="Smoke Tests\MyPC\Create Test Plan Items.cs" />
     <Compile Include="Smoke Tests\MyPC\LoginInMypc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base Test\WEBUItest.cs" />

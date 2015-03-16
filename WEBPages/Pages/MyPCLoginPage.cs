@@ -14,30 +14,82 @@ namespace WEBPages.Pages
     //Contains the methods to complete Login MyPC
     public class MyPCLoginPage
     {
-        public static IWebElement LoginBtn
-        { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_btnLogin")); } }
+        #region WebElements               
 
-        public static IWebElement UserNameField
-        { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_txtUserName")); } }
+       const string txtUserName= "ctl00_PageContent_txtUserName";
 
-        public static IWebElement PasswordField
-        { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_txtPassword")); } }
+       const string txtPassword = "ctl00_PageContent_txtPassword";
 
-        public static IWebElement AuthenticateBtn
-        { get { return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_btnAuthenticate")); } }
+       const string btnAuthenticate = "ctl00_PageContent_btnAuthenticate";
 
-        public static IWebElement DomainSelector
-        {get {
-            
-            return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_ddlDomains_Input")); }}
+       const string arrDomains = "ctl00_PageContent_ddlDomains_Arrow";
 
-        public static IWebElement Domains_DropDown
-        {get{ return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_ddlDomains_DropDown")); } }
+       const string  inpDomains = "ctl00_PageContent_ddlDomains_Input";
 
-        public static IWebElement ProjectSelector
-        {get {return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_ddlProjects_Input"));}}
+       const string  ddlDomains="ctl00_PageContent_ddlDomains_DropDown";
 
-        public static IWebElement Projects_DropDown
-        {get {return Driver.Instance.FindElementAndWait(By.Id("ctl00_PageContent_ddlProjects_DropDown"));}}                    
+       const string arrProjects = "ctl00_PageContent_ddlProjects_Arrow";
+
+       const string inpProjects="ctl00_PageContent_ddlProjects_Input";
+
+       const string ddlProjects = "ctl00_PageContent_ddlProjects_DropDown";
+
+       const string btnLogin = "ctl00_PageContent_btnLogin";
+       
+        #endregion WebElemnts
+
+        #region Actions
+
+        public static void TypeUserName(string userName)
+        {
+            Driver.Instance.FindElementAndWait(By.Id(txtUserName)).Clear();
+            Driver.Instance.FindElementAndWait(By.Id(txtUserName)).SendKeys(userName);
+        }
+
+        public static void TypePassword(string password)
+        {
+           Driver.Instance.FindElementAndWait(By.Id( txtPassword)).Clear();
+           Driver.Instance.FindElementAndWait(By.Id( txtPassword)).SendKeys(password);
+        }
+
+        public static void ClickAuthenticate()
+        { 
+            Driver.Instance.FindElementAndWait(By.Id(btnAuthenticate)).Click(); 
+        }
+
+        public static void SelectDomain(string domain)
+        {
+            Driver.Instance.FindElementAndWait(By.Id(arrDomains)).Click();
+            Driver.Instance.FindElementAndWait(By.Id(inpDomains)).Click();
+            Driver.Instance.FindElementAndWait(By.Id(ddlDomains)).SelectItem(domain).Click();
+        }
+
+        public static void SelectProject(string project)
+        {
+            Driver.Instance.FindElementAndWait(By.Id(arrProjects)).Click();
+            Driver.Instance.FindElementAndWait(By.Id(inpProjects)).Click();
+            Driver.Instance.FindElementAndWait(By.Id(ddlProjects)).SelectItem(project).Click();
+        }
+
+        public static void ClickLogin()
+        {
+            Driver.Instance.FindElementAndWait(By.Id(btnLogin)).Click();
+        }
+
+        public static void LoginToProject(string userName, string password, string domain, string project)
+        {
+            TypeUserName(userName);
+            TypePassword(password);
+            ClickAuthenticate();
+            SelectDomain(domain);
+            SelectProject(project);
+            ClickLogin();
+            //After Login Action
+           // Driver.Instance.
+            MyPCNavigation.SwitchToPopup();    
+        }
+
+        #endregion Actions
+
     }        
 }

@@ -11,7 +11,7 @@ namespace WEBPages.Pages
 {
     public class StartRunDialog
     {
-        static string position = @".//iframe[contains(@ng-src,'StartRun.aspx')]";
+        const string position = @".//iframe[contains(@ng-src,'StartRun.aspx')]";
         static IWebDriverExt driver = Driver.Instance;
 
         static IWebDriverExt runTestDialog

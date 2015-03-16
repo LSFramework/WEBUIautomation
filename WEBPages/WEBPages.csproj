@@ -46,6 +46,7 @@
     <Compile Include="Pages\ALMainPage.cs" />
     <Compile Include="Pages\AssignTestDialog.cs" />
     <Compile Include="Pages\DesignLoadTest.cs" />
+    <Compile Include="Pages\MainHeadLinks.cs" />
     <Compile Include="Pages\StartRunDialog.cs" />
     <Compile Include="Pages\TestLab.cs" />
     <Compile Include="Pages\DLT\WorkloadTypeDialog.cs" />
@@ -55,7 +56,10 @@
     <Compile Include="Pages\MyPCNavigation.cs" />
     <Compile Include="Pages\Pages.cs" />
     <Compile Include="Pages\DLT\ScriptsTreeSlidingPane.cs" />
-    <Compile Include="Pages\TestPlan.cs" />
+    <Compile Include="Pages\TestPlan Pages\CreateNewTestDialog.cs" />
+    <Compile Include="Pages\TestPlan Pages\CreateNewTestFolderDialog.cs" />
+    <Compile Include="Pages\TestPlan Pages\TestPlan.cs" />
+    <Compile Include="Pages\TestPlan Pages\UploadScriptDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +68,7 @@
       <Name>WEBUIautomation</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
