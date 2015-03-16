@@ -26,6 +26,7 @@ namespace WEBUIautomation.Utils
 
         public static void Create()
         {
+            #region
             /*
             XmlDocument doc = new XmlDocument();
             XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
@@ -60,7 +61,8 @@ namespace WEBUIautomation.Utils
             
             doc.Save(startupPath);
             */
-            
+            #endregion
+
             if (!File.Exists(startupPath))
             {
                 try

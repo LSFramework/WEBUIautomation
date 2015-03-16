@@ -21,9 +21,9 @@ namespace WEBPages.Pages
                 if (_mainTab.CurrentFrame != By.Id(position))
                 {
                     _mainTab.SwitchTo().DefaultContent();
-                    MyPCNavigation.TestManagement.Click();
-                    MyPCNavigation.TestManagement.SelectItem("Test Lab").Click();
-                    _mainTab = Driver.Instance.SwitchToFrame(By.Id(position));
+                    MyPCNavigation.ClickMenuItem(MainHeadLinks.TestManagement);
+                    MyPCNavigation.ClickMenuItem(MainHeadLinks.TestPlan);
+                    _mainTab.SwitchToFrame(By.Id(position));
                 }
                 return _mainTab;
             }

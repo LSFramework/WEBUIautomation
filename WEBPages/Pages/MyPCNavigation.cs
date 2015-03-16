@@ -7,19 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using WEBUIautomation;
 using WEBUIautomation.Utils;
+using System.Drawing;
 
 namespace WEBPages.Pages
 {
+    
+    
+    
+    
     public class MyPCNavigation
     {
-        #region xPath constatnts
-
-        const string xPathHome = @".//span[contains(@class, 'IconContainer IconHome')]";
-        const string xPathLogoutBtn = @".//*[@id='MastheadDiv']/div[1]/div[2]/div[7]";
-        const string xPathTestMgmt = @".//*[@id='MastheadDiv']/div[3]/div/div[2]/span[1]";
-        const string xPathCloseDLT = @".//div[contains(@class, 'xButtonWrapper')]";
-
-        #endregion
+        #region Page Locator
 
         static string position = "MastheadDiv";
 
@@ -27,34 +25,49 @@ namespace WEBPages.Pages
 
         static IWebDriverExt mainPage
         {
-            get {
+            get 
+            {
                 if (driver.CurrentFrame != (By.Id(position)))
-                { 
+                {   
                     driver.SwitchToDefaultContent(); 
                 }
+
                 return driver;            
             }
         }
 
-        public static IWebElement LogoutBtn
-        { get { return mainPage.FindElementAndWait(By.XPath(xPathLogoutBtn)); } }
+        #endregion Page Locator
 
-        public static IWebElement btnRefresh
-        { get { return mainPage.FindElementAndWait(By.XPath(".//div[contains(@ng-click, 'Refresh()')]")); } }
+        #region Elements Locators
 
-        public static IWebElement Home
-        { get { return mainPage.FindElementAndWait(By.XPath(xPathHome)); } }
+        const string lblUser = @".//*[@id='MastheadDiv']/div[1]/div[2]/div[6]";
 
-        public static IWebElement TestManagement
-        { get { return mainPage.FindElementAndWait(By.XPath(xPathTestMgmt)); } }
+        const string lblDomain = @".//*[@id='MastheadDiv']/div[1]/div[2]/div[1]/span[1]";
 
-        
+        const string lblProject = @".//*[@id='MastheadDiv']/div[1]/div[2]/div[1]/span[2]";
+
+        const string LogoutBtn = @".//*[@id='MastheadDiv']/div[1]/div[2]/div[7]";
+
+        const string btnRefresh = @".//div[contains(@ng-click, 'Refresh()')]";
+
+        const string Home = @".//span[contains(@class, 'IconContainer IconHome')]";
+
+        const string TestManagement = @".//div[contains(@ng-class, 'selectedLink_TestMgmt')]";
+
+        const string xPathCloseDLT = @".//div[contains(@class, 'xButtonWrapper')]";
+
+        #endregion //Elements Locators
+
+        #region Page Actions
 
         public static void SwitchToPopup()
         {
             int before = driver.WindowHandles.ToList().Count;
 
-            do { IList<string> afterPopup = driver.WindowHandles.ToList(); }
+            do
+            {
+                IList<string> afterPopup = driver.WindowHandles.ToList();
+            }
             while (driver.WindowHandles.ToList().Count == before);
 
             driver.SwitchTo().Window(Driver.Instance.WindowHandles.Last());
@@ -64,6 +77,37 @@ namespace WEBPages.Pages
         {
             mainPage.FindElementAndWait(By.XPath(xPathCloseDLT)).Click();
         }
+
+        public static string GetDomainName()
+        {
+           return mainPage.FindElementAndWait(By.XPath(lblDomain)).Text;
+        }
+
+        public static string GetProjectName()
+        {
+            return mainPage.FindElementAndWait(By.XPath(lblProject)).Text;
+        }
+
+        public static string GetUserLoggedIn()
+        {
+            return mainPage.FindElementAndWait(By.XPath(lblUser)).Text;
+        }
+
+        public static void ClickRefresh()
+        {
+            mainPage.FindElementAndWait(By.XPath(btnRefresh)).Click();
+        }
+
+        public static void ClickMenuItem(string textMenuItem)
+        {
+            string xPathLocator = @".//*[contains(text(), '" + textMenuItem + "')]";
+            IWebElement menuItem = mainPage.FindElementAndWait(By.XPath(xPathLocator));
+            (mainPage as IJavaScriptExecutor).ExecuteScript(string.Format("window.scrollTo(0, {0});", menuItem.Location.Y));
+            menuItem.Click();
+        }
+
+
+        #endregion //Page Actions
     }
     
 }

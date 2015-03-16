@@ -19,6 +19,7 @@ namespace WEBUIautomation.Utils
             }
         }
 
+        // TO BE DELETED
         public static void Initialize()
         {
             FirefoxProfile properties = new FirefoxProfile();
@@ -46,14 +47,14 @@ namespace WEBUIautomation.Utils
 
             //Setting Implicit Wait timeout
             #endregion
-            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));
+            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
         }
 
         public static void Initialize(Browser browser)
         {
             Instance = WebDriverBrowser.LaunchBrowser(browser);
+            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
         }
-        
 
         //Set Browser resolution
         public static void SetBrowserResolution(int width, int height)

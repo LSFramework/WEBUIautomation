@@ -1,5 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿//using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +11,24 @@ using System.Threading.Tasks;
 using WEBUIautomation;
 using WEBUIautomation.Utils;
 
+
 namespace WEBUItests
 {
+    public static class Const
+    {
+        public const Browser BROWSER = Browser.IE;
+    }
 
-    public class WEBUItest
+    public abstract class WEBUItest
     {
         [TestFixtureSetUp]
         public void Initialize()
         {
-            Logger.Log("Starting Test Set", Logger.msgType.Message);
-            Driver.Initialize();
+            Driver.Initialize(Const.BROWSER);
+            Logger.Log("Starting Test Set", Logger.msgType.Message);            
             Properties.Create();
             Properties.Read();            
-            Driver.BrowserMaximize();
+            Driver.BrowserMaximize();          
         }
 
         [SetUp]

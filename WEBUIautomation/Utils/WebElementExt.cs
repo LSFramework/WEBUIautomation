@@ -13,19 +13,25 @@ namespace WEBUIautomation.Utils
     public static class WebElementExt
     {
         //Highlight a found element
-        public static void Highlight(this IWebElement element, int ms = 20)
+        public static void Highlight(this IWebElement iWebElement, int ms = 20)
         {
             try
             {
                 var jsDriver = ((IJavaScriptExecutor)Driver.Instance);
-                var originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
-                jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
+                var originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", iWebElement);
+                jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", iWebElement);
                 Driver.Wait(ms / 1000);
-                jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", element);
+                jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", iWebElement);
             }
             catch (Exception)
             {
             }
+        }
+
+      
+        public static bool IsElementPresent(this IWebElement iWebElement, By by, int seconds=1)
+        {
+            return Driver.Instance.IsElementPresent(by, seconds);
         }
 
         public static IWebElement FindElementAndWait(this IWebElement iWebElement, By by)
@@ -40,7 +46,9 @@ namespace WEBUIautomation.Utils
 
         public static IWebElement SelectItem(this IWebElement iWebElement, string itemLocator, string tagName)
         {
-            return Driver.Instance.FindElementAndWait(By.XPath(@"//" + tagName + "[contains(text(), '" + itemLocator + "')]"));
+            IWebElement item= Driver.Instance.FindElementAndWait(By.XPath(@"//" + tagName + "[contains(text(), '" + itemLocator + "')]"));
+            (Driver.Instance as IJavaScriptExecutor).ExecuteScript(string.Format("window.scrollTo(0, {0});", item.Location.Y));
+            return item;
         }
 
         public static IWebElement SelectItem(this IWebElement iWebElement, string itemLocator, string tagName, string propertyName)

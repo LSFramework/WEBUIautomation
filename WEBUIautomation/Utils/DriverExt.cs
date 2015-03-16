@@ -15,40 +15,52 @@ namespace WEBUIautomation.Utils
 {
     public static class WebDriverExt
     {
-       
-        private static IWebElement FindElementByLocator(this IWebDriverExt iWebDriverExt, By by, int seconds=20)
-        {
-            Func<IWebDriver, bool> predicate = (x) =>
-            {
-                try
-                {
-                    IWebElement elementThatOnlyAppearsOnPostback = iWebDriverExt.FindElement(by);
-                    return true;
-                }
-                catch (NoSuchElementException){return false;}
-            };
 
+        private static IWebElement FindElementByLocator(this IWebDriverExt iWebDriverExt, By by, int seconds=10)
+        {            
+            
+            //WebDriverWait wait1 = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(seconds));
+            //wait1.Until(driver => ((IJavaScriptExecutor)iWebDriverExt).ExecuteScript("return document.readyState").Equals("complete"));      
             WebDriverWait wait = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(seconds));
-            wait.Until(driver => ((IJavaScriptExecutor)iWebDriverExt).ExecuteScript("return document.readyState").Equals("complete"));
-            wait.Until(predicate);
-            wait.Until(ExpectedConditions.ElementIsVisible(by));
-            IWebElement element = iWebDriverExt.FindElement(by);
-          
-            //Draw a border around found element
-            element.Highlight();
+            
+            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(NoSuchElementException));
+           
+            System.Threading.Thread.Sleep(200);
 
-            return element;
+            var element = wait.Until<IWebElement>(driver =>
+                {
+                    var elements = iWebDriverExt.FindElements(by);
+                    if (elements.Count > 0)
+                        return elements[0];
+                    else
+                        return null;
+                }
+                );
+          
+                ////Draw a border around found element
+                element.Highlight();
+
+                return element;            
         }
 
 
         public static IWebElement FindElementAndWait(this IWebDriverExt iWebDriverExt, By by)
         {
-            return  FindElementByLocator(iWebDriverExt, by);            
+            return  FindElementByLocator(iWebDriverExt, by);
         }
 
         public static bool IsElementPresent(this IWebDriverExt iWebDriverExt, By by, int seconds)
         {
-            return FindElementByLocator(iWebDriverExt, by, seconds) != null;      
+            //return FindElementByLocator(iWebDriverExt, by, seconds) != null;      
+            try
+            {
+                IWebElement element = iWebDriverExt.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException) 
+            { 
+                return false; 
+            }
         }
 
         public static IWebElement FindElementAndWait(this IWebDriverExt iWebDriverExt, By by, int seconds)
@@ -58,7 +70,7 @@ namespace WEBUIautomation.Utils
 
         public static IWebDriverExt SwitchToFrame(this IWebDriverExt iWebDriverExt, By by)
         {
-            Driver.Wait(1);
+            //Driver.Wait(1);
             IWebElement frame = iWebDriverExt.FindElementAndWait(by);
             iWebDriverExt.SwitchTo().Frame(frame);
             iWebDriverExt.CurrentFrame = by;             
@@ -72,8 +84,6 @@ namespace WEBUIautomation.Utils
             return iWebDriverExt;
         }
 
-        
-
         public static void GoToFrame(this IWebDriverExt iWebDriverExt,string tag, string attribute, string frameLocator)
         {
             IList<IWebElement> frames = iWebDriverExt.FindElements(By.TagName(tag));
@@ -84,10 +94,6 @@ namespace WEBUIautomation.Utils
                     break;
                 }           
         }
-
-        
-
-
     }
 
 }
