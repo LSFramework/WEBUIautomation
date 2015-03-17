@@ -1,65 +1,87 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WEBPages.Pages;
-using TestStack.BDDfy;
+
 
 namespace WEBUItests.Smoke_Tests.MyPC
 {
+    /// <summary>
+    /// The fixture to test a possibility to create test plan entities
+    /// Such as folders, performance test, upload script.
+    /// </summary>
     [TestFixture]
-    public class Create_Test_Plan_Items : LoginInMypc
+    public class Create_Test_Plan_Items 
     {
 
         const string expTestSaved = @".//*[@id='ctl00_PageContent_lblStatus'][contains(text(),'Test saved')]";
         const string pathToScript = @"C:\ins\CloudSanityScript.zip";
-        string scriptFolder = "scripts_" + Guid.NewGuid().ToString();
-        string testFolder = "tests_" + Guid.NewGuid().ToString();
-        string testName = "test_" + Guid.NewGuid().ToString();
 
+        static string scriptFolder = "scripts_" + Guid.NewGuid().ToString();
+        static string testFolder = "tests_" + Guid.NewGuid().ToString();
+        static string testName = "test_" + Guid.NewGuid().ToString();
+
+        
         #region To Create Test Plan
 
-        public void GivenIAmOnTestPlan()
+        /// <summary>
+        /// Navigate to Test Plan perspective
+        /// </summary>
+        [Test]
+        public void Test_1_NaviagateToTestPlan()
         {
-            IWebElement element = TestPlan.TreePane;
+            Assert.IsInstanceOf<IWebElement>(TestPlan.TreePane);
         }
 
-        public void WhenICreateTheFolders()
+
+        /// <summary>
+        /// Creates folders in Test Plan Tree
+        /// </summary>
+        [Test]
+        public void Test_2_CreateTheFolders()
         {
             TestPlan.CreateNewFolder(testFolder);
             TestPlan.CreateNewFolder(scriptFolder);
         }
-
-        public void AndAddScript()
+        /// <summary>
+        ///  Upload a script
+        /// </summary>
+        [Test]
+        public void Test_3_UploadScript()
         {
             TestPlan.UploadScript(pathToScript, scriptFolder);
         }
-        public void AndCreateTest()
+
+        /// <summary>
+        /// Create a performance test
+        /// </summary>
+        [Test]
+        public void Test_4_CreatePerformanceTest()
         {
             TestPlan.CreateNewTest(testName, testFolder);
         }
-        public void ThenTheDLTScreenWithWorkloadTypeDialogShouldBeOpened()
+
+        /// <summary>
+        /// Check is DLT page opened after a performance test was created
+        /// </summary>
+        [Test]
+        public void Test_5_CheckTheDLTScreenWithWorkloadTypeDialogIsOpened()
         {
             IWebElement element = DesignLoadTest.Workload.WorkloadTypeDialog.btnOK;
             element.Click();
+            MyPCNavigation.CloseDLT_Tab();
         }
 
-        #endregion  /To Create Test Plan
+        #endregion  //To Create Test Plan
 
+
+        /// <summary>
+        /// Delete all from Test Plan
+        /// </summary>
         [Test]
-        public void _CreateTestPlanEntities()
+        public void Test_6_DeleteAllFromTestPlan()
         {
-            //this.Given(_ => GivenIAmOnTestPlan())
-            //     .When(_ => WhenICreateTheFolders())
-            //      .And(_ => AndAddScript())
-            //      .And(_ => AndCreateTest())
-            //     .Then(_ => ThenTheDLTScreenWithWorkloadTypeDialogShouldBeOpened())
-            //     .BDDfy();
             TestPlan.CleanTestPlanTree();
         }
-
     }
 }

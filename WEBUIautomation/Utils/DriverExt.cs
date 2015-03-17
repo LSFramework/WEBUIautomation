@@ -1,48 +1,74 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.PhantomJS;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 
 namespace WEBUIautomation.Utils
 {
     public static class WebDriverExt
     {
-
-        private static IWebElement FindElementByLocator(this IWebDriverExt iWebDriverExt, By by, int seconds=10)
-        {            
-            
-            //WebDriverWait wait1 = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(seconds));
-            //wait1.Until(driver => ((IJavaScriptExecutor)iWebDriverExt).ExecuteScript("return document.readyState").Equals("complete"));      
-            WebDriverWait wait = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(seconds));
-            
-            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(NoSuchElementException));
-           
+        public static string NewWindow(this IWebDriverExt iWebDriverExt)
+        {
             System.Threading.Thread.Sleep(200);
 
-            var element = wait.Until<IWebElement>(driver =>
-                {
-                    var elements = iWebDriverExt.FindElements(by);
-                    if (elements.Count > 0)
-                        return elements[0];
-                    else
-                        return null;
-                }
+            WebDriverWait wait=new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(10));
+            string window=wait.Until<string>
+                (driver =>
+                    {
+                        var sessions=iWebDriverExt.WindowHandles;
+                        if (sessions.Count > 1)
+                            return sessions[1];
+                        else return null;
+                    }
+                 );
+
+            return window;
+        }
+
+        private static IWebElement FindElementByLocator(this IWebDriverExt iWebDriverExt, By by, int seconds=10)
+        {
+            System.Threading.Thread.Sleep(200);
+
+            //DefaultWait<IWebDriverExt> waitUntillPageLoaded = new DefaultWait<IWebDriverExt>(iWebDriverExt);
+            //waitUntillPageLoaded.Timeout=TimeSpan.FromSeconds(seconds);
+            //waitUntillPageLoaded.PollingInterval = TimeSpan.FromMilliseconds(100);
+            //waitUntillPageLoaded.
+
+            DefaultWait<IWebDriverExt> wait = new DefaultWait<IWebDriverExt>(iWebDriverExt);
+            wait.Timeout = TimeSpan.FromSeconds(seconds);
+            wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(NoSuchElementException));
+            wait.Until(driver => ((IJavaScriptExecutor)iWebDriverExt).ExecuteScript("return document.readyState").Equals("complete"));
+            var element = wait.Until<IWebElement>
+                (driver =>
+                    {
+                        var elements = iWebDriverExt.FindElements(by);
+                    
+                        if (elements.Count > 0)  
+                            return elements[0];
+                        else return null;
+                    }
                 );
           
                 ////Draw a border around found element
-                element.Highlight();
+                iWebDriverExt.Highlight(element);
 
                 return element;            
         }
 
+        //Highlight a found element
+        public static void Highlight(this IWebDriverExt driver, IWebElement iWebElement, int ms = 20)
+        {
+            try
+            {
+                var jsDriver = ((IJavaScriptExecutor)driver);
+                var originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", iWebElement);
+                jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", iWebElement);
+                Driver.Wait(ms / 1000);
+                jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", iWebElement);
+            }
+            catch (Exception) { }
+        }
 
         public static IWebElement FindElementAndWait(this IWebDriverExt iWebDriverExt, By by)
         {
@@ -50,8 +76,7 @@ namespace WEBUIautomation.Utils
         }
 
         public static bool IsElementPresent(this IWebDriverExt iWebDriverExt, By by, int seconds)
-        {
-            //return FindElementByLocator(iWebDriverExt, by, seconds) != null;      
+        {            
             try
             {
                 IWebElement element = iWebDriverExt.FindElement(by);
@@ -93,6 +118,11 @@ namespace WEBUIautomation.Utils
                     iWebDriverExt.SwitchTo().Frame(frame);
                     break;
                 }           
+        }
+
+        public static IWebElement SelectListItem(this IWebDriverExt iWebDriverExt, string itemLocator)
+        {
+            return iWebDriverExt.FindElementAndWait(By.XPath("//li[contains(text(), '" + itemLocator + "')]"));
         }
     }
 

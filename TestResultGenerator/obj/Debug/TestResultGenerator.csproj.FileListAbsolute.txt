@@ -1,0 +1,7 @@
+C:\GitHub\WEBUIautomation\TestResultGenerator\bin\Debug\TestResultGenerator.exe.config
+C:\GitHub\WEBUIautomation\TestResultGenerator\bin\Debug\TestResultGenerator.exe
+C:\GitHub\WEBUIautomation\TestResultGenerator\bin\Debug\TestResultGenerator.pdb
+C:\GitHub\WEBUIautomation\TestResultGenerator\bin\Debug\NUnitDocumentor.dll
+C:\GitHub\WEBUIautomation\TestResultGenerator\bin\Debug\NUnitDocumentor.pdb
+C:\GitHub\WEBUIautomation\TestResultGenerator\obj\Debug\TestResultGenerator.exe
+C:\GitHub\WEBUIautomation\TestResultGenerator\obj\Debug\TestResultGenerator.pdb

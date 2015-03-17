@@ -46,17 +46,31 @@ namespace WEBPages.Pages.TestPlan_Pages
 
         #region Actions
 
+
+        /// <summary>
+        /// Performs typing the name of a folder to textBox
+        /// </summary>
+        /// <param name="folderName">string folderName to be typed to textBox</param>
         public static void TypeFolderName(string folderName)
         {
             Dialog.FindElementAndWait(By.Id(txtInputFolderName)).Clear();
             Dialog.FindElementAndWait(By.Id(txtInputFolderName)).SendKeys(folderName);
         }
 
+
+        /// <summary>
+        /// Performs click OK button that closes dialog with creating of a folder of folder name was typed
+        /// If folder name wasn't typed dialog will not be closed.
+        /// </summary>
         public static void ClickOk() 
         {
             Dialog.FindElementAndWait(By.Id(btnOk)).Click();
         }
 
+
+        /// <summary>
+        /// Closes dialog without creating of a folder if folder name was typed
+        /// </summary>
         public static void ClickClose()
         {
             Dialog.FindElementAndWait(By.Id(btnClose));

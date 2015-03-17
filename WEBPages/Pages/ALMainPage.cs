@@ -9,14 +9,15 @@ using WEBUIautomation.Utils;
 
 namespace WEBPages.Pages
 {
-    public class ALMainPage
+    public class ALMainPage:PageBase
     {
         const string MyPCLink = @"//a[text()='My Performance Center']";
 
         public static void GoToMyPC(string almAddress, string almPort)
-        { 
-            Driver.Instance.Navigate().GoToUrl(almAddress + @":" + almPort + @"/qcbin/loadtest/");
+        {           
+            driver.Navigate().GoToUrl(almAddress + @":" + almPort + @"/qcbin/loadtest/");
            // Driver.Instance.FindElement(By.XPath(MyPCLink)).Click();
+
         }
     }
 }
