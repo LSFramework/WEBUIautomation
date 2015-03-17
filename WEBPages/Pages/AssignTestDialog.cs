@@ -28,7 +28,6 @@ namespace WEBPages.Pages
             }
         }
 
-
        public static IWebElement btnOk
        { get { return assignTestDialog.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_DialogActions_btnOK")); } }
 

@@ -60,7 +60,6 @@
     <Compile Include="Utils\Parallel.cs" />
     <Compile Include="Utils\Properties.cs" />
     <Compile Include="Utils\Snapshot.cs" />
-    <Compile Include="Utils\Storage.cs" />
     <Compile Include="Utils\TestInfo.cs" />
     <Compile Include="Utils\WebDriverBrowser.cs" />
     <Compile Include="Utils\WebElementExt.cs" />
