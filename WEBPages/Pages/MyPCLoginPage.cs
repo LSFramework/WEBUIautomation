@@ -14,7 +14,6 @@ namespace WEBPages.Pages
     //Contains the methods to complete Login MyPC
     public class MyPCLoginPage:PageBase
     {
-       
         #region WebElements Locators               
 
        const string txtUserName= "ctl00_PageContent_txtUserName";
