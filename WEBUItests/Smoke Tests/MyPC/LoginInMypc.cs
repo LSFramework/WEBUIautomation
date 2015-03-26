@@ -1,67 +1,67 @@
 ﻿using NUnit.Framework;
 using WEBUIautomation.Utils;
 using WEBPages.Pages;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using WEBUIautomation;
-using System;
-using System.Threading;
-using TestStack.BDDfy;
 
 namespace WEBUItests.Smoke_Tests
 {
+    /// <summary>
+    /// Implements reusible methods to login MyPC
+    /// </summary>
     [TestFixture]
-    public class LoginInMypc : WEBUItest //BrowsersTestBase //
+    public abstract class LoginInMyPC : WEBUItest
     {
+        const string expMyPcOpened = "MastheadDiv";
 
-        #region Private Constatns
-
-        const string expMyPcOpened = "MastheadDiv";      
-        
-        //string expScriptName = "CloudSanityScript";
-
-        #endregion Private Constatns
-
-        #region SetUp
-
-        [SetUp]
-        public void ThisTestSetUp()        
+        /// <summary>
+        /// The method runs before all tests
+        /// </summary>
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
         {
-            base.SetUp();
-            this.Given(_ => GivenIAmOnLoginPerformanceCenterPage())
-                .When(_ => WhenIFeelAllRequiredFields())
-                .And(_ => AndClickTheLoginButton())
-                .Then(_ => ThenIShouldBeLoggedInPerformanceCenter())
-                .BDDfy(); 
+            
+            WEBUItest.TestFixtureSetUp();
+            GoToMyPC_URL();
+            UserAuthenticate();
+            LoginToSelectedProject();
+            CheckIsUserLoggedToProject();
         }
-        
-        #endregion
-
-        #region Helpers methods to test functionality
 
         #region To login
-        
-        public void GivenIAmOnLoginPerformanceCenterPage()
+
+        /// <summary>
+        /// Opens MyPC Login Page from ALM server
+        /// </summary>
+        public void GoToMyPC_URL()
         {
-            ALMainPage.GoToMyPC(Properties.QCServer, Properties.ServerPort);
+            ALMainPage.GoToMyPC(Properties.QCServer, Properties.ServerPort);            
         }
 
-        public void WhenIFeelAllRequiredFields()
+        /// <summary>
+        ///  Authenticate User to ALM
+        /// </summary>
+        public void UserAuthenticate()
         {
             MyPCLoginPage.TypeUserName(Properties.UserName);
             MyPCLoginPage.TypePassword(Properties.UserPassword);
-            MyPCLoginPage.ClickAuthenticate();
+            MyPCLoginPage.ClickAuthenticate();           
+        }
+
+        /// <summary>
+        /// Select Domain and Project and login to
+        /// </summary>
+        public void LoginToSelectedProject()
+        { 
             MyPCLoginPage.SelectDomain(Properties.DomainName);
             MyPCLoginPage.SelectProject(Properties.ProjectName);
-        }
-
-        public void AndClickTheLoginButton()
-        {
             MyPCLoginPage.ClickLogin();
-        }
+        }       
 
-        public void ThenIShouldBeLoggedInPerformanceCenter()
+        /// <summary>
+        /// Checks is user really logged in the project and domain were selected at LoginPage.
+        /// </summary>
+        public void CheckIsUserLoggedToProject()
         {
+            System.Threading.Thread.Sleep(500);
             MyPCNavigation.SwitchToPopup();
             Assert.True( // Check that userName, Domain and Project are shown on page as expected
                 MyPCNavigation.GetDomainName().Contains(Properties.DomainName)
@@ -69,117 +69,11 @@ namespace WEBUItests.Smoke_Tests
             &&  MyPCNavigation.GetUserLoggedIn().Contains(Properties.UserName));
         }
        
-        #endregion /To Login
-
-   
-
-        #region To Delete All from Test Plan
-
-        public void WhenIObserveTheTestPlanTree()
+        #endregion /To Login      
+        [TestFixtureTearDown]
+        public void FixtureTearDown()
         {
-            TestPlan.ExpandTreeAndFillItemsLists();
-        }
-
-        private void ThenIDeleteAllItemsFromTestPlanTree()
-        {
-            TestPlan.CleanTestPlanTree();
-        }
-
-        #endregion /To Delete All from Test Plan
-
-        #endregion Helpers methods to test functionality
-
-        #region Tests
-
-
-
-        //void _CleanAllFromTestPlan()
-        //{
-        //    this.Given(_ => GivenIAmOnTestPlan())
-        //        .When(_ => WhenIObserveTheTestPlanTree())
-        //        .Then(_ => ThenIDeleteAllItemsFromTestPlanTree())
-        //        .BDDfy();
-        //}
-
-        
-
-        //[Test]
-        // public void CreateTestPlanEntities()
-        // {
-        //     //_CreateTestPlanEntities();
-        //     //_CleanAllFromTestPlan();
-        // }
-
-
-        #endregion Tests
-
-
-        //[Test ]
-        //public void Test1PlanCRUD()
-        //{
-        //    TestPlan.CreateNewFolder(testFolder);
-        //    TestPlan.CreateNewFolder(scriptFolder);
-        //    TestPlan.UploadScript(pathToScript, scriptFolder);
-        //    TestPlan.CreateNewTest(testName, testFolder);
-        //    System.Threading.Thread.Sleep(3000);
-        //    this.BDDfy();
-        //}
-        //[Test]
-        //public void Test2DLT()
-        //{
-        //    DesignLoadTest.Workload.WorkloadTypeDialog.btnOK.Click();
-        //    DesignLoadTest.Tabs.tabGroupsAndWorkload.Click();
-        //    DesignLoadTest.Workload.ScriptsTreeSlidingPane.SelectScript(expScriptName, scriptFolder);
-        //    DesignLoadTest.Workload.GroupsAndWorkloadPane.row0GroupsGrid.Click();
-        //    DesignLoadTest.Workload.ScriptsTreeSlidingPane.CloseScriptsTree();
-        //    DesignLoadTest.Workload.GroupsAndWorkloadPane.inputNumberOfLGs.SendKeys("1");
-        //    DesignLoadTest.Workload.GroupsAndWorkloadPane.row0GroupsGrid.Click();
-        //    DesignLoadTest.ActionsFrame.btnSave.Click();
-        //    Assert.AreEqual(true, Driver.Instance.IsElementPresent(By.XPath(expTestSaved), 10));
-        //    MyPCNavigation.CloseDLT_Tab();
-        //    this.BDDfy();
-        //}
-
-
-        //[Test]
-        //public void Test3AssignTestToTestSet()
-        //{
-        //    TestLab.btnAssignTest.Click();
-        //    AssignTestDialog.ComboTreeInput.Click();
-        //    AssignTestDialog.SelectTest(testName, testFolder);
-        //    AssignTestDialog.btnOk.Click();
-        //    Driver.Wait(1);
-        //    this.BDDfy();
-        //}
-
-        //[Test]
-        //public void Test4RunTest()
-        //{
-        //    MyPCNavigation.btnRefresh.Click();
-        //    TestLab.SelectTestInGrid(testName);
-        //    TestLab.btnRunTest.Click();
-        //    StartRunDialog.btnRun.Click();
-        //    Driver.Wait(60);
-        //    this.BDDfy();
-        //}
-
-        //public void ClearTestPlan()
-        //{
-        //    MyPCNavigation.Home.Click();
-        //    TestPlan.DeleteNode(expScriptName);
-        //    TestPlan.DeleteNode(scriptFolder);
-        //    TestPlan.DeleteNode(testName);
-        //    TestPlan.DeleteNode(testFolder);
-        //    MyPCNavigation.LogoutBtn.Click();
-        //    this.BDDfy();
-        //}
-
-
-        [TearDown]
-        public void thisTearDown()
-        {
-           // ClearTestPlan();
-            base.TearDown();
+            base.Cleanup();
         }
     }
 }

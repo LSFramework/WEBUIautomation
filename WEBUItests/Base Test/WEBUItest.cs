@@ -1,40 +1,62 @@
 ﻿//using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WEBUIautomation;
 using WEBUIautomation.Utils;
-
+using System.IO;
+using NUnit.Core;
+using System.Collections;
 
 namespace WEBUItests
 {
+<<<<<<< HEAD
     public static class Const
     {
         public const Browser BROWSER = Browser.Chrome;
     }
+=======
+>>>>>>> origin/PC_1250
 
+    using Logger= WEBUIautomation.Utils.Logger;   
+
+
+    /// <summary>
+    /// Base test to use with WebDriver
+    /// </summary>
     public abstract class WEBUItest
     {
-        [TestFixtureSetUp]
-        public void Initialize()
+
+        
+        protected static Object locker = new object();
+        /// <summary>
+        /// Inits WebDriver instance
+        /// </summary>
+        public static void TestFixtureSetUp()
         {
-            Driver.Initialize(Const.BROWSER);
-            Logger.Log("Starting Test Set", Logger.msgType.Message);            
-            Properties.Create();
-            Properties.Read();            
-            Driver.BrowserMaximize();
+            lock (locker)
+            {
+                Driver.Instance = null;
+                Driver.Initialize(TestContextVariables.BROWSER);
+                Logger.Log("Starting Test Set", Logger.msgType.Message);
+                Properties.Create();
+                Properties.Read();
+                Driver.BrowserMaximize();
+            }        
         }
 
+
+        /// <summary>
+        /// Before each tests
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
             Logger.Log("Starting Test: " + NUnit.Framework.TestContext.CurrentContext.Test.Name, Logger.msgType.Message);
         }
 
+        /// <summary>
+        /// After each tests
+        /// </summary>
         [TearDown]
         public void TearDown()
         {
@@ -49,10 +71,14 @@ namespace WEBUItests
             }
         }
 
-        [TestFixtureTearDown]
+
+        /// <summary>
+        /// Close WebDriver
+        /// </summary>
+        //[TestFixtureTearDown]
         public void Cleanup()
         {
-            Driver.Wait(3);
+            Driver.Wait(1);
             Driver.Close();
         }
     }

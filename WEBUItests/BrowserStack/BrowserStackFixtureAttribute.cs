@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WEBUItests.BrowserStack
 {
@@ -17,7 +12,7 @@ namespace WEBUItests.BrowserStack
         /// <summary>
         /// The arguments of the test fixture. Each argument results in one call of the entire Test Fixture.
         /// </summary>
-        /// <param name="arguments">The arguments of the Test Fixture.</param>
+        /// <param name="argument">The arguments of the Test Fixture.</param>
         public BrowserStackFixtureAttribute(string argument)
         {
             Argument = argument;

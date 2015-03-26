@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBUItests", "WEBUItests\WE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBPages", "WEBPages\WEBPages.csproj", "{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestResultGenerator", "TestResultGenerator\TestResultGenerator.csproj", "{9DCB8621-040A-4956-9DCA-5217FD857B5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

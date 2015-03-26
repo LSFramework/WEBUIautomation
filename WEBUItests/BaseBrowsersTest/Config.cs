@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
 using WEBUIautomation;
 
 namespace WEBUItests.BaseBrowsersTest
 {
+
+    /// <summary>
+    /// Implements access to testdata variables from a file
+    /// </summary>
     public static class Config
     {
         /// <summary>
@@ -54,9 +55,9 @@ namespace WEBUItests.BaseBrowsersTest
 
 
             //Reads first 5 possible keys on below format from .config
-            ///<add key="Browser1" value="Chrome" />
-            ///<add key="Browser2" value="Firefox" />
-            ///<add key="Browser3" value="IE" />
+            //<add key="Browser1" value="Chrome" />
+            //<add key="Browser2" value="Firefox" />
+            //<add key="Browser3" value="IE" />
             for (int i = 1; i < 5; i++)
             {
                 //string iterator

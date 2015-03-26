@@ -7,20 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using WEBUIautomation;
 using WEBUIautomation.Utils;
+using System.Drawing;
 
 namespace WEBPages.Pages
-{
-    
-    
-    
-    
-    public class MyPCNavigation
+{ 
+    public class MyPCNavigation:PageBase
     {
         #region Page Locator
 
         static string position = "MastheadDiv";
 
-        static IWebDriverExt driver = Driver.Instance;
+       
 
         static IWebDriverExt mainPage
         {
@@ -38,6 +35,8 @@ namespace WEBPages.Pages
         #endregion Page Locator
 
         #region Elements Locators
+
+
 
         const string lblUser = @".//*[@id='MastheadDiv']/div[1]/div[2]/div[6]";
 
@@ -57,20 +56,19 @@ namespace WEBPages.Pages
 
         #endregion //Elements Locators
 
+ //       static IList<IWebElement> projectProperties = mainPage.FindElements(By.XPath(@".//span[@class='ng-binding']")).ToList<IWebElement>();
+
+
+
         #region Page Actions
 
         public static void SwitchToPopup()
         {
-            int before = driver.WindowHandles.ToList().Count;
-
-            do
-            {
-                IList<string> afterPopup = driver.WindowHandles.ToList();
-            }
-            while (driver.WindowHandles.ToList().Count == before);
-
-            driver.SwitchTo().Window(Driver.Instance.WindowHandles.Last());
+            string popup = driver.NewWindow();
+            driver.SwitchTo().Window(popup);
         }
+
+
 
         public static void CloseDLT_Tab()
         {
@@ -100,11 +98,10 @@ namespace WEBPages.Pages
         public static void ClickMenuItem(string textMenuItem)
         {
             string xPathLocator = @".//*[contains(text(), '" + textMenuItem + "')]";
-            mainPage.FindElementAndWait(By.XPath(xPathLocator)).Click();
+            IWebElement menuItem = mainPage.FindElementAndWait(By.XPath(xPathLocator));
+            (mainPage as IJavaScriptExecutor).ExecuteScript(string.Format("window.scrollTo(0, {0});", menuItem.Location.Y));
+            menuItem.Click();
         }
-
-
         #endregion //Page Actions
-    }
-    
+    }   
 }

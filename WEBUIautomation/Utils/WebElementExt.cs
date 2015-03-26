@@ -1,9 +1,5 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WEBUIautomation.Utils
 {
@@ -27,7 +23,7 @@ namespace WEBUIautomation.Utils
             {
             }
         }
-
+      
         public static bool IsElementPresent(this IWebElement iWebElement, By by, int seconds=1)
         {
             return Driver.Instance.IsElementPresent(by, seconds);
@@ -45,12 +41,25 @@ namespace WEBUIautomation.Utils
 
         public static IWebElement SelectItem(this IWebElement iWebElement, string itemLocator, string tagName)
         {
-            return Driver.Instance.FindElementAndWait(By.XPath(@"//" + tagName + "[contains(text(), '" + itemLocator + "')]"));
+            IWebElement item= Driver.Instance.FindElementAndWait(By.XPath(@"//" + tagName + "[contains(text(), '" + itemLocator + "')]"));
+            (Driver.Instance as IJavaScriptExecutor).ExecuteScript(string.Format("window.scrollTo(0, {0});", item.Location.Y));
+            return item;
         }
 
         public static IWebElement SelectItem(this IWebElement iWebElement, string itemLocator, string tagName, string propertyName)
         {
             return Driver.Instance.FindElementAndWait(By.XPath(@"//" + tagName + "[contains(@" + propertyName + ",'" + itemLocator + "')]"));
+        }
+
+        /// <summary>
+        /// Performs click action on UI element that contains itemLocator's text in the tag tagName
+        /// </summary>
+        /// <param name="iWebElement"></param>
+        /// <param name="itemLocator"></param>
+        /// <param name="tagName"></param>
+        public static void ClickItem(this IWebElement iWebElement, string itemLocator, string tagName)
+        {
+            Driver.Instance.FindElementAndWait(By.XPath(@"//" + tagName + "[contains(text(), '" + itemLocator + "')]")).Click();
         }
     }
 }

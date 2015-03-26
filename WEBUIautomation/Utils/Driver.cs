@@ -9,72 +9,47 @@ namespace WEBUIautomation.Utils
 {
     public class Driver
     {
-        public static IWebDriverExt Instance { get; private set;}
+        public static IWebDriverExt Instance 
+        { 
+            get { return instance ; } 
+            set { instance = value; } 
+        }
         
-        public static ICapabilities Capabilities
-        {
-            get
-            {
-                return (Instance as RemoteWebDriver).Capabilities;
-            }
-        }
+        private static IWebDriverExt instance;
 
-        // TO BE DELETED
-        public static void Initialize()
-        {
-            FirefoxProfile properties = new FirefoxProfile();
-            properties.SetPreference("profile", "default");
-            Instance = WebDriverBrowser.LaunchBrowser(Browser.IE);
-            #region
-            //Object for Snapshot class
-            //var snap = new Snapshot();
-            //Object for Logger class
-            //var logger = new Logger();
-            //Binding driver to the EventFiringDriver
-            //var firingDriver = new EventFiringWebDriverExt(new FirefoxDriverExt());
-
-            //Adding TakeScreenshotOnException event to Driver ExceptionThrown listener
-            //firingDriver.ExceptionThrown += snap.TakeScreenshotOnException;
-            //Adding LogOnException event to Driver ExceptionThrown listener
-            //firingDriver.ExceptionThrown += logger.LogOnException;
-
-            //Initializing WebDriver object
-            //Instance = firingDriver;
-
-            //Instance = new ChromeDriverExt(@"C:\Utils");
-            //Instance = StartIEDriver();
-            //Instance = new FirefoxDriverExt();
-
-            //Setting Implicit Wait timeout
-            #endregion
-            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));
-        }
-
+        protected static Object Instancelocker = new object();
+       
         public static void Initialize(Browser browser)
         {
-            Instance = WebDriverBrowser.LaunchBrowser(browser);
-            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(1));
+            lock (Instancelocker)
+            {
+                instance = null;
+                WebDriverBrowser brow = new WebDriverBrowser();
+                instance = brow.LaunchBrowser(browser) as IWebDriverExt;
+                instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+            }
         }
 
         //Set Browser resolution
         public static void SetBrowserResolution(int width, int height)
         {
-            Instance.Manage().Window.Position = new Point(0, 0);
-            Instance.Manage().Window.Size = new Size(width, height);            
+            instance.Manage().Window.Position = new Point(0, 0);
+            instance.Manage().Window.Size = new Size(width, height);            
         }
 
         //Maximize Browser window
         public static void BrowserMaximize()
         {
-            Instance.Manage().Window.Maximize();
+            instance.Manage().Window.Maximize();
         }
 
         //Close Driver
         public static void Close()
         {
-            Instance.Quit();
-            Instance.Dispose();
-            Instance = null;
+
+            instance.Quit();
+            instance.Dispose();
+            instance = null;
         }
         
         //Thread sleep

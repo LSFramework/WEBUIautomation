@@ -49,6 +49,10 @@
     </Reference>
     <Reference Include="WebDriver.Support, Version=2.45.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+    <Reference Include="WebDriver">
+      <HintPath>..\packages\Selenium.WebDriver.2.45.0\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support">
       <HintPath>..\packages\Selenium.Support.2.45.0\lib\net40\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -62,7 +66,6 @@
     <Compile Include="Utils\Parallel.cs" />
     <Compile Include="Utils\Properties.cs" />
     <Compile Include="Utils\Snapshot.cs" />
-    <Compile Include="Utils\Storage.cs" />
     <Compile Include="Utils\TestInfo.cs" />
     <Compile Include="Utils\WebDriverBrowser.cs" />
     <Compile Include="Utils\WebElementExt.cs" />

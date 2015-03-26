@@ -21,20 +21,20 @@ namespace WEBPages.Pages
         static List<string> ScriptsList = new List<string>();
         static List<string> TestsList = new List<string>();
 
-        static IWebDriverExt _mainTab = Driver.Instance;
+        static IWebDriverExt driver = Driver.Instance;
 
         static IWebDriverExt mainTab
         {
             get
             {
-                if (_mainTab.CurrentFrame != By.Id(position))
+                if (driver.CurrentFrame != By.Id(position))
                 {
-                    _mainTab.SwitchTo().DefaultContent();
+                    driver.SwitchTo().DefaultContent();
                     MyPCNavigation.ClickMenuItem(MainHeadLinks.TestManagement);
                     MyPCNavigation.ClickMenuItem(MainHeadLinks.TestPlan);
-                    _mainTab.SwitchToFrame(By.Id(position));
+                    driver.SwitchToFrame(By.Id(position));
                 }
-                return _mainTab;
+                return driver;
             }
         }
         
@@ -99,8 +99,8 @@ namespace WEBPages.Pages
             TreePane.SelectItem("Subject", "span").Click();
             TreePane.SelectItem(testFolder, "span").Click();
             CreateTestBtn.Click();
-            Driver.Instance.SwitchToDefaultContent();
-            Driver.Instance.SwitchToFrame(By.XPath(@".//iframe[contains(@ng-src,'CreateNewTest.aspx')]"));
+            driver.SwitchToDefaultContent();
+            driver.SwitchToFrame(By.XPath(@".//iframe[contains(@ng-src,'CreateNewTest.aspx')]"));
             CreateNewTestDialog.txtNewTestName.SendKeys(testName);
             CreateNewTestDialog.btnCreateNewOK.Click();            
         }
@@ -113,13 +113,13 @@ namespace WEBPages.Pages
             UploadScriptDialog.UploadScript(pathToScript);            
             try
             {
-                if (Driver.Instance.SwitchTo().Alert() != null)
+                if (driver.SwitchTo().Alert() != null)
                 {
-                    IAlert alertDialog = Driver.Instance.SwitchTo().Alert();
+                    IAlert alertDialog = driver.SwitchTo().Alert();
                     string stringToLog = string.Format("Modal window {0} appears ", alertDialog.Text);
                     Logger.Log(stringToLog, Logger.msgType.Message);
                     alertDialog.Accept();
-                    Driver.Instance.SwitchTo().DefaultContent();
+                    driver.SwitchTo().DefaultContent();
                 }
             }
             catch (Exception)
@@ -132,6 +132,7 @@ namespace WEBPages.Pages
 
         public static void CleanTestPlanTree()
         {
+            ExpandTreeAndFillItemsLists();
             DeleteItemsFromTree(ScriptsList);         
             DeleteItemsFromTree(TestsList);        
             DeleteItemsFromTree(FoldersList);
@@ -189,13 +190,13 @@ namespace WEBPages.Pages
                 Driver.Wait(1);                
                     try
                     {
-                        if (Driver.Instance.SwitchTo().Alert() != null)
+                        if (driver.SwitchTo().Alert() != null)
                         {
-                            IAlert alertDialog = Driver.Instance.SwitchTo().Alert();
+                            IAlert alertDialog = driver.SwitchTo().Alert();
                             string stringToLog = string.Format("Modal window {0} appears ", alertDialog.Text);
                             Logger.Log(stringToLog, Logger.msgType.Message);
                             alertDialog.Accept();                            
-                            Driver.Instance.SwitchTo().DefaultContent();
+                            driver.SwitchTo().DefaultContent();
                         }
                     }
                     catch (Exception)

@@ -12,9 +12,9 @@ using OpenQA.Selenium.Interactions;
 namespace WEBPages.Pages
 {
     //Contains the methods to complete Login MyPC
-    public class MyPCLoginPage
+    public class MyPCLoginPage:PageBase
     {
-        #region WebElements               
+        #region WebElements Locators               
 
        const string txtUserName= "ctl00_PageContent_txtUserName";
 
@@ -24,9 +24,9 @@ namespace WEBPages.Pages
 
        const string arrDomains = "ctl00_PageContent_ddlDomains_Arrow";
 
-       const string  inpDomains = "ctl00_PageContent_ddlDomains_Input";
+       const string inpDomains = "ctl00_PageContent_ddlDomains_Input";
 
-       const string  ddlDomains="ctl00_PageContent_ddlDomains_DropDown";
+       const string ddlDomains="ctl00_PageContent_ddlDomains_DropDown";
 
        const string arrProjects = "ctl00_PageContent_ddlProjects_Arrow";
 
@@ -42,38 +42,40 @@ namespace WEBPages.Pages
 
         public static void TypeUserName(string userName)
         {
-            Driver.Instance.FindElementAndWait(By.Id(txtUserName)).Clear();
-            Driver.Instance.FindElementAndWait(By.Id(txtUserName)).SendKeys(userName);
+
+            driver.FindElementAndWait(By.Id(txtUserName)).Clear();
+            driver.FindElementAndWait(By.Id(txtUserName)).SendKeys(userName);
         }
 
         public static void TypePassword(string password)
         {
-           Driver.Instance.FindElementAndWait(By.Id( txtPassword)).Clear();
-           Driver.Instance.FindElementAndWait(By.Id( txtPassword)).SendKeys(password);
+          
+            driver.FindElementAndWait(By.Id(txtPassword)).Clear();
+            driver.FindElementAndWait(By.Id(txtPassword)).SendKeys(password);
         }
 
         public static void ClickAuthenticate()
-        { 
-            Driver.Instance.FindElementAndWait(By.Id(btnAuthenticate)).Click(); 
+        {
+            driver.FindElementAndWait(By.Id(btnAuthenticate)).Click(); 
         }
 
         public static void SelectDomain(string domain)
         {
-            Driver.Instance.FindElementAndWait(By.Id(arrDomains)).Click();
-            Driver.Instance.FindElementAndWait(By.Id(inpDomains)).Click();
-            Driver.Instance.FindElementAndWait(By.Id(ddlDomains)).SelectItem(domain).Click();
+            driver.FindElementAndWait(By.Id(arrDomains)).Click();
+            driver.FindElementAndWait(By.Id(inpDomains)).Click();
+            driver.FindElementAndWait(By.Id(ddlDomains)).SelectItem(domain).Click();
         }
 
         public static void SelectProject(string project)
         {
-            Driver.Instance.FindElementAndWait(By.Id(arrProjects)).Click();
-            Driver.Instance.FindElementAndWait(By.Id(inpProjects)).Click();
-            Driver.Instance.FindElementAndWait(By.Id(ddlProjects)).SelectItem(project).Click();
+            driver.FindElementAndWait(By.Id(arrProjects)).Click();
+            driver.FindElementAndWait(By.Id(inpProjects)).Click();
+            driver.FindElementAndWait(By.Id(ddlProjects)).SelectItem(project).Click();
         }
 
         public static void ClickLogin()
         {
-            Driver.Instance.FindElementAndWait(By.Id(btnLogin)).Click();
+            driver.FindElementAndWait(By.Id(btnLogin)).Click();
         }
 
         public static void LoginToProject(string userName, string password, string domain, string project)
@@ -84,8 +86,7 @@ namespace WEBPages.Pages
             SelectDomain(domain);
             SelectProject(project);
             ClickLogin();
-            //After Login Action
-           // Driver.Instance.
+        
             MyPCNavigation.SwitchToPopup();    
         }
 

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WEBUIautomation.Utils
+namespace WEBUItests.Smoke_Tests.MyPC
 {
-    //Store variables here
-    class Storage
+    class RunPerformanceTest
     {
     }
 }

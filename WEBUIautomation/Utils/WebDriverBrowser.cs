@@ -1,12 +1,7 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using OpenQA.Selenium.PhantomJS;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Safari;
 using System;
-using System.Configuration;
 using WEBUIautomation.Utils;
 
 namespace WEBUIautomation
@@ -16,43 +11,30 @@ namespace WEBUIautomation
     /// </summary>
     public class WebDriverBrowser
     {
-        public static Browser getBrowserFromString(string name)
+        public IWebDriver LaunchBrowser(Browser browser)
         {
-            return (Browser)Enum.Parse(typeof(Browser), name);
-        }
-
-        public static IWebDriverExt LaunchBrowser(Browser browser)
-        {
-            IWebDriverExt driver;
+            IWebDriver driver;
             switch (browser)
             {
-                case Browser.IE:
-
-                    driver = StartIEDriver();
-                    
+                case Browser.IE: driver = StartIEDriver();
                     break;
 
-                case Browser.Chrome:                                
-
-                    driver = new ChromeDriverExt(@"C:\Utils");
-                    
+                case Browser.Chrome: driver = new ChromeDriverExt(@"C:\Utils");
                     break;
 
                 default:
-                       
                        FirefoxProfile profile = new FirefoxProfile();
-                       profile.SetPreference("profile", "default");
-                       var capabilities = new DesiredCapabilities();
-                       driver = new FirefoxDriverExt(capabilities);                 
-                        
+                       profile.SetPreference("profile", "default");                    
+                       driver = new FirefoxDriverExt(profile);                 
                     break;
             }
 
             driver.Manage().Cookies.DeleteAllCookies();
+
             return driver as IWebDriverExt;
         }
 
-        private static IWebDriverExt StartIEDriver()
+        private IWebDriver StartIEDriver()
         {
             InternetExplorerOptions ieOptions = new InternetExplorerOptions();
             ieOptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;

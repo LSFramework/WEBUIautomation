@@ -1,13 +1,7 @@
 ﻿using NUnit.Core;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using WEBUIautomation;
-using WEBUItests.BaseBrowsersTest;
 
 namespace WEBUItests.BrowserStack
 {
@@ -65,7 +59,7 @@ namespace WEBUItests.BrowserStack
 
         /// <summary>
         /// Gets the argument under which this test fixture was created.
-        /// This is <c>null</c> for the root test suite.
+        /// This is null for the root test suite.
         /// </summary>
         private string Param { get; set; }
 
