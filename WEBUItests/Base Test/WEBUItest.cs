@@ -14,7 +14,7 @@ namespace WEBUItests
 {
     public static class Const
     {
-        public const Browser BROWSER = Browser.Firefox;
+        public const Browser BROWSER = Browser.Chrome;
     }
 
     public abstract class WEBUItest

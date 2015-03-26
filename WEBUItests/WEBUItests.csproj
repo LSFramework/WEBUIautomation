@@ -36,16 +36,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.core">
-      <HintPath>..\..\..\Program Files (x86)\NUnit 2.6.4\bin\lib\nunit.core.dll</HintPath>
+      <HintPath>..\packages\NUnitTestAdapter.1.2\lib\nunit.core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="nunit.core.interfaces">
-      <HintPath>..\..\..\Program Files (x86)\NUnit 2.6.4\bin\lib\nunit.core.interfaces.dll</HintPath>
+      <HintPath>..\packages\NUnitTestAdapter.1.2\lib\nunit.core.interfaces.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.util">
+      <HintPath>..\packages\NUnitTestAdapter.1.2\lib\nunit.util.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="NUnit.VisualStudio.TestAdapter">
-      <HintPath>..\packages\NUnitTestAdapter.1.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
+      <HintPath>..\packages\NUnitTestAdapter.1.2\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -55,11 +61,10 @@
       <HintPath>..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="TestStack.BDDfy">
-      <HintPath>..\packages\TestStack.BDDfy.4.1.0\lib\NET40\TestStack.BDDfy.dll</HintPath>
+      <HintPath>..\packages\TestStack.BDDfy.4.1.2\lib\NET40\TestStack.BDDfy.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver, Version=2.44.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.WebDriver.2.44.0\lib\net40\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver">
+      <HintPath>..\packages\Selenium.WebDriver.2.45.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="WEBPages">
       <HintPath>..\WEBPages\bin\Debug\WEBPages.dll</HintPath>
@@ -78,11 +83,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BaseBrowsersTest\Config.cs" />
-    <Compile Include="BrowserStack\BrowserStackFixture.cs" />
-    <Compile Include="BrowserStack\BrowserStackFixtureAddin.cs" />
-    <Compile Include="BrowserStack\BrowserStackFixtureAttribute.cs" />
-    <Compile Include="BaseBrowsersTest\BrowsersTestBase.cs" />
     <Compile Include="Smoke Tests\MyPC\Create Test Plan Items.cs" />
     <Compile Include="Smoke Tests\MyPC\LoginInMypc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,12 +99,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\Selenium.WebDriver.IEDriver.2.44.0.0\content\IEDriverServer.exe">
+    <Content Include="..\packages\Selenium.WebDriver.IEDriver.2.45.0.1\content\IEDriverServer.exe">
       <Link>IEDriverServer.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
@@ -127,7 +126,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Label="DownloadIEDriverBuildTask">
     <CoreBuildDependsOn>DownloadIEDriver;$(CoreBuildDependsOn)</CoreBuildDependsOn>
-    <IEDriverInstallPath>$(SolutionDir)packages\Selenium.WebDriver.IEDriver.2.44.0.0\</IEDriverInstallPath>
+    <IEDriverInstallPath>$(SolutionDir)packages\Selenium.WebDriver.IEDriver.2.45.0.1\</IEDriverInstallPath>
     <IEDriverToolsPath>$(IEDriverInstallPath)tools\</IEDriverToolsPath>
     <IEDriverInitScriptPath>$(IEDriverToolsPath)Init.ps1</IEDriverInitScriptPath>
     <IEDriverPath>$(IEDriverInstallPath)content\IEDriverServer.exe</IEDriverPath>

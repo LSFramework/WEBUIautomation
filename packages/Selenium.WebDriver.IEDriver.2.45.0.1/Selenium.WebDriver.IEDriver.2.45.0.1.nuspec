@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Selenium.WebDriver.IEDriver</id>
+    <version>2.45.0.1</version>
+    <authors>jsakamoto</authors>
+    <owners>jsakamoto</owners>
+    <licenseUrl>http://unlicense.org/</licenseUrl>
+    <projectUrl>https://github.com/jsakamoto/nupkg-selenium-webdriver-iedriver/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Download and install IE Driver(x86) for Selenium WebDriver into your Unit Test Project on the fly.
+      "IEDriverServer.exe" added as a linked project item, and copied to bin folder at the build.
+      NuGet package restoring ready, and no need to commit "IEDriverServer.exe" binary into source code control repository.
+      / Selenium WebDriver用 IE Driver(x86) をその場でダウンロードし単体テストプロジェクトに追加します。
+      "IEDriverServer.exe" はリンクされたアイテムとしてプロジェクトに追加され、ビルド時に bin フォルダにコピーされます。
+      NuGet パッケージの復元に対応済み、"IEDriver.exe" をソース管理リポジトリに登録する必要はありません。
+      / The installing/uninstalling script codes that contained this package are free and unencumbered software released into the public domain.
+      / "iedriverserver.exe" is licensed under the Apache license v.2.0.</description>
+    <summary>Selenium Internet Explorer Driver (Win32) (Install on the fly, does not make your source repository to fat.)</summary>
+    <releaseNotes>v.2.45
+      - IE Driver 2.45 release
+      v.2.44
+      - IE Driver 2.44 release
+      v.2.43
+      - Update package.
+      v.2.42.0.1
+      - Fix: Installing this package was fail when .csproj file and packages folder are in a same folder.
+      v.2.42
+      - Update package.
+      v.2.41.0.1
+      - HTTP proxy settings are available now.(1. HTTP_PROXY environment variable, 2. NuGet configuration)
+      - Fix: Occur exception at Add-Type in init.ps1 when installing the package.</releaseNotes>
+    <language>en-US</language>
+    <tags>Selenium WebDriver IEDriverServer</tags>
+  </metadata>
+</package>
