@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WEBUIautomation.Utils;
+using WEBUIautomation.Extensions;
 
 
 namespace WEBPages.Pages
@@ -23,6 +24,7 @@ namespace WEBPages.Pages
 
                 static IWebElement btnCloseTree
                 { get { return WorkloadFrame.FindElementAndWait(By.Id("SelectScripts")); } }
+               
                 public static void SelectScript(string scriptName, string scriptFolder)
                 {
                     Actions action = new Actions(WorkloadFrame);
@@ -35,6 +37,7 @@ namespace WEBPages.Pages
                 {
                     btnCloseTree.Click();                
                 }
+
                 #endregion
             }
         }

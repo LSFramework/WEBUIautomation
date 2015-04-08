@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WEBUIautomation.Utils;
+using WEBUIautomation.Extensions;
 
 namespace WEBPages.Pages
 {

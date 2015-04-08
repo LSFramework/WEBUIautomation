@@ -12,6 +12,7 @@ namespace WEBUIautomation.Utils
     public interface IWebDriverExt : IWebDriver
     {
         By CurrentFrame { get; set; }
+        string CurrentView { get; set; }
     }
 
     #region IWebDriverExt instances implementations for some browsers
@@ -23,6 +24,7 @@ namespace WEBUIautomation.Utils
         public FirefoxDriverExt(FirefoxProfile profile) : base(profile) { }
         public FirefoxDriverExt(DesiredCapabilities capabilities) : base(capabilities) { }
         public By CurrentFrame { get; set; }
+        public string CurrentView { get; set; }
     }
 
     //extended ChromeDriver class with FindElementAndWait method
@@ -30,8 +32,9 @@ namespace WEBUIautomation.Utils
     {
         //Constructor inherited from the base class
         public ChromeDriverExt(string path) : base(path) { }
-        public ChromeDriverExt(string path, ChromeOptions options) : base(path, options) { }     
+        public ChromeDriverExt(string path, ChromeOptions options) : base(path, options) { }
         public By CurrentFrame { get; set; }
+        public string CurrentView { get; set; }
     }
 
     //extended InternetExplorerDriver class with FindElementAndWait method
@@ -41,6 +44,7 @@ namespace WEBUIautomation.Utils
         public InternetExplorerDriverExt(string path) : base(path) { }
         public InternetExplorerDriverExt(string path, InternetExplorerOptions options) : base(path, options) { }
         public By CurrentFrame { get; set; }
+        public string CurrentView { get; set; }
     }
 
     //extended PhantomJSDriver class with FindElementAndWait method
@@ -49,6 +53,7 @@ namespace WEBUIautomation.Utils
         //Constructor inherited from the base class
         public PhantomJSDriverExt(string path) : base(path) { }
         public By CurrentFrame { get; set; }
+        public string CurrentView { get; set; }
     }
 
     //extended EventFiringWebDriver class with FindElementAndWait method
@@ -57,6 +62,7 @@ namespace WEBUIautomation.Utils
         //Constructor inherited from the base class
         public EventFiringWebDriverExt(IWebDriver parentDriver) : base(parentDriver) { }
         public By CurrentFrame { get; set; }
+        public string CurrentView { get; set; }
     }
 
     #endregion

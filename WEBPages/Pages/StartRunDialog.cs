@@ -1,12 +1,13 @@
 ﻿using OpenQA.Selenium;
 using WEBUIautomation.Utils;
+using WEBUIautomation.Extensions;
 
 namespace WEBPages.Pages
 {
-    public class StartRunDialog
+    public class StartRunDialog:DriverContainer
     {
         const string position = @".//iframe[contains(@ng-src,'StartRun.aspx')]";
-        static IWebDriverExt driver = Driver.Instance;
+        
 
         static IWebDriverExt runTestDialog
         {

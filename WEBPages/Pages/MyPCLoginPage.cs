@@ -7,76 +7,87 @@ using WEBUIautomation;
 using WEBUIautomation.Utils;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using WEBUIautomation.Extensions;
+using WEBUIautomation.WebElement;
+using System.Threading;
+using WEBUIautomation.Wait;
 
 
 namespace WEBPages.Pages
 {
     //Contains the methods to complete Login MyPC
-    public class MyPCLoginPage:PageBase
+    public class MyPCLoginPage: DriverContainer
     {
         #region WebElements Locators               
 
-       const string txtUserName= "ctl00_PageContent_txtUserName";
+        private static WebElement txtUserName { get { return new WebElement().ById("ctl00_PageContent_txtUserName"); } }
 
-       const string txtPassword = "ctl00_PageContent_txtPassword";
+        private static WebElement txtPassword { get { return new WebElement().ById("ctl00_PageContent_txtPassword");}}
 
-       const string btnAuthenticate = "ctl00_PageContent_btnAuthenticate";
+        private static WebElement btnAuthenticate { get { return new WebElement().ById("ctl00_PageContent_btnAuthenticate");}}
 
-       const string arrDomains = "ctl00_PageContent_ddlDomains_Arrow";
+        private static WebElement arrDomains { get { return new WebElement().ById("ctl00_PageContent_ddlDomains_Arrow");}}
 
-       const string inpDomains = "ctl00_PageContent_ddlDomains_Input";
+        private static WebElement inpDomains { get { return new WebElement().ById("ctl00_PageContent_ddlDomains_Input");}}
 
-       const string ddlDomains="ctl00_PageContent_ddlDomains_DropDown";
+        private static WebElement ddlDomains{ get { return new WebElement().ById("ctl00_PageContent_ddlDomains_DropDown");}}
 
-       const string arrProjects = "ctl00_PageContent_ddlProjects_Arrow";
+        private static WebElement arrProjects{ get { return new WebElement().ById("ctl00_PageContent_ddlProjects_Arrow");}}
 
-       const string inpProjects="ctl00_PageContent_ddlProjects_Input";
+        private static WebElement inpProjects { get { return new WebElement().ById("ctl00_PageContent_ddlProjects_Input");}}
 
-       const string ddlProjects = "ctl00_PageContent_ddlProjects_DropDown";
+        private static WebElement ddlProjects { get { return new WebElement().ById("ctl00_PageContent_ddlProjects_DropDown");}}
 
-       const string btnLogin = "ctl00_PageContent_btnLogin";
-       
+        private static WebElement btnLogin { get { return new WebElement().ById("ctl00_PageContent_btnLogin"); } }      
+
+
         #endregion WebElemnts
 
         #region Actions
 
+        #region Single Actions
+
         public static void TypeUserName(string userName)
         {
-
-            driver.FindElementAndWait(By.Id(txtUserName)).Clear();
-            driver.FindElementAndWait(By.Id(txtUserName)).SendKeys(userName);
+            txtUserName.SendKeys(userName);
         }
 
         public static void TypePassword(string password)
         {
-          
-            driver.FindElementAndWait(By.Id(txtPassword)).Clear();
-            driver.FindElementAndWait(By.Id(txtPassword)).SendKeys(password);
+            txtPassword.SendKeys(password);
         }
 
         public static void ClickAuthenticate()
         {
-            driver.FindElementAndWait(By.Id(btnAuthenticate)).Click(); 
+           btnAuthenticate.Click();
+           ///wait for user Authentication response
+           WaitHelper.Try(() => arrDomains.Exists());  
         }
 
         public static void SelectDomain(string domain)
         {
-            driver.FindElementAndWait(By.Id(arrDomains)).Click();
-            driver.FindElementAndWait(By.Id(inpDomains)).Click();
-            driver.FindElementAndWait(By.Id(ddlDomains)).SelectItem(domain).Click();
+            arrDomains.Click();
+            inpDomains.Click();
+            ddlDomains.SelectItem(domain).Click();
+
+            WaitHelper.Try(()=>arrProjects.Exists());            
         }
 
         public static void SelectProject(string project)
         {
-            driver.FindElementAndWait(By.Id(arrProjects)).Click();
-            driver.FindElementAndWait(By.Id(inpProjects)).Click();
-            driver.FindElementAndWait(By.Id(ddlProjects)).SelectItem(project).Click();
+            arrProjects.Click();
+            inpProjects.Click();
+            ddlProjects.SelectItem(project).Click();
         }
 
         public static void ClickLogin()
         {
-            driver.FindElementAndWait(By.Id(btnLogin)).Click();
+            btnLogin.Click();
         }
+
+        #endregion Single Actions
+
+        #region Complex Actions
 
         public static void LoginToProject(string userName, string password, string domain, string project)
         {
@@ -86,11 +97,20 @@ namespace WEBPages.Pages
             SelectDomain(domain);
             SelectProject(project);
             ClickLogin();
-        
-            MyPCNavigation.SwitchToPopup();    
+            SwitchToPopup();    
+        }
+
+        #endregion Complex Actions
+
+        public static void SwitchToPopup()
+        {
+            string popup = driver.NewWindow();
+            driver.SwitchTo().Window(popup);
+            driver.SwitchTo().Window(driver.WindowHandles.First()).Close();
+            driver.SwitchTo().Window(driver.WindowHandles.Last());
+            driver.SwitchToDefaultContent();
         }
 
         #endregion Actions
-
     }        
 }

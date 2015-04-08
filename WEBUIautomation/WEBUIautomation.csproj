@@ -51,10 +51,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Utils\Browser.cs" />
+    <Compile Include="Extensions\EnumExtension.cs" />
+    <Compile Include="Extensions\IWebElementExtension.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Extensions\WebDriverExtension.cs" />
+    <Compile Include="Extensions\WebElementExtension.cs" />
+    <Compile Include="Tags\TagAttributes.cs" />
+    <Compile Include="Tags\TagNames.cs" />
+    <Compile Include="Utils\Browsers.cs" />
+    <Compile Include="Utils\DirectoryHelper.cs" />
     <Compile Include="Utils\IWebDriverExt.cs" />
     <Compile Include="Utils\Driver.cs" />
-    <Compile Include="Utils\DriverExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\Parallel.cs" />
@@ -62,11 +69,17 @@
     <Compile Include="Utils\Snapshot.cs" />
     <Compile Include="Utils\TestInfo.cs" />
     <Compile Include="Utils\WebDriverBrowser.cs" />
-    <Compile Include="Utils\WebElementExt.cs" />
+    <Compile Include="Wait\WaitHelper.cs" />
+    <Compile Include="Element\WebElement.cs" />
+    <Compile Include="Element\WebElementActions.cs" />
+    <Compile Include="Element\WebElementByCriteria.cs" />
+    <Compile Include="Element\WebElementException.cs" />
+    <Compile Include="Element\WebElementFilters.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

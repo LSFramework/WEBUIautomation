@@ -19,25 +19,25 @@ namespace WEBUIautomation.Utils
 
         protected static Object Instancelocker = new object();
        
-        public static void Initialize(Browser browser)
+        public static void Initialize(Browsers browser)
         {
             lock (Instancelocker)
             {
                 instance = null;
                 WebDriverBrowser brow = new WebDriverBrowser();
                 instance = brow.LaunchBrowser(browser) as IWebDriverExt;
-                instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+               // instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             }
         }
 
-        //Set Browser resolution
+        //Set Browsers resolution
         public static void SetBrowserResolution(int width, int height)
         {
             instance.Manage().Window.Position = new Point(0, 0);
             instance.Manage().Window.Size = new Size(width, height);            
         }
 
-        //Maximize Browser window
+        //Maximize Browsers window
         public static void BrowserMaximize()
         {
             instance.Manage().Window.Maximize();
@@ -46,10 +46,11 @@ namespace WEBUIautomation.Utils
         //Close Driver
         public static void Close()
         {
-
-            instance.Quit();
-            instance.Dispose();
-            instance = null;
+            if (Instance == null) return;
+            
+                instance.Quit();
+                instance.Dispose();
+                instance = null;            
         }
         
         //Thread sleep

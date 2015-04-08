@@ -1,8 +1,11 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using System;
+using System.IO;
 using WEBUIautomation.Utils;
+using WEBUIautomation.Wait;
 
 namespace WEBUIautomation
 {
@@ -11,15 +14,24 @@ namespace WEBUIautomation
     /// </summary>
     public class WebDriverBrowser
     {
-        public IWebDriver LaunchBrowser(Browser browser)
+        public Browsers SelectedBrowser
         {
-            IWebDriver driver;
+            get;
+            private set;
+        }
+
+        public IWebDriverExt LaunchBrowser(Browsers browser)
+        {
+            IWebDriverExt driver;
+            SelectedBrowser = browser;
             switch (browser)
             {
-                case Browser.IE: driver = StartIEDriver();
+                case Browsers.InternetExplorer: 
+                    driver = StartInternetExplorer();//StartIEDriver();
                     break;
 
-                case Browser.Chrome: driver = new ChromeDriverExt(@"C:\Utils");
+                case Browsers.Chrome: 
+                    driver = StartChrome();//new ChromeDriverExt(Directory.GetCurrentDirectory());
                     break;
 
                 default:
@@ -39,8 +51,50 @@ namespace WEBUIautomation
             InternetExplorerOptions ieOptions = new InternetExplorerOptions();
             ieOptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
             ieOptions.EnsureCleanSession = true;
-            var driver = new InternetExplorerDriverExt(@"C:\Utils", ieOptions);
+            var driver = new InternetExplorerDriverExt(Directory.GetCurrentDirectory(), ieOptions);
             return driver;
         }
+
+        public static Browsers getBrowserFromString(string strBrowser)
+        {
+            return (Browsers)Enum.Parse(typeof(Browsers), strBrowser);       
+        }
+
+        static FirefoxDriverExt StartFirefox()
+        {
+            var firefoxProfile = new FirefoxProfile
+            {
+                AcceptUntrustedCertificates = true,
+                EnableNativeEvents = true
+            };
+
+            return new FirefoxDriverExt(firefoxProfile);
+         }
+
+        static ChromeDriverExt StartChrome()
+         {
+             var chromeOptions = new ChromeOptions();
+             var defaultDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\..\Local\Google\Chrome\User Data\Default";
+
+             if (Directory.Exists(defaultDataFolder))
+             {
+                 WaitHelper.Try(() => DirectoryHelper.ForceDelete(defaultDataFolder));
+             }
+
+             return new ChromeDriverExt(Directory.GetCurrentDirectory(), chromeOptions);
+         }
+
+        static InternetExplorerDriverExt StartInternetExplorer()
+         {
+             var internetExplorerOptions = new InternetExplorerOptions
+             {
+                 IntroduceInstabilityByIgnoringProtectedModeSettings = true,
+                 EnsureCleanSession = true,
+                 InitialBrowserUrl = "about:blank",
+                 EnableNativeEvents = true
+             };
+
+             return new InternetExplorerDriverExt(Directory.GetCurrentDirectory(), internetExplorerOptions);
+         }
     }
 }

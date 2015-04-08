@@ -7,36 +7,22 @@ using System.IO;
 using NUnit.Core;
 using System.Collections;
 
-namespace WEBUItests
+namespace WEBUItests.Base_Test
 {
-
     using Logger= WEBUIautomation.Utils.Logger;   
-
-
+    
     /// <summary>
     /// Base test to use with WebDriver
     /// </summary>
     public abstract class WEBUItest
     {
-
-        
-        protected static Object locker = new object();
         /// <summary>
-        /// Inits WebDriver instance
+        /// Logs test start
         /// </summary>
-        public static void TestFixtureSetUp()
+        public void TestSetUp()
         {
-            lock (locker)
-            {
-                Driver.Instance = null;
-                Driver.Initialize(TestContextVariables.BROWSER);
-                Logger.Log("Starting Test Set", Logger.msgType.Message);
-                Properties.Create();
-                Properties.Read();
-                Driver.BrowserMaximize();
-            }        
+            Logger.Log("Starting Test Set", Logger.msgType.Message);  
         }
-
 
         /// <summary>
         /// Before each tests
@@ -64,12 +50,10 @@ namespace WEBUItests
             }
         }
 
-
         /// <summary>
         /// Close WebDriver
         /// </summary>
-        //[TestFixtureTearDown]
-        public void Cleanup()
+        public void DriverCleanup()
         {
             Driver.Wait(1);
             Driver.Close();

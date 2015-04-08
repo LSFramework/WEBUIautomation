@@ -46,24 +46,27 @@
   <ItemGroup>
     <Compile Include="Pages\ALMainPage.cs" />
     <Compile Include="Pages\AssignTestDialog.cs" />
+    <Compile Include="Pages\BlankPageClass.cs" />
     <Compile Include="Pages\DesignLoadTest.cs" />
-    <Compile Include="Pages\MainHeadLinks.cs" />
-    <Compile Include="Pages\ModalDialogues\CreateNewTestSetDialog.cs" />
-    <Compile Include="Pages\ModalDialogues\CreateNewTestSetFolderDialog.cs" />
-    <Compile Include="Pages\ModalDialogues\ManageTestSetsDialog.cs" />
-    <Compile Include="Pages\PageBase.cs" />
+    <Compile Include="Pages\TestLab\ModalDialogues\CreateNewTestSetDialog.cs" />
+    <Compile Include="Pages\TestLab\ModalDialogues\CreateNewTestSetFolderDialog.cs" />
+    <Compile Include="Pages\TestLab\ModalDialogues\ManageTestSetDialogActions.cs" />
+    <Compile Include="Pages\TestLab\ModalDialogues\ManageTestSetsDialog.cs" />
+    <Compile Include="Pages\DriverContainer.cs" />
     <Compile Include="Pages\StartRunDialog.cs" />
-    <Compile Include="Pages\TestLab.cs" />
+    <Compile Include="Pages\TestLab\TestLab.cs" />
     <Compile Include="Pages\DLT\WorkloadTypeDialog.cs" />
     <Compile Include="Pages\DLT\SummaryGeneralDetails.cs" />
     <Compile Include="Pages\DLT\GroupsAndWorkloadPane.cs" />
     <Compile Include="Pages\MyPCLoginPage.cs" />
-    <Compile Include="Pages\MyPCNavigation.cs" />
+    <Compile Include="Pages\MainHead.cs" />
     <Compile Include="Pages\DLT\ScriptsTreeSlidingPane.cs" />
-    <Compile Include="Pages\TestPlan Pages\CreateNewTestDialog.cs" />
-    <Compile Include="Pages\TestPlan Pages\CreateNewTestFolderDialog.cs" />
-    <Compile Include="Pages\TestPlan Pages\TestPlan.cs" />
-    <Compile Include="Pages\TestPlan Pages\UploadScriptDialog.cs" />
+    <Compile Include="Pages\TestLab\TestLabActions.cs" />
+    <Compile Include="Pages\TestPlan\ModalDialogues\CreateNewTestFolderDialog.cs" />
+    <Compile Include="Pages\TestPlan\TestPlanFlows.cs" />
+    <Compile Include="Pages\TestPlan\ModalDialogues\CreateNewTestDialog.cs" />
+    <Compile Include="Pages\TestPlan\TestPlan.cs" />
+    <Compile Include="Pages\TestPlan\ModalDialogues\UploadScriptDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
