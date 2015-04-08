@@ -9,15 +9,14 @@ using System.Collections;
 
 namespace WEBUItests
 {
-<<<<<<< HEAD
+ using Logger= WEBUIautomation.Utils.Logger;   
     public static class Const
     {
         public const Browser BROWSER = Browser.Chrome;
     }
-=======
->>>>>>> origin/PC_1250
 
-    using Logger= WEBUIautomation.Utils.Logger;   
+
+   
 
 
     /// <summary>
