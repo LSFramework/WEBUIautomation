@@ -14,9 +14,11 @@ namespace WEBPages.Pages
         const string MyPCLink = @"//a[text()='My Performance Center']";
 
         public static void GoToMyPC(string MyPCUrl)
-        {           
+
+        {
+                    
             driver.Navigate().GoToUrl(MyPCUrl);
-           // Driver.Instance.FindElement(By.XPath(MyPCLink)).Click();
+
 
         }
     }
