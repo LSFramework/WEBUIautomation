@@ -9,8 +9,8 @@ using System.Collections;
 
 namespace WEBUItests.Base_Test
 {
-    
 
+    using Logger = WEBUIautomation.Utils.Logger;
     /// <summary>
     /// Base test to use with WebDriver
     /// </summary>
