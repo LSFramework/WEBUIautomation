@@ -84,10 +84,10 @@ namespace WEBUIautomation.WebElement
 
         private IList<IWebElement> FindIWebElements()
         {
-            if (_searchCache != null)
-            {
-                return _searchCache;
-            }            
+            //if (_searchCache != null)
+            //{
+            //    return _searchCache;
+            //}            
 
             Browser.WaitScript();
 
@@ -95,12 +95,15 @@ namespace WEBUIautomation.WebElement
 
             IEnumerable<IWebElement> resultEnumerable = new List<IWebElement>() as IEnumerable<IWebElement>;
 
+            bool single=Browser.TryFindElement(_firstSelector);
+            
             if (Browser.IsElementPresent(_firstSelector))
             {
                 Exception e = null;
                 Browser.TryFindElements(_firstSelector, out resultEnumerable, out e);
             }
             else
+                if(!single)
             {
                 DefaultWait<IWebDriverExt> wait = new DefaultWait<IWebDriverExt>(Browser);
                 wait.Timeout = TimeSpan.FromSeconds(10);
@@ -108,7 +111,7 @@ namespace WEBUIautomation.WebElement
 
                 resultEnumerable = wait.Until(driver =>
                     {
-                        Thread.Sleep(wait.PollingInterval);
+                        Thread.Sleep(TimeSpan.FromMilliseconds(50));
 
                         var elements = Browser.FindElements(_firstSelector);
 

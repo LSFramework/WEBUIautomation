@@ -250,6 +250,24 @@ namespace WEBUIautomation.Extensions
                 return false;
             }
         }
+
+        public static bool TryFindElement(this IWebDriverExt iWebDriverExt, By by)
+        { 
+            Func<bool> canBeFound=()=>
+                {
+                    try{
+                        iWebDriverExt.FindElement(by);
+                        return true;
+                    }
+                    catch(Exception)
+                    {
+                        return false;
+                    }
+                };
+
+
+            return WaitHelper.SpinWait(canBeFound, TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(100));
+        }
         
     }
 }

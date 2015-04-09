@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WEBPages.Pages;
+using WEBUIautomation.Utils;
 using WEBUItests.Base_Test;
 
 namespace WEBUItests.MyPCTests
@@ -21,6 +22,7 @@ namespace WEBUItests.MyPCTests
         [Test]
         public void Logout()
         {
+            if (Driver.Instance != null)
             MainHead.ClickLogout();
         }
 

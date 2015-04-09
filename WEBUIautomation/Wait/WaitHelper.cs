@@ -18,7 +18,7 @@ namespace WEBUIautomation.Wait
 
         private WaitHelper(TimeSpan timeout, TimeSpan checkInterval)
         {
-            if(timeout >= TimeSpan.Zero && checkInterval >= TimeSpan.Zero)
+            if (timeout >= TimeSpan.Zero && checkInterval >= TimeSpan.Zero)
             {
                 _timeout = timeout;
                 _checkInterval = checkInterval;
@@ -38,26 +38,26 @@ namespace WEBUIautomation.Wait
 
         public WaitHelper WaitFor(Func<bool> condition)
         {
-            if(condition != null)
+            if (condition != null)
             {
 
-            if (!_isSatisfied)
-            {
-                return this;
-            }
-
-            while (!condition())
-            {
-                var sleepAmount = Min(_timeout - _stopwatch.Elapsed, _checkInterval);
-                
-                Thread.Sleep(sleepAmount);
-                
-                if (sleepAmount < TimeSpan.Zero)
+                if (!_isSatisfied)
                 {
-                    _isSatisfied = false;
-                    break;
-                }                
-            }
+                    return this;
+                }
+
+                while (!condition())
+                {
+                    var sleepAmount = Min(_timeout - _stopwatch.Elapsed, _checkInterval);
+
+                    Thread.Sleep(sleepAmount);
+
+                    if (sleepAmount < TimeSpan.Zero)
+                    {
+                        _isSatisfied = false;
+                        break;
+                    }
+                }
             }
             return this;
         }
@@ -126,5 +126,8 @@ namespace WEBUIautomation.Wait
         {
             return left.CompareTo(right) < 0 ? left : right;
         }
+
+
     }
+
 }

@@ -126,8 +126,8 @@ namespace WEBUIautomation.WebElement
         private WebElement ByAttribute(string tagAttribute, string attributeValue, bool exactMatch = true)
         {
             var xPath = exactMatch ?
-                        string.Format("//*[@{0}=\"{1}\"]", tagAttribute, attributeValue) :
-                        string.Format("//*[contains(@{0}, \"{1}\")]", tagAttribute, attributeValue);
+                        string.Format(".//*[@{0}=\"{1}\"]", tagAttribute, attributeValue) :
+                        string.Format(".//*[contains(@{0}, \"{1}\")]", tagAttribute, attributeValue);
             var selector = By.XPath(xPath);
 
             _firstSelector = _firstSelector ?? selector;
