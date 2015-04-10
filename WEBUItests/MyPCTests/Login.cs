@@ -8,7 +8,7 @@ using WEBPages.Pages;
 using WEBUIautomation.Utils;
 using WEBUItests.Base_Test;
 
-namespace WEBUItests.MyPCTests
+namespace WEBUItests.MyPCTests.Test_0_Login
 {
     /// <summary>
     /// Login to project
@@ -16,6 +16,9 @@ namespace WEBUItests.MyPCTests
     [TestFixture][LoginIfNotLogged]
     public class Test_0_Login : WEBUItest
     {
+
+        MainHead mainHead = new MainHead();
+
         /// <summary>
         /// Checks is user really logged in the project and domain were selected at LoginPage.
         /// </summary>
@@ -24,9 +27,9 @@ namespace WEBUItests.MyPCTests
         {
             Assert.True(
                 // Check that userName, Domain and Project are shown on page as expected
-                MainHead.GetDomainName().Contains(Config.DomainName)
-            && MainHead.GetProjectName().Contains(Config.ProjectName)
-            && MainHead.GetUserLoggedIn().Contains(Config.UserName));
+                mainHead.GetDomainName().Contains(Config.DomainName)
+            && mainHead.GetProjectName().Contains(Config.ProjectName)
+            && mainHead.GetUserLoggedIn().Contains(Config.UserName));
         }
     }
 }

@@ -26,7 +26,7 @@ namespace WEBUItests.Base_Test
         /// Agter all tests
         /// </summary>
         /// <param name="testDetails"></param>
-        public void AfterTest(TestDetails testDetails){        }
+        public void AfterTest(TestDetails testDetails){ }
 
 
         /// <summary>
@@ -35,20 +35,27 @@ namespace WEBUItests.Base_Test
         /// <param name="testDetails"></param>
         public void BeforeTest(TestDetails testDetails)
         {
-
+            
             if (Driver.Instance == null)
             {
                 DriverSetUp();
-                ALMainPage.GoToMyPC(Config.MyPCUrl);
-                MyPCLoginPage.LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);
+
+                ALMainPage almMainPage = new ALMainPage();
+                almMainPage.GoToMyPC(Config.MyPCUrl);
+                MyPCLoginPage loginPage = new MyPCLoginPage();
+                loginPage.LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);
             }
 
             if (!MainHead.PageCanGetFocus())
             {                
                 DriverCleanup();
                 DriverSetUp();
-                ALMainPage.GoToMyPC(Config.MyPCUrl);
-                MyPCLoginPage.LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);
+
+                ALMainPage almMainPage = new ALMainPage();
+                almMainPage.GoToMyPC(Config.MyPCUrl);
+
+                MyPCLoginPage loginPage = new MyPCLoginPage();
+                loginPage.LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);
             }
         }
 

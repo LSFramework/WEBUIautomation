@@ -15,24 +15,26 @@ namespace WEBPages.Pages.TestPlan
     {
         #region The Page Locator
 
-        const string frameLocator="MainTab";
-        const string viewLocator = "Test Plan perspective";
+        public const string ViewLocator = "Test Plan";
+        public static By FrameLocator=By.Id("MainTab");
+        
 
         static IWebDriverExt mainTab
         {
             get
             {
                 ///Is driver on the perspective we need ?
-                if (!IsDriverOnTheView(By.Id(frameLocator), viewLocator))
+                if (!IsDriverOnTheView(FrameLocator, ViewLocator))
                 /// if it isn't
                 {
                     //Navigate to the perspective
                     driver.SwitchTo().DefaultContent();
-                    MainHead.NavigateToTestPlan();
+                    MainHead mainHead = new MainHead();
+                    mainHead.NavigateToTestPlan();
                     //Set driver's focus on the frame contains the perspective UI
                     //and mark driver as it is on the perspective
-                    driver.SwitchToFrame(By.Id(frameLocator));
-                    driver.CurrentView = viewLocator;
+                    driver.SwitchToFrame(FrameLocator);
+                    driver.CurrentView = ViewLocator;
                 }
                 // If yes 
                 return driver;
@@ -122,8 +124,8 @@ namespace WEBPages.Pages.TestPlan
         }
 
         public static void SelectSubjectFolder()
-        { 
-            FindTreeFolder("Subject").Click(); 
+        {
+            mainTab.FindFolder("Subject").Click(); 
         }
 
         static WebElement FindTreeFolder(string folderName)

@@ -8,7 +8,7 @@ using WEBPages.Pages;
 using WEBUIautomation.Utils;
 using WEBUItests.Base_Test;
 
-namespace WEBUItests.MyPCTests
+namespace WEBUItests.MyPCTests.Test_Last_Logout
 {
     /// <summary>
     /// Logout from project
@@ -16,6 +16,9 @@ namespace WEBUItests.MyPCTests
     [TestFixture]
     public class Test_Last_Logout : WEBUItest
     {
+
+        MainHead mainHead = new MainHead();
+
         /// <summary>
         /// Performs click on logout button
         /// </summary>
@@ -23,7 +26,7 @@ namespace WEBUItests.MyPCTests
         public void Logout()
         {
             if (Driver.Instance != null)
-            MainHead.ClickLogout();
+            mainHead.ClickLogout();
         }
 
         /// <summary>

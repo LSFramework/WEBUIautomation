@@ -17,21 +17,23 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
     public  class ManageTestSetsDialog: DriverContainer
     {       
         #region The dialog locators
-       
-        const string viewLocator = "Manage Test Sets Dialog";
-        const string frameLocator = @".//iframe[contains(@ng-src,'CrudTestSet.aspx')]";
+
+        public static string ViewLocator 
+        { get { return "Manage Test Sets Dialog"; } }
         
-        static IWebDriverExt dialog
+        public static By FrameLocator 
+        { get { return By.XPath(@".//iframe[contains(@ng-src,'CrudTestSet.aspx')]"); } }
+
+        IWebDriverExt dialog
         {
             get
             {
-                if (!IsDriverOnTheView(By.XPath(frameLocator), viewLocator))
+                if (!IsDriverOnTheView(FrameLocator, ViewLocator))
                 {
                     driver.SwitchToDefaultContent();
-                    driver.SwitchToFrame(By.XPath(frameLocator));
-                    driver.CurrentView = viewLocator;
+                    driver.SwitchToFrame(FrameLocator);
+                    driver.CurrentView = ViewLocator;
                 }
-
                 return driver;
             }
         }
@@ -40,79 +42,87 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         #region Properties
 
-        public static bool Opened
+        public bool Opened
         {
             get
             {
                 return WaitHelper.Try(() => dialog.NewWebElement()
                         .ById("ctl00_ctl00_PageContent_DialogContent_PanelCreateNewTestSet"));                                   
-            } 
+            }
         }
 
         #endregion 
 
         #region UI Web Elements
 
-        private static WebElement btnNewFolder
+        private WebElement btnNewFolder
         { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'newFolderButton')]"); } }
 
-        private static WebElement btnNewTestSet
+        private WebElement btnNewTestSet
         { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'newItemButton')]"); } }
 
-        private static WebElement btnDelete
+        private WebElement btnDelete
         { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'deleteButton')]"); } }
 
-        private static WebElement radTreeView
+        private WebElement radTreeView
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_TestSetTreeControl_GenericTreeView1_RadTreeView1"); } }
 
-        private static WebElement btnOK
+        private WebElement btnOK
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogActions_btnOK"); } }
 
-        private static WebElement btnClose
+        private WebElement btnClose
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_btnClose"); } }
 
         #endregion UI Web Elements
 
         #region Actions
 
-        public static void CreateNewFolderClick()
+        public NewTestSetFolderDialog NewFolderBtnClickExpectedSuccess()
         {
             btnNewFolder.Click();
+            return new NewTestSetFolderDialog();
         }
 
-        public static void SelectFolder(string folderName)
+        public ManageTestSetsDialog SelectFolder(string folderName)
         {
-          dialog.FindFolder(folderName).Click();
+            dialog.FindFolder(folderName).Click();
+            return this;
         }
 
-        public static void CreateNewTestSetClick()
+        public NewTestSetDialog CreateNewTestSetClick()
         {
-          btnNewTestSet.Click();      
+            btnNewTestSet.Click();
+            return new NewTestSetDialog();
         }
 
-        public static void SelectTestSet(string testSetName)
+        public ManageTestSetsDialog SelectTestSet(string testSetName)
         {
-          dialog.FindTestSet(testSetName).Click();     
+            dialog.FindTestSet(testSetName).Click();
+            return this;
         }
 
-        public static void CloseBtnClick()
+        public TestLabPage CloseBtnClick()
         {
             btnClose.Click();
+            return new TestLabPage();
         }
 
-        public static void SelectRootFolder()
+        public ManageTestSetsDialog SelectRootFolder()
         {
             SelectFolder("Root");
+            return this;
         }
 
-        public static void ClickOkBtn()
+        public TestLabPage ClickOkBtnExpectedSuccess()
         { 
-            btnOK.Click(); 
+            btnOK.Click();
+            return new TestLabPage();
         }
 
-        public static bool TryExpandFolder(string folderName)
+        public ManageTestSetsDialog TryExpandFolder(string folderName)
         { 
-            return dialog.TryExpandTreeFolder(folderName); 
+            dialog.TryExpandTreeFolder(folderName);
+            return this;
         }
 
         #endregion Actions

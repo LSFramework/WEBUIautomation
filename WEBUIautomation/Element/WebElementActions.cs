@@ -10,6 +10,7 @@ using WEBUIautomation.Extensions;
 using System.Globalization;
 using WEBUIautomation.Wait;
 using System.Threading;
+using OpenQA.Selenium.Remote;
 
 
 namespace WEBUIautomation.WebElement
@@ -89,10 +90,11 @@ namespace WEBUIautomation.WebElement
 
         #region Common methods
 
-        public IWebElement Element()
-        {
-            return FindSingle();
-        }
+        //public IWebElement Element()
+        //{
+        //    var element= FindSingle();
+        //    return element;
+        //}
 
         public bool IsEnabled()
         {
@@ -318,6 +320,7 @@ namespace WEBUIautomation.WebElement
         }
 
         #endregion
+               
     }
 
     public enum JavaScriptEvents

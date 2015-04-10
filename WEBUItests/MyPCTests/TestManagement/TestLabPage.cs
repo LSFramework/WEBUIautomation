@@ -9,7 +9,7 @@ using WEBPages.Pages.TestLab;
 using WEBPages.Pages.TestLab.ModalDialogues;
 using WEBUItests.Base_Test;
 
-namespace WEBUItests.MyPCTests.TestManagement
+namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
 {
     /// <summary>
     /// Const
@@ -32,13 +32,16 @@ namespace WEBUItests.MyPCTests.TestManagement
     [TestFixture][LoginIfNotLogged]
     public class Test_1_TestLabCreateEntities:WEBUItest
     {
+
+        MainHead mainHead = new MainHead();
+        TestLabPage testLabPage = new TestLabPage();
         /// <summary>
         /// Navigate to Test Lab perspective
         /// </summary>
         [Test]
         public void Step_0_NavigateToTestLab()
         {
-            MainHead.NavigateToTestLab();
+            mainHead.NavigateToTestLab();
         }
 
         /// <summary>
@@ -47,7 +50,7 @@ namespace WEBUItests.MyPCTests.TestManagement
         [Test]
         public void Step_1_ClickManageTestSets()
         {
-            TestLab.ClickManageTestSets();
+            testLabPage.ClickManageTestSets();
         }
 
         /// <summary>
@@ -56,8 +59,8 @@ namespace WEBUItests.MyPCTests.TestManagement
         [Test]
         public void Step_2_CreateNewTestSetFolder()
         {
-            string warning=string.Empty;
-            ManageTestSetDialogActions.CreateNewTestSetFolder(Const.testSetFolderName, out warning);            
+            ManageTestSetDialogActions actions=new ManageTestSetDialogActions();
+            actions.CreateNewTestSetFolder(Const.testSetFolderName);            
         }
 
         /// <summary>
@@ -66,8 +69,8 @@ namespace WEBUItests.MyPCTests.TestManagement
         [Test]
         public void Step_3_CreateNewTestSet()
         {
-            string warning = string.Empty;
-            ManageTestSetDialogActions.CreateNewTestSet(Const.testSetFolderName, Const.testSetName, out warning);           
+            ManageTestSetDialogActions actions = new ManageTestSetDialogActions();
+            actions.CreateNewTestSet(Const.testSetFolderName, Const.testSetName);           
         }
 
         /// <summary>
@@ -76,7 +79,8 @@ namespace WEBUItests.MyPCTests.TestManagement
         [Test]
         public void Step_4_SelectTestSet()
         {
-            ManageTestSetDialogActions.SelectTestSet(Const.testSetFolderName,Const.testSetName);            
+            ManageTestSetDialogActions actions = new ManageTestSetDialogActions();
+            actions.SelectTestSet(Const.testSetFolderName, Const.testSetName);            
         }
 
     }

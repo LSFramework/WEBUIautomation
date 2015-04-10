@@ -41,12 +41,10 @@ namespace WEBUIautomation.Extensions
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             string window = wait.Until<string>
              (d =>
-                {
-                    Thread.Sleep(wait.PollingInterval);
-
-                    if ( driver.WindowHandles.Count > 1)
-                        return driver.WindowHandles[1];
-                    else return null;
+                {   
+                    if (driver.WindowHandles.Count < 2)
+                         return null;
+                    return driver.WindowHandles[1];                    
                 }
              );
 
@@ -65,11 +63,12 @@ namespace WEBUIautomation.Extensions
             iWebDriverExt.WaitScript();
             iWebDriverExt.WaitReadyState();
 
-            IWebElement frame = iWebDriverExt.NewWebElement().ByCriteria(by).Element();
-
-            iWebDriverExt.SwitchTo().Frame(frame);
-            iWebDriverExt.CurrentFrame = by;
-
+            if (TryFindElement(iWebDriverExt, by))
+            {
+                IWebElement frame = iWebDriverExt.FindElement(by); 
+                iWebDriverExt.SwitchTo().Frame(frame);
+                iWebDriverExt.CurrentFrame = by;
+            }
             return iWebDriverExt;
         }
 
@@ -78,16 +77,16 @@ namespace WEBUIautomation.Extensions
             iWebDriverExt.SwitchTo().Frame(inlineFrame);
         }
 
-        public static void GoToFrame(this IWebDriverExt iWebDriverExt, string tag, string attribute, string frameLocator)
-        {
-            IList<IWebElement> frames = iWebDriverExt.FindElements(By.TagName(tag));
-            foreach (IWebElement frame in frames)
-                if (frame.GetAttribute(attribute).Contains(frameLocator))
-                {
-                    iWebDriverExt.SwitchTo().Frame(frame);
-                    break;
-                }
-        }
+        //public static void GoToFrame(this IWebDriverExt iWebDriverExt, string tag, string attribute, string frameLocator)
+        //{
+        //    IList<IWebElement> frames = iWebDriverExt.FindElements(By.TagName(tag));
+        //    foreach (IWebElement frame in frames)
+        //        if (frame.GetAttribute(attribute).Contains(frameLocator))
+        //        {
+        //            iWebDriverExt.SwitchTo().Frame(frame);
+        //            break;
+        //        }
+        //}
         
         private static IWebElement FindElementByLocator(this IWebDriverExt iWebDriverExt, By by, int seconds = 10)
         {
@@ -108,8 +107,7 @@ namespace WEBUIautomation.Extensions
 
                         if (elements.Count > 0)
                             return elements[0];
-                        else return null;
-                   
+                        else return null;                   
                 }
                 );
 
@@ -255,7 +253,8 @@ namespace WEBUIautomation.Extensions
         { 
             Func<bool> canBeFound=()=>
                 {
-                    try{
+                    try
+                    {
                         iWebDriverExt.FindElement(by);
                         return true;
                     }
@@ -265,8 +264,7 @@ namespace WEBUIautomation.Extensions
                     }
                 };
 
-
-            return WaitHelper.SpinWait(canBeFound, TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(100));
+            return WaitHelper.SpinWait(canBeFound, TimeSpan.FromSeconds(10));
         }
         
     }

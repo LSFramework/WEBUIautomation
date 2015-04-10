@@ -51,13 +51,14 @@
     <Compile Include="Pages\AssignTestDialog.cs" />
     <Compile Include="Pages\BlankPageClass.cs" />
     <Compile Include="Pages\DesignLoadTest.cs" />
-    <Compile Include="Pages\TestLab\ModalDialogues\CreateNewTestSetDialog.cs" />
-    <Compile Include="Pages\TestLab\ModalDialogues\CreateNewTestSetFolderDialog.cs" />
+    <Compile Include="Pages\TestLab\ModalDialogues\NewTestSetDialog.cs" />
+    <Compile Include="Pages\TestLab\ModalDialogues\NewTestSetFolderDialog.cs" />
+    <Compile Include="Pages\TestLab\ModalDialogues\IPage.cs" />
     <Compile Include="Pages\TestLab\ModalDialogues\ManageTestSetDialogActions.cs" />
     <Compile Include="Pages\TestLab\ModalDialogues\ManageTestSetsDialog.cs" />
     <Compile Include="Pages\DriverContainer.cs" />
     <Compile Include="Pages\StartRunDialog.cs" />
-    <Compile Include="Pages\TestLab\TestLab.cs" />
+    <Compile Include="Pages\TestLab\TestLabPage.cs" />
     <Compile Include="Pages\DLT\WorkloadTypeDialog.cs" />
     <Compile Include="Pages\DLT\SummaryGeneralDetails.cs" />
     <Compile Include="Pages\DLT\GroupsAndWorkloadPane.cs" />

@@ -14,8 +14,7 @@ using WEBUIautomation.Wait;
 namespace WEBUIautomation.WebElement
 {
     public partial class WebElement : ICloneable
-    {
-       
+    {       
         private By _firstSelector;
 
         private IList<IWebElement> _searchCache;
@@ -69,13 +68,15 @@ namespace WEBUIautomation.WebElement
                 ? elements.Single()
                 : _index == -1
                     ? elements.Last()
-                    : elements.ElementAt(_index);
+                    : elements.ElementAt(_index);           
+
+
+            Browser.ScrollToElement(element);
+
             // ReSharper disable UnusedVariable
             var elementAccess = element.Enabled;
             // ReSharper restore UnusedVariable
 
-
-            Browser.ScrollToElement(element);
             Browser.Highlight(element);     
             
             
@@ -84,18 +85,18 @@ namespace WEBUIautomation.WebElement
 
         private IList<IWebElement> FindIWebElements()
         {
-            //if (_searchCache != null)
-            //{
-            //    return _searchCache;
-            //}            
+            if (_searchCache != null)
+            {
+                return _searchCache;
+            }            
 
             Browser.WaitScript();
 
             Browser.WaitReadyState();
 
-            IEnumerable<IWebElement> resultEnumerable = new List<IWebElement>() as IEnumerable<IWebElement>;
+            var resultEnumerable = new List<IWebElement>() as IEnumerable<IWebElement>;
 
-            bool single=Browser.TryFindElement(_firstSelector);
+           // bool single=Browser.TryFindElement(_firstSelector);
             
             if (Browser.IsElementPresent(_firstSelector))
             {
@@ -103,25 +104,26 @@ namespace WEBUIautomation.WebElement
                 Browser.TryFindElements(_firstSelector, out resultEnumerable, out e);
             }
             else
-                if(!single)
+            //if(!single)
             {
-                DefaultWait<IWebDriverExt> wait = new DefaultWait<IWebDriverExt>(Browser);
-                wait.Timeout = TimeSpan.FromSeconds(10);
+                var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(10));               
                 wait.PollingInterval = TimeSpan.FromMilliseconds(100);
 
-                resultEnumerable = wait.Until(driver =>
+                resultEnumerable = wait.Until<IList<IWebElement>>(driver =>
                     {
-                        Thread.Sleep(TimeSpan.FromMilliseconds(50));
+                        //Thread.Sleep(TimeSpan.FromMilliseconds(50));
 
                         var elements = Browser.FindElements(_firstSelector);
 
-                        if (elements.Count > 0)
-                            return elements as IEnumerable<IWebElement>;
-                        else return null;
+                        if (elements.Count == 0)
+                        {
+                            return null;
+                        }
+                        return elements;
                     });
             }
 
-            resultEnumerable = Browser.FindElements(_firstSelector) as IEnumerable<IWebElement>;
+            //resultEnumerable = Browser.FindElements(_firstSelector) as IEnumerable<IWebElement>;
 
             try
             {

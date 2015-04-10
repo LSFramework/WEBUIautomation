@@ -172,7 +172,6 @@ namespace WEBUIautomation.WebElement
         {
             _firstSelector = by;
             return this;
-
         }
     }
 }

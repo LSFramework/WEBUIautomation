@@ -11,7 +11,7 @@ namespace WEBPages.Pages
         const string viewLocator = "";
         const string frameLocator = "";
 
-        static IWebDriverExt dialog
+        IWebDriverExt dialog
         {
             get
             {
@@ -30,7 +30,7 @@ namespace WEBPages.Pages
 
         #region Properties
 
-        public static bool Opened
+        public bool Opened
         {
             get
             {

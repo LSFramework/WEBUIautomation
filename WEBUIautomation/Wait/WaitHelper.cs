@@ -40,7 +40,6 @@ namespace WEBUIautomation.Wait
         {
             if (condition != null)
             {
-
                 if (!_isSatisfied)
                 {
                     return this;
@@ -48,8 +47,9 @@ namespace WEBUIautomation.Wait
 
                 while (!condition())
                 {
-                    var sleepAmount = Min(_timeout - _stopwatch.Elapsed, _checkInterval);
-
+                    TimeSpan sleepAmount = Min(_timeout - _stopwatch.Elapsed, _checkInterval);
+                 
+                    if(sleepAmount>TimeSpan.Zero)
                     Thread.Sleep(sleepAmount);
 
                     if (sleepAmount < TimeSpan.Zero)

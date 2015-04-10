@@ -6,30 +6,21 @@ using System.Threading.Tasks;
 
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {
-    public class ManageTestSetDialogActions
+    public class ManageTestSetDialogActions: ManageTestSetsDialog
     {
-
         /// <summary>
         /// Makes try to create test set folder with folderName string
         /// returns nothing if folder has been created or a warning if it has not.
         /// </summary>
         /// <param name="folderName"></param>
         /// <param name="warning"></param>
-        public static void CreateNewTestSetFolder(string folderName, out string warning)
+        public ManageTestSetsDialog CreateNewTestSetFolder(string folderName)
         {
-            warning = string.Empty;   
-            ManageTestSetsDialog.SelectRootFolder();
-            ManageTestSetsDialog.CreateNewFolderClick();
-            CreateNewTestSetFolderDialog.TypeFolderName(folderName);
-            CreateNewTestSetFolderDialog.ClickOK();
+            this.SelectRootFolder();    
 
-            if (CreateNewTestSetFolderDialog.Opened)
-            {
-                warning = CreateNewTestSetFolderDialog.GetWarningMessage();
-                if(warning!=string.Empty)
-                CreateNewTestSetFolderDialog.ClickClose();          
-            }
-                     
+            return this.NewFolderBtnClickExpectedSuccess()
+                .TypeFolderName(folderName)
+                .ClickOKExpectedSuccess();
         }
 
 
@@ -40,30 +31,22 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
         /// <param name="parentFolder"></param>
         /// <param name="testSetName"></param>
         /// <param name="warning"></param>
-        public static void CreateNewTestSet(string parentFolder, string testSetName, out string warning)
-        {
-            warning = string.Empty;
-            ManageTestSetsDialog.SelectRootFolder();
-            ManageTestSetsDialog.SelectFolder(parentFolder);
-            ManageTestSetsDialog.CreateNewTestSetClick();
-            CreateNewTestSetDialog.TypeTestSetName(testSetName);
-            CreateNewTestSetDialog.ClickOK();
-
-            if (CreateNewTestSetDialog.Opened)
-            {
-                warning = CreateNewTestSetDialog.GetWarningMessage();
-                if(warning!=string.Empty)
-                CreateNewTestSetDialog.ClickClose();
-            }
+        public ManageTestSetsDialog CreateNewTestSet(string parentFolder, string testSetName)
+        { 
+            return this.SelectRootFolder()
+            .SelectFolder(parentFolder)
+            .CreateNewTestSetClick()
+            .TypeTestSetName(testSetName)
+            .ClickOkExpectingSucces();            
         }
 
 
-        public static void SelectTestSet(string parentFolder, string testSetName)
+        public TestLabPage SelectTestSet(string parentFolder, string testSetName)
         {
-            ManageTestSetsDialog.TryExpandFolder("Root");
-            ManageTestSetsDialog.TryExpandFolder(parentFolder);
-            ManageTestSetsDialog.SelectTestSet(testSetName);
-            ManageTestSetsDialog.ClickOkBtn();
+            return this.TryExpandFolder("Root")
+                .TryExpandFolder(parentFolder)
+                .SelectTestSet(testSetName)
+                .ClickOkBtnExpectedSuccess();
         }
     }
 }

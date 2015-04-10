@@ -8,27 +8,27 @@ namespace WEBPages.Pages.TestLab
 {
     using TagAttributes = WEBUIautomation.Tags.TagAttributes;
 
-    public class TestLab: DriverContainer
+    public class TestLabPage: DriverContainer
     {
+        public const string ViewLocator = "Test Lab";
+        public static By FrameLocator =By.Id( "MainTab");   
 
-        const string viewLocator = "Test Lab perspective";
-        const string frameLocator = "MainTab";   
-
-        static IWebDriverExt mainTab
+        IWebDriverExt mainTab
         {
             get
             {
                 ///Is driver on the perspective we need ?
-                if (! IsDriverOnTheView(By.Id(frameLocator), viewLocator))
+                if (! IsDriverOnTheView(FrameLocator, ViewLocator))
                 /// if it isn't
                 {     
                     //Navigate to the perspective
                     driver.SwitchTo().DefaultContent();
-                    MainHead.NavigateToTestLab();                    
+                    MainHead mainHead = new MainHead();
+                    mainHead.NavigateToTestLab();                    
                     //Set driver's focus on the frame contains the perspective UI
                     //and mark driver as it is on the perspective
-                    driver.SwitchToFrame(By.Id(frameLocator));
-                    driver.CurrentView = viewLocator;
+                    driver.SwitchToFrame(FrameLocator);
+                    driver.CurrentView = ViewLocator;
                 }
                 // If yes 
                 return driver;
@@ -36,23 +36,23 @@ namespace WEBPages.Pages.TestLab
         }
         
 
-        static WebElement btnManageTestSets
+         WebElement btnManageTestSets
         { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title,"Manage Test Sets"); } }
 
-        static WebElement btnAssignTest
+         WebElement btnAssignTest
         { get { return mainTab.NewWebElement().ByXPath(@".//a[contains(@title, 'Assign Test to TestSet')]"); } }
 
-        static WebElement btnRunTest
+         WebElement btnRunTest
         { get { return mainTab.NewWebElement().ByXPath(@".//img[contains(@alt, 'Run Test')]"); } }
                
-        public static bool TestLabOpened
-        { get { return WaitHelper.Try(() => btnManageTestSets.Exists()); } }
+        public bool Opened
+        { get { return WaitHelper.Try(() => btnManageTestSets.Exists(1)); } }
 
         /// <summary>
         /// Action : Performs click Manage Test Sets button.
         /// Expected : A modal-dialog Manage Test Sets appears.
         /// </summary>
-        public static void ClickManageTestSets()
+        public  void ClickManageTestSets()
         {
             btnManageTestSets.Click();
         }
@@ -61,7 +61,7 @@ namespace WEBPages.Pages.TestLab
         /// Select Test In Grid
         /// </summary>
         /// <param name="testName"></param>
-        public static void SelectTestInGrid(string testName)
+        public  void SelectTestInGrid(string testName)
         {
             mainTab.NewWebElement().ByXPath(@".//td[contains(text(), '" + testName + "')]").Click();
         }

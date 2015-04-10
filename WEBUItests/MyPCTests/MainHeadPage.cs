@@ -12,15 +12,20 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
     [TestFixture]
     [LoginIfNotLogged]
     public class Test_1_MainHeadPage : WEBUItest
-    {        
-        /// <summary>
+    {
+
+        MainHead mainHead = new MainHead();
+        
+        TestLabPage testLabPage =new TestLabPage();
+
+            /// <summary>
         /// Navigates to Test Lab
         /// </summary>
         [Test]
         public void Step_1_NavigateToTestLab()
         {
-            MainHead.NavigateToTestLab();
-            Assert.True(TestLab.TestLabOpened);
+            mainHead.NavigateToTestLab();
+            Assert.True(testLabPage.Opened);
         }
 
         /// <summary>
@@ -29,7 +34,7 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
         [Test]
         public void Step_2_NavigateToTestPlan()
         {
-           MainHead.NavigateToTestPlan();
+            mainHead.NavigateToTestPlan();
            Assert.True(TestPlan.Opened);
         }
     }

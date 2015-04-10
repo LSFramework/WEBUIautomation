@@ -11,6 +11,7 @@ using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
 using System.Threading;
 using WEBUIautomation.Wait;
+using OpenQA.Selenium.Remote;
 
 
 namespace WEBPages.Pages
@@ -20,26 +21,25 @@ namespace WEBPages.Pages
     {
         #region WebElements Locators               
 
-        private static WebElement txtUserName { get { return new WebElement().ById("ctl00_PageContent_txtUserName"); } }
+        WebElement txtUserName { get { return new WebElement().ById("ctl00_PageContent_txtUserName"); } }
 
-        private static WebElement txtPassword { get { return new WebElement().ById("ctl00_PageContent_txtPassword");}}
+        WebElement txtPassword { get { return new WebElement().ById("ctl00_PageContent_txtPassword");} }
 
-        private static WebElement btnAuthenticate { get { return new WebElement().ById("ctl00_PageContent_btnAuthenticate");}}
+        WebElement btnAuthenticate { get { return new WebElement().ById("ctl00_PageContent_btnAuthenticate");}}
 
-        private static WebElement arrDomains { get { return new WebElement().ById("ctl00_PageContent_ddlDomains_Arrow");}}
+        WebElement arrDomains { get { return new WebElement().ById("ctl00_PageContent_ddlDomains_Arrow");}}
 
-        private static WebElement inpDomains { get { return new WebElement().ById("ctl00_PageContent_ddlDomains_Input");}}
+        WebElement inpDomains { get { return new WebElement().ById("ctl00_PageContent_ddlDomains_Input");}}
 
-        private static WebElement ddlDomains{ get { return new WebElement().ById("ctl00_PageContent_ddlDomains_DropDown");}}
+        WebElement ddlDomains{ get { return new WebElement().ById("ctl00_PageContent_ddlDomains_DropDown");}}
 
-        private static WebElement arrProjects{ get { return new WebElement().ById("ctl00_PageContent_ddlProjects_Arrow");}}
+        WebElement arrProjects{ get { return new WebElement().ById("ctl00_PageContent_ddlProjects_Arrow");}}
 
-        private static WebElement inpProjects { get { return new WebElement().ById("ctl00_PageContent_ddlProjects_Input");}}
+        WebElement inpProjects { get { return new WebElement().ById("ctl00_PageContent_ddlProjects_Input");}}
 
-        private static WebElement ddlProjects { get { return new WebElement().ById("ctl00_PageContent_ddlProjects_DropDown");}}
+        WebElement ddlProjects { get { return new WebElement().ById("ctl00_PageContent_ddlProjects_DropDown");}}
 
-        private static WebElement btnLogin { get { return new WebElement().ById("ctl00_PageContent_btnLogin"); } }      
-
+        WebElement btnLogin { get { return new WebElement().ById("ctl00_PageContent_btnLogin"); } }      
 
         #endregion WebElemnts
 
@@ -47,62 +47,69 @@ namespace WEBPages.Pages
 
         #region Single Actions
 
-        public static void TypeUserName(string userName)
+        public MyPCLoginPage TypeUserName(string userName)
         {
-            txtUserName.SendKeys(userName);
+            txtUserName.ById("ctl00_PageContent_txtUserName").SendKeys(userName);
+            return this;
         }
 
-        public static void TypePassword(string password)
+        public MyPCLoginPage TypePassword(string password)
         {
             txtPassword.SendKeys(password);
+            return this;
         }
 
-        public static void ClickAuthenticate()
+        public MyPCLoginPage ClickAuthenticate()
         {
            btnAuthenticate.Click();
            ///wait for user Authentication response
-           WaitHelper.Try(() => arrDomains.Exists());  
+           WaitHelper.Try(() => arrDomains.Exists(1));
+           return this;
         }
 
-        public static void SelectDomain(string domain)
+        public MyPCLoginPage SelectDomain(string domain)
         {
             arrDomains.Click();
             inpDomains.Click();
             ddlDomains.SelectItem(domain).Click();
 
-            WaitHelper.Try(()=>arrProjects.Exists());            
+            WaitHelper.Try(()=>arrProjects.Exists(1));
+            return this;
         }
 
-        public static void SelectProject(string project)
+        public MyPCLoginPage SelectProject(string project)
         {
             arrProjects.Click();
             inpProjects.Click();
             ddlProjects.SelectItem(project).Click();
+            return this;
         }
 
-        public static void ClickLogin()
+        public MyPCLoginPage ClickLogin()
         {
             btnLogin.Click();
+            return this;
         }
 
         #endregion Single Actions
 
         #region Complex Actions
 
-        public static void LoginToProject(string userName, string password, string domain, string project)
+        public MainHead LoginToProject(string userName, string password, string domain, string project)
         {
-            TypeUserName(userName);
-            TypePassword(password);
-            ClickAuthenticate();
-            SelectDomain(domain);
-            SelectProject(project);
-            ClickLogin();
-            SwitchToPopup();    
+            TypeUserName(userName)
+            .TypePassword(password)
+            .ClickAuthenticate()
+            .SelectDomain(domain)
+            .SelectProject(project)
+            .ClickLogin()
+            .SwitchToPopup();
+            return new MainHead();
         }
 
         #endregion Complex Actions
 
-        public static void SwitchToPopup()
+        public void SwitchToPopup()
         {
             string popup = driver.NewWindow();
             driver.SwitchTo().Window(popup);
