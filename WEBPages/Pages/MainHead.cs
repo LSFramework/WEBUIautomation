@@ -19,18 +19,21 @@ namespace WEBPages.Pages
     {
         #region The Page Locator
 
-        const string position = "MastheadDiv";
+        public string ViewLocator { get { return "Main Head"; } }
+
+        public static By FrameLocator { get { return By.Id("MastheadDiv"); } }   
+        
 
         public static bool PageCanGetFocus()
         {
-            return driver.CurrentFrame == By.Id(position) || driver.CurrentFrame == By.Id("MainTab");
+            return driver.CurrentFrame == FrameLocator || driver.CurrentFrame == By.Id("MainTab");
         }
         
         IWebDriverExt mainPage
         {
             get 
             {
-                if (driver.CurrentFrame != (By.Id(position)))
+                if (driver.CurrentFrame != FrameLocator)
                 {   
                     driver.SwitchToDefaultContent(); 
                 }

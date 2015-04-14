@@ -50,6 +50,7 @@ namespace WEBUIautomation.Wait
                     TimeSpan sleepAmount = Min(_timeout - _stopwatch.Elapsed, _checkInterval);
                  
                     if(sleepAmount>TimeSpan.Zero)
+
                     Thread.Sleep(sleepAmount);
 
                     if (sleepAmount < TimeSpan.Zero)

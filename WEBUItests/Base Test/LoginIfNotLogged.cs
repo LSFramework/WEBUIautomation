@@ -34,8 +34,7 @@ namespace WEBUItests.Base_Test
         /// </summary>
         /// <param name="testDetails"></param>
         public void BeforeTest(TestDetails testDetails)
-        {
-            
+        { 
             if (Driver.Instance == null)
             {
                 DriverSetUp();

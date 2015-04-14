@@ -141,19 +141,22 @@ namespace WEBUIautomation.Extensions
             iWebDriverExt.WaitScript();
             iWebDriverExt.WaitReadyState();
 
-            try
+            Func<bool> present = () =>
             {
-                var elements = iWebDriverExt.FindElements(by);
+                try
+                {
+                    var elements = iWebDriverExt.FindElements(by);
 
-                if (elements.Count > 0)
-                    return true;
-
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }            
+                    if (elements.Count > 0)
+                        return true;
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            };
+            return WaitHelper.SpinWait(present, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(200));
         }
 
         public static IWebElement FindElementAndWait(this IWebDriverExt iWebDriverExt, By by, int seconds)
@@ -239,12 +242,29 @@ namespace WEBUIautomation.Extensions
                    collection = elements as IEnumerable<IWebElement>;
                    return true;
                }
-               return false;
+               else 
+               {
+                  var wait = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(10));               
+                        wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+
+                  collection= wait.Until<IList<IWebElement>>(driver =>
+                    {
+                        Thread.Sleep(TimeSpan.FromMilliseconds(50));
+
+                        elements = iWebDriverExt.FindElements(by);
+
+                        if (elements.Count == 0)
+                        {
+                            return null;
+                        }
+                        return elements;
+                    });
+                  return true;
+               }
             }
             catch(Exception e)
             {
                 exception = e;
-                Console.WriteLine(e);
                 return false;
             }
         }
@@ -266,6 +286,5 @@ namespace WEBUIautomation.Extensions
 
             return WaitHelper.SpinWait(canBeFound, TimeSpan.FromSeconds(10));
         }
-        
     }
 }

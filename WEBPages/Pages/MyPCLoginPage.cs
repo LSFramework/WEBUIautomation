@@ -61,10 +61,8 @@ namespace WEBPages.Pages
 
         public MyPCLoginPage ClickAuthenticate()
         {
-           btnAuthenticate.Click();
-           ///wait for user Authentication response
-           WaitHelper.Try(() => arrDomains.Exists(1));
-           return this;
+           btnAuthenticate.Click();           
+           return this;       
         }
 
         public MyPCLoginPage SelectDomain(string domain)
@@ -72,9 +70,7 @@ namespace WEBPages.Pages
             arrDomains.Click();
             inpDomains.Click();
             ddlDomains.SelectItem(domain).Click();
-
-            WaitHelper.Try(()=>arrProjects.Exists(1));
-            return this;
+            return this;         
         }
 
         public MyPCLoginPage SelectProject(string project)
@@ -87,7 +83,7 @@ namespace WEBPages.Pages
 
         public MyPCLoginPage ClickLogin()
         {
-            btnLogin.Click();
+            btnLogin.Click(false);
             return this;
         }
 
@@ -109,7 +105,7 @@ namespace WEBPages.Pages
 
         #endregion Complex Actions
 
-        public void SwitchToPopup()
+        void SwitchToPopup()
         {
             string popup = driver.NewWindow();
             driver.SwitchTo().Window(popup);

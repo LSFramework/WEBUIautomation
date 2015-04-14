@@ -11,6 +11,7 @@ using System.Globalization;
 using WEBUIautomation.Wait;
 using System.Threading;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Interactions;
 
 
 namespace WEBUIautomation.WebElement
@@ -118,29 +119,41 @@ namespace WEBUIautomation.WebElement
 
         public void Click(bool useJQuery = true)
         {
-            var element = FindSingle();
 
-            Contract.Assert(element.Enabled);
-
-            if (useJQuery && element.TagName != TagNames.Link.GetEnumDescription())
-            {
-                FireJQueryEvent(element, JavaScriptEvents.Click);
-            }
-            else
-            {
-                try
+            Func<bool> clickable=()=>
                 {
-                    element.Click();
-                }
-                catch (InvalidOperationException e)
-                {
-                    if (e.Message.Contains("Element is not clickable"))
+                    try
                     {
-                        Thread.Sleep(2000);
-                        element.Click();
+                        if (FindSingle().Enabled)                       
+                            return true;    
+                        return false;
                     }
+                    catch(Exception)
+                    {
+                        return false;
+                    }
+                };
+
+            try
+            {
+                FindSingle().Click();
+            }
+            catch (StaleElementReferenceException e)
+            {
+                ClearSearchResultCache();
+                FindSingle().Click();
+            }
+            catch (InvalidOperationException e)
+            {
+                if (e.Message.Contains("Element is not clickable"))
+                {
+                    Thread.Sleep(500);
+                    WaitHelper.SpinWait(clickable, TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(100));
+                    FindSingle().Click();
                 }
             }
+
+                Thread.Sleep(100);           
         }
 
         public void Clear()
