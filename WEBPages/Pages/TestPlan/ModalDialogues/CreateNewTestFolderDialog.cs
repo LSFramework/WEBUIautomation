@@ -7,51 +7,58 @@ using WEBUIautomation.Wait;
 
 namespace WEBPages.Pages.TestPlan.ModalDialogues
 {
-    public class CreateNewTestFolderDialog : DriverContainer
+    public class CreateNewTestFolderDialog : DriverContainer ,IPage
     {
         #region The dialog locators
 
-        const string viewLocator = "Create New Test Folder";
-        const string frameLocator = @".//iframe[contains(@ng-src,'CreateNewTestFolder.aspx')]";
+        public string Url { get; private set; }
+        public string ViewLocator {get{return  "Create New Test Folder";} }
+        public By FrameLocator{ get { return By.XPath(@".//iframe[contains(@ng-src,'CreateNewTestFolder.aspx')]");}}
 
-        static IWebDriverExt dialog
+
+        IWebDriverExt dialog
         {
             get
             {
-                if (!IsDriverOnTheView(By.XPath(frameLocator), viewLocator))
+                if (!IsDriverOnTheView(FrameLocator, ViewLocator))
                 {
                     driver.SwitchToDefaultContent();
-                    driver.SwitchToFrame(By.XPath(frameLocator));
-                    driver.CurrentView = viewLocator;
+                    driver.SwitchToFrame(FrameLocator);
+                    driver.CurrentView = ViewLocator;
                 }
                 return driver;
             }
+        }
+
+        public CreateNewTestFolderDialog()
+        {
+            Url = dialog.Url;
         }
 
         #endregion The dialog locators
 
         #region UI Web Elements
 
-        static WebElement dialogTitle
+        WebElement dialogTitle
         { get { return dialog.NewWebElement().ById("dialogTitle").ByText("Create New Test Folder"); } }
 
-        static WebElement txtInputFolderName
+        WebElement txtInputFolderName
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_TxtTestFolderName"); } }
 
-        static WebElement btnOk
+        WebElement btnOk
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogActions_btnOK"); } }
 
-        static WebElement btnClose
+        WebElement btnClose
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_btnClose"); } }
 
-        static WebElement lblMessage
+        WebElement lblMessage
         { get { return dialog.NewWebElement().ByXPath(@".//*[@id='ctl00_ctl00_PageContent_DialogContent_RequiredFieldValidator1']//font"); } }
         
         #endregion UI Web Elements
 
         #region Properties
 
-        public static bool Opened
+        public bool Opened
         {
             get
             {
@@ -64,7 +71,7 @@ namespace WEBPages.Pages.TestPlan.ModalDialogues
 
         #region Helpers
 
-        static bool IsMessageDisplayed()
+        bool IsMessageDisplayed()
         {
             return !WaitHelper.Try(
                 () => dialog.NewWebElement()
@@ -82,18 +89,20 @@ namespace WEBPages.Pages.TestPlan.ModalDialogues
         /// Expected :dialog closes  with creating a folder with name was typed
         /// If folder name wasn't typed or it is already exists the dialog will not be closed.
         /// </summary>
-        public static void ClickOkBtn()
+        public TestPlanPage ClickOkBtn()
         {
             btnOk.Click();
+            return new TestPlanPage();
         }
 
         /// <summary>
         /// Action: Performs click Close button 
         /// Expected: The dialog closed  without creating a folder if folder name was typed
         /// </summary>
-        public static void ClickCloseBtn()
+        public TestPlanPage ClickCloseBtn()
         {
             btnClose.Click();
+            return new TestPlanPage();
         }
 
         /// <summary>
@@ -101,16 +110,17 @@ namespace WEBPages.Pages.TestPlan.ModalDialogues
         /// Expected: Folder name has been typed to the textBox
         /// </summary>
         /// <param name="folderName">string folderName to be typed to textBox</param>
-        public static void TypeFolderName(string folderName)
+        public CreateNewTestFolderDialog TypeFolderName(string folderName)
         {
             txtInputFolderName.Text = folderName;
+            return this;
         }
 
         /// <summary>
         /// Gets warning message
         /// </summary>
         /// <returns></returns>
-        public static string GetWarningMessage()
+        public string GetWarningMessage()
         {
             if (IsMessageDisplayed())
                 return lblMessage.Text;

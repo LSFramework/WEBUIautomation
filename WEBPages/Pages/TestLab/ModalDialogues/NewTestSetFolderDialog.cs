@@ -11,7 +11,7 @@ using WEBUIautomation.WebElement;
 
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {
-    public class NewTestSetFolderDialog: DriverContainer, IPage
+    public class NewTestSetFolderDialog : DriverContainer, IPage
     {
         #region The dialog locators
 
@@ -19,8 +19,8 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         public string ViewLocator { get { return "Create New Test Set Folder"; } }
 
-        public By FrameLocator { get { return By.Name("CreateNewTestSetFolder"); } }
-        
+        public By FrameLocator { get { return By.Name("CreateNewTestSetFolder"); } }      
+
         IWebDriverExt dialog
         {
             get

@@ -28,8 +28,6 @@ namespace WEBUIautomation.WebElement
                 
         private IWebElement TryFindSingle()
         {
-            //Contract.Ensures(Contract.Result<IWebElement>() != null);
-
             try
             {
                 return FindSingleIWebElement();
@@ -49,17 +47,19 @@ namespace WEBUIautomation.WebElement
             }
             catch (WebElementNotFoundException)
             {
-                throw;
+               throw;
             }
             catch
             {
-                throw WebElementNotFoundException;
+                throw;// WebElementNotFoundException;
             }
         }
 
         private IWebElement FindSingleIWebElement()
         {
+           
             var elements = FindIWebElements();
+
 
             if (!elements.Any())
                 throw WebElementNotFoundException;
@@ -71,7 +71,7 @@ namespace WEBUIautomation.WebElement
                     : elements.ElementAt(_index);           
 
 
-            Browser.ScrollToElement(element);
+           // Browser.ScrollToElement(element);
 
             // ReSharper disable UnusedVariable
             var elementAccess = element.Enabled;
@@ -92,40 +92,13 @@ namespace WEBUIautomation.WebElement
             Browser.WaitScript();
             Browser.WaitReadyState();
 
-            var resultEnumerable = new List<IWebElement>() as IEnumerable<IWebElement>;
-            //resultEnumerable = null;
+            var resultEnumerable = new List<IWebElement>() as IEnumerable<IWebElement>;            
+            Exception ex = null;
 
-            //bool single=Browser.TryFindElement(_firstSelector);
-            
-            //if (Browser.IsElementPresent(_firstSelector))
-            //{
-                Exception ex = null;
-                Browser.TryFindElements(_firstSelector, out resultEnumerable, out ex);
-            //}
-            //else
-            //if(!single)
-            //{
-            //    var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(10));               
-            //    wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+            Browser.TryFindElements(_firstSelector, out resultEnumerable, out ex);
 
-            //    resultEnumerable = wait.Until<IList<IWebElement>>(driver =>
-            //        {
-            //            Thread.Sleep(TimeSpan.FromMilliseconds(50));
-
-            //            var elements = Browser.FindElements(_firstSelector);
-
-            //            if (elements.Count == 0)
-            //            {
-            //                return null;
-            //            }
-            //            return elements;
-            //        });
-            //}
-
-            //if(resultEnumerable==null)
-            //resultEnumerable = Browser.FindElements(_firstSelector) as IEnumerable<IWebElement>;
-
-            if (resultEnumerable.ToList().Count == 1) return resultEnumerable.ToList();
+            if (resultEnumerable.ToList().Count == 1) 
+                return resultEnumerable.ToList();
 
             try
             {
@@ -141,9 +114,7 @@ namespace WEBUIautomation.WebElement
                 return new List<IWebElement>();
             }
 
-            var resultList = resultEnumerable.ToList();
-
-            return resultList;
+            return resultEnumerable.ToList();           
         }
 
         private WebElementNotFoundException WebElementNotFoundException

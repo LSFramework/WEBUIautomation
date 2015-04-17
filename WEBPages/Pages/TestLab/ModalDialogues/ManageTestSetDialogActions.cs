@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {
-    public class ManageTestSetDialogActions: ManageTestSetsDialog
+   
+    // Actions
+    
+    public partial class ManageTestSetsDialog
     {
         /// <summary>
         /// Makes try to create test set folder with folderName string
@@ -16,9 +19,8 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
         /// <param name="warning"></param>
         public ManageTestSetsDialog CreateNewTestSetFolder(string folderName)
         {
-            this.SelectRootFolder();    
-
-            return this.NewFolderBtnClickExpectedSuccess()
+            return this.SelectRootFolder()
+                .NewFolderBtnClickExpectedSuccess()
                 .TypeFolderName(folderName)
                 .ClickOKExpectedSuccess();
         }
@@ -34,10 +36,10 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
         public ManageTestSetsDialog CreateNewTestSet(string parentFolder, string testSetName)
         { 
             return this.SelectRootFolder()
-            .SelectFolder(parentFolder)
-            .CreateNewTestSetClick()
-            .TypeTestSetName(testSetName)
-            .ClickOkExpectingSucces();            
+                .SelectFolder(parentFolder)
+                .CreateNewTestSetClick()
+                .TypeTestSetName(testSetName)
+                .ClickOkExpectingSucces();            
         }
 
 

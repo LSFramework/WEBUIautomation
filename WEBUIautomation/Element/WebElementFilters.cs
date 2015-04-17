@@ -167,11 +167,5 @@ namespace WEBUIautomation.WebElement
 
             return string.Join(", ", result);
         }
-
-        public WebElement ByCriteria(By by)
-        {
-            _firstSelector = by;
-            return this;
-        }
     }
 }

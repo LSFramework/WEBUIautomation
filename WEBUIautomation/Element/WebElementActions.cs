@@ -120,40 +120,53 @@ namespace WEBUIautomation.WebElement
         public void Click(bool useJQuery = true)
         {
 
-            Func<bool> clickable=()=>
+            Func<bool> clickable = () =>
                 {
                     try
                     {
-                        if (FindSingle().Enabled)                       
-                            return true;    
+                        var element = FindSingle();
+                        if (element.Enabled && element.Displayed)
+                            return true;
                         return false;
                     }
-                    catch(Exception)
+                    catch (StaleElementReferenceException)
                     {
+                        ClearSearchResultCache();
                         return false;
                     }
                 };
+
 
             try
             {
                 FindSingle().Click();
             }
-            catch (StaleElementReferenceException e)
+            catch (StaleElementReferenceException)
             {
                 ClearSearchResultCache();
-                FindSingle().Click();
+                WaitHelper.Try(() => FindSingle().Click());
             }
             catch (InvalidOperationException e)
             {
                 if (e.Message.Contains("Element is not clickable"))
                 {
-                    Thread.Sleep(500);
                     WaitHelper.SpinWait(clickable, TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(100));
-                    FindSingle().Click();
+                    //Thread.Sleep(500);//Wait for removing a slider  
+                    WaitHelper.Try(() => FindSingle().Click());
                 }
             }
+            catch (ElementNotVisibleException)
+            {
+                var element = FindSingle();
+                Browser.ExecuteJavaScript(String.Format("window.scrollTo(0,{0});", element.Location.Y));
+                Thread.Sleep(100);
+                element.Click();
+            }
+            catch
+            { throw; }
 
-                Thread.Sleep(100);           
+            ClearSearchResultCache();
+            Thread.Sleep(100);           
         }
 
         public void Clear()
@@ -206,8 +219,7 @@ namespace WEBUIautomation.WebElement
 
         public void MouseOver()
         {
-            var element = FindSingle();
-            FireJQueryEvent(element, JavaScriptEvents.MouseOver);
+            FireJQueryEvent(FindSingle(), JavaScriptEvents.MouseOver);
         }
 
         public string GetAttribute(TagAttributes tagAttribute)

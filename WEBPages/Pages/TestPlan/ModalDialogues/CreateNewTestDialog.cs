@@ -11,7 +11,7 @@ namespace WEBPages.Pages.TestPlan.ModalDialogues
 {
     #region Create New Test dialog
 
-    public class CreateNewTestDialog:DriverContainer
+    public class CreateNewTestDialog: DriverContainer
     {
         public static IWebElement txtNewTestName
         { get { return driver.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_DialogContent_txtNewTestName")); } }
@@ -27,7 +27,6 @@ namespace WEBPages.Pages.TestPlan.ModalDialogues
 
         public static IWebElement btnHelp
         { get { return driver.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_btnHelp")); } }
-
     }
 
     #endregion

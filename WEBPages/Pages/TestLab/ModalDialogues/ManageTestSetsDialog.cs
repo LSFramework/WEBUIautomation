@@ -14,15 +14,19 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
     /// <summary>
     /// Implements  actions for Manage Test Sets dialog
     /// </summary>
-    public  class ManageTestSetsDialog: DriverContainer
+    public partial class ManageTestSetsDialog : DriverContainer, IPage
     {       
         #region The dialog locators
 
-        public static string ViewLocator 
-        { get { return "Manage Test Sets Dialog"; } }
-        
-        public static By FrameLocator 
-        { get { return By.XPath(@".//iframe[contains(@ng-src,'CrudTestSet.aspx')]"); } }
+        public string Url { get; private set; }
+        public string ViewLocator { get { return "Manage Test Sets Dialog"; } }
+        public By FrameLocator { get { return By.XPath(@".//iframe[contains(@ng-src,'CrudTestSet.aspx')]"); } }
+
+        public ManageTestSetsDialog()
+        {
+            Url = dialog.Url;
+        }
+
 
         IWebDriverExt dialog
         {
@@ -46,8 +50,10 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
         {
             get
             {
-                return WaitHelper.Try(() => dialog.NewWebElement()
-                        .ById("ctl00_ctl00_PageContent_DialogContent_PanelCreateNewTestSet"));                                   
+                return WaitHelper.Try(
+                    () => dialog.NewWebElement()
+                        .ById("ctl00_ctl00_PageContent_DialogContent_PanelCreateNewTestSet")
+                        );                                   
             }
         }
 
@@ -55,22 +61,22 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         #region UI Web Elements
 
-        private WebElement btnNewFolder
+         WebElement btnNewFolder
         { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'newFolderButton')]"); } }
 
-        private WebElement btnNewTestSet
+         WebElement btnNewTestSet
         { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'newItemButton')]"); } }
 
-        private WebElement btnDelete
+         WebElement btnDelete
         { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'deleteButton')]"); } }
 
-        private WebElement radTreeView
+         WebElement radTreeView
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_TestSetTreeControl_GenericTreeView1_RadTreeView1"); } }
 
-        private WebElement btnOK
+         WebElement btnOK
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogActions_btnOK"); } }
 
-        private WebElement btnClose
+         WebElement btnClose
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_btnClose"); } }
 
         #endregion UI Web Elements
@@ -126,6 +132,5 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
         }
 
         #endregion Actions
-
     }
 }

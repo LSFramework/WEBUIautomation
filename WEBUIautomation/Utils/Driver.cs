@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using OpenQA.Selenium.Remote;
 using System.Drawing;
+using OpenQA.Selenium.Support.Events;
 
 namespace WEBUIautomation.Utils
 {
@@ -24,11 +25,13 @@ namespace WEBUIautomation.Utils
             lock (Instancelocker)
             {
                 instance = null;
+
                 WebDriverBrowser brow = new WebDriverBrowser();
                 instance = brow.LaunchBrowser(browser) as IWebDriverExt;
                 instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
                 instance.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(10));
-                instance.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(2));
+                instance.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(2));          
+                 
             }
         }
 

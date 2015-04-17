@@ -5,6 +5,7 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Events;
+using System;
 
 namespace WEBUIautomation.Utils
 {
@@ -33,6 +34,7 @@ namespace WEBUIautomation.Utils
         //Constructor inherited from the base class
         public ChromeDriverExt(string path) : base(path) { }
         public ChromeDriverExt(string path, ChromeOptions options) : base(path, options) { }
+        public ChromeDriverExt(string path, ChromeOptions options, TimeSpan commandTimeout) : base(path, options, commandTimeout) { }
         public By CurrentFrame { get; set; }
         public string CurrentView { get; set; }
     }

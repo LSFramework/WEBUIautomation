@@ -12,6 +12,7 @@ using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
 using WEBUIautomation.Wait;
 using WEBPages.Pages.TestLab;
+using WEBPages.Pages.TestPlan;
 
 namespace WEBPages.Pages
 {
@@ -85,19 +86,19 @@ namespace WEBPages.Pages
         /// <summary>
         /// Start Link
         /// </summary>
-        private  WebElement link_Start
-          { get { return mainPage.NewWebElement().ByText("Start"); } }
+        WebElement link_Start
+        { get { return mainPage.NewWebElement().ByText("Start"); } }
 
         /// <summary>
         /// Test Management Links 
         /// </summary>
-        private  WebElement link_TestMgmt
+        WebElement link_TestMgmt
         { get { return mainPage.NewWebElement().ByText("Test Management"); } }
 
-        private  WebElement linkTestPlan
+        WebElement linkTestPlan
         { get { return mainPage.NewWebElement().ByText("Test Plan"); } }
 
-        private  WebElement linkTestLab
+        WebElement linkTestLab
         { get { return mainPage.NewWebElement().ByText("Test Lab"); } }
 
 
@@ -105,38 +106,38 @@ namespace WEBPages.Pages
         /// <summary>
         /// Runs & Analysis Links
         /// </summary>
-        private  WebElement link_RunsAndAnalysis
+        WebElement link_RunsAndAnalysis
         { get { return mainPage.NewWebElement().ByText("Runs & Analysis"); } }
 
-        private  WebElement linkRuns
+        WebElement linkRuns
         { get { return mainPage.NewWebElement().ByText("Runs"); } }
 
-        private  WebElement linkTrending
+        WebElement linkTrending
         { get { return mainPage.NewWebElement().ByText("Trending"); } }
 
-        private  WebElement linkPAL
+        WebElement linkPAL
         { get { return mainPage.NewWebElement().ByText("PAL"); } }
 
 
         /// <summary>
         /// Resources Link
         /// </summary>
-        private  WebElement link_Resources
+        WebElement link_Resources
         { get { return mainPage.NewWebElement().ByText("Resources"); } }
 
-        private  WebElement link_TestResources
+        WebElement link_TestResources
         { get { return mainPage.NewWebElement().ByText("Test Resources"); } }
 
-        private  WebElement link_TestingHosts
+        WebElement link_TestingHosts
         { get { return mainPage.NewWebElement().ByText("Testing Hosts"); } }
 
-        private  WebElement link_Timeslots
+        WebElement link_Timeslots
         { get { return mainPage.NewWebElement().ByText("Timeslots"); } }
 
-        private  WebElement link_Topologies
+        WebElement link_Topologies
         { get { return mainPage.NewWebElement().ByText("Topologies"); } }
 
-        private  WebElement link_MI_Listeners
+        WebElement link_MI_Listeners
         { get { return mainPage.NewWebElement().ByText("MI Listeners"); } }
 
         /// <summary>
@@ -241,27 +242,30 @@ namespace WEBPages.Pages
 
         #region Main Head Links Actions
 
-        public  void ClickRefresh()
+        public MainHead ClickRefresh()
         {
             btnRefresh.Click();
+            return this;
         }
 
         /// <summary>
         /// Action: Perform click on Test Management Link
         /// Expected: Test Plan and Test Plan links are shown 
         /// </summary>
-        public  void MouseOverTestManagementLink()
+        public MainHead MouseOverTestManagementLink()
         {
             link_TestMgmt.MouseOver();
+            return this;
         } 
 
         /// <summary>
         /// Action: Perform click on Test Lab item
         /// Expected: Test Lab perspective opened
         /// </summary>
-        public  void ClickTestLabLink()
+        public  TestLabPage ClickTestLabLink()
         {
             linkTestLab.Click();
+            return new TestLabPage();
         }
 
         /// <summary>
@@ -270,21 +274,20 @@ namespace WEBPages.Pages
         /// 1. Perform click on Test Lab item
         /// Expected: Test Lab perspective opened
         /// </summary>
-        public void NavigateToTestLab()
+        public TestLabPage NavigateToTestLab()
         {
-            MouseOverTestManagementLink();
-            ClickTestLabLink();
-            driver.SwitchToFrame(TestLabPage.FrameLocator);         
-            driver.CurrentView = TestLabPage.ViewLocator;
+            return MouseOverTestManagementLink()
+            .ClickTestLabLink();
         }
 
         /// <summary>
         /// Action: Perform click on Test Lab item
         /// Expected: Test Plan perspective opened
         /// </summary>
-        public  void ClickTestPlanLink()
+        public TestPlanPage ClickTestPlanLink()
         {
             linkTestPlan.Click();
+            return new TestPlanPage();
         }
 
         /// <summary>
@@ -293,12 +296,10 @@ namespace WEBPages.Pages
         /// 1. Perform click on Test Lab item
         /// Expected: Test Lab perspective opened
         /// </summary>
-        public void NavigateToTestPlan()
+        public TestPlanPage NavigateToTestPlan()
         {
-            MouseOverTestManagementLink();
-            ClickTestPlanLink();
-            driver.SwitchToFrame(TestLabPage.FrameLocator);
-            driver.CurrentView = TestLabPage.ViewLocator;
+            return MouseOverTestManagementLink()
+            .ClickTestPlanLink();
         }
 
         #endregion Main Head Links Actions

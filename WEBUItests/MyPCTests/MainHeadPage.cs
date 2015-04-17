@@ -15,8 +15,7 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
     {
 
         MainHead mainHead = new MainHead();
-        
-        TestLabPage testLabPage =new TestLabPage();
+
 
             /// <summary>
         /// Navigates to Test Lab
@@ -24,8 +23,8 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
         [Test]
         public void Step_1_NavigateToTestLab()
         {
-            mainHead.NavigateToTestLab();
-            Assert.True(testLabPage.Opened);
+           var testLabPage = mainHead.NavigateToTestLab();
+           Assert.True(testLabPage.Opened);
         }
 
         /// <summary>
@@ -34,8 +33,8 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
         [Test]
         public void Step_2_NavigateToTestPlan()
         {
-            mainHead.NavigateToTestPlan();
-           Assert.True(TestPlan.Opened);
+            var testPlanPage = mainHead.NavigateToTestPlan();
+            Assert.True(testPlanPage.Opened);
         }
     }
 }

@@ -6,7 +6,7 @@ using WEBUIautomation.Wait;
 
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {
-    public class NewTestSetDialog: DriverContainer
+    public class NewTestSetDialog : DriverContainer, IPage
     {
         #region The dialog locators
 
@@ -14,7 +14,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         public string ViewLocator { get { return "Create New Performance Test Set"; } }
         
-        public static By FrameLocator {get {return By.Name("CreateNewTestSet");}}
+        public By FrameLocator {get {return By.Name("CreateNewTestSet");}}
 
         public NewTestSetDialog()
         {
@@ -104,7 +104,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
             return new ManageTestSetsDialog();
         }
 
-        public  string GetWarningMessage()
+        public string GetWarningMessage()
         {
             if (IsMessageDisplayed())
                 return lblMessage.Text;
@@ -115,10 +115,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
 
         #region Complex Action
-
-
-
-
+                
         #endregion Complex Action
 
         #endregion Actions

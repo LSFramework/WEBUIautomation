@@ -81,7 +81,7 @@ namespace WEBUIautomation
                  WaitHelper.Try(() => DirectoryHelper.ForceDelete(defaultDataFolder));
              }
 
-             return new ChromeDriverExt(Directory.GetCurrentDirectory(), chromeOptions);
+             return new ChromeDriverExt(Directory.GetCurrentDirectory(), chromeOptions, TimeSpan.FromSeconds(10));
          }
 
         static InternetExplorerDriverExt StartInternetExplorer()

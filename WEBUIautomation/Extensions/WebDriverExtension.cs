@@ -156,13 +156,9 @@ namespace WEBUIautomation.Extensions
                     return false;
                 }
             };
-            return WaitHelper.SpinWait(present, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(200));
-        }
 
-        public static IWebElement FindElementAndWait(this IWebDriverExt iWebDriverExt, By by, int seconds)
-        {
-            return FindElementByLocator(iWebDriverExt, by, seconds);
-        }
+            return WaitHelper.SpinWait(present, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(200));
+        }        
         
         public static IWebElement SelectListItem(this IWebDriverExt iWebDriverExt, string itemLocator)
         {
@@ -182,15 +178,12 @@ namespace WEBUIautomation.Extensions
             return new WebElement();
         }
 
-        public static void ScrollToElement(this IWebDriverExt iWebDriverExt, IWebElement element)
-        {
-            (iWebDriverExt as IJavaScriptExecutor).ExecuteScript(string.Format("window.scrollTo(0, {0});", element.Location.Y));
-        }
 
         public static WebElement FindFolder(this IWebDriverExt iWebDriverExt, string folderName)
         {
-            return iWebDriverExt.NewWebElement()
-                .ByXPath(@".//img[contains(@src, 'folder')]/following-sibling::span[contains(text(), '" + folderName + "')]");
+            string folderLocator = string.Format(@".//span[contains(text(), '{0}')]", folderName);
+
+            return iWebDriverExt.NewWebElement().ByXPath(folderLocator);
             
         }
 
@@ -201,29 +194,26 @@ namespace WEBUIautomation.Extensions
          
         }
 
-        public static bool TryExpandTreeFolder(this IWebDriverExt iWebDriverExt, string folderName)
+        public static void TryExpandTreeFolder(this IWebDriverExt iWebDriverExt, string folderName)
         {
-            By expanded = By.XPath(@".//img[contains(@src, 'folder')]/following-sibling::span[contains(text(), '"
-                + folderName + "')]/../span[@class='rtMinus']");
+            string expanded = string.Format(@".//span[contains(text(), '{0}')]/preceding-sibling::span[@class='rtMinus']", folderName);
 
-            By collapsed = By.XPath(@".//img[contains(@src, 'folder')]/following-sibling::span[contains(text(), '"
-                + folderName + "')]/../span[@class='rtPlus']");
+            string collapsed = string.Format(@".//span[contains(text(), '{0}')]/preceding-sibling::span[@class='rtPlus']", folderName);
 
+            if (iWebDriverExt.TryFindElement(By.XPath(expanded))) return;                     
 
-            if (iWebDriverExt.IsElementPresent(expanded)) return true;           
-           
-            return WaitHelper.Try( 
-                () => iWebDriverExt.NewWebElement().ByCriteria(collapsed).Click()
-              );
+            iWebDriverExt.NewWebElement().ByXPath(collapsed).Click();
+
+            
         }
          
         /// <summary>
-        /// Tries find elements by locator without any additional wait.
+        /// Tries find elements by locator.
         /// </summary>
         /// <param name="driver">WebDriver instance</param>
         /// <param name="by">A mechanism by which to find elements</param>
         /// <param name="collection">Out collection of found elements</param>
-        /// <param name="e">exception container</param>
+        /// <param name="e">exception </param>
         /// <returns>True if an element was found, otherwise false</returns>
         public static bool TryFindElements(this IWebDriverExt iWebDriverExt, By by, out IEnumerable<IWebElement> collection, out Exception exception)
         {
@@ -231,10 +221,16 @@ namespace WEBUIautomation.Extensions
             collection = new List<IWebElement>() as IEnumerable<IWebElement>;
 
             iWebDriverExt.WaitScript();
-            iWebDriverExt.WaitReadyState();
+            iWebDriverExt.WaitReadyState();           
 
             try
             {
+                if (iWebDriverExt.TryFindElement(by))
+                {
+                    collection = iWebDriverExt.FindElements(by);
+                    return true;
+                }
+
                var elements = iWebDriverExt.FindElements(by);
 
                if (elements.Count > 0)
@@ -245,7 +241,7 @@ namespace WEBUIautomation.Extensions
                else 
                {
                   var wait = new WebDriverWait(iWebDriverExt, TimeSpan.FromSeconds(10));               
-                        wait.PollingInterval = TimeSpan.FromMilliseconds(100);
+                      wait.PollingInterval = TimeSpan.FromMilliseconds(100);
 
                   collection= wait.Until<IList<IWebElement>>(driver =>
                     {
@@ -253,12 +249,11 @@ namespace WEBUIautomation.Extensions
 
                         elements = iWebDriverExt.FindElements(by);
 
-                        if (elements.Count == 0)
-                        {
-                            return null;
-                        }
+                        if (elements.Count == 0) { return null; }
+
                         return elements;
                     });
+
                   return true;
                }
             }
@@ -284,7 +279,7 @@ namespace WEBUIautomation.Extensions
                     }
                 };
 
-            return WaitHelper.SpinWait(canBeFound, TimeSpan.FromSeconds(10));
+            return WaitHelper.SpinWait(canBeFound, TimeSpan.FromSeconds(5));
         }
     }
 }

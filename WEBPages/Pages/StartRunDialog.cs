@@ -5,7 +5,7 @@ using WEBUIautomation.WebElement;
 
 namespace WEBPages.Pages
 {
-    public class StartRunDialog:DriverContainer
+    public class StartRunDialog: DriverContainer
     {
         const string position = @".//iframe[contains(@ng-src,'StartRun.aspx')]";        
 

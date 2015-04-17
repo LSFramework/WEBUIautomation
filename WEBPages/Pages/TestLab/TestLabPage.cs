@@ -7,34 +7,48 @@ using WEBUIautomation.Wait;
 namespace WEBPages.Pages.TestLab
 {
     using TagAttributes = WEBUIautomation.Tags.TagAttributes;
+    using WEBPages.Pages.TestLab.ModalDialogues;
+    using System;
 
-    public class TestLabPage: DriverContainer
+    public class TestLabPage: DriverContainer, IPage
     {
-        public const string ViewLocator = "Test Lab";
-        public static By FrameLocator =By.Id( "MainTab");   
+
+        public string Url { get; private set; }
+
+        public string ViewLocator { get { return "Test Lab"; } }
+
+        public By FrameLocator { get { return By.Id( "MainTab"); } }
 
         IWebDriverExt mainTab
         {
             get
             {
-                ///Is driver on the perspective we need ?
-                if (! IsDriverOnTheView(FrameLocator, ViewLocator))
-                /// if it isn't
-                {     
-                    //Navigate to the perspective
-                    driver.SwitchTo().DefaultContent();
-                    MainHead mainHead = new MainHead();
-                    mainHead.NavigateToTestLab();                    
-                    //Set driver's focus on the frame contains the perspective UI
-                    //and mark driver as it is on the perspective
-                    driver.SwitchToFrame(FrameLocator);
-                    driver.CurrentView = ViewLocator;
+                if (! IsDriverOnTheView(FrameLocator, ViewLocator))          
+                {
+                    try
+                    {
+                        driver.SwitchToFrame(FrameLocator);
+                        driver.NewWebElement().ByAttribute(TagAttributes.Title,"Manage Test Sets");
+                        driver.CurrentView = ViewLocator;
+                    }
+                    catch (Exception)
+                    {
+                        driver.SwitchTo().DefaultContent();
+                        MainHead mainHead = new MainHead();
+                        mainHead.NavigateToTestLab();
+                        driver.SwitchToFrame(FrameLocator);
+                        driver.CurrentView = ViewLocator;
+                    }
                 }
-                // If yes 
+               
                 return driver;
             }
         }
-        
+                
+        public TestLabPage() 
+        { 
+           Url = mainTab.Url; 
+        }
 
          WebElement btnManageTestSets
         { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title,"Manage Test Sets"); } }
@@ -52,9 +66,10 @@ namespace WEBPages.Pages.TestLab
         /// Action : Performs click Manage Test Sets button.
         /// Expected : A modal-dialog Manage Test Sets appears.
         /// </summary>
-        public  void ClickManageTestSets()
+        public  ManageTestSetsDialog ClickManageTestSets()
         {
             btnManageTestSets.Click();
+            return new ManageTestSetsDialog();
         }
         
         /// <summary>
