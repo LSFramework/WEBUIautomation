@@ -1,63 +1,39 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.Wait;
 using WEBUIautomation.WebElement;
+using WEBPages.Extensions;
 
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {
-    public class NewTestSetFolderDialog : DriverContainer, IPage
+    using Locators = ContentLocators.Locators.NewTestSetFolderDialog;
+
+    public class NewTestSetFolderDialog :SecondLevelDialog
     {
         #region The dialog locators
 
-        public string Url { get; private set; }
+        public override string ViewLocator { get { return Locators.ViewLocator; } }
 
-        public string ViewLocator { get { return "Create New Test Set Folder"; } }
+        public override By FrameLocator { get { return Locators.FrameLocator; } } 
 
-        public By FrameLocator { get { return By.Name("CreateNewTestSetFolder"); } }      
-
-        IWebDriverExt dialog
-        {
-            get
-            {
-                if (!IsDriverOnTheView(FrameLocator, ViewLocator))
-                {
-                    driver.SwitchToFrame(FrameLocator);
-                    driver.CurrentView = ViewLocator;
-                }
-                return driver;
-            }
-        }
 
         #endregion The dialog locators
 
-        #region  Ctor
-
-        public NewTestSetFolderDialog()
-        {
-            Url = dialog.Url;
-        }
-
-        #endregion
 
         #region UI Web Elements
 
         WebElement txtFolderName
-        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_TxtTestSetFolderName"); } }
+        { get { return dialog.NewWebElement().ById(Locators.txtFolderNameId); } }
 
          WebElement btnOK
-        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogActions_btnOK"); } }
+        { get { return dialog.NewWebElement().ById(Locators.btnOkId); } }
 
          WebElement btnClose
-        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_btnClose"); } }
+        { get { return dialog.NewWebElement().ById(Locators.btnCloseId); } }
 
          WebElement lblMessage
-        { get { return dialog.NewWebElement().ByXPath(@".//*[@id='ctl00_ctl00_PageContent_DialogContent_RequiredFieldValidator1']//font"); } }
+        { get { return dialog.NewWebElement().ByXPath(Locators.lblMessageXPath); } }
 
         #endregion UI Web Elements
 
@@ -74,17 +50,6 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         #endregion Helpers
 
-        #region Properties
-
-        public  bool Opened
-        {
-            get {
-                return WaitHelper.Try(()=>dialog.NewWebElement()
-                .ById("ctl00_ctl00_PageContent_DialogContent_PanelCreateNewTestSetFolder")); 
-            }
-        }
-
-        #endregion Properties
 
         #region Actions
 

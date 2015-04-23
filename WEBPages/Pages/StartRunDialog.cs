@@ -1,35 +1,25 @@
 ﻿using OpenQA.Selenium;
-using WEBUIautomation.Utils;
-using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
+using WEBPages.Extensions;
 
 namespace WEBPages.Pages
 {
-    public class StartRunDialog: DriverContainer
-    {
-        const string position = @".//iframe[contains(@ng-src,'StartRun.aspx')]";        
+    using Locators = ContentLocators.Locators.StartRunDialog;
 
-        IWebDriverExt dialog
-        {
-            get
-            {
-                if (driver.CurrentFrame != By.XPath(position))
-                {
-                    driver.SwitchToDefaultContent();
-                    driver.SwitchToFrame(By.XPath(position));
-                }
-                return driver;
-            }
-        }
+    public class StartRunDialog : FirstLevelDialog
+    {
+        public override By FrameLocator { get { return Locators.FrameLocator; } }        
+
+        public override string ViewLocator { get { return Locators.ViewLocator; } }
+        
         
         WebElement btnRun
-        { get { return dialog.NewWebElement().ById("ctl00_PageContent_btnRun"); } }
+        { get { return dialog.NewWebElement().ById(Locators.btnRunId); } }
 
         public StartRunDialog ClickRunBtn()
         {
             btnRun.Click();
             return this;
         }
-
     }
 }

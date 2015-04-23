@@ -10,8 +10,6 @@ using WEBUIautomation.Extensions;
 using System.Globalization;
 using WEBUIautomation.Wait;
 using System.Threading;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Interactions;
 
 
 namespace WEBUIautomation.WebElement
@@ -89,13 +87,7 @@ namespace WEBUIautomation.WebElement
 
         #endregion
 
-        #region Common methods
-
-        //public IWebElement Element()
-        //{
-        //    var element= FindSingle();
-        //    return element;
-        //}
+        #region Common methods        
 
         public bool IsEnabled()
         {
@@ -117,57 +109,10 @@ namespace WEBUIautomation.WebElement
             return WaitHelper.SpinWait(Exists, TimeSpan.FromSeconds(seconds), TimeSpan.FromMilliseconds(200));
         }
 
-        public void Click(bool useJQuery = true)
+        public void Click(bool useJQuery = false)
         {
-
-            Func<bool> clickable = () =>
-                {
-                    try
-                    {
-                        var element = FindSingle();
-                        if (element.Enabled && element.Displayed)
-                            return true;
-                        return false;
-                    }
-                    catch (StaleElementReferenceException)
-                    {
-                        ClearSearchResultCache();
-                        return false;
-                    }
-                };
-
-
-            try
-            {
-                FindSingle().Click();
-            }
-            catch (StaleElementReferenceException)
-            {
-                ClearSearchResultCache();
-                WaitHelper.Try(() => FindSingle().Click());
-            }
-            catch (InvalidOperationException e)
-            {
-                if (e.Message.Contains("Element is not clickable"))
-                {
-                    WaitHelper.SpinWait(clickable, TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(100));
-                    //Thread.Sleep(500);//Wait for removing a slider  
-                    WaitHelper.Try(() => FindSingle().Click());
-                }
-            }
-            catch (ElementNotVisibleException)
-            {
-                var element = FindSingle();
-                Browser.ExecuteJavaScript(String.Format("window.scrollTo(0,{0});", element.Location.Y));
-                Thread.Sleep(100);
-                element.Click();
-            }
-            catch
-            { throw; }
-
-            ClearSearchResultCache();
-            Thread.Sleep(100);           
-        }
+            DoAction( () => FindSingle().Click() );
+        }       
 
         public void Clear()
         {
@@ -176,7 +121,7 @@ namespace WEBUIautomation.WebElement
 
         public void SendKeys(string keys)
         {
-            FindSingle().SendKeys(keys);
+            DoAction( () => FindSingle().SendKeys(keys) );
         }
 
         public void SetCheck(bool value, bool useJQuery = true)
@@ -204,7 +149,7 @@ namespace WEBUIautomation.WebElement
 
         public void Select(string optionValue)
         {
-            SelectCommon(optionValue, SelectTypes.ByValue);
+            DoAction( () => SelectCommon(optionValue, SelectTypes.ByValue) );
         }
 
         public void Select(int optionValue)
@@ -219,7 +164,7 @@ namespace WEBUIautomation.WebElement
 
         public void MouseOver()
         {
-            FireJQueryEvent(FindSingle(), JavaScriptEvents.MouseOver);
+           DoAction( () => FireJQueryEvent(FindSingle(), JavaScriptEvents.MouseOver) );
         }
 
         public string GetAttribute(TagAttributes tagAttribute)
@@ -308,6 +253,68 @@ namespace WEBUIautomation.WebElement
 
         #region Helpers
 
+        protected void DoAction(Action action)
+        {
+            Func<bool> readyForAction = () =>
+            {
+
+                try
+                {
+                    var element = FindSingle();
+                    if (element.Enabled && element.Displayed)
+                    {
+                        Browser.Highlight(element);
+                        return true;
+                    }
+                    else
+                    {
+                        MoveToVisible(element);
+                    }
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            };
+
+            WaitHelper.SpinWait(readyForAction, Browser.WaitProfile.Timeout, Browser.WaitProfile.PollingInterval);
+
+            try
+            {
+                action();
+            }
+            catch (StaleElementReferenceException)
+            {
+                ClearSearchResultCache();
+                WaitHelper.Try(action);
+            }
+            catch (InvalidOperationException e)
+            {
+                if (e.Message.Contains("Element is not clickable"))
+                {
+                    WaitHelper.SpinWait(readyForAction, Browser.WaitProfile.Timeout, Browser.WaitProfile.PollingInterval);
+                    WaitHelper.Try(action);
+                }
+            }
+            catch (ElementNotVisibleException)
+            {
+                MoveToVisible(FindSingle());
+                WaitHelper.Try(action);
+            }
+
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                ClearSearchResultCache();
+                Thread.Sleep(Browser.WaitProfile.PollingInterval.Milliseconds / 2);
+                Browser.WaitReadyState();
+            }
+        }
+
         private void Set(bool value, bool useJQuery = true)
         {
             if (Selected ^ value)
@@ -342,6 +349,13 @@ namespace WEBUIautomation.WebElement
             var eventName = javaScriptEvent.GetEnumDescription();
 
             Browser.ExecuteJavaScript(string.Format("$(arguments[0]).{0}();", eventName), element);
+        }
+
+        private void MoveToVisible(IWebElement element)
+        {
+            Browser.ExecuteJavaScript(String.Format("window.scrollTo(0,{0});", element.Location.Y));
+            Browser.ExecuteJavaScript("arguments[0].scrollIntoView(true);", element);
+            Browser.WaitReadyState();
         }
 
         #endregion

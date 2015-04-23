@@ -1,66 +1,33 @@
 ﻿using OpenQA.Selenium;
+using WEBUIautomation.Tags;
 using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
-using WEBUIautomation.Wait;
+using WEBPages.Extensions;
+using WEBPages.Pages.TestLab.ModalDialogues;
+using System;
+using WEBPages.Pages.BasePageObject;
+using WEBPages.ContentLocators;
 
 namespace WEBPages.Pages.TestLab
 {
-    using TagAttributes = WEBUIautomation.Tags.TagAttributes;
-    using WEBPages.Pages.TestLab.ModalDialogues;
-    using System;
+    using Locators=ContentLocators.Locators.TestLabPage;
 
-    public class TestLabPage: DriverContainer, IPage
+    public class TestLabPage: MainTabFrame
     {
+        protected override MainHead_Links MenuHeader { get { return MainHead_Links.TestManagement; } }
+        protected override Perspectives ViewName { get { return Perspectives.TestLab; } }
+        protected override By byElement  { get { return Locators.byElement; } }
 
-        public string Url { get; private set; }
-
-        public string ViewLocator { get { return "Test Lab"; } }
-
-        public By FrameLocator { get { return By.Id( "MainTab"); } }
-
-        IWebDriverExt mainTab
-        {
-            get
-            {
-                if (! IsDriverOnTheView(FrameLocator, ViewLocator))          
-                {
-                    try
-                    {
-                        driver.SwitchToFrame(FrameLocator);
-                        driver.NewWebElement().ByAttribute(TagAttributes.Title,"Manage Test Sets");
-                        driver.CurrentView = ViewLocator;
-                    }
-                    catch (Exception)
-                    {
-                        driver.SwitchTo().DefaultContent();
-                        MainHead mainHead = new MainHead();
-                        mainHead.NavigateToTestLab();
-                        driver.SwitchToFrame(FrameLocator);
-                        driver.CurrentView = ViewLocator;
-                    }
-                }
-               
-                return driver;
-            }
-        }
-                
-        public TestLabPage() 
-        { 
-           Url = mainTab.Url; 
-        }
-
-         WebElement btnManageTestSets
-        { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title,"Manage Test Sets"); } }
+        WebElement btnManageTestSets
+        { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnManageTestSetsValue); } }
 
          WebElement btnAssignTest
-        { get { return mainTab.NewWebElement().ByXPath(@".//a[contains(@title, 'Assign Test to TestSet')]"); } }
+        { get { return mainTab.NewWebElement().ByXPath(Locators.btnAssignTestXPath); } }
 
          WebElement btnRunTest
-        { get { return mainTab.NewWebElement().ByXPath(@".//img[contains(@alt, 'Run Test')]"); } }
-               
-        public bool Opened
-        { get { return WaitHelper.Try(() => btnManageTestSets.Exists(1)); } }
+        { get { return mainTab.NewWebElement().ByXPath(Locators.btnRunTestXPath); } }
+                  
 
         /// <summary>
         /// Action : Performs click Manage Test Sets button.
@@ -78,7 +45,10 @@ namespace WEBPages.Pages.TestLab
         /// <param name="testName"></param>
         public  void SelectTestInGrid(string testName)
         {
-            mainTab.NewWebElement().ByXPath(@".//td[contains(text(), '" + testName + "')]").Click();
+            string xPath = @".//td[contains(text(), '" + testName + "')]";
+
+            mainTab.NewWebElement().ByXPath(xPath).Click();
         }
+
     }
 }

@@ -3,36 +3,19 @@ using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
 using WEBUIautomation.Wait;
+using WEBPages.Extensions;
 
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {
-    public class NewTestSetDialog : DriverContainer, IPage
+    using Locators = ContentLocators.Locators.NewTestSetDialog;
+
+    public class NewTestSetDialog : SecondLevelDialog
     {
         #region The dialog locators
 
-        public string Url { get; private set; }
+        public override string ViewLocator { get { return Locators.ViewLocator; } }
 
-        public string ViewLocator { get { return "Create New Performance Test Set"; } }
-        
-        public By FrameLocator {get {return By.Name("CreateNewTestSet");}}
-
-        public NewTestSetDialog()
-        {
-            Url = dialog.Url;
-        }
-
-        IWebDriverExt dialog
-        {
-            get
-            {
-                if (!IsDriverOnTheView(FrameLocator, ViewLocator))
-                {
-                    driver.SwitchToFrame(FrameLocator);
-                    driver.CurrentView = ViewLocator;
-                }
-                return driver;
-            }
-        }
+        public override By FrameLocator { get { return Locators.FrameLocator; } }        
         
         #endregion The dialog locators
 
@@ -53,13 +36,6 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
         #endregion UI Web Elements
 
         #region Properties
-
-        public  bool Opened
-        { get
-            { return WaitHelper.Try(()=>dialog.NewWebElement()
-                .ById("ctl00_ctl00_PageContent_DialogContent_PanelCreateNewTestSet"));         
-            }       
-        }
 
         #endregion Properties
 

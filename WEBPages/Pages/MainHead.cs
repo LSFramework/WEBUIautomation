@@ -1,33 +1,27 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WEBUIautomation;
 using WEBUIautomation.Utils;
-using System.Drawing;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
-using WEBUIautomation.Wait;
-using WEBPages.Pages.TestLab;
-using WEBPages.Pages.TestPlan;
+using WEBPages.Extensions;
+using WEBPages.ContentLocators;
 
 namespace WEBPages.Pages
 {
-    public class MainHead: DriverContainer
+    using Locators = WEBPages.ContentLocators.Locators.MainHeadPage;
+   
+    public class MainHead: FramePageBase
     {
-        #region The Page Locator
+        #region Page Locator
 
-        public string ViewLocator { get { return "Main Head"; } }
+        public override string ViewLocator { get { return Locators.ViewLocator; } }
 
-        public static By FrameLocator { get { return By.Id("MastheadDiv"); } }   
-        
+        public override By FrameLocator { get { return Locators.FrameLocator; } }
 
-        public static bool PageCanGetFocus()
-        {
-            return driver.CurrentFrame == FrameLocator || driver.CurrentFrame == By.Id("MainTab");
+        By MainTabFrame { get { return Locators.MainTabFrame; } }
+
+        public bool PageCanGetFocus()
+        { 
+            return driver.CurrentFrame == FrameLocator || driver.CurrentFrame == MainTabFrame; 
         }
         
         IWebDriverExt mainPage
@@ -42,115 +36,45 @@ namespace WEBPages.Pages
             }
         }
 
-       
-
-        #endregion Page Locator
+        #endregion // Page Locator
 
         #region Elements Locators
 
         #region Main Head Title Elements
 
-        private  WebElement lblUser
-        { get { return mainPage.NewWebElement().ByXPath(@".//span[contains(@local-string, 'hello')]/.."); } }
+        WebElement lblUser { get { return mainPage.NewWebElement().ByXPath(Locators.lblUserXPath); } }
 
-        private  WebElement lblDomain
-        { get { return mainPage.NewWebElement().ByXPath(@".//span[contains(@local-string, 'domain')]/.."); } }
+        WebElement lblDomain { get { return mainPage.NewWebElement().ByXPath(Locators.lblDomainXPath); } }
 
-        private  WebElement lblProject
-        { get { return mainPage.NewWebElement().ByXPath(@".//span[contains(@local-string, 'project')]/.."); } }
+        WebElement lblProject { get { return mainPage.NewWebElement().ByXPath(Locators.lblProjectXPath); } }
 
-        private  WebElement btnLogout
-        { get { return mainPage.NewWebElement().ByXPath(@".//span[contains(@local-string, 'logout')]"); } }
-
-        public  void ClickLogout()
-        {
-            btnLogout.Click();        
-        }
-
+        WebElement btnLogout { get { return mainPage.NewWebElement().ByXPath(Locators.btnLogoutXPath); } }
 
         #endregion  Main Head Title Elements
 
         #region Main Head Tabs Elements Locators
 
-        private  WebElement tabHome
-        { get { return mainPage.NewWebElement().ByXPath(@".//span[contains(@class, 'IconContainer IconHome')]"); } }
+        private  WebElement tabHome 
+        { get { return mainPage.NewWebElement().ByXPath(Locators.tabHomeXPath); } }
 
-        private  WebElement btnCloseDLT
-        { get { return mainPage.NewWebElement().ByXPath(@".//div[contains(@class, 'xButtonWrapper')]"); } }
+        private  WebElement btnCloseDLT 
+        { get { return mainPage.NewWebElement().ByXPath(Locators.btnCloseDLTXPath); } }
 
         #endregion  Main Head Tabs Elements Locators
 
         #region Main Head Links Elements Locators
 
         #region Links
-        /// <summary>
-        /// Start Link
-        /// </summary>
-        WebElement link_Start
-        { get { return mainPage.NewWebElement().ByText("Start"); } }
 
-        /// <summary>
-        /// Test Management Links 
-        /// </summary>
-        WebElement link_TestMgmt
-        { get { return mainPage.NewWebElement().ByText("Test Management"); } }
+        WebElement mhLink(MainHead_Links mhLink)
+        {
+            return mainPage.NewWebElement().ByText(mhLink.GetEnumDescription());
+        }
 
-        WebElement linkTestPlan
-        { get { return mainPage.NewWebElement().ByText("Test Plan"); } }
-
-        WebElement linkTestLab
-        { get { return mainPage.NewWebElement().ByText("Test Lab"); } }
-
-
-
-        /// <summary>
-        /// Runs & Analysis Links
-        /// </summary>
-        WebElement link_RunsAndAnalysis
-        { get { return mainPage.NewWebElement().ByText("Runs & Analysis"); } }
-
-        WebElement linkRuns
-        { get { return mainPage.NewWebElement().ByText("Runs"); } }
-
-        WebElement linkTrending
-        { get { return mainPage.NewWebElement().ByText("Trending"); } }
-
-        WebElement linkPAL
-        { get { return mainPage.NewWebElement().ByText("PAL"); } }
-
-
-        /// <summary>
-        /// Resources Link
-        /// </summary>
-        WebElement link_Resources
-        { get { return mainPage.NewWebElement().ByText("Resources"); } }
-
-        WebElement link_TestResources
-        { get { return mainPage.NewWebElement().ByText("Test Resources"); } }
-
-        WebElement link_TestingHosts
-        { get { return mainPage.NewWebElement().ByText("Testing Hosts"); } }
-
-        WebElement link_Timeslots
-        { get { return mainPage.NewWebElement().ByText("Timeslots"); } }
-
-        WebElement link_Topologies
-        { get { return mainPage.NewWebElement().ByText("Topologies"); } }
-
-        WebElement link_MI_Listeners
-        { get { return mainPage.NewWebElement().ByText("MI Listeners"); } }
-
-        /// <summary>
-        /// Reports Link
-        /// </summary>
-        private  WebElement link_Reports
-        { get { return mainPage.NewWebElement().ByText("Reports"); } }
-
-        /// <summary>
-        /// Personalized Views Link
-        /// </summary>
-        private  WebElement link_Personal
-        { get { return mainPage.NewWebElement().ByText("Personalized Views"); } }
+        WebElement menu(Perspectives menuItem)
+        {
+            return mainPage.NewWebElement().ByText(menuItem.GetEnumDescription());
+        }
 
         #endregion Links
 
@@ -159,7 +83,7 @@ namespace WEBPages.Pages
         /// Refresh Button
         /// </summary>
         private  WebElement btnRefresh 
-        { get { return mainPage.NewWebElement().ByXPath(@".//div[contains(@ng-click, 'Refresh()')]"); } }
+        { get { return mainPage.NewWebElement().ByXPath(Locators.btnRefreshXPath); } }
 
         /// <summary>
         /// Auto refresh menu
@@ -170,7 +94,7 @@ namespace WEBPages.Pages
             {
                 return mainPage.NewWebElement()
                     .ByTagName(WEBUIautomation.Tags.TagNames.Div)
-                    .ByClass("iconPadding iconPaddingDropdown");
+                    .ByClass(Locators.menuAutoRefreshClass);
             }
         }
 
@@ -183,7 +107,7 @@ namespace WEBPages.Pages
             {
                 return mainPage.NewWebElement()
                     .ByTagName(WEBUIautomation.Tags.TagNames.Span)
-                    .ByText("Auto Refresh On");
+                    .ByText(Locators.menuItemAutoRefreshOnText);
             }
         }
         /// <summary>
@@ -195,19 +119,24 @@ namespace WEBPages.Pages
             {
                 return mainPage.NewWebElement()
                     .ByTagName(WEBUIautomation.Tags.TagNames.Span)
-                    .ByText("Auto Refresh Off");
+                    .ByText(Locators.menuItemAutoRefreshOffText);
             }
         }
        
         #endregion Refresh Section
 
-        #endregion Main Head Links Elements Locators
+        #endregion // Main Head Links Elements Locators
         
         #endregion //Elements Locators
 
-        #region Page Actions
+        #region DriverContainer Actions
         
         #region Main Head Title Actions
+
+        public void ClickLogout()
+        {
+            btnLogout.Click();
+        }
 
         public  string GetDomainName()
         {
@@ -248,62 +177,32 @@ namespace WEBPages.Pages
             return this;
         }
 
-        /// <summary>
-        /// Action: Perform click on Test Management Link
-        /// Expected: Test Plan and Test Plan links are shown 
-        /// </summary>
-        public MainHead MouseOverTestManagementLink()
+        public StartTab ShowStart()
         {
-            link_TestMgmt.MouseOver();
+            MenuItemClick(Perspectives.Start);
+            return new StartTab();
+        }
+
+        public void ShowPerspective(MainHead_Links menuHeader, Perspectives viewName)
+        {
+            MenuHeaderMouseOver(menuHeader).MenuItemClick(viewName);
+            driver.SwitchToFrame(MainTabFrame);
+            driver.CurrentView = viewName.GetEnumDescription();
+        }
+
+        public MainHead MenuHeaderMouseOver(MainHead_Links menuHeader)
+        {
+            mainPage.NewWebElement().ByText(menuHeader.GetEnumDescription()).MouseOver();
             return this;
-        } 
-
-        /// <summary>
-        /// Action: Perform click on Test Lab item
-        /// Expected: Test Lab perspective opened
-        /// </summary>
-        public  TestLabPage ClickTestLabLink()
-        {
-            linkTestLab.Click();
-            return new TestLabPage();
         }
 
-        /// <summary>
-        /// Actions: 
-        /// 1. Mouse over Test Management link 
-        /// 1. Perform click on Test Lab item
-        /// Expected: Test Lab perspective opened
-        /// </summary>
-        public TestLabPage NavigateToTestLab()
+        public void MenuItemClick(Perspectives viewName)
         {
-            return MouseOverTestManagementLink()
-            .ClickTestLabLink();
-        }
-
-        /// <summary>
-        /// Action: Perform click on Test Lab item
-        /// Expected: Test Plan perspective opened
-        /// </summary>
-        public TestPlanPage ClickTestPlanLink()
-        {
-            linkTestPlan.Click();
-            return new TestPlanPage();
-        }
-
-        /// <summary>
-        /// Actions: 
-        /// 1. Mouse over Test Management link 
-        /// 1. Perform click on Test Lab item
-        /// Expected: Test Lab perspective opened
-        /// </summary>
-        public TestPlanPage NavigateToTestPlan()
-        {
-            return MouseOverTestManagementLink()
-            .ClickTestPlanLink();
+            mainPage.NewWebElement().ByText(viewName.GetEnumDescription()).Click();
         }
 
         #endregion Main Head Links Actions
 
-        #endregion //Page Actions
+        #endregion // DriverContainer Actions
     }   
 }

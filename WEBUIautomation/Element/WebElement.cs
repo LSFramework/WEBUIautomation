@@ -1,31 +1,37 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
-using System.Threading;
-using OpenQA.Selenium.Support.UI;
-using WEBUIautomation.Wait;
+using System.Collections.ObjectModel;
 
 namespace WEBUIautomation.WebElement
 {
     public partial class WebElement : ICloneable
-    {       
+    {
+        private ISearchContext _searcher;
+
         private By _firstSelector;
 
         private IList<IWebElement> _searchCache;
 
         private IWebDriverExt Browser = Driver.Instance;
+        
+        public WebElement()
+            : this(Driver.Instance)
+        { }
+
+        private WebElement(ISearchContext searcher)
+        {
+            _searcher = searcher;
+        }
 
         private IWebElement FindSingle()
         {
             return TryFindSingle();            
         }
-                
+       
         private IWebElement TryFindSingle()
         {
             try
@@ -68,38 +74,28 @@ namespace WEBUIautomation.WebElement
                 ? elements.Single()
                 : _index == -1
                     ? elements.Last()
-                    : elements.ElementAt(_index);           
-
-
-           // Browser.ScrollToElement(element);
+                    : elements.ElementAt(_index); 
 
             // ReSharper disable UnusedVariable
             var elementAccess = element.Enabled;
-            // ReSharper restore UnusedVariable
-
-            Browser.Highlight(element);                 
+            // ReSharper restore UnusedVariable                             
             
             return element;
         }
 
         private IList<IWebElement> FindIWebElements()
-        {
-            if (_searchCache != null)
-            {
-                return _searchCache;
-            }            
+        { 
+            var resultEnumerable = new List<IWebElement>() as IEnumerable<IWebElement>;  
 
-            Browser.WaitScript();
-            Browser.WaitReadyState();
+            bool found=_searcher.TryFindElements(_firstSelector, out resultEnumerable, Browser.WaitProfile.Timeout, Browser.WaitProfile.PollingInterval);
 
-            var resultEnumerable = new List<IWebElement>() as IEnumerable<IWebElement>;            
-            Exception ex = null;
-
-            Browser.TryFindElements(_firstSelector, out resultEnumerable, out ex);
+            if (!found)
+                throw new NoSuchElementException(string.Format("Can't find any element with given search criteria: {0}.",
+                    SearchCriteriaToString()));
 
             if (resultEnumerable.ToList().Count == 1) 
                 return resultEnumerable.ToList();
-
+            
             try
             {
                 resultEnumerable = FilterByVisibility(resultEnumerable).ToList();
@@ -110,7 +106,7 @@ namespace WEBUIautomation.WebElement
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Logger.Log(e.StackTrace, Logger.msgType.Error);
                 return new List<IWebElement>();
             }
 
@@ -126,6 +122,11 @@ namespace WEBUIautomation.WebElement
             }
         }
 
+        public WebElement FindRelative()
+        {
+            return new WebElement (this.FindSingle() as ISearchContext);              
+        }      
+
         object ICloneable.Clone()
         {
             return Clone();
@@ -135,5 +136,6 @@ namespace WEBUIautomation.WebElement
         {
             return (WebElement)MemberwiseClone();
         }
+                       
     }
 }

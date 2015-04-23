@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -47,29 +48,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentLocators\Locators.cs" />
+    <Compile Include="ContentLocators\Menu.cs" />
+    <Compile Include="Extensions\DriverExtension.cs" />
+    <Compile Include="Extensions\WebElementExtension.cs" />
     <Compile Include="Pages\ALMainPage.cs" />
-    <Compile Include="Pages\AssignTestDialog.cs" />
-    <Compile Include="Pages\BasePageObject\BlankPageClass.cs" />
-    <Compile Include="Pages\DesignLoadTest.cs" />
+    <Compile Include="Pages\BasePageObject\FirstLevelDialog.cs" />
+    <Compile Include="Pages\BasePageObject\SecondLevelDialog.cs" />
+    <Compile Include="Pages\BasePageObject\MainTabView.cs" />
+    <Compile Include="Pages\StartTab.cs" />
     <Compile Include="Pages\TestLab\ModalDialogues\NewTestSetDialog.cs" />
     <Compile Include="Pages\TestLab\ModalDialogues\NewTestSetFolderDialog.cs" />
-    <Compile Include="Pages\BasePageObject\IPage.cs" />
     <Compile Include="Pages\TestLab\ModalDialogues\ManageTestSetDialogActions.cs" />
     <Compile Include="Pages\TestLab\ModalDialogues\ManageTestSetsDialog.cs" />
     <Compile Include="Pages\BasePageObject\DriverContainer.cs" />
     <Compile Include="Pages\StartRunDialog.cs" />
     <Compile Include="Pages\TestLab\TestLabPage.cs" />
-    <Compile Include="Pages\DLT\WorkloadTypeDialog.cs" />
-    <Compile Include="Pages\DLT\SummaryGeneralDetails.cs" />
-    <Compile Include="Pages\DLT\GroupsAndWorkloadPane.cs" />
     <Compile Include="Pages\MyPCLoginPage.cs" />
     <Compile Include="Pages\MainHead.cs" />
-    <Compile Include="Pages\DLT\ScriptsTreeSlidingPane.cs" />
-    <Compile Include="Pages\TestPlan\ModalDialogues\CreateNewTestFolderDialog.cs" />
-    <Compile Include="Pages\TestPlan\TestPlanActions.cs" />
-    <Compile Include="Pages\TestPlan\ModalDialogues\CreateNewTestDialog.cs" />
-    <Compile Include="Pages\TestPlan\TestPlanPage.cs" />
+    <Compile Include="Pages\TestPlan\ModalDialogues\CreateTestDialog.cs" />
+    <Compile Include="Pages\TestPlan\ModalDialogues\CreateTestFolderDialog.cs" />
     <Compile Include="Pages\TestPlan\ModalDialogues\UploadScriptDialog.cs" />
+    <Compile Include="Pages\TestPlan\TestPlanActions.cs" />
+    <Compile Include="Pages\TestPlan\TestPlanPage.cs" />
+    <Compile Include="Pages\TestPlan\ModalDialogues\UploadScriptDialogold.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,9 +79,6 @@
       <Project>{b41aa1f1-f477-437b-9465-b2d99ff89efd}</Project>
       <Name>WEBUIautomation</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

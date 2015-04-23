@@ -13,6 +13,28 @@ namespace WEBUItests
     public class Config
     {
         /// <summary>
+        /// UserName
+        /// </summary>
+        public static string UserName { get { return GetConfigValue("UserName", "sa"); } }
+      
+        /// <summary>
+        /// Password
+        /// </summary>       
+        public static string UserPassword { get { return GetConfigValue("UserPassword", ""); } }
+      
+     
+        /// <summary>
+        /// Domain Name
+        /// </summary>         
+        public static string DomainName { get { return GetConfigValue("DomainName", "TestDomain"); } }
+       
+        /// <summary>
+        /// Project
+        /// </summary>         
+        public static string ProjectName { get { return GetConfigValue("ProjectName", "TestProject"); } }
+
+
+        /// <summary>
         /// Returns the App.config value for requested key, or default value if not defined.
         /// </summary>
         /// <param name="key">Application configuration key</param>
@@ -35,7 +57,7 @@ namespace WEBUItests
         { 
             get 
             { 
-                return GetBrowsersFromConfig() ;
+                return GetBrowsers() ;
             } 
         }
 
@@ -44,25 +66,23 @@ namespace WEBUItests
         /// Gets browsers from .config file
         /// </summary>
         /// <returns>List of browsers to testing</returns>
-        private static List<string> GetBrowsersFromConfig()
+        private static List<string> GetBrowsers()
         {
             Browsers browserResult;
-            //creating an empty storage for browsers' list
             var browsers = new List<string>();
 
-            //If config contains only one default browser like as <add key="Browsers" value="Chrome" />
             string browser = Config.GetConfigValue("Browser", "null");            
             if(browser!="null")browsers.Add(browser);
 
 
             //Reads first 5 possible keys on below format from .config
-            //<add key="Browser1" value="Chrome" />
-            //<add key="Browser2" value="Firefox" />
-            //<add key="Browser3" value="IE" />
+            //<add key="Browser1" value="chrome" />
+            //<add key="Browser2" value="firefox" />
+            //<add key="Browser3" value="ie" />
             for (int i = 1; i < 5; i++)
             {
                 //string iterator
-                browser = Config.GetConfigValue("Browser" + i, "null");
+                browser = Config.GetConfigValue("Browser" + i, "null").ToLower();
                 
                 //if value exists and it is a browser
                 if (browser != "null" && Enum.TryParse<Browsers>(browser, out browserResult))
@@ -71,7 +91,7 @@ namespace WEBUItests
             
             //If .config is empty 
             if (browsers.Count == 0)
-                browsers.Add(Browsers.Firefox.ToString());
+                browsers.Add(Browsers.firefox.ToString());
             
             return browsers;
         }
@@ -81,34 +101,19 @@ namespace WEBUItests
         /// </summary>
         public static string MyPCUrl
         {
-            get { return GetMyPCUrlFromConfig(); }
+            get { return GetMyPCUrl(); }
         }
 
-        private static string GetMyPCUrlFromConfig()
+        private static string GetMyPCUrl()
         {
             string result;
             string AlmServer= Config.GetConfigValue("Server","");
             string Port=Config.GetConfigValue("Port","8080");
             string MyPC_Url_prefix = Config.GetConfigValue("MyPC_Url_prefix", @"/qcbin/loadtest/");
             
-            result=AlmServer + @":" + Port + MyPC_Url_prefix;
+            result= string.Format("{0}:{1}{2}",AlmServer,Port,MyPC_Url_prefix);
             return result;
         }
-        /// <summary>
-        /// UserName
-        /// </summary>
-        public static string UserName { get { return GetConfigValue("UserName", "sa"); } }
-        /// <summary>
-        /// Password
-        /// </summary>
-        public static string UserPassword { get { return GetConfigValue("UserPassword", ""); } }
-        /// <summary>
-        /// Domain Name
-        /// </summary>
-        public static string DomainName { get { return GetConfigValue("DomainName", "TestDomain"); } }
-        /// <summary>
-        /// Project
-        /// </summary>
-        public static string ProjectName { get { return GetConfigValue("ProjectName", "TestProject"); } }
+       
     }
 }

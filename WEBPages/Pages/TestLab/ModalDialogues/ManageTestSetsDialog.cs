@@ -1,63 +1,24 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.Wait;
 using WEBUIautomation.WebElement;
+using WEBPages.Extensions;
 
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {
     /// <summary>
     /// Implements  actions for Manage Test Sets dialog
     /// </summary>
-    public partial class ManageTestSetsDialog : DriverContainer, IPage
+    public partial class ManageTestSetsDialog : FirstLevelDialog
     {       
         #region The dialog locators
-
-        public string Url { get; private set; }
-        public string ViewLocator { get { return "Manage Test Sets Dialog"; } }
-        public By FrameLocator { get { return By.XPath(@".//iframe[contains(@ng-src,'CrudTestSet.aspx')]"); } }
-
-        public ManageTestSetsDialog()
-        {
-            Url = dialog.Url;
-        }
-
-
-        IWebDriverExt dialog
-        {
-            get
-            {
-                if (!IsDriverOnTheView(FrameLocator, ViewLocator))
-                {
-                    driver.SwitchToDefaultContent();
-                    driver.SwitchToFrame(FrameLocator);
-                    driver.CurrentView = ViewLocator;
-                }
-                return driver;
-            }
-        }
-
+               
+        public override string ViewLocator { get { return "Manage Test Sets Dialog"; } }
+        public override By FrameLocator { get { return By.XPath(@".//iframe[contains(@ng-src,'CrudTestSet.aspx')]"); } }
+        
         #endregion The dialog locators
-
-        #region Properties
-
-        public bool Opened
-        {
-            get
-            {
-                return WaitHelper.Try(
-                    () => dialog.NewWebElement()
-                        .ById("ctl00_ctl00_PageContent_DialogContent_PanelCreateNewTestSet")
-                        );                                   
-            }
-        }
-
-        #endregion 
+ 
 
         #region UI Web Elements
 
@@ -70,7 +31,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
          WebElement btnDelete
         { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'deleteButton')]"); } }
 
-         WebElement radTreeView
+         WebElement treeView
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_TestSetTreeControl_GenericTreeView1_RadTreeView1"); } }
 
          WebElement btnOK
@@ -91,7 +52,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         public ManageTestSetsDialog SelectFolder(string folderName)
         {
-            dialog.FindFolder(folderName).Click();
+            dialog.FindTreeItemByText(folderName).Click();
             return this;
         }
 
@@ -103,7 +64,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         public ManageTestSetsDialog SelectTestSet(string testSetName)
         {
-            dialog.FindTestSet(testSetName).Click();
+          dialog.FindTreeItemByText(testSetName).Click();
             return this;
         }
 

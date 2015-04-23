@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {
    
-    // Actions
-    
+    // Complex Actions
     public partial class ManageTestSetsDialog
     {
         /// <summary>
@@ -24,7 +23,6 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
                 .TypeFolderName(folderName)
                 .ClickOKExpectedSuccess();
         }
-
 
         /// <summary>
         /// Makes try to create test set with name testSetName under parentFolder
@@ -42,10 +40,10 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
                 .ClickOkExpectingSucces();            
         }
 
-
         public TestLabPage SelectTestSet(string parentFolder, string testSetName)
         {
-            return this.TryExpandFolder("Root")
+            return this.SelectRootFolder()
+                .SelectFolder(parentFolder)
                 .TryExpandFolder(parentFolder)
                 .SelectTestSet(testSetName)
                 .ClickOkBtnExpectedSuccess();
