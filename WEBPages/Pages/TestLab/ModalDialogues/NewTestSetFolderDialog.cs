@@ -1,13 +1,9 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.Wait;
 using WEBUIautomation.WebElement;
+using WEBPages.Extensions;
 
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {

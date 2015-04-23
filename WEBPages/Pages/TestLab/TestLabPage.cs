@@ -3,6 +3,7 @@ using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
 using WEBUIautomation.Wait;
+using WEBPages.Extensions;
 
 namespace WEBPages.Pages.TestLab
 {

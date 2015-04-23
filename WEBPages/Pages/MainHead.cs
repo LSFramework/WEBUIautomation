@@ -1,33 +1,27 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WEBUIautomation;
 using WEBUIautomation.Utils;
-using System.Drawing;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
-using WEBUIautomation.Wait;
 using WEBPages.Pages.TestLab;
 using WEBPages.Pages.TestPlan;
+using WEBPages.Extensions;
 
 namespace WEBPages.Pages
 {
+    using Locators = WEBPages.ContentLocators.Locators.MainHeadPage;
+
     public class MainHead: DriverContainer
     {
         #region The Page Locator
 
-        public string ViewLocator { get { return "Main Head"; } }
+        public string ViewLocator { get { return Locators.ViewLocator; } }
 
-        public static By FrameLocator { get { return By.Id("MastheadDiv"); } }   
+        public By FrameLocator { get { return By.Id(Locators.FrameLocatorID); } }   
         
 
-        public static bool PageCanGetFocus()
+        public bool PageCanGetFocus()
         {
-            return driver.CurrentFrame == FrameLocator || driver.CurrentFrame == By.Id("MainTab");
+            return driver.CurrentFrame == FrameLocator || driver.CurrentFrame == By.Id(Locators.MainTabID);
         }
         
         IWebDriverExt mainPage
@@ -41,8 +35,6 @@ namespace WEBPages.Pages
                 return driver;            
             }
         }
-
-       
 
         #endregion Page Locator
 

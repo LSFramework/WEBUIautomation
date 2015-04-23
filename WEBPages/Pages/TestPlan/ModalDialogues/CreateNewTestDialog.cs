@@ -1,33 +1,75 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WEBUIautomation.Utils;
+using WEBUIautomation.WebElement;
 using WEBUIautomation.Extensions;
+using WEBPages.Extensions;
 
 namespace WEBPages.Pages.TestPlan.ModalDialogues
 {
-    #region Create New Test dialog
-
-    public class CreateNewTestDialog: DriverContainer
+    public class CreateNewTestDialog : DriverContainer, IPage
     {
-        public static IWebElement txtNewTestName
-        { get { return driver.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_DialogContent_txtNewTestName")); } }
 
-        public static IWebElement cmbTestSetTree
-        { get { return driver.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_DialogContent_TestSetTree_ComboTree")); } }
+        #region The dialog locators
 
-        public static IWebElement btnCreateNewOK
-        { get { return driver.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_DialogActions_btnCreateNewOK")); } }
+        public string Url { get { return ""; } }
+        public string ViewLocator { get { return ""; } }
+        public By FrameLocator { get { return By.XPath(""); } }
 
-        public static IWebElement btnClose
-        { get { return driver.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_btnClose")); } }
+        IWebDriverExt dialog
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
-        public static IWebElement btnHelp
-        { get { return driver.FindElementAndWait(By.Id("ctl00_ctl00_PageContent_btnHelp")); } }
+        #endregion The dialog locators
+
+        #region UI Web Elements
+
+        public WebElement txtNewTestName
+        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_txtNewTestName"); } }
+
+        public WebElement cmbTestSetTree
+        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_TestSetTree_ComboTree"); } }
+
+        public WebElement btnCreateNewOK
+        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogActions_btnCreateNewOK"); } }
+
+        public WebElement btnClose
+        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_btnClose"); } }
+
+        public WebElement btnHelp
+        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_btnHelp"); } }
+
+
+        #endregion UI Web Elements
+
+        #region Properties
+
+        public static bool Opened
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion Properties
+
+        #region Helpers
+
+
+
+
+        #endregion Helpers
+
+        #region Actions
+
+
+
+
+        #endregion Actions
     }
-
-    #endregion
 }

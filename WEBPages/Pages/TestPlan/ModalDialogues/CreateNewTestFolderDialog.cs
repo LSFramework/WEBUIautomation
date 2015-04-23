@@ -4,6 +4,7 @@ using WEBUIautomation.Utils;
 using WEBUIautomation.WebElement;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.Wait;
+using WEBPages.Extensions;
 
 namespace WEBPages.Pages.TestPlan.ModalDialogues
 {

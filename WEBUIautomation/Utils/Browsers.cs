@@ -5,12 +5,12 @@ namespace WEBUIautomation
     public enum Browsers
     {
         [Description("Windows Internet Explorer")]
-        InternetExplorer,
+        ie,
 
         [Description("Mozilla Firefox")]
-        Firefox,
+        firefox,
 
         [Description("Google Chrome")]
-        Chrome
+        chrome
     }
 }

@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using System;
@@ -14,30 +13,22 @@ namespace WEBUIautomation
     /// </summary>
     public class WebDriverBrowser
     {
-        public Browsers SelectedBrowser
-        {
-            get;
-            private set;
-        }
-
         public IWebDriverExt LaunchBrowser(Browsers browser)
         {
             IWebDriverExt driver;
-            SelectedBrowser = browser;
+           
             switch (browser)
             {
-                case Browsers.InternetExplorer: 
-                    driver = StartInternetExplorer();//StartIEDriver();
+                case Browsers.ie: 
+                    driver = StartInternetExplorer();
                     break;
 
-                case Browsers.Chrome: 
-                    driver = StartChrome();//new ChromeDriverExt(Directory.GetCurrentDirectory());
+                case Browsers.chrome: 
+                    driver = StartChrome();
                     break;
 
                 default:
-                       FirefoxProfile profile = new FirefoxProfile();
-                       profile.SetPreference("profile", "default");                    
-                       driver = new FirefoxDriverExt(profile);                 
+                    driver = StartFirefox();                 
                     break;
             }
 
@@ -46,32 +37,17 @@ namespace WEBUIautomation
             return driver as IWebDriverExt;
         }
 
-        private IWebDriver StartIEDriver()
+        FirefoxDriverExt StartFirefox()
         {
-            InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-            ieOptions.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
-            ieOptions.EnsureCleanSession = true;
-            var driver = new InternetExplorerDriverExt(Directory.GetCurrentDirectory(), ieOptions);
-            return driver;
-        }
+            FirefoxProfile profile = new FirefoxProfile();
+            profile.SetPreference("profile", "default");
 
-        public static Browsers getBrowserFromString(string strBrowser)
-        {
-            return (Browsers)Enum.Parse(typeof(Browsers), strBrowser);       
-        }
+            WaitProfile waitProfile = new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(50));
 
-        static FirefoxDriverExt StartFirefox()
-        {
-            var firefoxProfile = new FirefoxProfile
-            {
-                AcceptUntrustedCertificates = true,
-                EnableNativeEvents = true
-            };
-
-            return new FirefoxDriverExt(firefoxProfile);
+            return new FirefoxDriverExt(profile, waitProfile);
          }
 
-        static ChromeDriverExt StartChrome()
+        ChromeDriverExt StartChrome()
          {
              var chromeOptions = new ChromeOptions();
              var defaultDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\..\Local\Google\Chrome\User Data\Default";
@@ -81,10 +57,12 @@ namespace WEBUIautomation
                  WaitHelper.Try(() => DirectoryHelper.ForceDelete(defaultDataFolder));
              }
 
-             return new ChromeDriverExt(Directory.GetCurrentDirectory(), chromeOptions, TimeSpan.FromSeconds(10));
+             WaitProfile waitProfile = new WaitProfile(TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(500));
+
+             return new ChromeDriverExt(Directory.GetCurrentDirectory(), chromeOptions, TimeSpan.FromSeconds(10), waitProfile);
          }
 
-        static InternetExplorerDriverExt StartInternetExplorer()
+        InternetExplorerDriverExt StartInternetExplorer()
          {
              var internetExplorerOptions = new InternetExplorerOptions
              {
@@ -94,7 +72,14 @@ namespace WEBUIautomation
                  EnableNativeEvents = true
              };
 
-             return new InternetExplorerDriverExt(Directory.GetCurrentDirectory(), internetExplorerOptions);
+             WaitProfile waitProfile = new WaitProfile(TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(50));
+
+             return new InternetExplorerDriverExt(Directory.GetCurrentDirectory(), internetExplorerOptions, waitProfile);
+         }
+
+        public static Browsers getBrowserFromString(string strBrowser)
+         {
+             return (Browsers)Enum.Parse(typeof(Browsers), strBrowser);
          }
     }
 }

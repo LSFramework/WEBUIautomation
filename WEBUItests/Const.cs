@@ -10,12 +10,12 @@ namespace WEBUItests
     /// <summary>
     /// To use the same test variables between fixtures
     /// </summary>
-    public static partial class Const
+    public class Const
     {
         /// <summary>
         ///  A browser to be used under test  
         /// </summary>
         public static Browsers BROWSER
-        { get { return WebDriverBrowser.getBrowserFromString(Config.BrowsersSet[0]); } }
+        { get { return WebDriverBrowser.getBrowserFromString(Config.BrowsersSet.First()); } }
     }
 }

@@ -1,47 +1,44 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WEBUIautomation;
-using WEBUIautomation.Utils;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
-using System.Threading;
-using WEBUIautomation.Wait;
-using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.PageObjects;
+using WEBPages.ContentLocators;
+using WEBPages.Extensions;
 
 
 namespace WEBPages.Pages
 {
-    //Contains the methods to complete Login MyPC
+    using Locators= WEBPages.ContentLocators.Locators.MyPCLoginPage;
+
     public class MyPCLoginPage: DriverContainer
-    {
-        #region WebElements Locators               
+    {       
+        string windowHandle;        
 
-        WebElement txtUserName { get { return new WebElement().ById("ctl00_PageContent_txtUserName"); } }
+        #region WebElements Locators    
+      
+        WebElement txtUserName 
+        { get { return new WebElement().ById(Locators.txtUserNameID); } }
+        WebElement txtPassword 
+        { get { return new WebElement().ById(Locators.txtPasswordID); } }
+        WebElement btnAuthenticate 
+        { get { return new WebElement().ById(Locators.btnAuthenticateID); } }
+        WebElement ddlDomains_Arrow 
+        { get { return new WebElement().ById(Locators.ddlDomains_ArrowID); } }
+        WebElement ddlDomains_Input 
+        { get { return new WebElement().ById(Locators.ddlDomains_InputID); } }
+        WebElement ddlDomains_DropDown 
+        { get { return new WebElement().ById(Locators.ddlDomains_DropDownID); } }
+        WebElement ddlProjects_Arrow
+        { get { return new WebElement().ById(Locators.ddlProjects_ArrowID); } }
+        WebElement ddlProjects_Input 
+        { get { return new WebElement().ById(Locators.ddlProjects_InputID); } }
+        WebElement ddlProjects_DropDown 
+        {get { return new WebElement().ById(Locators.ddlProjects_DropDownID); } }
+        WebElement btnLogin
+        { get { return new WebElement().ById(Locators.btnLoginID); } }      
 
-        WebElement txtPassword { get { return new WebElement().ById("ctl00_PageContent_txtPassword");} }
-
-        WebElement btnAuthenticate { get { return new WebElement().ById("ctl00_PageContent_btnAuthenticate");}}
-
-        WebElement arrDomains { get { return new WebElement().ById("ctl00_PageContent_ddlDomains_Arrow");}}
-
-        WebElement inpDomains { get { return new WebElement().ById("ctl00_PageContent_ddlDomains_Input");}}
-
-        WebElement ddlDomains{ get { return new WebElement().ById("ctl00_PageContent_ddlDomains_DropDown");}}
-
-        WebElement arrProjects{ get { return new WebElement().ById("ctl00_PageContent_ddlProjects_Arrow");}}
-
-        WebElement inpProjects { get { return new WebElement().ById("ctl00_PageContent_ddlProjects_Input");}}
-
-        WebElement ddlProjects { get { return new WebElement().ById("ctl00_PageContent_ddlProjects_DropDown");}}
-
-        WebElement btnLogin { get { return new WebElement().ById("ctl00_PageContent_btnLogin"); } }      
-
-        #endregion WebElemnts
+        #endregion WebElemnts       
 
         #region Actions
 
@@ -49,7 +46,7 @@ namespace WEBPages.Pages
 
         public MyPCLoginPage TypeUserName(string userName)
         {
-            txtUserName.ById("ctl00_PageContent_txtUserName").SendKeys(userName);
+            txtUserName.SendKeys(userName);
             return this;
         }
 
@@ -67,23 +64,23 @@ namespace WEBPages.Pages
 
         public MyPCLoginPage SelectDomain(string domain)
         {
-            arrDomains.Click();
-            inpDomains.Click();
-            ddlDomains.SelectItem(domain).Click();
+            ddlDomains_Arrow.Click();
+            ddlDomains_Input.Click();
+            ddlDomains_DropDown.SelectItem(domain).Click();
             return this;         
         }
 
         public MyPCLoginPage SelectProject(string project)
         {
-            arrProjects.Click();
-            inpProjects.Click();
-            ddlProjects.SelectItem(project).Click();
+            ddlProjects_Arrow.Click();
+            ddlProjects_Input.Click();
+            ddlProjects_DropDown.SelectItem(project).Click();
             return this;
         }
 
         public MyPCLoginPage ClickLogin()
         {
-            btnLogin.Click(false);
+            btnLogin.Click();
             return this;
         }
 
@@ -93,6 +90,8 @@ namespace WEBPages.Pages
 
         public MainHead LoginToProject(string userName, string password, string domain, string project)
         {
+            windowHandle = driver.CurrentWindowHandle;
+
             TypeUserName(userName)
             .TypePassword(password)
             .ClickAuthenticate()
@@ -107,9 +106,9 @@ namespace WEBPages.Pages
 
         void SwitchToPopup()
         {
-            string popup = driver.NewWindow();
+            string popup = driver.GetNewWindow();
             driver.SwitchTo().Window(popup);
-            driver.SwitchTo().Window(driver.WindowHandles.First()).Close();
+            driver.SwitchTo().Window(windowHandle).Close();
             driver.SwitchTo().Window(driver.WindowHandles.Last());
             driver.SwitchToDefaultContent();
         }

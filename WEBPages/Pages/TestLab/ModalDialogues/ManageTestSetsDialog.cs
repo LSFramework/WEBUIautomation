@@ -1,13 +1,9 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.Wait;
 using WEBUIautomation.WebElement;
+using WEBPages.Extensions;
 
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {
@@ -70,7 +66,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
          WebElement btnDelete
         { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'deleteButton')]"); } }
 
-         WebElement radTreeView
+         WebElement treeView
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_TestSetTreeControl_GenericTreeView1_RadTreeView1"); } }
 
          WebElement btnOK
@@ -91,7 +87,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         public ManageTestSetsDialog SelectFolder(string folderName)
         {
-            dialog.FindFolder(folderName).Click();
+            dialog.FindTreeItemByText(folderName).Click();
             return this;
         }
 
@@ -103,7 +99,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         public ManageTestSetsDialog SelectTestSet(string testSetName)
         {
-            dialog.FindTestSet(testSetName).Click();
+          dialog.FindTreeItemByText(testSetName).Click();
             return this;
         }
 

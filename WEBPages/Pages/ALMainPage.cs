@@ -13,9 +13,10 @@ namespace WEBPages.Pages
     {
         const string MyPCLink = @"//a[text()='My Performance Center']";
 
-        public void GoToMyPC(string MyPCUrl)
+        public MyPCLoginPage GoToMyPC(string MyPCUrl)
         {                    
             driver.Navigate().GoToUrl(MyPCUrl);
+            return new MyPCLoginPage();
         }
     }
 }

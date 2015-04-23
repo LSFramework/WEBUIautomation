@@ -44,30 +44,4 @@ namespace WEBUIautomation.Utils
             webDriver.Value = driver;
         }
     }
-
-//    public class WebDriverListener : ITestAction 
-//    {
-//        public ActionTargets Targets { get { return ActionTargets.Test | ActionTargets.Suite; } }
-
-//        public void BeforeTest(TestDetails testDetails) 
-//        {
-//            if (testDetails.Method.IsPublic)
-//            {
-//                //String browserName = TestContext.CurrentContext.//testDetails.Method.GetParameters().GetHashCode().ToString();//method.getTestMethod().getXmlTest().getLocalParameters().get("browserName");
-//                IWebDriver driver = LocalDriverFactory.CreateInstance("firefox");
-//                LocalDriverManager.SetWebDriver(driver);
-//            }
-//        }
-
-
-//        public void AfterTest(TestDetails testDetails)
-//        {
-//            if (testDetails.Method.IsPublic) {
-//                IWebDriver driver = LocalDriverManager.GetDriver();
-//                if (driver != null) {
-//                    driver.Dispose();
-//                }
-//            }
-//        }
-//}
 }

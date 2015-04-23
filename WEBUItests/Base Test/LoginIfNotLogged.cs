@@ -17,6 +17,8 @@ namespace WEBUItests.Base_Test
                 AllowMultiple = true)]
     public class LoginIfNotLoggedAttribute:Attribute, ITestAction
     {
+
+        MainHead mainHead=new MainHead();
         /// <summary>
         /// Ctor
         /// </summary>
@@ -38,24 +40,21 @@ namespace WEBUItests.Base_Test
             if (Driver.Instance == null)
             {
                 DriverSetUp();
-
-                ALMainPage almMainPage = new ALMainPage();
-                almMainPage.GoToMyPC(Config.MyPCUrl);
-                MyPCLoginPage loginPage = new MyPCLoginPage();
-                loginPage.LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);
+                DoLogin();
             }
 
-            if (!MainHead.PageCanGetFocus())
+            if ( ! mainHead.PageCanGetFocus())
             {                
                 DriverCleanup();
                 DriverSetUp();
-
-                ALMainPage almMainPage = new ALMainPage();
-                almMainPage.GoToMyPC(Config.MyPCUrl);
-
-                MyPCLoginPage loginPage = new MyPCLoginPage();
-                loginPage.LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);
+                DoLogin();
             }
+        }
+
+        private void DoLogin()
+        {
+
+            mainHead = new ALMainPage().GoToMyPC(Config.MyPCUrl).LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);           
         }
 
 

@@ -1,10 +1,6 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using System;
+﻿using System;
 using System.Threading;
-using OpenQA.Selenium.Remote;
 using System.Drawing;
-using OpenQA.Selenium.Support.Events;
 
 namespace WEBUIautomation.Utils
 {
@@ -18,7 +14,7 @@ namespace WEBUIautomation.Utils
         
         private static IWebDriverExt instance;
 
-        protected static Object Instancelocker = new object();
+        static Object Instancelocker = new object();
        
         public static void Initialize(Browsers browser)
         {
@@ -30,8 +26,7 @@ namespace WEBUIautomation.Utils
                 instance = brow.LaunchBrowser(browser) as IWebDriverExt;
                 instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
                 instance.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(10));
-                instance.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(2));          
-                 
+                instance.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(2));                  
             }
         }
 
@@ -59,9 +54,9 @@ namespace WEBUIautomation.Utils
         }
         
         //Thread sleep
-        public static void Wait(int seconds)
+        public static void Wait(int millisecondsTimeout)
        {
-           Thread.Sleep(seconds * 1000);
+           Thread.Sleep(millisecondsTimeout);
        }
     }
 }

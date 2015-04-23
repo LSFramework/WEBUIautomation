@@ -45,7 +45,8 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         public TestLabPage SelectTestSet(string parentFolder, string testSetName)
         {
-            return this.TryExpandFolder("Root")
+            return this.SelectRootFolder()
+                .SelectFolder(parentFolder)
                 .TryExpandFolder(parentFolder)
                 .SelectTestSet(testSetName)
                 .ClickOkBtnExpectedSuccess();
