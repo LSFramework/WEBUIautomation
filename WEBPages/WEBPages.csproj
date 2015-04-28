@@ -56,6 +56,10 @@
     <Compile Include="Pages\BasePageObject\FirstLevelDialog.cs" />
     <Compile Include="Pages\BasePageObject\SecondLevelDialog.cs" />
     <Compile Include="Pages\BasePageObject\MainTabView.cs" />
+    <Compile Include="Extensions\DriverExtension.cs" />
+    <Compile Include="Extensions\WebElementExtension.cs" />
+    <Compile Include="Pages\ALMainPage.cs" />
+    <Compile Include="Pages\BasePageObject\BlankPageClass.cs" />
     <Compile Include="Pages\StartTab.cs" />
     <Compile Include="Pages\TestLab\ModalDialogues\NewTestSetDialog.cs" />
     <Compile Include="Pages\TestLab\ModalDialogues\NewTestSetFolderDialog.cs" />
@@ -69,6 +73,8 @@
     <Compile Include="Pages\TestPlan\ModalDialogues\CreateTestDialog.cs" />
     <Compile Include="Pages\TestPlan\ModalDialogues\CreateTestFolderDialog.cs" />
     <Compile Include="Pages\TestPlan\ModalDialogues\UploadScriptDialog.cs" />
+    <Compile Include="Pages\TestPlan\ModalDialogues\CreateNewTestDialog.cs" />
+    <Compile Include="Pages\TestPlan\ModalDialogues\CreateNewTestFolderDialog.cs" />
     <Compile Include="Pages\TestPlan\TestPlanActions.cs" />
     <Compile Include="Pages\TestPlan\TestPlanPage.cs" />
     <Compile Include="Pages\TestPlan\ModalDialogues\UploadScriptDialogold.cs" />
