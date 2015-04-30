@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using WEBPages.Pages;
 using WEBUIautomation.Utils;
 using WEBUItests.Base_Test;
+using WEBUItests.TestVariables;
 
 namespace WEBUItests.MyPCTests.Test_0_Login
 {
     /// <summary>
-    /// Login to project
+    /// Checks is user really logged in the project and domain were selected at LoginPage.
     /// </summary>
     [TestFixture][LoginIfNotLogged]
     public class Test_0_Login : WEBUItest
@@ -20,16 +21,33 @@ namespace WEBUItests.MyPCTests.Test_0_Login
         MainHead mainHead = new MainHead();
 
         /// <summary>
-        /// Checks is user really logged in the project and domain were selected at LoginPage.
+        /// Check domain
         /// </summary>
         [Test]
-        public void CheckIsUserLoggedToProject()
+        public void CheckDomain()
         {
-            Assert.True(
-                // Check that userName, Domain and Project are shown on page as expected
-                mainHead.GetDomainName().Contains(Config.DomainName)
-            && mainHead.GetProjectName().Contains(Config.ProjectName)
-            && mainHead.GetUserLoggedIn().Contains(Config.UserName));
+            string Expected = string.Format("Domain: {0},", Config.DomainName);
+            Assert.AreEqual(Expected, mainHead.GetDomainName());        
+        }
+
+        /// <summary>
+        /// Check project
+        /// </summary>
+        [Test]
+        public void CheckProject()
+        {
+            string Expected = string.Format("Project: {0}", Config.ProjectName);
+            Assert.AreEqual(Expected, mainHead.GetProjectName());
+        }
+
+        /// <summary>
+        /// Check user name
+        /// </summary>
+        [Test]
+        public void CheckUserName()
+        {
+            string Expected = string.Format("Hello {0}", Config.UserName);
+            Assert.AreEqual(Expected, mainHead.GetUserLoggedIn());
         }
     }
 }

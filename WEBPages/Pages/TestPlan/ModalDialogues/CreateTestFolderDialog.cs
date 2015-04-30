@@ -101,6 +101,14 @@ namespace WEBPages.Pages.TestPlan.ModalDialogues
             return IsMessageDisplayed() ? lblMessage.Text: string.Empty;            
         }
 
+        /// <summary>
+        /// Gets text from TestFolder input element
+        /// </summary>
+        /// <returns></returns>
+        public string GetFolderNameText()
+        {
+            return txtTestFolderName.Text;
+        }
         #endregion Actions
     }
 }

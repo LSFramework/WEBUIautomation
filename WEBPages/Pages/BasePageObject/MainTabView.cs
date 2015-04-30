@@ -8,35 +8,52 @@ using WEBUIautomation.Wait;
 
 namespace WEBPages.Pages.BasePageObject
 {
+    using Locators = ContentLocators.Locators.MainHeadPage;
+
     public abstract class MainTabFrame: FramePageBase
     {
         #region MainTabFrame abstract memebers
 
-        //The main tab menu item to select a child menu item e.g. "Test Management"
+        /// <summary>
+        /// The main tab menu item to select a child menu item e.g. "Test Management"
+        /// </summary>
         protected abstract MainHead_Links MenuHeader { get; }
 
-        //The menu item to navigate to a selected View e.g. "Test Plan"
+        /// <summary>
+        /// The menu item to navigate to a selected View e.g. "Test Plan"
+        /// </summary>
         protected abstract Perspectives ViewName { get; }
 
-        //An element should be found byElement  to check that an expected view is really opened       
+        /// <summary>
+        /// An element should be found byElement  to check that an expected view is really opened 
+        /// </summary>    
         protected abstract By byElement { get; }
 
         #endregion MainTabFrame abstract memebers
 
         #region FramePageBase implementation
 
-        //All page-classes inherit this one should be located in MainTab frame.
-        public override By FrameLocator { get { return Locators.MainHeadPage.MainTabFrame; } }
+        /// <summary>
+        /// All page-classes inherit this one should be located in MainTab frame.
+        /// </summary>
+        public override By FrameLocator { get { return Locators.MainTabFrame; } }
 
-        // View locator should be name of the view.
+        /// <summary>
+        /// View locator should be name of the view.
+        /// </summary>
         public override string ViewLocator { get { return ViewName.GetEnumDescription(); } }
 
         #endregion FramePageBase implementation
 
-        //Ctor to switch driver on the expected view in MainTab frame.
+        /// <summary>
+        /// Ctor to switch driver on the expected view in MainTab frame.
+        /// </summary>
         protected MainTabFrame() { Url = mainTab.Url; }
 
-        //Mechanism to switch driver to the view.
+        /// <summary>
+        /// Mechanism to switch driver to the view.
+        /// </summary>
+        /// <exception cref="OpenQA.Selenium.NotFoundException">Thrown when a modal dialogue opened</exception>
         protected IWebDriverExt mainTab
         {
             get
@@ -53,10 +70,11 @@ namespace WEBPages.Pages.BasePageObject
                     {
                         driver.SwitchTo().DefaultContent();
                         MainHead mainHead = new MainHead();
+                        if(mainHead.ModalOpened)
+                            throw new NotFoundException(Locators.ExceptionString);
                         mainHead.ShowPerspective(MenuHeader, ViewName);                     
                     }
                 }
-
                 return driver;
             }
         }  

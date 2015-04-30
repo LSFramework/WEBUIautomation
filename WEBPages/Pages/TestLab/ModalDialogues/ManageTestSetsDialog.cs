@@ -7,6 +7,8 @@ using WEBPages.Extensions;
 
 namespace WEBPages.Pages.TestLab.ModalDialogues
 {
+    using Locators = ContentLocators.Locators.ManageTestSetsDialog;
+
     /// <summary>
     /// Implements  actions for Manage Test Sets dialog
     /// </summary>
@@ -14,37 +16,44 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
     {       
         #region The dialog locators
                
-        public override string ViewLocator { get { return "Manage Test Sets Dialog"; } }
-        public override By FrameLocator { get { return By.XPath(@".//iframe[contains(@ng-src,'CrudTestSet.aspx')]"); } }
+        public override string ViewLocator { get { return Locators.ViewLocator; } }
+        public override By FrameLocator { get { return Locators.FrameLocator; } }
         
         #endregion The dialog locators
- 
 
+        #region Properties
+
+        /// <summary>
+        /// returns name of a selected folder in tree.
+        /// </summary>
+        public string SelectedFolder { get { return dialog.FindSelectedFolder(); } }
+
+        #endregion Properties
         #region UI Web Elements
 
-         WebElement btnNewFolder
-        { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'newFolderButton')]"); } }
+        WebElement btnNewFolder
+        { get { return dialog.NewWebElement().ByClass(Locators.btnNewFolderClassName, false); } }            
 
          WebElement btnNewTestSet
-        { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'newItemButton')]"); } }
+        { get { return dialog.NewWebElement().ByClass(Locators.btnNewTestSetClassName, false); } }
 
          WebElement btnDelete
-        { get { return dialog.NewWebElement().ByXPath(@".//*[contains(@class, 'deleteButton')]"); } }
+         { get { return dialog.NewWebElement().ByClass(Locators.btnDeleteItemClassName, false); } }
 
          WebElement treeView
-        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_TestSetTreeControl_GenericTreeView1_RadTreeView1"); } }
+        { get { return dialog.NewWebElement().ById(Locators.treeViewID); } }
 
          WebElement btnOK
-        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogActions_btnOK"); } }
+        { get { return dialog.NewWebElement().ById(Locators.btnOkId); } }
 
          WebElement btnClose
-        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_btnClose"); } }
+        { get { return dialog.NewWebElement().ById(Locators.btnCloseID); } }
 
         #endregion UI Web Elements
 
         #region Actions
 
-        public NewTestSetFolderDialog NewFolderBtnClickExpectedSuccess()
+        public NewTestSetFolderDialog btnNewFolderClick()
         {
             btnNewFolder.Click();
             return new NewTestSetFolderDialog();
@@ -56,7 +65,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
             return this;
         }
 
-        public NewTestSetDialog CreateNewTestSetClick()
+        public NewTestSetDialog btnNewTestSetClick()
         {
             btnNewTestSet.Click();
             return new NewTestSetDialog();
@@ -76,7 +85,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         public ManageTestSetsDialog SelectRootFolder()
         {
-            SelectFolder("Root");
+            SelectFolder(Locators.TestLabRoot);
             return this;
         }
 
@@ -91,6 +100,13 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
             dialog.TryExpandTreeFolder(folderName);
             return this;
         }
+
+        public bool IsFolderSelected(string folderName)
+        {
+            return folderName == dialog.FindSelectedFolder();
+        }
+
+        
 
         #endregion Actions
     }

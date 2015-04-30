@@ -19,7 +19,7 @@ namespace WEBPages.Pages
         bool Opened { get; }
     }
 
-    public abstract class FramePageBase:DriverContainer, IFrame
+    public abstract class FramePageBase: DriverContainer, IFrame
     {
         //Frame Url
         public string Url { get; protected set; }
@@ -31,13 +31,9 @@ namespace WEBPages.Pages
         public abstract By FrameLocator { get; }
 
         //returns true if an expected view is opened, otherwise returns false
-        public bool Opened 
-        { 
-            get 
-            { 
-                return driver.CurrentView == ViewLocator; 
-            } 
-        }        
+        public bool Opened
+        { get { return driver.CurrentView == ViewLocator; } }
+        
 
         /// <summary>
         ///  Checks the driver is focused on the expected view
@@ -45,8 +41,7 @@ namespace WEBPages.Pages
         /// <returns>true if driver has focus on the expected view, otherwise returns false</returns>
         protected bool IsDriverOnTheFrame()
         {
-            return (driver.CurrentFrame == FrameLocator & driver.CurrentView == ViewLocator);
+            return (driver.CurrentFrame == FrameLocator && driver.CurrentView == ViewLocator);
         }    
     }
-
 }

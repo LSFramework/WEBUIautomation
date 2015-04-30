@@ -48,18 +48,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentLocators\Locators.cs" />
+    <Compile Include="ContentLocators\LocatorsMainTab.cs" />
+    <Compile Include="ContentLocators\LocatorsDialogs.cs" />
     <Compile Include="ContentLocators\Menu.cs" />
-    <Compile Include="Extensions\DriverExtension.cs" />
     <Compile Include="Extensions\WebElementExtension.cs" />
-    <Compile Include="Pages\ALMainPage.cs" />
+    <Compile Include="Extensions\DriverExtension.cs" />
     <Compile Include="Pages\BasePageObject\FirstLevelDialog.cs" />
     <Compile Include="Pages\BasePageObject\SecondLevelDialog.cs" />
     <Compile Include="Pages\BasePageObject\MainTabView.cs" />
-    <Compile Include="Extensions\DriverExtension.cs" />
-    <Compile Include="Extensions\WebElementExtension.cs" />
     <Compile Include="Pages\ALMainPage.cs" />
-    <Compile Include="Pages\BasePageObject\BlankPageClass.cs" />
+    <Compile Include="Pages\Runs\TestRunsPage.cs" />
     <Compile Include="Pages\StartTab.cs" />
     <Compile Include="Pages\TestLab\ModalDialogues\NewTestSetDialog.cs" />
     <Compile Include="Pages\TestLab\ModalDialogues\NewTestSetFolderDialog.cs" />
@@ -75,7 +73,7 @@
     <Compile Include="Pages\TestPlan\ModalDialogues\UploadScriptDialog.cs" />
     <Compile Include="Pages\TestPlan\TestPlanActions.cs" />
     <Compile Include="Pages\TestPlan\TestPlanPage.cs" />
-    <Compile Include="Pages\TestPlan\ModalDialogues\UploadScriptDialogold.cs" />
+    <Compile Include="Pages\Trending\TrendingPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

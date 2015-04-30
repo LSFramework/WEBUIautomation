@@ -1,11 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WEBPages.Pages;
 using WEBUIautomation.Utils;
+using WEBUItests.TestVariables;
 
 namespace WEBUItests.Base_Test
 {
@@ -53,7 +50,6 @@ namespace WEBUItests.Base_Test
 
         private void DoLogin()
         {
-
             mainHead = new ALMainPage().GoToMyPC(Config.MyPCUrl).LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);           
         }
 
@@ -65,23 +61,15 @@ namespace WEBUItests.Base_Test
         {
             get { return ActionTargets.Suite; }
         }
-
-
-        /// <summary>
-        /// Locker to create a new WebDriver instance
-        /// </summary>
-        protected static Object locker = new object();
+        
         /// <summary>
         /// Inits WebDriver instance
         /// </summary>
         public void DriverSetUp()
         {
-            lock (locker)
-            {
-                Driver.Instance = null;
-                Driver.Initialize(Const.BROWSER);               
+            
+                Driver.Initialize(Variables.BROWSER);               
                 Driver.BrowserMaximize();
-            }
         }
 
         /// <summary>

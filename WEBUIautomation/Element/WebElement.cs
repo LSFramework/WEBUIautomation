@@ -29,7 +29,7 @@ namespace WEBUIautomation.WebElement
 
         private IWebElement FindSingle()
         {
-            return TryFindSingle();            
+                return TryFindSingle();          
         }
        
         private IWebElement TryFindSingle()

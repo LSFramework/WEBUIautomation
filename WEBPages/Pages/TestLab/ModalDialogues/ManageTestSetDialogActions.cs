@@ -19,7 +19,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
         public ManageTestSetsDialog CreateNewTestSetFolder(string folderName)
         {
             return this.SelectRootFolder()
-                .NewFolderBtnClickExpectedSuccess()
+                .btnNewFolderClick()
                 .TypeFolderName(folderName)
                 .ClickOKExpectedSuccess();
         }
@@ -35,7 +35,7 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
         { 
             return this.SelectRootFolder()
                 .SelectFolder(parentFolder)
-                .CreateNewTestSetClick()
+                .btnNewTestSetClick()
                 .TypeTestSetName(testSetName)
                 .ClickOkExpectingSucces();            
         }

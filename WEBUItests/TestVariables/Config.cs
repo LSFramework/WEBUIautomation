@@ -4,9 +4,8 @@ using System.Configuration;
 using System.Text;
 using WEBUIautomation;
 
-namespace WEBUItests
+namespace WEBUItests.TestVariables
 {
-
     /// <summary>
     /// Implements access to testdata variables from a file
     /// </summary>
@@ -107,8 +106,8 @@ namespace WEBUItests
         private static string GetMyPCUrl()
         {
             string result;
-            string AlmServer= Config.GetConfigValue("Server","");
-            string Port=Config.GetConfigValue("Port","8080");
+            string AlmServer= Config.GetConfigValue("Server", "");
+            string Port=Config.GetConfigValue("Port", "8080");
             string MyPC_Url_prefix = Config.GetConfigValue("MyPC_Url_prefix", @"/qcbin/loadtest/");
             
             result= string.Format("{0}:{1}{2}",AlmServer,Port,MyPC_Url_prefix);

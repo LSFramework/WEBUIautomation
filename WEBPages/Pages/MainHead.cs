@@ -11,27 +11,43 @@ namespace WEBPages.Pages
    
     public class MainHead: FramePageBase
     {
-        #region Page Locator
+        #region Page Locator      
 
-        public override string ViewLocator { get { return Locators.ViewLocator; } }
+        private By MainTabFrame 
+        { get { return Locators.MainTabFrame; } }
 
-        public override By FrameLocator { get { return Locators.FrameLocator; } }
+        public override string ViewLocator 
+        { get { return Locators.ViewLocator; } }
 
-        By MainTabFrame { get { return Locators.MainTabFrame; } }
+        public override By FrameLocator 
+        { get { return Locators.FrameLocator; } }
 
         public bool PageCanGetFocus()
         { 
             return driver.CurrentFrame == FrameLocator || driver.CurrentFrame == MainTabFrame; 
         }
-        
-        IWebDriverExt mainPage
+
+        public bool ModalOpened
+        {
+            get
+            {
+                WebElement body = new WebElement().ByXPath(Locators.bodyXPath);
+                return body.GetAttribute(WEBUIautomation.Tags.TagAttributes.Class) == Locators.ModalOpened;
+            }
+        }
+
+
+        protected IWebDriverExt mainPage
         {
             get 
             {
                 if (driver.CurrentFrame != FrameLocator)
                 {   
-                    driver.SwitchToDefaultContent(); 
+                    driver.SwitchToDefaultContent();
+                    if (ModalOpened)
+                        throw new NotFoundException(Locators.ExceptionString);
                 }
+                driver.CurrentView = ViewLocator;
                 return driver;            
             }
         }
@@ -129,8 +145,8 @@ namespace WEBPages.Pages
         
         #endregion //Elements Locators
 
-        #region DriverContainer Actions
-        
+        #region Main Head Actions
+
         #region Main Head Title Actions
 
         public void ClickLogout()
@@ -180,7 +196,8 @@ namespace WEBPages.Pages
         public StartTab ShowStart()
         {
             MenuItemClick(Perspectives.Start);
-            return new StartTab();
+            driver.CurrentView = Perspectives.Start.GetEnumDescription();
+            return this as StartTab;
         }
 
         public void ShowPerspective(MainHead_Links menuHeader, Perspectives viewName)

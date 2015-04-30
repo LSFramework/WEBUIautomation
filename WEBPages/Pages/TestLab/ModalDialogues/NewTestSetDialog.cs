@@ -37,6 +37,9 @@ namespace WEBPages.Pages.TestLab.ModalDialogues
 
         #region Properties
 
+         public string TestSetName
+         { get { return txtTestSetName.Text; } }
+
         #endregion Properties
 
         #region Helpers

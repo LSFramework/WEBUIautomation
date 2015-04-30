@@ -22,9 +22,10 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
 
         MainHead mainHead = new MainHead();
         TestPlanPage testPlan;
-        CreateTestFolderDialog createNewTestFolderDialog;
+        CreateTestFolderDialog createTestFolderDialog;
 
         string tFolderName = Variables.TestPlan.testFolderName;
+        string sFolderName = Variables.TestPlan.scriptFolderName;
         string tName = Variables.TestPlan.testName;
         string subject = Variables.TestPlan.subjectFolder;
 
@@ -36,7 +37,8 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
         [Test]
         public void Step_1_NavigateToTestPlan()
         {
-            testPlan = new TestPlanPage();       
+            testPlan = new TestPlanPage();
+            Assert.True(testPlan.Opened);
         }
 
 
@@ -47,7 +49,7 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
         public void Step_2_SelectSubjectFolder()
         {
             testPlan.SelectSubjectFolder();
-           // Assert.True(TestPlan.IsFolderSelected("Subject"));
+           Assert.True(testPlan.IsFolderSelected("Subject"));
         }
 
         /// <summary>
@@ -56,8 +58,8 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
         [Test]
         public void Step_3_OpenCreateFolderDailog()
         {
-            createNewTestFolderDialog = testPlan.OpenCreateNewFolderDialog(subject);
-            Assert.True(createNewTestFolderDialog.Opened);
+            createTestFolderDialog = testPlan.OpenCreateNewFolderDialog(subject);
+            Assert.True(createTestFolderDialog.Opened);
         }
 
         /// <summary>
@@ -66,15 +68,36 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
         [Test]
         public void Step_4_TypeNewFolderName()
         {
-            createNewTestFolderDialog.TypeFolderName(tFolderName);
+            createTestFolderDialog.TypeFolderName(tFolderName);
+            Assert.AreEqual(createTestFolderDialog.GetFolderNameText(), tFolderName);
         }
         /// <summary>
-        /// Confirm Create Folder
+        /// Confirm Create Folder and check the dialogue has been closed.
         /// </summary>
         [Test]
         public void Step_5_Confirm()
         {
-            createNewTestFolderDialog.ClickOkBtn();
+            testPlan=createTestFolderDialog.ClickOkBtn();           
+            Assert.False(createTestFolderDialog.Opened);
+          
+        }
+
+        /// <summary>
+        /// Check has Test Plan opened
+        /// </summary>
+        [Test]
+        public void Step_6_CheckTestPlanOpened()
+        {
+            Assert.True(testPlan.Opened);
+        }
+
+        /// <summary>
+        /// Check if the new folder selected in the testplan tree
+        /// </summary>
+        [Test]
+        public void Step_7_CheckIsFolderCreated()
+        {
+            Assert.True(testPlan.IsFolderSelected(tFolderName));
         }
 
     }

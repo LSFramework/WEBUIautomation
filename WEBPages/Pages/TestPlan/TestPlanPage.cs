@@ -13,25 +13,15 @@ namespace WEBPages.Pages.TestPlan
     
     public partial class TestPlanPage: MainTabFrame
     {
-        #region The DriverContainer Locator
+        #region The MainTabFrame members
 
         protected override MainHead_Links MenuHeader { get { return MainHead_Links.TestManagement; } }
         protected override Perspectives ViewName { get { return Perspectives.TestPlan; } }
         protected override By byElement { get { return Locators.byElement; } }
 
-        #endregion The DriverContainer Locator
+        #endregion The MainTabFrame members
 
         #region Elements Locators
-
-        WebElement txtFindNode
-        {
-            get
-            {
-                return mainTab.NewWebElement()
-                    .ById( Locators.txtFindNodeID1, false )
-                    .ById( Locators.txtFindNodeID2, false );
-            }
-        }
 
         #region Test Plan Tree toolbar buttons
 
@@ -43,10 +33,10 @@ namespace WEBPages.Pages.TestPlan
 
         WebElement btnCreateTest
         { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnCreateTestTitle); } }
-        
+
         WebElement btnDelete
         { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnDeleteTitle); } }
-       
+
         WebElement btnCopy
         { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnCopyTitle); } }
 
@@ -64,13 +54,23 @@ namespace WEBPages.Pages.TestPlan
 
         #endregion Test Plan Tree toolbar buttons
 
+        WebElement txtFindNode
+        {
+            get
+            {
+                return mainTab.NewWebElement()
+                    .ById( Locators.txtFindNodeID1, false )
+                    .ById( Locators.txtFindNodeID2, false );
+            }
+        }
+
         #endregion  Elements Locators
 
         #region Helpers
 
         public bool IsFolderSelected(string folderName)
         {
-            return folderName == mainTab.NewWebElement().ByXPath(Locators.selectedFolderXPath).Text;
+            return folderName == mainTab.FindSelectedFolder();
         }
 
         public WebElement FindTest(string testName)

@@ -15,9 +15,15 @@ namespace WEBPages.Pages.TestLab
 
     public class TestLabPage: MainTabFrame
     {
+        #region The MainTabFrame members
+
         protected override MainHead_Links MenuHeader { get { return MainHead_Links.TestManagement; } }
         protected override Perspectives ViewName { get { return Perspectives.TestLab; } }
         protected override By byElement  { get { return Locators.byElement; } }
+
+        #endregion The MainTabFrame members
+
+        #region Elements Locators
 
         WebElement btnManageTestSets
         { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnManageTestSetsValue); } }
@@ -27,9 +33,13 @@ namespace WEBPages.Pages.TestLab
 
          WebElement btnRunTest
         { get { return mainTab.NewWebElement().ByXPath(Locators.btnRunTestXPath); } }
-                  
 
-        /// <summary>
+         WebElement filterByTestSetInput
+         { get { return mainTab.NewWebElement().ById(Locators.filterByTestSetInputId); } }
+
+         #endregion Elements Locators
+
+         /// <summary>
         /// Action : Performs click Manage Test Sets button.
         /// Expected : A modal-dialog Manage Test Sets appears.
         /// </summary>
@@ -49,6 +59,9 @@ namespace WEBPages.Pages.TestLab
 
             mainTab.NewWebElement().ByXPath(xPath).Click();
         }
+
+        public string SelectedTestSet
+        { get { return filterByTestSetInput.Text; } }
 
     }
 }

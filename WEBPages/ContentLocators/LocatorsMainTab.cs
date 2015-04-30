@@ -13,7 +13,6 @@ namespace WEBPages.ContentLocators
         public static class ALMMainPage
         {
             public const string MyPCLink = @"//a[text()='My Performance Center']";
-
         }
 
         public static class MyPCLoginPage
@@ -32,16 +31,19 @@ namespace WEBPages.ContentLocators
 
         public static class MainHeadPage
         {
+            public const string ExceptionString = "WebDriver can't get access to the MainHead page.  A modal dialogue is still opened.";
+
             public const string ViewLocator = "Main Head";
             public const string FrameLocatorID = "MastheadDiv";
             public const string MainTabID = "MainTab";
+       
 
             public static By FrameLocator =By.Id(FrameLocatorID);
             public static By MainTabFrame=By.Id(MainTabID);
 
             public const string lblUserXPath=@".//span[contains(@local-string, 'hello')]/..";
             public const string lblDomainXPath=@".//span[contains(@local-string, 'domain')]/..";
-            public const string lblProjectXPath=@".//span[contains(@local-string, 'domain')]/..";
+            public const string lblProjectXPath = @".//span[contains(@local-string, 'project')]/..";
             public const string btnLogoutXPath=@".//span[contains(@local-string, 'logout')]";
             public const string tabHomeXPath=@".//span[contains(@class, 'IconContainer IconHome')]";
             public const string btnCloseDLTXPath=@".//div[contains(@class, 'xButtonWrapper')]";
@@ -50,6 +52,14 @@ namespace WEBPages.ContentLocators
             public const string menuAutoRefreshClass = "iconPadding iconPaddingDropdown";
             public const string menuItemAutoRefreshOnText = "Auto Refresh On";
             public const string menuItemAutoRefreshOffText = "Auto Refresh Off";
+            public const string ModalOpened = "ng-scope ng-animate modal-open";
+            public const string bodyXPath = "html/body";
+        }
+
+        public static class StartTabPage
+        {
+            public const string ViewLocator = "Start";
+
         }
 
         public static class TestLabPage
@@ -59,9 +69,7 @@ namespace WEBPages.ContentLocators
             public const string btnManageTestSetsValue = "Manage Test Sets";
             public const string btnAssignTestXPath = @".//a[contains(@title, 'Assign Test to TestSet')]";
             public const string btnRunTestXPath = @".//img[contains(@alt, 'Run Test')]";
- 
-        
-        
+            public const string filterByTestSetInputId = "ctl00_PageContent_Toolbar_toolbar2_i0_SelectTestSetTree_ComboTree_Input"; 
         }
 
 
@@ -88,66 +96,14 @@ namespace WEBPages.ContentLocators
             public static string Menu;            
         }
 
-        public static class CreateTestFolderDialog
-        { 
-            public static By FrameLocator =By.XPath(@".//iframe[contains(@ng-src,'CreateNewTestFolder.aspx')]");
-
-            public const string ViewLocator = "Create New Test Folder";
-
-            public const string dialogTitleID = "dialogTitle";
-            public const string txtTestFolderNameID = "ctl00_ctl00_PageContent_DialogContent_TxtTestFolderName";
-            public const string btnOkID = "ctl00_ctl00_PageContent_DialogActions_btnOK";
-            public const string btnClose = "ctl00_ctl00_PageContent_btnClose";
-            public const string lblMessageXPath = @".//*[@id='ctl00_ctl00_PageContent_DialogContent_RequiredFieldValidator1']//font";
-            public const string panelID = "ctl00_ctl00_PageContent_DialogContent_PanelCreateNewTestFolder";
-            public const string requiredFieldValidatorID = "ctl00_ctl00_PageContent_DialogContent_RequiredFieldValidator1";
-            public const string noMesaageStyleValue = "color:Red;display:none;";
+        public static class TestRunsPage
+        {
+            public static By LeftLabel = By.XPath(".//*[@id='LeftLabel']/span[@local-string='TestRuns']"); 
         }
 
-        public static class UploadScriptDialog
+        public static class TrendingPage
         {
-            public static By FrameLocator = By.XPath(@".//iframe[contains(@ng-src,'UploadScripts.aspx')]");
-            public const string ViewLocator = "Upload Script Dialog";
-        }
-
-        public static class CreateTestDialog
-        {
-            public static By FrameLocator = By.XPath(@".//iframe[contains(@ng-src,'CreateNewTestDialog.aspx')]");
-            public const string ViewLocator = "Create New Test Dialog";
-
-            public const string txtNewTestNameID = "ctl00_ctl00_PageContent_DialogContent_txtNewTestName";
-            public const string cmbTestSetTreeID = "ctl00_ctl00_PageContent_DialogContent_TestSetTree_ComboTree";
-            public const string btnCreateNewOKID = "ctl00_ctl00_PageContent_DialogActions_btnCreateNewOK";
-            public const string btnCloseID = "ctl00_ctl00_PageContent_btnClose";
-            public const string btnHelpID = "ctl00_ctl00_PageContent_btnHelp";          
-        }
-
-        public static class NewTestSetDialog
-        {
-            public static By FrameLocator = By.Name("CreateNewTestSet");
-            public const string ViewLocator = "Create New Performance Test Set";
-
-        
-        }
-
-        public static class StartRunDialog
-        {
-            public static By FrameLocator = By.XPath(@".//iframe[contains(@ng-src,'StartRun.aspx')]");
-            public const string ViewLocator = "Run Performance Test";
-
-            public const string btnRunId = "ctl00_PageContent_btnRun";
-        }
-
-        public static class NewTestSetFolderDialog
-        {
-            public static By FrameLocator = By.Name("CreateNewTestSetFolder");
-            public const string ViewLocator = "Create New Test Set Folder";
-            public const string lblMessageXPath = @".//*[@id='ctl00_ctl00_PageContent_DialogContent_RequiredFieldValidator1']//font";
-            public const string btnCloseId = "ctl00_ctl00_PageContent_btnClose";
-            public const string btnOkId = "ctl00_ctl00_PageContent_DialogActions_btnOK";
-            public const string txtFolderNameId = "ctl00_ctl00_PageContent_DialogContent_TxtTestSetFolderName";
-
-
+            public static By LeftLabel = By.XPath(".//*[@id='LeftLabel']/span[@local-string='PerformanceTrending']"); 
         }
     }
 }
