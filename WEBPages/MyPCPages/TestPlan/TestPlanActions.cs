@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WEBPages.Pages.TestPlan.ModalDialogues;
-
-namespace WEBPages.Pages.TestPlan
+﻿namespace WEBPages.MyPCPages
 {
     public class TestPlanActions:TestPlanPage
     {

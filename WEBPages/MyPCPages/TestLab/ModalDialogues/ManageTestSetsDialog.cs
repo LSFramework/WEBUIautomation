@@ -1,13 +1,12 @@
 ﻿using OpenQA.Selenium;
-using WEBUIautomation.Utils;
-using WEBUIautomation.Extensions;
-using WEBUIautomation.Wait;
 using WEBUIautomation.WebElement;
 using WEBPages.Extensions;
+using WEBPages.BasePageObject;
 
-namespace WEBPages.Pages.TestLab.ModalDialogues
+namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.ManageTestSetsDialog;
+    
 
     /// <summary>
     /// Implements  actions for Manage Test Sets dialog

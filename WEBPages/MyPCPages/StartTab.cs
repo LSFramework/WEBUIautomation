@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using WEBUIautomation.Extensions;
 
-namespace WEBPages.Pages
+namespace WEBPages.MyPCPages
 {
 
     using WEBPages.ContentLocators;

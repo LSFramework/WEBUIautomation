@@ -98,12 +98,33 @@ namespace WEBPages.ContentLocators
 
         public static class TestRunsPage
         {
-            public static By LeftLabel = By.XPath(".//*[@id='LeftLabel']/span[@local-string='TestRuns']"); 
+            public static By LeftLabel = By.XPath(@".//*[@id='LeftLabel']/span[@local-string='TestRuns']"); 
         }
 
         public static class TrendingPage
         {
-            public static By LeftLabel = By.XPath(".//*[@id='LeftLabel']/span[@local-string='PerformanceTrending']"); 
+            public static By LeftLabel = By.XPath(@".//*[@id='LeftLabel']/span[@local-string='PerformanceTrending']"); 
         }
+
+        public static class PalPage
+        {
+            public static By PalTitle = By.XPath(@".//*[@id='ctl00_PageContent_iPC_A_Zone']//span[contains(@title, 'PAL Resources')]");
+        }
+
+        public static class TestResources
+        {
+            public static By TestResourcesTitle = By.XPath(@".//*[@id='ctl00_PageContent_iPC_A_Zone']//span[contains(@title, 'Test Resources')]");
+        }
+
+        public static class TestingHosts
+        {
+            public static By TestingHostsTitle = By.XPath(@".//*[@id='ctl00_PageContent_iPC_A_Zone']//span[contains(@title, 'Performance Center Hosts')]");
+        }
+
+        public static class Timeslots
+        { 
+            
+        }
+
     }
 }

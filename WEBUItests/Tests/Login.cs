@@ -1,11 +1,5 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WEBPages.Pages;
-using WEBUIautomation.Utils;
+using WEBPages.MyPCPages;
 using WEBUItests.Base_Test;
 using WEBUItests.TestVariables;
 
@@ -27,7 +21,7 @@ namespace WEBUItests.MyPCTests.Test_0_Login
         public void CheckDomain()
         {
             string Expected = string.Format("Domain: {0},", Config.DomainName);
-            Assert.AreEqual(Expected, mainHead.GetDomainName());        
+            Assert.AreEqual(Expected, mainHead.GetDomainName());  
         }
 
         /// <summary>

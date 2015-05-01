@@ -1,13 +1,13 @@
 ﻿using OpenQA.Selenium;
-using WEBUIautomation.Utils;
-using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
 using WEBUIautomation.Wait;
 using WEBPages.Extensions;
+using WEBPages.BasePageObject;
 
-namespace WEBPages.Pages.TestLab.ModalDialogues
+namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.NewTestSetDialog;
+    
 
     public class NewTestSetDialog : SecondLevelDialog
     {

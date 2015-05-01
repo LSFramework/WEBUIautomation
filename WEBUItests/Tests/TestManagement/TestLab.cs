@@ -4,10 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WEBPages.Pages;
-using WEBPages.Pages.TestLab;
-using WEBPages.Pages.TestLab.ModalDialogues;
-using WEBPages.Pages.TestPlan;
+using WEBPages.MyPCPages;
 using WEBUItests.Base_Test;
 using WEBUItests.TestVariables;
 
@@ -36,7 +33,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         public void Step_0_TestPlan()
         {
             TestPlanPage testPlan = new TestPlanPage();
-            Assert.True(testPlan.Opened);
+            Assert.True(testPlan.ViewOpened);
         }
 
         /// <summary>
@@ -46,7 +43,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         public void Step_01_NavigateToTestLab()
         {
             testLabPage = new TestLabPage();
-            Assert.True(testLabPage.Opened);
+            Assert.True(testLabPage.ViewOpened);
         }
 
         /// <summary>
@@ -56,7 +53,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         public void Step_02_ClickManageTestSets()
         {
             dlgMngTestSets=testLabPage.ClickManageTestSets();
-            Assert.True(dlgMngTestSets.Opened);
+            Assert.True(dlgMngTestSets.ViewOpened);
         }
 
         /// <summary>
@@ -76,7 +73,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         public void Step_04_OpenNewTestSetFolderDialog()
         {
             dlgCreateTestFolder = dlgMngTestSets.btnNewFolderClick();
-            Assert.True(dlgCreateTestFolder.Opened);
+            Assert.True(dlgCreateTestFolder.ViewOpened);
         }
 
         /// <summary>
@@ -96,7 +93,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         public void Step_06_ConfirmCreateTestFolder()
         {
             dlgMngTestSets=dlgCreateTestFolder.ClickOKExpectedSuccess();
-            Assert.True(dlgMngTestSets.Opened);
+            Assert.True(dlgMngTestSets.ViewOpened);
         }
 
         /// <summary>
@@ -116,7 +113,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         public void Step_08_OpenNewTestSetDialog()
         {
             dlgCreateTesSet=dlgMngTestSets.btnNewTestSetClick();
-            Assert.True(dlgCreateTesSet.Opened);
+            Assert.True(dlgCreateTesSet.ViewOpened);
         }
 
         /// <summary>
@@ -136,7 +133,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         public void Step_10_ConfirmCreateTestSet()
         {
             dlgMngTestSets = dlgCreateTesSet.ClickOkExpectingSucces();
-            Assert.True(dlgMngTestSets.Opened);
+            Assert.True(dlgMngTestSets.ViewOpened);
         }
 
 
@@ -147,7 +144,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         public void Step_11_SelectTestSet()
         {
             testLabPage=dlgMngTestSets.SelectTestSet(tsFolderName, tsName);
-            Assert.True(testLabPage.Opened);       
+            Assert.True(testLabPage.ViewOpened);       
         }
 
         /// <summary>

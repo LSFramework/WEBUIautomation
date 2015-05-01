@@ -1,12 +1,5 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WEBPages.Pages;
-using WEBPages.Pages.TestPlan;
-using WEBPages.Pages.TestPlan.ModalDialogues;
+using WEBPages.MyPCPages;
 using WEBUItests.Base_Test;
 using WEBUItests.TestVariables;
 
@@ -20,15 +13,16 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
     public class TestPlan:WEBUItest
     {
 
+
         MainHead mainHead = new MainHead();
         TestPlanPage testPlan;
         CreateTestFolderDialog createTestFolderDialog;
+
 
         string tFolderName = Variables.TestPlan.testFolderName;
         string sFolderName = Variables.TestPlan.scriptFolderName;
         string tName = Variables.TestPlan.testName;
         string subject = Variables.TestPlan.subjectFolder;
-
 
 
         /// <summary>
@@ -38,7 +32,7 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
         public void Step_1_NavigateToTestPlan()
         {
             testPlan = new TestPlanPage();
-            Assert.True(testPlan.Opened);
+            Assert.True(testPlan.ViewOpened);
         }
 
 
@@ -59,7 +53,7 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
         public void Step_3_OpenCreateFolderDailog()
         {
             createTestFolderDialog = testPlan.OpenCreateNewFolderDialog(subject);
-            Assert.True(createTestFolderDialog.Opened);
+            Assert.True(createTestFolderDialog.ViewOpened);
         }
 
         /// <summary>
@@ -77,8 +71,8 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
         [Test]
         public void Step_5_Confirm()
         {
-            testPlan=createTestFolderDialog.ClickOkBtn();           
-            Assert.False(createTestFolderDialog.Opened);
+            testPlan=createTestFolderDialog.ClickOkBtn();
+            Assert.False(createTestFolderDialog.ViewOpened);
           
         }
 
@@ -88,7 +82,7 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
         [Test]
         public void Step_6_CheckTestPlanOpened()
         {
-            Assert.True(testPlan.Opened);
+            Assert.True(testPlan.ViewOpened);
         }
 
         /// <summary>

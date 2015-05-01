@@ -1,12 +1,11 @@
 ﻿using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
-using WEBPages.Extensions;
 
-namespace WEBPages.Pages
+namespace WEBPages.BasePageObject
 {
-    public abstract class FirstLevelDialog : FramePageBase
+    public abstract class SecondLevelDialog : FramePageBase
     {
-        protected FirstLevelDialog() { Url = dialog.Url; }
+        protected SecondLevelDialog() { Url = dialog.Url; } 
 
         protected IWebDriverExt dialog
         {
@@ -14,13 +13,12 @@ namespace WEBPages.Pages
             {
                 if (!IsDriverOnTheFrame())
                 {
-                    driver.SwitchToDefaultContent();
                     driver.SwitchToFrame(FrameLocator);
                     driver.CurrentView = ViewLocator;
                 }
 
                 return driver;
             }
-        }             
+        } 
     }
 }

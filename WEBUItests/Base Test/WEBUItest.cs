@@ -1,15 +1,12 @@
-﻿//using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using WEBUIautomation;
 using WEBUIautomation.Utils;
 using System.IO;
-//using NUnit.Core;
 using System.Collections;
 
 namespace WEBUItests.Base_Test
 {
-
     using Logger = WEBUIautomation.Utils.Logger;
     /// <summary>
     /// Base test to use with WebDriver

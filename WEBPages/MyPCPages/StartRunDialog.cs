@@ -1,8 +1,9 @@
 ﻿using OpenQA.Selenium;
 using WEBUIautomation.WebElement;
 using WEBPages.Extensions;
+using WEBPages.BasePageObject;
 
-namespace WEBPages.Pages
+namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.StartRunDialog;
 

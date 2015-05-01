@@ -48,32 +48,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasePageObject\FramePageBase.cs" />
+    <Compile Include="BasePageObject\IFrame.cs" />
     <Compile Include="ContentLocators\LocatorsMainTab.cs" />
     <Compile Include="ContentLocators\LocatorsDialogs.cs" />
     <Compile Include="ContentLocators\Menu.cs" />
     <Compile Include="Extensions\WebElementExtension.cs" />
     <Compile Include="Extensions\DriverExtension.cs" />
-    <Compile Include="Pages\BasePageObject\FirstLevelDialog.cs" />
-    <Compile Include="Pages\BasePageObject\SecondLevelDialog.cs" />
-    <Compile Include="Pages\BasePageObject\MainTabView.cs" />
-    <Compile Include="Pages\ALMainPage.cs" />
-    <Compile Include="Pages\Runs\TestRunsPage.cs" />
-    <Compile Include="Pages\StartTab.cs" />
-    <Compile Include="Pages\TestLab\ModalDialogues\NewTestSetDialog.cs" />
-    <Compile Include="Pages\TestLab\ModalDialogues\NewTestSetFolderDialog.cs" />
-    <Compile Include="Pages\TestLab\ModalDialogues\ManageTestSetDialogActions.cs" />
-    <Compile Include="Pages\TestLab\ModalDialogues\ManageTestSetsDialog.cs" />
-    <Compile Include="Pages\BasePageObject\DriverContainer.cs" />
-    <Compile Include="Pages\StartRunDialog.cs" />
-    <Compile Include="Pages\TestLab\TestLabPage.cs" />
-    <Compile Include="Pages\MyPCLoginPage.cs" />
-    <Compile Include="Pages\MainHead.cs" />
-    <Compile Include="Pages\TestPlan\ModalDialogues\CreateTestDialog.cs" />
-    <Compile Include="Pages\TestPlan\ModalDialogues\CreateTestFolderDialog.cs" />
-    <Compile Include="Pages\TestPlan\ModalDialogues\UploadScriptDialog.cs" />
-    <Compile Include="Pages\TestPlan\TestPlanActions.cs" />
-    <Compile Include="Pages\TestPlan\TestPlanPage.cs" />
-    <Compile Include="Pages\Trending\TrendingPage.cs" />
+    <Compile Include="BasePageObject\FirstLevelDialog.cs" />
+    <Compile Include="BasePageObject\SecondLevelDialog.cs" />
+    <Compile Include="BasePageObject\MainTabView.cs" />
+    <Compile Include="MyPCPages\ALMainPage.cs" />
+    <Compile Include="MyPCPages\PAL\PALPage.cs" />
+    <Compile Include="MyPCPages\Runs\TestRunsPage.cs" />
+    <Compile Include="MyPCPages\StartTab.cs" />
+    <Compile Include="MyPCPages\TestLab\ModalDialogues\NewTestSetDialog.cs" />
+    <Compile Include="MyPCPages\TestLab\ModalDialogues\NewTestSetFolderDialog.cs" />
+    <Compile Include="MyPCPages\TestLab\ModalDialogues\ManageTestSetDialogActions.cs" />
+    <Compile Include="MyPCPages\TestLab\ModalDialogues\ManageTestSetsDialog.cs" />
+    <Compile Include="BasePageObject\DriverContainer.cs" />
+    <Compile Include="MyPCPages\StartRunDialog.cs" />
+    <Compile Include="MyPCPages\TestLab\TestLabPage.cs" />
+    <Compile Include="MyPCPages\MyPCLoginPage.cs" />
+    <Compile Include="MyPCPages\MainHead.cs" />
+    <Compile Include="MyPCPages\TestPlan\ModalDialogues\CreateTestDialog.cs" />
+    <Compile Include="MyPCPages\TestPlan\ModalDialogues\CreateTestFolderDialog.cs" />
+    <Compile Include="MyPCPages\TestPlan\ModalDialogues\UploadScriptDialog.cs" />
+    <Compile Include="MyPCPages\TestPlan\TestPlanActions.cs" />
+    <Compile Include="MyPCPages\TestPlan\TestPlanPage.cs" />
+    <Compile Include="MyPCPages\TestResources\TestResources.cs" />
+    <Compile Include="MyPCPages\Trending\TrendingPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

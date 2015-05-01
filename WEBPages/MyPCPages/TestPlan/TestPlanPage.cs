@@ -1,13 +1,12 @@
 ﻿using WEBUIautomation.Tags;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
-using WEBPages.Pages.TestPlan.ModalDialogues;
-using WEBPages.Pages.BasePageObject; 
+using WEBPages.BasePageObject; 
 using WEBPages.Extensions;
 using WEBPages.ContentLocators;
 using OpenQA.Selenium;
 
-namespace WEBPages.Pages.TestPlan
+namespace WEBPages.MyPCPages
 {
     using Locators= WEBPages.ContentLocators.Locators.TestPlanPage;
     
@@ -17,7 +16,7 @@ namespace WEBPages.Pages.TestPlan
 
         protected override MainHead_Links MenuHeader { get { return MainHead_Links.TestManagement; } }
         protected override Perspectives ViewName { get { return Perspectives.TestPlan; } }
-        protected override By byElement { get { return Locators.byElement; } }
+        protected override By byKeyElement { get { return Locators.byElement; } }
 
         #endregion The MainTabFrame members
 

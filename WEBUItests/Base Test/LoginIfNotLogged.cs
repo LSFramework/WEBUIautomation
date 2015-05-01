@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
-using WEBPages.Pages;
+using WEBPages.MyPCPages;
 using WEBUIautomation.Utils;
 using WEBUItests.TestVariables;
 

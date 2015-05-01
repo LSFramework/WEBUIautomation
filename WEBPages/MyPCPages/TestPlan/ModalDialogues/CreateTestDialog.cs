@@ -4,9 +4,11 @@ using WEBUIautomation.Utils;
 using WEBUIautomation.WebElement;
 using WEBUIautomation.Extensions;
 using WEBPages.Extensions;
+using WEBPages.BasePageObject;
 
-namespace WEBPages.Pages.TestPlan.ModalDialogues
+namespace WEBPages.MyPCPages
 {
+
     using Locators = WEBPages.ContentLocators.Locators.CreateTestDialog;
 
     public class CreateTestDialog : FirstLevelDialog
@@ -38,7 +40,6 @@ namespace WEBPages.Pages.TestPlan.ModalDialogues
         { get { return dialog.NewWebElement().ById(Locators.btnHelpID); } }
 
         #endregion UI Web Elements
-
 
         #region Helpers
 

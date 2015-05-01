@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WEBPages.ContentLocators;
-using WEBPages.Pages.BasePageObject;
+using WEBPages.BasePageObject;
 
-namespace WEBPages.Pages.Runs
+namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.TestRunsPage;
+    
     public class TestRunsPage: MainTabFrame
     {
 
@@ -19,7 +20,7 @@ namespace WEBPages.Pages.Runs
         protected override Perspectives ViewName
         { get { return Perspectives.Runs; } }
 
-        protected override By byElement
+        protected override By byKeyElement
         {
             get { return Locators.LeftLabel; }
         }

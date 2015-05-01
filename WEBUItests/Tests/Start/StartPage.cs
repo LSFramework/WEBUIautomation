@@ -1,10 +1,5 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WEBPages.Pages;
+using WEBPages.MyPCPages;
 using WEBUItests.Base_Test;
 
 namespace WEBUItests.MyPCTests.Start
@@ -25,7 +20,7 @@ namespace WEBUItests.MyPCTests.Start
         public void Step_01_NavigateToStartTab()
         {
             startTab = new StartTab();
-            Assert.True(startTab.Opened);
+            Assert.True(startTab.ViewOpened);
         }
 
         public void Step_02_CheckTestingHosts()

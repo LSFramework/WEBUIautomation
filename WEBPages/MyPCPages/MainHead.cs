@@ -2,12 +2,14 @@
 using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
+using WEBPages.BasePageObject;
 using WEBPages.Extensions;
 using WEBPages.ContentLocators;
 
-namespace WEBPages.Pages
+namespace WEBPages.MyPCPages
 {
     using Locators = WEBPages.ContentLocators.Locators.MainHeadPage;
+   
    
     public class MainHead: FramePageBase
     {

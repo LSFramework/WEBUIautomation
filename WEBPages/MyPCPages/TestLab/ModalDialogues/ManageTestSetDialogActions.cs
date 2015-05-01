@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WEBPages.Pages.TestLab.ModalDialogues
+namespace WEBPages.MyPCPages
 {
    
     // Complex Actions

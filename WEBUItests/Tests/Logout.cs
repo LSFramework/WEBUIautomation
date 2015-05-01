@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WEBPages.Pages;
+using WEBPages.MyPCPages;
 using WEBUIautomation.Utils;
 using WEBUItests.Base_Test;
 

@@ -4,8 +4,9 @@ using WEBUIautomation.Extensions;
 using WEBUIautomation.Wait;
 using WEBUIautomation.WebElement;
 using WEBPages.Extensions;
+using WEBPages.BasePageObject;
 
-namespace WEBPages.Pages.TestLab.ModalDialogues
+namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.NewTestSetFolderDialog;
 

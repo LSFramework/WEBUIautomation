@@ -2,11 +2,12 @@ using System.Linq;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
 using WEBPages.Extensions;
+using WEBPages.BasePageObject;
 
 
-namespace WEBPages.Pages
+namespace WEBPages.MyPCPages
 {
-    using Locators= WEBPages.ContentLocators.Locators.MyPCLoginPage;
+    using Locators= WEBPages.ContentLocators.Locators.MyPCLoginPage;    
 
     public class MyPCLoginPage: DriverContainer
     {        

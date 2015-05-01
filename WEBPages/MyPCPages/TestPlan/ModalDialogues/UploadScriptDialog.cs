@@ -1,10 +1,7 @@
 ﻿using OpenQA.Selenium;
-using System;
-using WEBUIautomation.Utils;
-using WEBUIautomation.Extensions;
-using WEBPages.Extensions;
+using WEBPages.BasePageObject;
 
-namespace WEBPages.Pages
+namespace WEBPages.MyPCPages
 {
   
     using Locators = ContentLocators.Locators.UploadScriptDialog;

@@ -1,4 +1,6 @@
-﻿namespace WEBPages.Pages
+﻿using WEBPages.BasePageObject;
+
+namespace WEBPages.MyPCPages
 {
 
     public class ALMainPage : DriverContainer

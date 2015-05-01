@@ -1,11 +1,6 @@
 ﻿using NUnit.Framework;
-using WEBPages.Pages;
-using WEBPages.Pages.TestLab;
-using WEBPages.Pages.TestPlan;
 using WEBUItests.Base_Test;
-using WEBPages.ContentLocators;
-using WEBPages.Pages.Runs;
-using WEBPages.Pages.Trending;
+using WEBPages.MyPCPages;
 
 namespace WEBUItests.MyPCTests.Test_1_Sanity
 {
@@ -23,7 +18,7 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
         public void Step_1_NavigateToTestLab()
         {
            TestLabPage testLabPage = new TestLabPage();
-           Assert.True(testLabPage.Opened);
+           Assert.True(testLabPage.ViewOpened);
         }
 
         /// <summary>
@@ -33,7 +28,7 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
         public void Step_2_NavigateToTestPlan()
         {
             TestPlanPage testPlanPage = new TestPlanPage();
-            Assert.True(testPlanPage.Opened);
+            Assert.True(testPlanPage.ViewOpened);
         }
 
         /// <summary>
@@ -43,7 +38,7 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
         public void Step_3_NavigateToStart()
         {
             StartTab startTab = new StartTab();
-            Assert.True(startTab.Opened);
+            Assert.True(startTab.ViewOpened);
         }
 
 
@@ -54,7 +49,7 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
         public void Step_4_NavigateToRuns()
         {
             TestRunsPage testRunsPage = new TestRunsPage();
-            Assert.True(testRunsPage.Opened);
+            Assert.True(testRunsPage.ViewOpened);
         }
 
         /// <summary>
@@ -64,7 +59,27 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
         public void Step_5_NavigateToTrending()
         {
             TrendingPage trendingPage = new TrendingPage();
-            Assert.True(trendingPage.Opened);
+            Assert.True(trendingPage.ViewOpened);
+        }
+
+        /// <summary>
+        /// Step_6_NavigateToPal
+        /// </summary>
+        [Test]
+        public void Step_6_NavigateToPal()
+        {
+            PalPage palPage = new PalPage();
+            Assert.True(palPage.ViewOpened);
+        }
+
+        /// <summary>
+        /// Step_7_NavigateToTestResources
+        /// </summary>
+        [Test]
+        public void Step_7_NavigateToTestResources()
+        {
+            TestResources testResources = new TestResources();
+            Assert.True(testResources.ViewOpened);
         }
     }
 }

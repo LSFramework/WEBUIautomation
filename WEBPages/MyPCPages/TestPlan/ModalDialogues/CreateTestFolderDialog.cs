@@ -1,15 +1,14 @@
 ﻿using OpenQA.Selenium;
-using System;
-using WEBUIautomation.Utils;
 using WEBUIautomation.WebElement;
-using WEBUIautomation.Extensions;
 using WEBUIautomation.Wait;
 using WEBPages.Extensions;
+using WEBPages.BasePageObject;
 
 
-namespace WEBPages.Pages.TestPlan.ModalDialogues
+namespace WEBPages.MyPCPages
 {
- using Locators = WEBPages.ContentLocators.Locators.CreateTestFolderDialog;
+
+    using Locators = WEBPages.ContentLocators.Locators.CreateTestFolderDialog;
 
     public class CreateTestFolderDialog : FirstLevelDialog
     {
@@ -60,11 +59,12 @@ namespace WEBPages.Pages.TestPlan.ModalDialogues
 
         #region Actions
 
-        /// <summary>
-        /// Action: Performs click OK button 
-        /// Expected :dialog closes  with creating a folder with name was typed
-        /// If folder name wasn't typed or it is already exists the dialog will not be closed.
-        /// </summary>
+
+
+        /// <summary> Action: Performs click OK button.
+        ///     Expected :dialog closes  with creating a folder with name was typed.
+        ///     If folder name wasn't typed or it is already exists the dialog will not be closed. 
+        ///     </summary>
         public TestPlanPage ClickOkBtn()
         {
             btnOk.Click();
