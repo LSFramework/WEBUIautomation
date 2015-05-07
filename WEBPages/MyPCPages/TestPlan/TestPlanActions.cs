@@ -2,7 +2,7 @@
 {
     public class TestPlanActions:TestPlanPage
     {
-        public TestPlanPage CreateTestPlanFolder(string folderName)
+        public TestPlanPage CreateFolder(string folderName)
         {
           return SelectSubjectFolder()
                 .ClickCreateNewFolderBtn()
@@ -10,7 +10,14 @@
                 .ClickOkBtn();
         }
 
-        public void UploadScriptToFolder(string folderName, string scriptName) { }
+        public void CreateTest(string folderName, string testName)
+        {
+            OpenCreateNewTestDialog(folderName);         
+        
+        }
+
+
+        public void UploadScript(string folderName, string scriptName) { }
 
     }
 }

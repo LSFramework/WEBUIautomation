@@ -46,6 +46,7 @@ namespace WEBPages.BasePageObject
 
         #endregion FramePageBase implementation
 
+
         /// <summary>
         /// Ctor to switch driver on the expected view in MainTab frame.
         /// </summary>
@@ -64,9 +65,13 @@ namespace WEBPages.BasePageObject
                 {
                     try
                     {
+
                         driver.SwitchToFrame(FrameLocator);
-                        driver.FindElement(byKeyElement);
-                        driver.CurrentView = ViewLocator;
+                        if (driver.FindElement(byKeyElement).Displayed)
+                        {
+                            driver.CurrentView = ViewLocator;
+                        }
+                        else throw new NotFoundException();
                     }
                     catch (Exception)
                     {

@@ -15,26 +15,16 @@ namespace WEBPages.MyPCPages
 
         #region WebElements Locators    
       
-        WebElement txtUserName 
-        { get { return new WebElement().ById(Locators.txtUserNameID); } }
-        WebElement txtPassword 
-        { get { return new WebElement().ById(Locators.txtPasswordID); } }
-        WebElement btnAuthenticate 
-        { get { return new WebElement().ById(Locators.btnAuthenticateID); } }
-        WebElement ddlDomains_Arrow 
-        { get { return new WebElement().ById(Locators.ddlDomains_ArrowID); } }
-        WebElement ddlDomains_Input 
-        { get { return new WebElement().ById(Locators.ddlDomains_InputID); } }
-        WebElement ddlDomains_DropDown 
-        { get { return new WebElement().ById(Locators.ddlDomains_DropDownID); } }
-        WebElement ddlProjects_Arrow
-        { get { return new WebElement().ById(Locators.ddlProjects_ArrowID); } }
-        WebElement ddlProjects_Input 
-        { get { return new WebElement().ById(Locators.ddlProjects_InputID); } }
-        WebElement ddlProjects_DropDown 
-        {get { return new WebElement().ById(Locators.ddlProjects_DropDownID); } }
-        WebElement btnLogin
-        { get { return new WebElement().ById(Locators.btnLoginID); } }      
+        WebElement txtUserName          { get { return new WebElement().ById(Locators.txtUserNameID); } }
+        WebElement txtPassword          { get { return new WebElement().ById(Locators.txtPasswordID); } }
+        WebElement btnAuthenticate      { get { return new WebElement().ById(Locators.btnAuthenticateID); } }
+        WebElement ddlDomains_Arrow     { get { return new WebElement().ById(Locators.ddlDomains_ArrowID); } }
+        WebElement ddlDomains_Input     { get { return new WebElement().ById(Locators.ddlDomains_InputID); } }
+        WebElement ddlDomains_DropDown  { get { return new WebElement().ById(Locators.ddlDomains_DropDownID); } }
+        WebElement ddlProjects_Arrow    { get { return new WebElement().ById(Locators.ddlProjects_ArrowID); } }
+        WebElement ddlProjects_Input    { get { return new WebElement().ById(Locators.ddlProjects_InputID); } }
+        WebElement ddlProjects_DropDown { get { return new WebElement().ById(Locators.ddlProjects_DropDownID); } }
+        WebElement btnLogin             { get { return new WebElement().ById(Locators.btnLoginID); } }      
 
         #endregion WebElemnts       
 

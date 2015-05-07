@@ -24,15 +24,6 @@ namespace WEBPages.MyPCPages
          WebElement txtTestSetName
         { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_TxtTestSetName"); } }
 
-         WebElement btnOK
-        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogActions_btnOK"); } }
-
-         WebElement btnClose
-        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_btnClose"); } }
-
-         WebElement lblMessage
-        { get { return dialog.NewWebElement().ByXPath(@".//*[@id='ctl00_ctl00_PageContent_DialogContent_RequiredFieldValidator1']//font"); } }
-
         #endregion UI Web Elements
 
         #region Properties
@@ -42,38 +33,19 @@ namespace WEBPages.MyPCPages
 
         #endregion Properties
 
-        #region Helpers
-
-         bool IsMessageDisplayed()
-        {
-            return !WaitHelper.Try(
-                () => dialog.NewWebElement()
-                    .ById("ctl00_ctl00_PageContent_DialogContent_RequiredFieldValidator1")
-                    .ByAttribute(WEBUIautomation.Tags.TagAttributes.Style, "color:Red;display:none;")
-                    );
-        }
-
-        #endregion Helpers
-
-        #region Actions
+    #region Actions
 
         #region Single Actions
 
         public NewTestSetDialog TypeTestSetName(string testSetName)
         {
             txtTestSetName.Text = testSetName;
-            return this;
-        }
-
-        public NewTestSetDialog ClickOKExpectingFailure()
-        {
-            btnOK.Click();
             return this;            
-        }
+        }        
 
         public ManageTestSetsDialog ClickOkExpectingSucces()
         {
-             btnOK.Click();
+             btnOk.Click();
              return new ManageTestSetsDialog();
         }
 
@@ -97,7 +69,7 @@ namespace WEBPages.MyPCPages
                 
         #endregion Complex Action
 
-        #endregion Actions
+    #endregion Actions
 
     }
 }

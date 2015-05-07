@@ -4,11 +4,9 @@ using WEBPages.Extensions;
 
 namespace WEBPages.BasePageObject
 {
-    public abstract class FirstLevelDialog : FramePageBase
+    public abstract class FirstLevelDialog : Dialog
     {
-        protected FirstLevelDialog() { Url = dialog.Url; }
-
-        protected IWebDriverExt dialog
+        protected override IWebDriverExt dialog
         {
             get
             {

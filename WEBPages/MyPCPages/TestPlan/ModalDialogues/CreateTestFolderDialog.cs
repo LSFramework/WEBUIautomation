@@ -21,22 +21,10 @@ namespace WEBPages.MyPCPages
 
         #endregion The dialog locators
 
-        #region UI Web Elements
-
-        WebElement dialogTitle
-        { get { return dialog.NewWebElement().ById(Locators.dialogTitleID).ByText(Locators.ViewLocator); } }
+        #region UI Web Elements     
 
         WebElement txtTestFolderName
         { get { return dialog.NewWebElement().ById(Locators.txtTestFolderNameID); } }
-
-        WebElement btnOk
-        { get { return dialog.NewWebElement().ById(Locators.btnOkID); } }
-
-        WebElement btnClose
-        { get { return dialog.NewWebElement().ById(Locators.btnClose); } }
-
-        WebElement lblMessage
-        { get { return dialog.NewWebElement().ByXPath(Locators.lblMessageXPath); } }
         
         #endregion UI Web Elements
 
@@ -44,22 +32,9 @@ namespace WEBPages.MyPCPages
 
 
         #endregion Properties
-
-        #region Helpers
-
-        bool IsMessageDisplayed()
-        {
-            return ! WaitHelper.Try(
-                () => dialog.NewWebElement()
-                    .ById(Locators.requiredFieldValidatorID)
-                    .ByAttribute(WEBUIautomation.Tags.TagAttributes.Style, Locators.noMesaageStyleValue));
-        }
-
-        #endregion Helpers
+     
 
         #region Actions
-
-
 
         /// <summary> Action: Performs click OK button.
         ///     Expected :dialog closes  with creating a folder with name was typed.

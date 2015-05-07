@@ -3,11 +3,9 @@ using WEBUIautomation.Extensions;
 
 namespace WEBPages.BasePageObject
 {
-    public abstract class SecondLevelDialog : FramePageBase
+    public abstract class SecondLevelDialog : Dialog
     {
-        protected SecondLevelDialog() { Url = dialog.Url; } 
-
-        protected IWebDriverExt dialog
+        protected override IWebDriverExt dialog
         {
             get
             {

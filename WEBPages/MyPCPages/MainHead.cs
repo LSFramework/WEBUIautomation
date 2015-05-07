@@ -10,19 +10,15 @@ namespace WEBPages.MyPCPages
 {
     using Locators = WEBPages.ContentLocators.Locators.MainHeadPage;
    
-   
     public class MainHead: FramePageBase
     {
-        #region Page Locator      
+        #region Page Locators      
 
-        private By MainTabFrame 
-        { get { return Locators.MainTabFrame; } }
+        private By MainTabFrame { get { return Locators.MainTabFrame; } }
 
-        public override string ViewLocator 
-        { get { return Locators.ViewLocator; } }
+        public override By FrameLocator { get { return Locators.FrameLocator; } }
 
-        public override By FrameLocator 
-        { get { return Locators.FrameLocator; } }
+        public override string ViewLocator { get { return Locators.ViewLocator; } }        
 
         public bool PageCanGetFocus()
         { 
@@ -38,7 +34,6 @@ namespace WEBPages.MyPCPages
             }
         }
 
-
         protected IWebDriverExt mainPage
         {
             get 
@@ -53,6 +48,7 @@ namespace WEBPages.MyPCPages
                 return driver;            
             }
         }
+
 
         #endregion // Page Locator
 
@@ -72,11 +68,9 @@ namespace WEBPages.MyPCPages
 
         #region Main Head Tabs Elements Locators
 
-        private  WebElement tabHome 
-        { get { return mainPage.NewWebElement().ByXPath(Locators.tabHomeXPath); } }
+        private  WebElement tabHome { get { return mainPage.NewWebElement().ByXPath(Locators.tabHomeXPath); } }
 
-        private  WebElement btnCloseDLT 
-        { get { return mainPage.NewWebElement().ByXPath(Locators.btnCloseDLTXPath); } }
+        private  WebElement btnCloseDLT { get { return mainPage.NewWebElement().ByXPath(Locators.btnCloseDLTXPath); } }
 
         #endregion  Main Head Tabs Elements Locators
 
@@ -211,13 +205,17 @@ namespace WEBPages.MyPCPages
 
         public MainHead MenuHeaderMouseOver(MainHead_Links menuHeader)
         {
-            mainPage.NewWebElement().ByText(menuHeader.GetEnumDescription()).MouseOver();
+            mainPage.NewWebElement()
+                .ByText(menuHeader.GetEnumDescription())
+                .MouseOver();
             return this;
         }
 
         public void MenuItemClick(Perspectives viewName)
         {
-            mainPage.NewWebElement().ByText(viewName.GetEnumDescription()).Click();
+            mainPage.NewWebElement()
+                .ByText(viewName.GetEnumDescription())
+                .Click();
         }
 
         #endregion Main Head Links Actions

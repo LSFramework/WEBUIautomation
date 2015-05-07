@@ -23,6 +23,7 @@ namespace WEBUItests.MyPCTests.Start
             Assert.True(startTab.ViewOpened);
         }
 
+
         public void Step_02_CheckTestingHosts()
         { 
           ///  

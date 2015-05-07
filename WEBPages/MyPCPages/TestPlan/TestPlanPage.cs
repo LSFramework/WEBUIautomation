@@ -20,7 +20,7 @@ namespace WEBPages.MyPCPages
 
         #endregion The MainTabFrame members
 
-        #region Elements Locators
+        #region Static Elements
 
         #region Test Plan Tree toolbar buttons
 
@@ -63,7 +63,27 @@ namespace WEBPages.MyPCPages
             }
         }
 
-        #endregion  Elements Locators
+        #endregion Static Elements
+
+        #region Dynamic Elements
+
+        public WebElement FindTest(string testName)
+        {
+            return mainTab.NewWebElement().ByXPath(Locators.performanceTestXPath).ByText(testName);
+        }
+
+        public WebElement FindTreeFolder(string folderName)
+        {
+            return mainTab.FindTreeItemByText(folderName);
+        }
+
+        //public WebElement FindScript(string scriptName)
+        //{ 
+        
+        //}
+
+
+        #endregion Dynamic Elements
 
         #region Helpers
 
@@ -71,12 +91,7 @@ namespace WEBPages.MyPCPages
         {
             return folderName == mainTab.FindSelectedFolder();
         }
-
-        public WebElement FindTest(string testName)
-        { 
-            return mainTab.NewWebElement().ByXPath(Locators.performanceTestXPath).ByText(testName);
-        }
-
+        
         #endregion Helpers
 
         #region Single Actions
@@ -89,28 +104,31 @@ namespace WEBPages.MyPCPages
 
         public TestPlanPage SelectSubjectFolder()
         {
-            mainTab.FindTreeItemByText(Locators.subjectFolderName).Click();
+            return SelectTreeItem(Locators.subjectFolderName);
+        }
+
+        public TestPlanPage SelectTreeItem(string treeItemName)
+        {
+            mainTab.FindTreeItemByText(treeItemName).Click();
             return this;
         }
 
-        WebElement FindTreeFolder(string folderName)
+        public TestPlanPage TryExpandTreeNode(string nodeName)
         {
-            return mainTab.FindTreeItemByText(folderName);
+             mainTab.TryExpandTreeFolder(nodeName);
+             return this;      
         }
 
-        public void TryExpandTreeNode(string nodeName)
-        {
-             mainTab.TryExpandTreeFolder(nodeName);                     
-        }
-
-        public void ClickUploadScriptBtn()
+        public UploadScriptDialog ClickUploadScriptBtn()
         {
             btnUploadScript.Click();
+            return new UploadScriptDialog();
         }
 
-        public void ClickCreateTestBtn()
+        public CreateTestDialog ClickCreateTestBtn()
         {
             btnCreateTest.Click();
+            return new CreateTestDialog();
         }
 
         #endregion Single Actions
@@ -136,20 +154,19 @@ namespace WEBPages.MyPCPages
         public UploadScriptDialog OpenUploadScriptDialog(string parentFolderName)
         {
             mainTab.FindTreeItemByText(parentFolderName).Click();       
-            ClickUploadScriptBtn();
-            return new UploadScriptDialog();
+            return ClickUploadScriptBtn();
         }
 
         /// <summary>
-        /// Performs select folder in tree and click "Create New Test" button
+        /// Performs select folder in tree and click "Create New Test" button. 
         /// Expected: Create New Test dialog screen appears.
         /// </summary>
         /// <param name="parentFolderName"></param>
         /// <param name="testName"></param>
-        public void OpenCreateNewTestDialog(string parentFolderName)
+        public CreateTestDialog OpenCreateNewTestDialog(string parentFolderName)
         {
             mainTab.FindTreeItemByText(parentFolderName).Click();       
-            ClickCreateTestBtn();
+            return ClickCreateTestBtn();
         }       
 
         #endregion            

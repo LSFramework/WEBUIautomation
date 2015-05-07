@@ -33,11 +33,9 @@ namespace WEBPages.MyPCPages
         WebElement btnCreateNewOK
         { get { return dialog.NewWebElement().ById(Locators.btnCreateNewOKID); } }
 
-        WebElement btnClose
-        { get { return dialog.NewWebElement().ById(Locators.btnCloseID); } }
-
         WebElement btnHelp
         { get { return dialog.NewWebElement().ById(Locators.btnHelpID); } }
+
 
         #endregion UI Web Elements
 
@@ -51,7 +49,29 @@ namespace WEBPages.MyPCPages
         #region Actions
 
 
+        public CreateTestDialog TypeTestName(string testName)
+        {
+            txtNewTestName.SendKeys(testName);
+            return this;
+        }
 
+        /// <summary>
+        /// Gets warning message
+        /// </summary>
+        /// <returns></returns>
+        public string GetWarningMessage()
+        {
+            return IsMessageDisplayed() ? lblMessage.Text : string.Empty;
+        }
+
+        /// <summary>
+        /// Gets text from TestFolder input element
+        /// </summary>
+        /// <returns></returns>
+        public string GetTestNameText()
+        {
+            return txtNewTestName.Text;
+        }
 
         #endregion Actions
     }

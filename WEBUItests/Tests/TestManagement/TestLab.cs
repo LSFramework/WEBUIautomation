@@ -27,16 +27,6 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         string tsName = Variables.TestLab.testSetName;
 
         /// <summary>
-        /// 
-        /// </summary>
-        [Test]
-        public void Step_0_TestPlan()
-        {
-            TestPlanPage testPlan = new TestPlanPage();
-            Assert.True(testPlan.ViewOpened);
-        }
-
-        /// <summary>
         /// Navigate to Test Lab perspective
         /// </summary>
         [Test]
@@ -77,7 +67,8 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         }
 
         /// <summary>
-        /// Type folder name to input field. Checks that input field was filled.
+        /// Type folder name to input field. 
+        /// Checks that input field was filled.
         /// </summary>
         [Test]
         public void Step_05_TypeFolderName()
@@ -87,7 +78,8 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         }
 
         /// <summary>
-        /// Confirm creating of the folder. Checks that "Create test folder dialog" closed and the "Manage test sets dialog" has focus. 
+        /// Confirm creating of the folder. 
+        /// Checks that "Create test folder dialog" closed and the "Manage test sets dialog" has focus. 
         /// </summary>
         [Test]
         public void Step_06_ConfirmCreateTestFolder()
@@ -97,7 +89,8 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         }
 
         /// <summary>
-        /// Select the created folder in tree
+        /// Select the created folder in tree.
+        /// Checks that folder is selected.
         /// </summary>
         [Test]
         public void Step_07_CheckHasFolderBeenCreated()
@@ -108,6 +101,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
 
         /// <summary>
         /// Open New Test Set Dialog
+        /// Checks that Create Folder dialog opened.
         /// </summary>
         [Test]
         public void Step_08_OpenNewTestSetDialog()
@@ -117,7 +111,8 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         }
 
         /// <summary>
-        /// Type test set name
+        /// Type test set name.
+        /// Checks that input field was filled.
         /// </summary>
         [Test]
         public void Step_09_TypeTestSetName()
@@ -127,7 +122,8 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         }
 
         /// <summary>
-        /// Confirm creating of the test set. Checks that "Create test set dialog" closed and the "Manage test sets dialog" has focus. 
+        /// Confirm creating of the test set. 
+        /// Checks that "Create test set dialog" closed and the "Manage test sets dialog" has focus. 
         /// </summary>
         [Test]
         public void Step_10_ConfirmCreateTestSet()
@@ -139,6 +135,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
 
         /// <summary>
         /// Select test set in tree and close the "Manage test sets dialog"
+        /// Checks that Tes Lab perspective got focus.
         /// </summary>
         [Test]
         public void Step_11_SelectTestSet()

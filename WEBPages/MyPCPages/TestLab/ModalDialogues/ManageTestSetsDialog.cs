@@ -42,11 +42,6 @@ namespace WEBPages.MyPCPages
          WebElement treeView
         { get { return dialog.NewWebElement().ById(Locators.treeViewID); } }
 
-         WebElement btnOK
-        { get { return dialog.NewWebElement().ById(Locators.btnOkId); } }
-
-         WebElement btnClose
-        { get { return dialog.NewWebElement().ById(Locators.btnCloseID); } }
 
         #endregion UI Web Elements
 
@@ -90,7 +85,7 @@ namespace WEBPages.MyPCPages
 
         public TestLabPage ClickOkBtnExpectedSuccess()
         { 
-            btnOK.Click();
+            btnOk.Click();
             return new TestLabPage();
         }
 

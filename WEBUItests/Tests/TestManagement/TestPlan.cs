@@ -12,17 +12,15 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
     [TestFixture][LoginIfNotLogged]
     public class TestPlan:WEBUItest
     {
-
-
-        MainHead mainHead = new MainHead();
         TestPlanPage testPlan;
         CreateTestFolderDialog createTestFolderDialog;
+        TestPlanActions testPlanAction;
 
 
-        string tFolderName = Variables.TestPlan.testFolderName;
-        string sFolderName = Variables.TestPlan.scriptFolderName;
-        string tName = Variables.TestPlan.testName;
-        string subject = Variables.TestPlan.subjectFolder;
+        string tFolderName  = Variables.TestPlan.testFolderName;
+        string sFolderName  = Variables.TestPlan.scriptFolderName;
+        string tName        = Variables.TestPlan.testName;
+        string subject      = Variables.TestPlan.subjectFolder;
 
 
         /// <summary>
@@ -34,7 +32,6 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
             testPlan = new TestPlanPage();
             Assert.True(testPlan.ViewOpened);
         }
-
 
         /// <summary>
         /// Select Subject Folder on tree
@@ -93,6 +90,27 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
         {
             Assert.True(testPlan.IsFolderSelected(tFolderName));
         }
+        
+        /// <summary>
+        /// Creates folder to save the loadtest scripts.
+        /// Checks is folder has been created successfully and it has been selected in Test Plan tree.
+        /// </summary>
+        [Test]
+        public void Step_8_CreateScriptsFolder()
+        {
+            testPlanAction = new TestPlanActions();
+            testPlanAction.CreateFolder(sFolderName);
+            Assert.True(testPlanAction.IsFolderSelected(sFolderName));
+        }
 
+
+        /// <summary>
+        /// Check the same of Step 8 from Test Plan object.
+        /// </summary>
+        [Test]
+        public void Step_9_checkFromTestPlanObject()
+        { 
+            Assert.True(testPlan.IsFolderSelected(sFolderName));
+        }
     }
 }

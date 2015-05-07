@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasePageObject\Dialog.cs" />
     <Compile Include="BasePageObject\FramePageBase.cs" />
     <Compile Include="BasePageObject\IFrame.cs" />
     <Compile Include="ContentLocators\LocatorsMainTab.cs" />
@@ -85,6 +86,9 @@
       <Project>{b41aa1f1-f477-437b-9465-b2d99ff89efd}</Project>
       <Name>WEBUIautomation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
