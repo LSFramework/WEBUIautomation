@@ -61,7 +61,7 @@ namespace WEBPages.MyPCPages
         }   
 
         /// <summary>
-        /// Action: performs click on Close button
+        /// Action: performs click on Shutdown button
         /// Expected: The dialog closed.
         /// </summary>
         public ManageTestSetsDialog ClickClose()

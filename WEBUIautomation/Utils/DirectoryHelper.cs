@@ -1,9 +1,23 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using WEBUIautomation.Wait;
 
 namespace WEBUIautomation.Utils
 {
     public static class DirectoryHelper
     {
+        public static string ChromeDirectory()
+        {
+            var defaultDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\..\Local\Google\Chrome\User Data\Default";
+
+            if (Directory.Exists(defaultDataFolder))
+            {
+                WaitHelper.Try(() => DirectoryHelper.ForceDelete(defaultDataFolder));
+            }
+
+            return Directory.GetCurrentDirectory();
+        }
+
         public static void ForceDelete(string path)
         {
 

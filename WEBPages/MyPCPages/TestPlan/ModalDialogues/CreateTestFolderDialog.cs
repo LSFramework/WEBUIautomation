@@ -47,7 +47,7 @@ namespace WEBPages.MyPCPages
         }
 
         /// <summary>
-        /// Action: Performs click Close button 
+        /// Action: Performs click Shutdown button 
         /// Expected: The dialog closed  without creating a folder if folder name was typed
         /// </summary>
         public TestPlanPage ClickCloseBtn()

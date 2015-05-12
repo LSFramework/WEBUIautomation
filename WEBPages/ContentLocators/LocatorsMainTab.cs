@@ -12,7 +12,7 @@ namespace WEBPages.ContentLocators
     {
         public static class ALMMainPage
         {
-            public const string MyPCLink = @"//a[text()='My Performance Center']";
+            public const string MyPCLink                = @"//a[text()='My Performance Center']";
         }
 
         public static class MyPCLoginPage
@@ -31,14 +31,14 @@ namespace WEBPages.ContentLocators
 
         public static class MainHeadPage
         {
-            public const string ExceptionString = "WebDriver can't get access to the MainHead page.  A modal dialogue is still opened.";
+            public const string ExceptionString         = "WebDriver can't get access to the MainHead page.  A modal dialogue is still opened.";
 
-            public const string ViewLocator     = "Main Head";
-            public const string FrameLocatorID  = "MastheadDiv";
-            public const string MainTabID       = "MainTab";       
+            public const string ViewLocator             = "Main Head";
+            public const string FrameLocatorID          = "MastheadDiv";
+            public const string MainTabID               = "MainTab";       
 
-            public static By FrameLocator =By.Id(FrameLocatorID);
-            public static By MainTabFrame=By.Id(MainTabID);
+            public static By FrameLocator               = By.Id(FrameLocatorID);
+            public static By MainTabFrame               = By.Id(MainTabID);
 
             public const string lblUserXPath    = @".//span[contains(@local-string, 'hello')]/..";
             public const string lblDomainXPath  = @".//span[contains(@local-string, 'domain')]/..";

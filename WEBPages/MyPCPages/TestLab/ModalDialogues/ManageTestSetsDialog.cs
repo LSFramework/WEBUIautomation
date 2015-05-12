@@ -14,9 +14,9 @@ namespace WEBPages.MyPCPages
     public partial class ManageTestSetsDialog : FirstLevelDialog
     {       
         #region The dialog locators
-               
+
+        public override By FrameLocator { get { return Locators.FrameLocator; } }        
         public override string ViewLocator { get { return Locators.ViewLocator; } }
-        public override By FrameLocator { get { return Locators.FrameLocator; } }
         
         #endregion The dialog locators
 
@@ -28,19 +28,16 @@ namespace WEBPages.MyPCPages
         public string SelectedFolder { get { return dialog.FindSelectedFolder(); } }
 
         #endregion Properties
+
         #region UI Web Elements
 
-        WebElement btnNewFolder
-        { get { return dialog.NewWebElement().ByClass(Locators.btnNewFolderClassName, false); } }            
+        WebElement btnNewFolder { get { return dialog.NewWebElement().ByClass(Locators.btnNewFolderClassName, false); } }            
 
-         WebElement btnNewTestSet
-        { get { return dialog.NewWebElement().ByClass(Locators.btnNewTestSetClassName, false); } }
+         WebElement btnNewTestSet { get { return dialog.NewWebElement().ByClass(Locators.btnNewTestSetClassName, false); } }
 
-         WebElement btnDelete
-         { get { return dialog.NewWebElement().ByClass(Locators.btnDeleteItemClassName, false); } }
+         WebElement btnDelete { get { return dialog.NewWebElement().ByClass(Locators.btnDeleteItemClassName, false); } }
 
-         WebElement treeView
-        { get { return dialog.NewWebElement().ById(Locators.treeViewID); } }
+         WebElement treeView { get { return dialog.NewWebElement().ById(Locators.treeViewID); } }
 
 
         #endregion UI Web Elements
@@ -98,9 +95,7 @@ namespace WEBPages.MyPCPages
         public bool IsFolderSelected(string folderName)
         {
             return folderName == dialog.FindSelectedFolder();
-        }
-
-        
+        }        
 
         #endregion Actions
     }

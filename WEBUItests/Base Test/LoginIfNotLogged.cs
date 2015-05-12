@@ -3,6 +3,7 @@ using System;
 using WEBPages.MyPCPages;
 using WEBUIautomation.Utils;
 using WEBUItests.TestVariables;
+using WEBUIautomation.Extensions;
 
 namespace WEBUItests.Base_Test
 {
@@ -50,7 +51,9 @@ namespace WEBUItests.Base_Test
 
         private void DoLogin()
         {
-            mainHead = new ALMainPage().GoToMyPC(Config.MyPCUrl).LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);           
+            mainHead = new ALMainPage()
+                .GoToMyPC(Config.MyPCUrl)
+                .LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);           
         }
 
 
@@ -69,16 +72,15 @@ namespace WEBUItests.Base_Test
         {
             
                 Driver.Initialize(Variables.BROWSER);               
-                Driver.BrowserMaximize();
+                Driver.Instance.BrowserMaximize();
         }
 
         /// <summary>
-        /// Close WebDriver
+        /// Shutdown WebDriver
         /// </summary>
         public void DriverCleanup()
         {
-            Driver.Wait(1);
-            Driver.Close();
+            Driver.Instance.Shutdown();
         }
     }
 }

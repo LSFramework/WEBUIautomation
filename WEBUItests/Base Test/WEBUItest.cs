@@ -2,6 +2,7 @@
 using System;
 using WEBUIautomation;
 using WEBUIautomation.Utils;
+using WEBUIautomation.Extensions;
 using System.IO;
 using System.Collections;
 
@@ -48,12 +49,11 @@ namespace WEBUItests.Base_Test
         }
 
         /// <summary>
-        /// Close WebDriver
+        /// Shutdown WebDriver
         /// </summary>
         public void DriverCleanup()
         {
-            Driver.Wait(1);
-            Driver.Close();
+            Driver.Instance.Shutdown();
         }
     }
 }

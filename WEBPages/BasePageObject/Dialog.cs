@@ -29,13 +29,13 @@ namespace WEBPages.BasePageObject
                     .ByAttribute(WEBUIautomation.Tags.TagAttributes.Style, Locators.noMesaageStyleValue));
         }
 
-        protected WebElement btnOk
+        protected virtual WebElement btnOk
         { get { return dialog.NewWebElement().ById(Locators.btnOkID); } }
 
-        protected WebElement btnClose
+        protected virtual WebElement btnClose
         { get { return dialog.NewWebElement().ById(Locators.btnClose); } }
 
-        protected WebElement lblMessage
+        protected virtual WebElement lblMessage
         { get { return dialog.NewWebElement().ByXPath(Locators.lblMessageXPath); } }
     
     }

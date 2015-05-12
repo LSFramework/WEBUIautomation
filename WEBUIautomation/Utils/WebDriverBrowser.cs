@@ -13,69 +13,69 @@ namespace WEBUIautomation
     /// </summary>
     public class WebDriverBrowser
     {
-        public IWebDriverExt LaunchBrowser(Browsers browser)
-        {
-            IWebDriverExt driver;
+        //public IWebDriverExt LaunchBrowser(Browsers browser)
+        //{
+        //    IWebDriverExt driver;
            
-            switch (browser)
-            {
-                case Browsers.ie: 
-                    driver = StartInternetExplorer();
-                    break;
+        //    switch (browser)
+        //    {
+        //        case Browsers.ie: 
+        //            driver = StartInternetExplorer();
+        //            break;
 
-                case Browsers.chrome: 
-                    driver = StartChrome();
-                    break;
+        //        case Browsers.chrome: 
+        //            driver = StartChrome();
+        //            break;
 
-                default:
-                    driver = StartFirefox();                 
-                    break;
-            }
+        //        default:
+        //            driver = StartFirefox();                 
+        //            break;
+        //    }
 
-            driver.Manage().Cookies.DeleteAllCookies();
+        //    driver.Manage().Cookies.DeleteAllCookies();
 
-            return driver as IWebDriverExt;
-        }
+        //    return driver as IWebDriverExt;
+        //}
 
-        FirefoxDriverExt StartFirefox()
-        {
-            FirefoxProfile profile = new FirefoxProfile();
-            profile.SetPreference("profile", "default");
+        //FirefoxDriverExt StartFirefox()
+        //{
+        //    FirefoxProfile profile = new FirefoxProfile();
+        //    profile.SetPreference("profile", "default");
 
-            WaitProfile waitProfile = new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(50));
+        //    WaitProfile waitProfile = new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(50));
 
-            return new FirefoxDriverExt(profile, waitProfile);
-         }
+        //    return new FirefoxDriverExt(profile);//profile, waitProfile);
+        // }
 
-        ChromeDriverExt StartChrome()
-         {
-             var chromeOptions = new ChromeOptions();
-             var defaultDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\..\Local\Google\Chrome\User Data\Default";
+        //ChromeDriverExt StartChrome()
+        // {
+        //     var chromeOptions = new ChromeOptions();
+        //     var defaultDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\..\Local\Google\Chrome\User Data\Default";
 
-             if (Directory.Exists(defaultDataFolder))
-             {
-                 WaitHelper.Try(() => DirectoryHelper.ForceDelete(defaultDataFolder));
-             }
+        //     if (Directory.Exists(defaultDataFolder))
+        //     {
+        //         WaitHelper.Try(() => DirectoryHelper.ForceDelete(defaultDataFolder));
+        //     }
 
-             WaitProfile waitProfile = new WaitProfile(TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(500));
+        //     WaitProfile waitProfile = new WaitProfile(TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(500));
 
-             return new ChromeDriverExt(Directory.GetCurrentDirectory(), chromeOptions, TimeSpan.FromSeconds(10), waitProfile);
-         }
+        //     return new ChromeDriverExt(Directory.GetCurrentDirectory(), chromeOptions, TimeSpan.FromSeconds(10), waitProfile);
+        // }
 
-        InternetExplorerDriverExt StartInternetExplorer()
-         {
-             var internetExplorerOptions = new InternetExplorerOptions
-             {
-                 IntroduceInstabilityByIgnoringProtectedModeSettings = true,
-                 EnsureCleanSession = true,
-                 InitialBrowserUrl = "about:blank",
-                 EnableNativeEvents = true
-             };
+        //InternetExplorerDriverExt StartInternetExplorer()
+        // {
+        //     var internetExplorerOptions = new InternetExplorerOptions
+        //     {
+        //         IntroduceInstabilityByIgnoringProtectedModeSettings = true,
+        //         EnsureCleanSession = true,
+        //         InitialBrowserUrl = "about:blank",
+        //         EnableNativeEvents = true
+        //     };
 
-             WaitProfile waitProfile = new WaitProfile(TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(50));
+        //     WaitProfile waitProfile = new WaitProfile(TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(50));
 
-             return new InternetExplorerDriverExt(Directory.GetCurrentDirectory(), internetExplorerOptions, waitProfile);
-         }
+        //     return new InternetExplorerDriverExt(Directory.GetCurrentDirectory(), internetExplorerOptions, waitProfile);
+        // }
 
         public static Browsers getBrowserFromString(string strBrowser)
          {

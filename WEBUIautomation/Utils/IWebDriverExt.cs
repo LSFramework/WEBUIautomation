@@ -6,6 +6,7 @@ using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Events;
 using System;
+using System.IO;
 using WEBUIautomation.Wait;
 
 namespace WEBUIautomation.Utils
@@ -27,16 +28,11 @@ namespace WEBUIautomation.Utils
         public string CurrentView { get; set; }
         public WaitProfile WaitProfile { get; private set; }
 
-        public FirefoxDriverExt() : base() { }
-        public FirefoxDriverExt(FirefoxProfile profile) : base(profile) { }
-        public FirefoxDriverExt(DesiredCapabilities capabilities) : base(capabilities) { }
-
-        public FirefoxDriverExt(FirefoxProfile profile, WaitProfile waitProfile)
-            : this(profile)
+        public FirefoxDriverExt(FirefoxProfile profile) : base(profile)
         {
-            WaitProfile = waitProfile;
+            profile.SetPreference("profile", "default");
+            this.WaitProfile = new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(50));
         }
-
     }
 
     
@@ -46,16 +42,16 @@ namespace WEBUIautomation.Utils
         public string CurrentView { get; set; }
         public WaitProfile WaitProfile { get; private set; }
         
-        public ChromeDriverExt(string path) : base(path) { }
-        public ChromeDriverExt(string path, ChromeOptions options) : base(path, options) { }
-        public ChromeDriverExt(string path, ChromeOptions options, TimeSpan commandTimeout) : base(path, options, commandTimeout) { }
-        
         public ChromeDriverExt(string path, ChromeOptions options, TimeSpan commandTimeout, WaitProfile waitProfile)
-            :this ( path,  options,  commandTimeout)
+            : base(path, options, commandTimeout)
         {
-            this.WaitProfile = waitProfile;        
-        }      
-       
+            this.WaitProfile = waitProfile;
+        }
+
+        public ChromeDriverExt()
+            :this ( DirectoryHelper.ChromeDirectory(), 
+                    new ChromeOptions(), TimeSpan.FromSeconds(10),
+                    new WaitProfile(TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(500))) { }
     }
 
    
@@ -65,13 +61,27 @@ namespace WEBUIautomation.Utils
         public string CurrentView { get; set; }
         public WaitProfile WaitProfile { get; private set; }
 
-        public InternetExplorerDriverExt(string path) : base(path) { }
         public InternetExplorerDriverExt(string path, InternetExplorerOptions options) : base(path, options) { }
 
-        public InternetExplorerDriverExt(string path, InternetExplorerOptions options, WaitProfile waitProfile) : this(path, options) 
+        public InternetExplorerDriverExt(string path, InternetExplorerOptions options, WaitProfile waitProfile) 
+            : this(path, options) 
         {
             WaitProfile = waitProfile;
         }
+
+        public InternetExplorerDriverExt()
+            : this ( Directory.GetCurrentDirectory(), 
+                    new InternetExplorerOptions
+                    {
+                        IntroduceInstabilityByIgnoringProtectedModeSettings = true,
+                        EnsureCleanSession = true,
+                        InitialBrowserUrl = "about:blank",
+                        EnableNativeEvents = true
+                    }, 
+                    new WaitProfile(TimeSpan.FromSeconds(10), 
+                    TimeSpan.FromMilliseconds(50))
+            ) 
+        { }
     }
 
     public class PhantomJSDriverExt : PhantomJSDriver, IWebDriverExt

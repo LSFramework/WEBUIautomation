@@ -59,6 +59,15 @@ namespace WEBUItests.TestVariables
             /// Name of a folder to store scripts
             /// </summary>
             public static string scriptFolderName =string.Format("Scripts Folder_{0}", Guid.NewGuid().ToString().Substring(0, 8));
+            /// <summary>
+            /// script Name
+            /// </summary>
+            public static string scriptName = "CloudSanityScript.zip";
+            /// <summary>
+            /// Path to script .zip
+            /// </summary>
+            public static string pathToScript = @"C:\ins\";
+
         }
 
 

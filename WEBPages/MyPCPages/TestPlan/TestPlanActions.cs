@@ -12,12 +12,20 @@
 
         public void CreateTest(string folderName, string testName)
         {
-            OpenCreateNewTestDialog(folderName);         
+            OpenCreateNewTestDialog(folderName)
+                .TypeTestName(testName);        
         
         }
 
 
-        public void UploadScript(string folderName, string scriptName) { }
+        public void UploadScript(string folderName, string pathToScript) 
+        {
+            SelectTreeItem(folderName)
+                .ClickUploadScriptBtn()
+                .SelectScript(pathToScript)
+                .ClickUploadBtn()
+                .ClickCloseButton();         
+        }
 
     }
 }

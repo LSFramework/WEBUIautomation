@@ -77,7 +77,7 @@ namespace WEBPages.MyPCPages
             return mainTab.FindTreeItemByText(folderName);
         }
 
-        //public WebElement FindScript(string scriptName)
+        //public WebElement FindScript(string pathToScript)
         //{ 
         
         //}
