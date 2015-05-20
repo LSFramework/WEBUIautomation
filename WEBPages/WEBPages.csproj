@@ -58,8 +58,9 @@
     <Compile Include="Extensions\DriverExtension.cs" />
     <Compile Include="BasePageObject\FirstLevelDialog.cs" />
     <Compile Include="BasePageObject\SecondLevelDialog.cs" />
-    <Compile Include="BasePageObject\MainTabView.cs" />
+    <Compile Include="BasePageObject\MainTabFrame.cs" />
     <Compile Include="MyPCPages\ALMainPage.cs" />
+    <Compile Include="MyPCPages\DesignLoadTest\DesignLoadTestPage.cs" />
     <Compile Include="MyPCPages\PAL\PALPage.cs" />
     <Compile Include="MyPCPages\Runs\TestRunsPage.cs" />
     <Compile Include="MyPCPages\StartTab.cs" />
@@ -86,6 +87,17 @@
       <Project>{b41aa1f1-f477-437b-9465-b2d99ff89efd}</Project>
       <Name>WEBUIautomation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AutoItX3Lib">
+      <Guid>{F8937E53-D444-4E71-9275-35B64210CC3B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

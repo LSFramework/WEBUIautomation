@@ -1,6 +1,7 @@
 ﻿using System;
 using WEBUIautomation;
 using System.Linq;
+using WEBUIautomation.Extensions;
 
 namespace WEBUItests.TestVariables
 {
@@ -13,8 +14,12 @@ namespace WEBUItests.TestVariables
         ///  A browser to be used under test  
         /// </summary>
         public static Browsers BROWSER
-        { get { return WebDriverBrowser.getBrowserFromString(Config.BrowsersSet.First()); } }
-
+        {
+            get
+            {
+                return Extensions.GetEnumFromString<Browsers>(Config.BrowsersSet.First());
+            //WebDriverBrowser.getBrowserFromString(Config.BrowsersSet.First()); } }
+            }}
 
         /// <summary>
         /// to use for Test Lab tests

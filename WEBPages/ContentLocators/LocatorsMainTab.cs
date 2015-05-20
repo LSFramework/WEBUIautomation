@@ -126,5 +126,15 @@ namespace WEBPages.ContentLocators
             
         }
 
+        public static class DesignLoadTest
+        { 
+            public const string ViewLocator = "Design Load Test";
+
+            public const string FrameLocatorXPath = @".//iframe[contains(@ng-src,'PreManageLoadTest.aspx')]";
+
+            public static By FrameLocator = By.XPath(FrameLocatorXPath);
+
+        }
+
     }
 }

@@ -56,21 +56,21 @@ namespace WEBPages.MyPCPages
 
         #region Main Head Title Elements
 
-        WebElement lblUser { get { return mainPage.NewWebElement().ByXPath(Locators.lblUserXPath); } }
+        WebElement lblUser { get { return mainPage.GetElement().ByXPath(Locators.lblUserXPath); } }
 
-        WebElement lblDomain { get { return mainPage.NewWebElement().ByXPath(Locators.lblDomainXPath); } }
+        WebElement lblDomain { get { return mainPage.GetElement().ByXPath(Locators.lblDomainXPath); } }
 
-        WebElement lblProject { get { return mainPage.NewWebElement().ByXPath(Locators.lblProjectXPath); } }
+        WebElement lblProject { get { return mainPage.GetElement().ByXPath(Locators.lblProjectXPath); } }
 
-        WebElement btnLogout { get { return mainPage.NewWebElement().ByXPath(Locators.btnLogoutXPath); } }
+        WebElement btnLogout { get { return mainPage.GetElement().ByXPath(Locators.btnLogoutXPath); } }
 
         #endregion  Main Head Title Elements
 
         #region Main Head Tabs Elements Locators
 
-        private  WebElement tabHome { get { return mainPage.NewWebElement().ByXPath(Locators.tabHomeXPath); } }
+        private  WebElement tabHome { get { return mainPage.GetElement().ByXPath(Locators.tabHomeXPath); } }
 
-        private  WebElement btnCloseDLT { get { return mainPage.NewWebElement().ByXPath(Locators.btnCloseDLTXPath); } }
+        private  WebElement btnCloseDLT { get { return mainPage.GetElement().ByXPath(Locators.btnCloseDLTXPath); } }
 
         #endregion  Main Head Tabs Elements Locators
 
@@ -80,12 +80,12 @@ namespace WEBPages.MyPCPages
 
         WebElement mhLink(MainHead_Links mhLink)
         {
-            return mainPage.NewWebElement().ByText(mhLink.GetEnumDescription());
+            return mainPage.GetElement().ByText(mhLink.GetEnumDescription());
         }
 
         WebElement menu(Perspectives menuItem)
         {
-            return mainPage.NewWebElement().ByText(menuItem.GetEnumDescription());
+            return mainPage.GetElement().ByText(menuItem.GetEnumDescription());
         }
 
         #endregion Links
@@ -95,7 +95,7 @@ namespace WEBPages.MyPCPages
         /// Refresh Button
         /// </summary>
         private  WebElement btnRefresh 
-        { get { return mainPage.NewWebElement().ByXPath(Locators.btnRefreshXPath); } }
+        { get { return mainPage.GetElement().ByXPath(Locators.btnRefreshXPath); } }
 
         /// <summary>
         /// Auto refresh menu
@@ -104,7 +104,7 @@ namespace WEBPages.MyPCPages
         {
             get
             {
-                return mainPage.NewWebElement()
+                return mainPage.GetElement()
                     .ByTagName(WEBUIautomation.Tags.TagNames.Div)
                     .ByClass(Locators.menuAutoRefreshClass);
             }
@@ -117,7 +117,7 @@ namespace WEBPages.MyPCPages
         {
             get
             {
-                return mainPage.NewWebElement()
+                return mainPage.GetElement()
                     .ByTagName(WEBUIautomation.Tags.TagNames.Span)
                     .ByText(Locators.menuItemAutoRefreshOnText);
             }
@@ -129,7 +129,7 @@ namespace WEBPages.MyPCPages
         {
             get
             {
-                return mainPage.NewWebElement()
+                return mainPage.GetElement()
                     .ByTagName(WEBUIautomation.Tags.TagNames.Span)
                     .ByText(Locators.menuItemAutoRefreshOffText);
             }
@@ -205,7 +205,7 @@ namespace WEBPages.MyPCPages
 
         public MainHead MenuHeaderMouseOver(MainHead_Links menuHeader)
         {
-            mainPage.NewWebElement()
+            mainPage.GetElement()
                 .ByText(menuHeader.GetEnumDescription())
                 .MouseOver();
             return this;
@@ -213,7 +213,7 @@ namespace WEBPages.MyPCPages
 
         public void MenuItemClick(Perspectives viewName)
         {
-            mainPage.NewWebElement()
+            mainPage.GetElement()
                 .ByText(viewName.GetEnumDescription())
                 .Click();
         }

@@ -38,8 +38,7 @@ namespace WEBPages.ContentLocators
 
             public const string txtTestFolderNameID         = "ctl00_ctl00_PageContent_DialogContent_TxtTestFolderName";  
             public const string panelID                     = "ctl00_ctl00_PageContent_DialogContent_PanelCreateNewTestFolder";
-            //public const string btnOkId                     = BaseDialog.btnOkID;
-            //public const string btnCloseID                  = BaseDialog.btnClose;
+ 
         }
 
         public static class UploadScriptDialog
@@ -47,11 +46,11 @@ namespace WEBPages.ContentLocators
             public static By FrameLocator                   = By.XPath(@".//iframe[contains(@ng-src,'UploadScripts.aspx')]");
             public const string ViewLocator                 = "Upload Script Dialog";
 
-            public const string btnSelectXpath              = @".//*[@id='AsyncScriptUploadControlrow0']/span";//".//input[@type='button'][@value= 'Select']";
+            
+            public const string btnSelectXpath              = @".//input[@value='Select'][@type='button']";
             public const string btnUploadId                 = "ctl00_PageContent_SubmitButton";
-            public const string btnCloseId                   = "ctl00_PageContent_btnClose";
-
-
+            public const string btnCloseId                  = "ctl00_PageContent_btnClose";
+            public const string msgNotificationXPath        = @".//*[@id='AsyncScriptUploadControlrow0']/i";
         }
 
         public static class CreateTestDialog

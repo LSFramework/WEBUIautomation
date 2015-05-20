@@ -127,6 +127,11 @@ namespace WEBUIautomation.Wait
         }
 
 
+
+        public static void Wait(int milliseconds)
+        {
+            Thread.Sleep(milliseconds);
+        }
     }
 
 }

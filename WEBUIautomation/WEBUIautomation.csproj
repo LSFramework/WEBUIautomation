@@ -67,8 +67,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\Snapshot.cs" />
-    <Compile Include="Utils\TestInfo.cs" />
-    <Compile Include="Utils\WebDriverBrowser.cs" />
     <Compile Include="Utils\WebDriverFactory.cs" />
     <Compile Include="Wait\WaitHelper.cs" />
     <Compile Include="Element\WebElement.cs" />

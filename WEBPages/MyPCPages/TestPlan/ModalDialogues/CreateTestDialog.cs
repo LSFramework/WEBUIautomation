@@ -25,16 +25,16 @@ namespace WEBPages.MyPCPages
         #region UI Web Elements
 
         WebElement txtNewTestName
-        { get { return dialog.NewWebElement().ById(Locators.txtNewTestNameID); } }
+        { get { return dialog.GetElement().ById(Locators.txtNewTestNameID); } }
 
         WebElement cmbTestSetTree
-        { get { return dialog.NewWebElement().ById(Locators.cmbTestSetTreeID); } }
+        { get { return dialog.GetElement().ById(Locators.cmbTestSetTreeID); } }
 
         WebElement btnCreateNewOK
-        { get { return dialog.NewWebElement().ById(Locators.btnCreateNewOKID); } }
+        { get { return dialog.GetElement().ById(Locators.btnCreateNewOKID); } }
 
         WebElement btnHelp
-        { get { return dialog.NewWebElement().ById(Locators.btnHelpID); } }
+        { get { return dialog.GetElement().ById(Locators.btnHelpID); } }
 
 
         #endregion UI Web Elements

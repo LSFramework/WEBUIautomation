@@ -23,10 +23,12 @@ namespace WEBUItests.MyPCTests.Start
             Assert.True(startTab.ViewOpened);
         }
 
-
+        /// <summary>
+        /// Step_02_CheckTestingHosts
+        /// </summary>
         public void Step_02_CheckTestingHosts()
         { 
-          ///  
+     
         }
     }
 }

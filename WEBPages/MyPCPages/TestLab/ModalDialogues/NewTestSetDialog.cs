@@ -22,7 +22,7 @@ namespace WEBPages.MyPCPages
         #region UI Web Elements
 
          WebElement txtTestSetName
-        { get { return dialog.NewWebElement().ById("ctl00_ctl00_PageContent_DialogContent_TxtTestSetName"); } }
+        { get { return dialog.GetElement().ById("ctl00_ctl00_PageContent_DialogContent_TxtTestSetName"); } }
 
         #endregion UI Web Elements
 

@@ -18,13 +18,13 @@ namespace WEBPages.MyPCPages
         public override  By FrameLocator { get { return Locators.FrameLocator; } }
 
         public CreateTestFolderDialog() : base() { }
-
+        
         #endregion The dialog locators
 
         #region UI Web Elements     
 
         WebElement txtTestFolderName
-        { get { return dialog.NewWebElement().ById(Locators.txtTestFolderNameID); } }
+        { get { return dialog.GetElement().ById(Locators.txtTestFolderNameID); } }
         
         #endregion UI Web Elements
 

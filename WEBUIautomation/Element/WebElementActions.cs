@@ -10,6 +10,7 @@ using WEBUIautomation.Extensions;
 using System.Globalization;
 using WEBUIautomation.Wait;
 using System.Threading;
+using OpenQA.Selenium.Interactions;
 
 
 namespace WEBUIautomation.WebElement
@@ -111,8 +112,20 @@ namespace WEBUIautomation.WebElement
 
         public void Click(bool useJQuery = false)
         {
+            if (useJQuery)
+            {
+                Browser.ExecuteJavaScript("TBD js click event on element");
+            }
+            
             DoAction( () => FindSingle().Click() );
-        }       
+
+        }
+
+        public void ClickPerform()
+        {
+            Actions action  = new Actions(Browser);
+            action.MoveToElement(FindSingle()).Click().Build().Perform();
+        }
 
         public void Clear()
         {
@@ -302,7 +315,12 @@ namespace WEBUIautomation.WebElement
                 MoveToVisible(FindSingle());
                 WaitHelper.Try(action);
             }
-
+            catch (WebDriverTimeoutException e)
+            {
+                string message = string.Format("Can't find single element with given search criteria: {0}", SearchCriteriaToString());
+                
+                throw new WebDriverTimeoutException(message, e.InnerException);
+            }
             catch
             {
                 throw;
@@ -347,7 +365,6 @@ namespace WEBUIautomation.WebElement
         private void FireJQueryEvent(IWebElement element, JavaScriptEvents javaScriptEvent)
         {
             var eventName = javaScriptEvent.GetEnumDescription();
-
             Browser.ExecuteJavaScript(string.Format("$(arguments[0]).{0}();", eventName), element);
         }
 

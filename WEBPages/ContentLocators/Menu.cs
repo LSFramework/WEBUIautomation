@@ -63,4 +63,25 @@ namespace WEBPages.ContentLocators
         [Description("Create New")]
         CreateNew
     }
+
+    public enum DLTabs
+    { 
+        [Description("Summary")]
+        Summary,
+
+        [Description("Groups & Workload")]
+        GroupsAndWorkload,
+
+        [Description("Monitors")]
+        Monitors,
+
+        [Description("Topology")]
+        Topology,
+
+        [Description("Diagnostics")]
+        Diagnostics,
+
+        [Description("Test Runs Trend")]
+        TestRunsTrend
+    }
 }

@@ -12,7 +12,8 @@ namespace WEBPages.MyPCPages
         public override string ViewLocator
         { get { return Perspectives.Start.GetEnumDescription(); } }
 
-        public StartTab() : base() { base.ShowStart(); }
+        public StartTab() : base() 
+        { base.ShowStart(); }
 
         #region UI Web Elements
 

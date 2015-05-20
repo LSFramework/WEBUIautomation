@@ -31,14 +31,13 @@ namespace WEBPages.MyPCPages
 
         #region UI Web Elements
 
-        WebElement btnNewFolder { get { return dialog.NewWebElement().ByClass(Locators.btnNewFolderClassName, false); } }            
+        private WebElement btnNewFolder { get { return dialog.GetElement().ByClass(Locators.btnNewFolderClassName, false); } }
 
-         WebElement btnNewTestSet { get { return dialog.NewWebElement().ByClass(Locators.btnNewTestSetClassName, false); } }
+        private WebElement btnNewTestSet { get { return dialog.GetElement().ByClass(Locators.btnNewTestSetClassName, false); } }
 
-         WebElement btnDelete { get { return dialog.NewWebElement().ByClass(Locators.btnDeleteItemClassName, false); } }
+        private WebElement btnDelete { get { return dialog.GetElement().ByClass(Locators.btnDeleteItemClassName, false); } }
 
-         WebElement treeView { get { return dialog.NewWebElement().ById(Locators.treeViewID); } }
-
+        private WebElement treeView { get { return dialog.GetElement().ById(Locators.treeViewID); } }
 
         #endregion UI Web Elements
 
@@ -64,7 +63,7 @@ namespace WEBPages.MyPCPages
 
         public ManageTestSetsDialog SelectTestSet(string testSetName)
         {
-          dialog.FindTreeItemByText(testSetName).Click();
+            dialog.FindTreeItemByText(testSetName).Click();
             return this;
         }
 
@@ -87,7 +86,7 @@ namespace WEBPages.MyPCPages
         }
 
         public ManageTestSetsDialog TryExpandFolder(string folderName)
-        { 
+        {
             dialog.TryExpandTreeFolder(folderName);
             return this;
         }

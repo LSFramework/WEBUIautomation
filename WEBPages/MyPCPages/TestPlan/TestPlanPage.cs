@@ -24,40 +24,40 @@ namespace WEBPages.MyPCPages
 
         #region Test Plan Tree toolbar buttons
 
-        WebElement btnCreateNewFolder
-        { get { return mainTab.NewWebElement().ByClass(Locators.newFolderButtonClass, false); } }
+        private WebElement btnCreateNewFolder
+        { get { return mainTab.GetElement().ByClass(Locators.newFolderButtonClass, false); } }
 
-        WebElement btnUploadScript
-        { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnUploadScriptTitle); } }
+        private WebElement btnUploadScript
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, Locators.btnUploadScriptTitle); } }
 
-        WebElement btnCreateTest
-        { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnCreateTestTitle); } }
+        private WebElement btnCreateTest
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, Locators.btnCreateTestTitle); } }
 
-        WebElement btnDelete
-        { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnDeleteTitle); } }
+        private WebElement btnDelete
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, Locators.btnDeleteTitle); } }
 
-        WebElement btnCopy
-        { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnCopyTitle); } }
+        private WebElement btnCopy
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, Locators.btnCopyTitle); } }
 
-        WebElement btnCut
-        { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnCutTitle); } }
+        private WebElement btnCut
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, Locators.btnCutTitle); } }
 
-        WebElement btnPaste
-        { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnPasteTitle); } }
+        private WebElement btnPaste
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, Locators.btnPasteTitle); } }
 
-        WebElement TreePanel
-        { get { return mainTab.NewWebElement().ById(Locators.treePanelID); } }
+        private WebElement TreePanel
+        { get { return mainTab.GetElement().ById(Locators.treePanelID); } }
 
-        WebElement lblWindowTitle
-        { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, ViewName.GetEnumDescription()); } }
+        private WebElement lblWindowTitle
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, ViewName.GetEnumDescription()); } }
 
         #endregion Test Plan Tree toolbar buttons
 
-        WebElement txtFindNode
+        private WebElement txtFindNode
         {
             get
             {
-                return mainTab.NewWebElement()
+                return mainTab.GetElement()
                     .ById( Locators.txtFindNodeID1, false )
                     .ById( Locators.txtFindNodeID2, false );
             }
@@ -69,7 +69,7 @@ namespace WEBPages.MyPCPages
 
         public WebElement FindTest(string testName)
         {
-            return mainTab.NewWebElement().ByXPath(Locators.performanceTestXPath).ByText(testName);
+            return mainTab.GetElement().ByXPath(Locators.performanceTestXPath).ByText(testName);
         }
 
         public WebElement FindTreeFolder(string folderName)

@@ -13,10 +13,10 @@ namespace WEBPages.Extensions
         {
             string xPathItemLocator = string.Format(".//span[@class='rtIn'][text()='{0}']", text);
 
-            return driver.NewWebElement().ByXPath(xPathItemLocator);
+            return driver.GetElement().ByXPath(xPathItemLocator);
         }
 
-        public static WebElement NewWebElement(this IWebDriverExt driver)
+        public static WebElement GetElement(this IWebDriverExt driver)
         {
             return new WebElement();
         }

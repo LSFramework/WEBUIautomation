@@ -25,16 +25,16 @@ namespace WEBPages.MyPCPages
         #region Elements Locators
 
         WebElement btnManageTestSets
-        { get { return mainTab.NewWebElement().ByAttribute(TagAttributes.Title, Locators.btnManageTestSetsValue); } }
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, Locators.btnManageTestSetsValue); } }
 
          WebElement btnAssignTest
-        { get { return mainTab.NewWebElement().ByXPath(Locators.btnAssignTestXPath); } }
+        { get { return mainTab.GetElement().ByXPath(Locators.btnAssignTestXPath); } }
 
          WebElement btnRunTest
-        { get { return mainTab.NewWebElement().ByXPath(Locators.btnRunTestXPath); } }
+        { get { return mainTab.GetElement().ByXPath(Locators.btnRunTestXPath); } }
 
          WebElement filterByTestSetInput
-         { get { return mainTab.NewWebElement().ById(Locators.filterByTestSetInputId); } }
+         { get { return mainTab.GetElement().ById(Locators.filterByTestSetInputId); } }
 
          #endregion Elements Locators
 
@@ -56,7 +56,7 @@ namespace WEBPages.MyPCPages
         {
             string xPath = @".//td[contains(text(), '" + testName + "')]";
 
-            mainTab.NewWebElement().ByXPath(xPath).Click();
+            mainTab.GetElement().ByXPath(xPath).Click();
         }
 
         public string SelectedTestSet

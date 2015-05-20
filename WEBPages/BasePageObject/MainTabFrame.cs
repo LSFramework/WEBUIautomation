@@ -10,6 +10,9 @@ namespace WEBPages.BasePageObject
     using Locators = ContentLocators.Locators.MainHeadPage;
     
 
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class MainTabFrame: FramePageBase
     {
         #region MainTabFrame abstract memebers
@@ -35,8 +38,7 @@ namespace WEBPages.BasePageObject
         /// <summary>
         /// All page-classes inherit this one should be located in MainTab frame.
         /// </summary>
-        public override By FrameLocator 
-        { get { return Locators.MainTabFrame; } }
+        public override By FrameLocator { get { return Locators.MainTabFrame; } }
 
         /// <summary>
         /// View locator should be name of the view.

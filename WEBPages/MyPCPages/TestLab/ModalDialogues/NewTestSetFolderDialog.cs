@@ -23,7 +23,7 @@ namespace WEBPages.MyPCPages
         #region UI Web Elements
 
         WebElement txtFolderName
-        { get { return dialog.NewWebElement().ById(Locators.txtFolderNameId); } }
+        { get { return dialog.GetElement().ById(Locators.txtFolderNameId); } }
         
         #endregion UI Web Elements
 

@@ -15,7 +15,7 @@ namespace WEBPages.BasePageObject
     public abstract class Dialog : FramePageBase
     {
         protected Dialog()
-        { 
+        {
             Url = dialog.Url; 
         }
 
@@ -24,19 +24,19 @@ namespace WEBPages.BasePageObject
         public bool IsMessageDisplayed()
         {
             return ! WaitHelper.Try(
-                () => dialog.NewWebElement()
+                () => dialog.GetElement()
                     .ById(Locators.requiredFieldValidatorID)
                     .ByAttribute(WEBUIautomation.Tags.TagAttributes.Style, Locators.noMesaageStyleValue));
         }
 
         protected virtual WebElement btnOk
-        { get { return dialog.NewWebElement().ById(Locators.btnOkID); } }
+        { get { return dialog.GetElement().ById(Locators.btnOkID); } }
 
         protected virtual WebElement btnClose
-        { get { return dialog.NewWebElement().ById(Locators.btnClose); } }
+        { get { return dialog.GetElement().ById(Locators.btnClose); } }
 
         protected virtual WebElement lblMessage
-        { get { return dialog.NewWebElement().ByXPath(Locators.lblMessageXPath); } }
+        { get { return dialog.GetElement().ByXPath(Locators.lblMessageXPath); } }
     
     }
 }

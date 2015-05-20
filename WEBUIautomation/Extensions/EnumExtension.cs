@@ -13,5 +13,11 @@ namespace WEBUIautomation.Extensions
 
             return attributes.Length > 0 ? attributes[0].Description : fieldName;
         }
+
+        public static T GetEnumFromString<T>(string strValue) where T : struct, IConvertible
+        {
+            return (T)Enum.Parse(typeof(T), strValue);
+        }
     }
+
 }

@@ -4,6 +4,10 @@ using WEBPages.Extensions;
 
 namespace WEBPages.BasePageObject
 {
+
+    /// <summary>
+    /// Responds for naviagtion to first level dalogs
+    /// </summary>
     public abstract class FirstLevelDialog : Dialog
     {
         protected override IWebDriverExt dialog
@@ -12,13 +16,18 @@ namespace WEBPages.BasePageObject
             {
                 if (!IsDriverOnTheFrame())
                 {
-                    driver.SwitchToDefaultContent();
-                    driver.SwitchToFrame(FrameLocator);
-                    driver.CurrentView = ViewLocator;
+                    Navigate();
                 }
 
                 return driver;
             }
+        }
+
+        private void Navigate()
+        {
+            driver.SwitchToDefaultContent();
+            driver.SwitchToFrame(FrameLocator);
+            driver.CurrentView = ViewLocator;
         }             
     }
 }

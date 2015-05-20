@@ -12,7 +12,7 @@ namespace WEBPages.MyPCPages
         public override By FrameLocator     { get { return Locators.FrameLocator; } } 
         public override string ViewLocator  { get { return Locators.ViewLocator; } }
 
-        WebElement btnRun { get { return dialog.NewWebElement().ById(Locators.btnRunId); } }
+        WebElement btnRun { get { return driver.GetElement().ById(Locators.btnRunId); } }
 
         public StartRunDialog ClickRunBtn()
         {
