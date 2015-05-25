@@ -2,12 +2,15 @@
 using WEBPages.BasePageObject;
 using WEBPages.ContentLocators;
 using WEBUIautomation.Extensions;
+using System;
+using WEBUIautomation.Utils;
+using WEBPages.MyPCPages;
 
-namespace WEBPages.MyPCPages.DesignLoadTest
+namespace WEBPages.BasePageObject
 {
+  
+    using Locators = ContentLocators.Locators.DesignLoadTestFrame;
 
-    using WEBUIautomation.Utils;
-using Locators = ContentLocators.Locators.DesignLoadTest;
 
     public abstract class DesignLoadTestFrame : FramePageBase
     {
@@ -18,6 +21,14 @@ using Locators = ContentLocators.Locators.DesignLoadTest;
         public override By FrameLocator { get { return Locators.FrameLocator; } }
 
         #endregion FramePageBase implementation
+        
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        protected DesignLoadTestFrame() 
+        { 
+            Url = dltTab.Url; 
+        }
 
         #region DLT Properties
 
@@ -25,7 +36,6 @@ using Locators = ContentLocators.Locators.DesignLoadTest;
         /// The menu item to navigate to a selected Tab e.g. "Groups & Workload"
         /// </summary>
         protected abstract DLTabs ViewName { get; }
-
 
         /// <summary>
         /// /// <summary>
@@ -35,21 +45,34 @@ using Locators = ContentLocators.Locators.DesignLoadTest;
         protected abstract By byKeyElement { get; }
 
         /// <summary>
-        /// Ctor
+        /// To navigate driver into right frame
         /// </summary>
-        protected DesignLoadTestFrame() 
-        { 
-            Url = dltTab.Url; 
-        }
-
         protected IWebDriverExt dltTab
         {
             get
             {
-                if (!IsDriverOnTheFrame())
+                try
                 {
+                    if (!IsDriverOnTheFrame())
+                    {
+
+                        driver.SwitchToFrame(FrameLocator);
+                        if (driver.FindElement(byKeyElement).Displayed)
+                        {
+                            driver.CurrentView = ViewLocator;
+                        }
+                        else throw new NotFoundException();
+                    }
+                }
+                catch (Exception)
+                {
+                    driver.SwitchTo().DefaultContent();
+                    MainHead mainHead = new MainHead();
+                    if (mainHead.ModalOpened)
+                        throw new NotFoundException(Locators.strModalOpenedException);
+                    mainHead.ClickDLTTab();
                     driver.SwitchToFrame(FrameLocator);
-                    ///To Be Done
+                    driver.CurrentView = ViewLocator;
                 }
 
                 return driver;

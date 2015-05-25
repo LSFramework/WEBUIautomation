@@ -6,7 +6,7 @@ namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.TrendingPage;
 
-    public class TrendingPage : MainTabFrame
+    public class TrendingPage : MainTabBasePage
     {
         protected override MainHead_Links MenuHeader { get { return MainHead_Links.RunAnalysis; } }
 

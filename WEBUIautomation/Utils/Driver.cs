@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Drawing;
+using WEBUIautomation.Extensions;
 
 namespace WEBUIautomation.Utils
 {
@@ -20,7 +21,7 @@ namespace WEBUIautomation.Utils
         {
             lock (Instancelocker)
             {
-                instance = null;
+                instance.Shutdown();
 
                 WebDriverFactory factory = new WebDriverFactory();
                 

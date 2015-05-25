@@ -11,7 +11,7 @@ namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.TestResources;
 
-    public class TestResources : MainTabFrame
+    public class TestResources : MainTabBasePage
     {
         protected override MainHead_Links MenuHeader { get {  return MainHead_Links.Resources; } }
 

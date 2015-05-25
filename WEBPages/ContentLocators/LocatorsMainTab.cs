@@ -31,7 +31,7 @@ namespace WEBPages.ContentLocators
 
         public static class MainHeadPage
         {
-            public const string ExceptionString         = "WebDriver can't get access to the MainHead page.  A modal dialogue is still opened.";
+            public const string strModalOpenedException = "WebDriver can't get access to the MainHead page.  A modal dialogue is still opened.";
 
             public const string ViewLocator             = "Main Head";
             public const string FrameLocatorID          = "MastheadDiv";
@@ -45,6 +45,7 @@ namespace WEBPages.ContentLocators
             public const string lblProjectXPath = @".//span[contains(@local-string, 'project')]/..";
             public const string btnLogoutXPath  = @".//span[contains(@local-string, 'logout')]";
             public const string tabHomeXPath    = @".//span[contains(@class, 'IconContainer IconHome')]";
+            public const string tabDLTXPath     = @".//span[contains(@class, 'IconContainer IconTest-Performance')]";
             public const string btnCloseDLTXPath= @".//div[contains(@class, 'xButtonWrapper')]";
 
             public const string btnRefreshXPath             = @".//div[contains(@ng-click, 'Refresh()')]";
@@ -126,14 +127,15 @@ namespace WEBPages.ContentLocators
             
         }
 
-        public static class DesignLoadTest
-        { 
-            public const string ViewLocator = "Design Load Test";
+        public static class DesignLoadTestFrame
+        {
+            public const string strModalOpenedException = MainHeadPage.strModalOpenedException;
+
+            public const string ViewLocator = "Design Load Test Tab";
 
             public const string FrameLocatorXPath = @".//iframe[contains(@ng-src,'PreManageLoadTest.aspx')]";
 
             public static By FrameLocator = By.XPath(FrameLocatorXPath);
-
         }
 
     }

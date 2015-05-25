@@ -11,7 +11,7 @@ namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.PalPage;
 
-    public class PalPage : MainTabFrame
+    public class PalPage : MainTabBasePage
     {
         protected override MainHead_Links MenuHeader
         { get { 

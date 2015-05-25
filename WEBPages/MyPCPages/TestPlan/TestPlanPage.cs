@@ -4,21 +4,22 @@ using WEBUIautomation.WebElement;
 using WEBPages.BasePageObject; 
 using WEBPages.Extensions;
 using WEBPages.ContentLocators;
-using OpenQA.Selenium;
+using WEBUIautomation.Utils;
 
 namespace WEBPages.MyPCPages
 {
     using Locators= WEBPages.ContentLocators.Locators.TestPlanPage;
+    using OpenQA.Selenium;
     
-    public partial class TestPlanPage: MainTabFrame
+    public class TestPlanPage: MainTabBasePage
     {
-        #region The MainTabFrame members
+        #region The IMainTabContext members
 
-        protected override MainHead_Links MenuHeader { get { return MainHead_Links.TestManagement; } }
-        protected override Perspectives ViewName { get { return Perspectives.TestPlan; } }
-        protected override By byKeyElement { get { return Locators.byElement; } }
+        protected override MainHead_Links   MenuHeader      { get { return MainHead_Links.TestManagement; } }
+        protected override Perspectives     ViewName        { get { return Perspectives.TestPlan; } }
+        protected override By               byKeyElement    { get { return Locators.byElement; } }
 
-        #endregion The MainTabFrame members
+        #endregion The IMainTabContext members
 
         #region Static Elements
 
@@ -49,7 +50,7 @@ namespace WEBPages.MyPCPages
         { get { return mainTab.GetElement().ById(Locators.treePanelID); } }
 
         private WebElement lblWindowTitle
-        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, ViewName.GetEnumDescription()); } }
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, context.ViewName.GetEnumDescription()); } }
 
         #endregion Test Plan Tree toolbar buttons
 
@@ -170,5 +171,7 @@ namespace WEBPages.MyPCPages
         }       
 
         #endregion            
+    
+        
     }
 }

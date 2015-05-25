@@ -51,6 +51,9 @@
     <Compile Include="BasePageObject\Dialog.cs" />
     <Compile Include="BasePageObject\FramePageBase.cs" />
     <Compile Include="BasePageObject\IFrame.cs" />
+    <Compile Include="BasePageObject\IMainTabContext.cs" />
+    <Compile Include="BasePageObject\InitMainTabContext.cs" />
+    <Compile Include="BasePageObject\MainTabBasePage.cs" />
     <Compile Include="ContentLocators\LocatorsMainTab.cs" />
     <Compile Include="ContentLocators\LocatorsDialogs.cs" />
     <Compile Include="ContentLocators\Menu.cs" />
@@ -60,7 +63,7 @@
     <Compile Include="BasePageObject\SecondLevelDialog.cs" />
     <Compile Include="BasePageObject\MainTabFrame.cs" />
     <Compile Include="MyPCPages\ALMainPage.cs" />
-    <Compile Include="MyPCPages\DesignLoadTest\DesignLoadTestPage.cs" />
+    <Compile Include="BasePageObject\DesignLoadTestFrame.cs" />
     <Compile Include="MyPCPages\PAL\PALPage.cs" />
     <Compile Include="MyPCPages\Runs\TestRunsPage.cs" />
     <Compile Include="MyPCPages\StartTab.cs" />
@@ -98,6 +101,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MyPCPages\DesignLoadTest\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

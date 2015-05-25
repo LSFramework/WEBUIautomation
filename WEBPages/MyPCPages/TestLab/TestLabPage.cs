@@ -12,7 +12,7 @@ namespace WEBPages.MyPCPages
 {
     using Locators=ContentLocators.Locators.TestLabPage;
 
-    public class TestLabPage: MainTabFrame
+    public class TestLabPage : MainTabBasePage
     {
         #region The MainTabFrame members
 

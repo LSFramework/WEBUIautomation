@@ -42,7 +42,7 @@ namespace WEBPages.MyPCPages
                 {   
                     driver.SwitchToDefaultContent();
                     if (ModalOpened)
-                        throw new NotFoundException(Locators.ExceptionString);
+                        throw new NotFoundException(Locators.strModalOpenedException);
                 }
                 driver.CurrentView = ViewLocator;
                 return driver;            
@@ -68,9 +68,11 @@ namespace WEBPages.MyPCPages
 
         #region Main Head Tabs Elements Locators
 
-        private  WebElement tabHome { get { return mainPage.GetElement().ByXPath(Locators.tabHomeXPath); } }
+        private WebElement tabHome      { get { return mainPage.GetElement().ByXPath(Locators.tabHomeXPath); } }
 
-        private  WebElement btnCloseDLT { get { return mainPage.GetElement().ByXPath(Locators.btnCloseDLTXPath); } }
+        private WebElement btnCloseDLT  { get { return mainPage.GetElement().ByXPath(Locators.btnCloseDLTXPath); } }
+
+        private WebElement tabDLT       { get { return mainPage.GetElement().ByXPath(Locators.tabDLTXPath); } }
 
         #endregion  Main Head Tabs Elements Locators
 
@@ -178,6 +180,12 @@ namespace WEBPages.MyPCPages
         {
             tabHome.Click();
         }
+
+        public void ClickDLTTab()
+        {
+            tabDLT.Click();
+        }
+
 
         #endregion Main Head Tabs Actions
 

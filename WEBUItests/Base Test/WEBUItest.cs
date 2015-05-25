@@ -9,6 +9,7 @@ using System.Collections;
 namespace WEBUItests.Base_Test
 {
     using Logger = WEBUIautomation.Utils.Logger;
+    using System.Diagnostics;
     /// <summary>
     /// Base test to use with WebDriver
     /// </summary>
@@ -39,8 +40,11 @@ namespace WEBUItests.Base_Test
         {
             if (NUnit.Framework.TestContext.CurrentContext.Result.Status == TestStatus.Failed)
             {
+                StackTrace stackTrace = new StackTrace();
+                string methodName = stackTrace.GetFrame(1).GetMethod().Name;
+
                 Logger.Log("The step: " + NUnit.Framework.TestContext.CurrentContext.Test.Name + " failed!", Logger.msgType.Error);
-                Logger.Log("Snapshot is: " + Snapshot.Take(), Logger.msgType.Error);
+                Logger.Log("Snapshot is: " + Snapshot.Take(methodName), Logger.msgType.Error);
             }
             else
             {

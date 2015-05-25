@@ -10,8 +10,8 @@ using WEBPages.BasePageObject;
 namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.TestRunsPage;
-    
-    public class TestRunsPage: MainTabFrame
+
+    public class TestRunsPage : MainTabBasePage
     {
 
         protected override MainHead_Links MenuHeader

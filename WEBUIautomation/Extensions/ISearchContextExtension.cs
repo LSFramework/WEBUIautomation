@@ -72,7 +72,7 @@ namespace WEBUIautomation.Extensions
             var collection = wait.Until<IReadOnlyCollection<IWebElement>>
                 (s =>
                     {
-                       // Thread.Sleep(pollingInterval.Milliseconds/2);
+                        Thread.Sleep(pollingInterval.Milliseconds/2);
                         var elements = s.FindElements(by);
                         if (elements.Count == 0)
                             return null;

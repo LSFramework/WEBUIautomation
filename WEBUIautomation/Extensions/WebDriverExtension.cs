@@ -31,8 +31,7 @@ namespace WEBUIautomation.Extensions
             }
             catch { }
         }
-               
-        
+      
         public static string GetNewWindow(this IWebDriverExt driver)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
