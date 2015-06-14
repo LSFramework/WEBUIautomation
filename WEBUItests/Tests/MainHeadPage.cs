@@ -7,7 +7,7 @@ namespace WEBUItests.MyPCTests.Test_1_Sanity
     /// <summary>
     /// Checks access to perspectives from Main Head Page
     /// </summary>
-    [TestFixture][LoginIfNotLogged]
+    [TestFixture]
     public class Test_1_MainHeadPage_Navigation : WEBUItest
     {
 

@@ -80,6 +80,14 @@ namespace WEBUIautomation.WebElement
             return this;
         }
 
+        public WebElement BySelenium(By by)
+        {
+            var selector = by;
+            _firstSelector = _firstSelector ?? selector;
+
+            return this;
+        }
+
         public WebElement ByIndex(int index)
         {
             _index = index;

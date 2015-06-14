@@ -49,9 +49,9 @@ namespace WEBUIautomation.Wait
                 {
                     TimeSpan sleepAmount = Min(_timeout - _stopwatch.Elapsed, _checkInterval);
                  
-                    if(sleepAmount>TimeSpan.Zero) Thread.Sleep(sleepAmount);
+                    if(sleepAmount > TimeSpan.Zero) Thread.Sleep(sleepAmount);
 
-                    if (sleepAmount < TimeSpan.Zero)
+                    if (sleepAmount <= TimeSpan.Zero)
                     {
                         _isSatisfied = false;
                         break;
@@ -125,8 +125,6 @@ namespace WEBUIautomation.Wait
         {
             return left.CompareTo(right) < 0 ? left : right;
         }
-
-
 
         public static void Wait(int milliseconds)
         {

@@ -30,7 +30,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -40,48 +52,63 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver">
-      <HintPath>..\packages\Selenium.WebDriver.2.45.0\lib\net40\WebDriver.dll</HintPath>
+    <Reference Include="TestStack.White, Version=0.13.0.0, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
+      <HintPath>..\packages\TestStack.White.0.13.3\lib\net40\TestStack.White.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="WebDriver.Support">
-      <HintPath>..\packages\Selenium.Support.2.45.0\lib\net40\WebDriver.Support.dll</HintPath>
+    <Reference Include="WebDriver">
+      <HintPath>..\packages\Selenium.WebDriver.2.46.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasePageObject\Dialog.cs" />
-    <Compile Include="BasePageObject\FramePageBase.cs" />
-    <Compile Include="BasePageObject\IFrame.cs" />
-    <Compile Include="BasePageObject\IMainTabContext.cs" />
-    <Compile Include="BasePageObject\InitMainTabContext.cs" />
-    <Compile Include="BasePageObject\MainTabBasePage.cs" />
+    <Compile Include="BasePageObject\Base\FramePageBase.cs" />
+    <Compile Include="BasePageObject\Base\IFrame.cs" />
+    <Compile Include="BasePageObject\DLTBase\IWorkLoadBasePage.cs" />
+    <Compile Include="BasePageObject\DLTBase\WorkLoadBasePage.cs" />
+    <Compile Include="BasePageObject\DLTBase\LoadTest.cs" />
+    <Compile Include="BasePageObject\DLTBase\TestAttributes.cs" />
+    <Compile Include="BasePageObject\DLTBase\WorkloadContext.cs" />
+    <Compile Include="BasePageObject\DLTBase\WorkloadMenu.cs" />
+    <Compile Include="BasePageObject\MainTab\InitMainTabContext.cs" />
+    <Compile Include="BasePageObject\MainTab\MainTabBasePage.cs" />
+    <Compile Include="ContentLocators\LocatorsDLT.cs" />
     <Compile Include="ContentLocators\LocatorsMainTab.cs" />
     <Compile Include="ContentLocators\LocatorsDialogs.cs" />
-    <Compile Include="ContentLocators\Menu.cs" />
+    <Compile Include="BasePageObject\MainTab\Menu.cs" />
+    <Compile Include="ContentLocators\LocatorsSLA.cs" />
+    <Compile Include="ContentLocators\Online.cs" />
     <Compile Include="Extensions\WebElementExtension.cs" />
     <Compile Include="Extensions\DriverExtension.cs" />
     <Compile Include="BasePageObject\FirstLevelDialog.cs" />
     <Compile Include="BasePageObject\SecondLevelDialog.cs" />
-    <Compile Include="BasePageObject\MainTabFrame.cs" />
+    <Compile Include="BasePageObject\MainTab\MainTabFrame.cs" />
     <Compile Include="MyPCPages\ALMainPage.cs" />
-    <Compile Include="BasePageObject\DesignLoadTestFrame.cs" />
+    <Compile Include="BasePageObject\DLTBase\DesignLoadTestFrame.cs" />
+    <Compile Include="MyPCPages\DesignLoadTest\DLT.cs" />
+    <Compile Include="MyPCPages\DesignLoadTest\DltGroupsAndWorkloadPage.cs" />
+    <Compile Include="MyPCPages\DesignLoadTest\DltSummaryPage.cs" />
+    <Compile Include="MyPCPages\DesignLoadTest\WorkloadMode.cs" />
+    <Compile Include="MyPCPages\Online\OnlineScreen.cs" />
     <Compile Include="MyPCPages\PAL\PALPage.cs" />
     <Compile Include="MyPCPages\Runs\TestRunsPage.cs" />
+    <Compile Include="MyPCPages\SLA\ServiceLevelAgreementPage.cs" />
     <Compile Include="MyPCPages\StartTab.cs" />
     <Compile Include="MyPCPages\TestLab\ModalDialogues\NewTestSetDialog.cs" />
     <Compile Include="MyPCPages\TestLab\ModalDialogues\NewTestSetFolderDialog.cs" />
     <Compile Include="MyPCPages\TestLab\ModalDialogues\ManageTestSetDialogActions.cs" />
     <Compile Include="MyPCPages\TestLab\ModalDialogues\ManageTestSetsDialog.cs" />
-    <Compile Include="BasePageObject\DriverContainer.cs" />
-    <Compile Include="MyPCPages\StartRunDialog.cs" />
+    <Compile Include="BasePageObject\Base\DriverContainer.cs" />
     <Compile Include="MyPCPages\TestLab\TestLabPage.cs" />
     <Compile Include="MyPCPages\MyPCLoginPage.cs" />
     <Compile Include="MyPCPages\MainHead.cs" />
     <Compile Include="MyPCPages\TestPlan\ModalDialogues\CreateTestDialog.cs" />
     <Compile Include="MyPCPages\TestPlan\ModalDialogues\CreateTestFolderDialog.cs" />
     <Compile Include="MyPCPages\TestPlan\ModalDialogues\UploadScriptDialog.cs" />
-    <Compile Include="MyPCPages\TestPlan\TestPlanActions.cs" />
+    <Compile Include="MyPCPages\TestPlan\TestPlanFunctionality.cs" />
     <Compile Include="MyPCPages\TestPlan\TestPlanPage.cs" />
     <Compile Include="MyPCPages\TestResources\TestResources.cs" />
+    <Compile Include="MyPCPages\TestRunDialog\StartRunDialog.cs" />
     <Compile Include="MyPCPages\Trending\TrendingPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -92,19 +119,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AutoItX3Lib">
-      <Guid>{F8937E53-D444-4E71-9275-35B64210CC3B}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MyPCPages\DesignLoadTest\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

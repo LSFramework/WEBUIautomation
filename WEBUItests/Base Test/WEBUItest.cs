@@ -5,16 +5,19 @@ using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
 using System.IO;
 using System.Collections;
+using System.Diagnostics;
 
 namespace WEBUItests.Base_Test
 {
     using Logger = WEBUIautomation.Utils.Logger;
-    using System.Diagnostics;
+
     /// <summary>
     /// Base test to use with WebDriver
     /// </summary>
+    [LoginIfNotLogged]
     public abstract class WEBUItest
     {
+       
         /// <summary>
         /// Logs test start
         /// </summary>
@@ -57,7 +60,7 @@ namespace WEBUItests.Base_Test
         /// </summary>
         public void DriverCleanup()
         {
-            Driver.Instance.Shutdown();
+           Driver.Instance= Driver.Instance.Shutdown();
         }
     }
 }

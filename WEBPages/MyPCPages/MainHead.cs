@@ -5,11 +5,14 @@ using WEBUIautomation.WebElement;
 using WEBPages.BasePageObject;
 using WEBPages.Extensions;
 using WEBPages.ContentLocators;
+using System;
+using System.Diagnostics.Contracts;
 
 namespace WEBPages.MyPCPages
 {
     using Locators = WEBPages.ContentLocators.Locators.MainHeadPage;
-   
+    using WEBUIautomation.Wait;
+
     public class MainHead: FramePageBase
     {
         #region Page Locators      
@@ -20,16 +23,16 @@ namespace WEBPages.MyPCPages
 
         public override string ViewLocator { get { return Locators.ViewLocator; } }        
 
-        public bool PageCanGetFocus()
-        { 
-            return driver.CurrentFrame == FrameLocator || driver.CurrentFrame == MainTabFrame; 
-        }
+        //public bool PageCanGetFocus()
+        //{ 
+        //    return driver.CurrentFrame == FrameLocator || driver.CurrentFrame == MainTabFrame; 
+        //}
 
         public bool ModalOpened
         {
             get
             {
-                WebElement body = new WebElement().ByXPath(Locators.bodyXPath);
+                WebElement body = mainPage.GetElement().ByXPath(Locators.bodyXPath);
                 return body.GetAttribute(WEBUIautomation.Tags.TagAttributes.Class) == Locators.ModalOpened;
             }
         }
@@ -38,15 +41,24 @@ namespace WEBPages.MyPCPages
         {
             get 
             {
-                if (driver.CurrentFrame != FrameLocator)
-                {   
-                    driver.SwitchToDefaultContent();
-                    if (ModalOpened)
-                        throw new NotFoundException(Locators.strModalOpenedException);
-                }
-                driver.CurrentView = ViewLocator;
-                return driver;            
+                return Navigate();           
             }
+        }
+
+        private IWebDriverExt Navigate()
+        {
+            if (driver.CurrentFrame != FrameLocator)
+            {
+                driver.SwitchToDefaultContent();
+
+                if (ModalOpened)
+                {
+                    WaitHelper.WithTimeout(TimeSpan.FromSeconds(5)).WaitFor(() => !ModalOpened);
+                }
+            }
+            driver.CurrentView = ViewLocator;
+            
+            return driver;
         }
 
 
@@ -70,9 +82,42 @@ namespace WEBPages.MyPCPages
 
         private WebElement tabHome      { get { return mainPage.GetElement().ByXPath(Locators.tabHomeXPath); } }
 
-        private WebElement btnCloseDLT  { get { return mainPage.GetElement().ByXPath(Locators.btnCloseDLTXPath); } }
+        private WebElement btnCloseDLT  { get { return mainPage.GetElement().ByXPath(Locators.btnCloseDLTXPath); } }        
 
-        private WebElement tabDLT       { get { return mainPage.GetElement().ByXPath(Locators.tabDLTXPath); } }
+        public WebElement DltTab (string testName)
+        {
+            Contract.Assume(testName != string.Empty, "testName cannot be empty");
+
+            driver.SwitchToDefaultContent();
+
+            return new WebElement()
+                .ByXPath(Locators.tabItemXPath)
+                .ByAttribute(WEBUIautomation.Tags.TagAttributes.Title, testName, false);
+        }
+
+        public bool IsDltShown(string testName)
+        {
+
+            string fullTitleValue =GetDltTabFullTitleValue(testName);
+            driver.WaitReadyState();
+            WebElement dltFrame = mainPage.GetElement().ByXPath(Locators.dltIFrameXPath(fullTitleValue));
+
+            string currentDltFrameClassValue = dltFrame.GetAttribute(WEBUIautomation.Tags.TagAttributes.Class);
+
+            return  currentDltFrameClassValue == Locators.shownDltFrameClassValue;
+
+        }
+
+        public string GetDltTabFullTitleValue(string testName)
+        {
+            return DltTab(testName).GetAttribute(WEBUIautomation.Tags.TagAttributes.Title);
+        }
+
+        public WebElement TestExecutionTab(string runName)
+        {
+            throw new NotImplementedException("TBD");
+        }
+
 
         #endregion  Main Head Tabs Elements Locators
 
@@ -80,19 +125,22 @@ namespace WEBPages.MyPCPages
 
         #region Links
 
-        WebElement mhLink(MainHead_Links mhLink)
+        private WebElement mhLink(MainHead_Links mhLink)
         {
             return mainPage.GetElement().ByText(mhLink.GetEnumDescription());
         }
 
-        WebElement menu(Perspectives menuItem)
+        private WebElement menu(Perspectives menuItem)
         {
             return mainPage.GetElement().ByText(menuItem.GetEnumDescription());
         }
 
         #endregion Links
 
+
+        //
         #region Refresh Section
+
         /// <summary>
         /// Refresh Button
         /// </summary>
@@ -124,6 +172,7 @@ namespace WEBPages.MyPCPages
                     .ByText(Locators.menuItemAutoRefreshOnText);
             }
         }
+        
         /// <summary>
         /// Auto refresh Off
         /// </summary>
@@ -181,9 +230,9 @@ namespace WEBPages.MyPCPages
             tabHome.Click();
         }
 
-        public void ClickDLTTab()
+        public void ClickDLTTab(string testName)
         {
-            tabDLT.Click();
+            DltTab(testName).Click();
         }
 
 
@@ -206,9 +255,12 @@ namespace WEBPages.MyPCPages
 
         public void ShowPerspective(MainHead_Links menuHeader, Perspectives viewName)
         {
-            MenuHeaderMouseOver(menuHeader).MenuItemClick(viewName);
-            driver.SwitchToFrame(MainTabFrame);
-            driver.CurrentView = viewName.GetEnumDescription();
+            if (driver.CurrentView != viewName.GetEnumDescription())
+            {
+                MenuHeaderMouseOver(menuHeader).MenuItemClick(viewName);
+                driver.SwitchToFrame(MainTabFrame);
+                driver.CurrentView = viewName.GetEnumDescription();
+            }
         }
 
         public MainHead MenuHeaderMouseOver(MainHead_Links menuHeader)

@@ -4,6 +4,7 @@ using WEBPages.MyPCPages;
 using WEBUIautomation.Utils;
 using WEBUItests.TestVariables;
 using WEBUIautomation.Extensions;
+using WEBUIautomation;
 
 namespace WEBUItests.Base_Test
 {
@@ -16,6 +17,7 @@ namespace WEBUItests.Base_Test
     public class LoginIfNotLoggedAttribute:Attribute, ITestAction
     {
 
+       
         MainHead mainHead=new MainHead();
         /// <summary>
         /// Ctor
@@ -34,26 +36,28 @@ namespace WEBUItests.Base_Test
         /// </summary>
         /// <param name="testDetails"></param>
         public void BeforeTest(TestDetails testDetails)
-        { 
+        {
+            
             if (Driver.Instance == null)
             {
                 DriverSetUp();
                 DoLogin();
             }
 
-            if ( ! mainHead.PageCanGetFocus())
+            if ( mainHead.ModalOpened )
             {                
                 DriverCleanup();
                 DriverSetUp();
                 DoLogin();
             }
+          
         }
 
         private void DoLogin()
         {
             mainHead = new ALMainPage()
                 .GoToMyPC(Config.MyPCUrl)
-                .LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);           
+                .LoginToProject(Config.UserName, Config.UserPassword, Config.DomainName, Config.ProjectName);
         }
 
 
@@ -70,9 +74,8 @@ namespace WEBUItests.Base_Test
         /// </summary>
         public void DriverSetUp()
         {
-            
-                Driver.Initialize(Variables.BROWSER);               
-                Driver.Instance.BrowserMaximize();
+            Driver.Initialize(Variables.BROWSER);               
+            Driver.Instance.BrowserMaximize();
         }
 
         /// <summary>
@@ -80,7 +83,7 @@ namespace WEBUItests.Base_Test
         /// </summary>
         public void DriverCleanup()
         {
-            Driver.Instance.Shutdown();
+            Driver.Instance = Driver.Instance.Shutdown();
         }
     }
 }

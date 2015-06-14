@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WEBPages.Extensions;
+﻿using WEBPages.Extensions;
 using WEBUIautomation.Utils;
+using WEBUIautomation.Wait;
+using WEBUIautomation.WebElement;
 
 namespace WEBPages.BasePageObject
 {
-    using WEBUIautomation.Wait;
-    using WEBUIautomation.WebElement;
+   
     using Locators = ContentLocators.Locators.BaseDialog;
 
     public abstract class Dialog : FramePageBase
@@ -26,7 +22,7 @@ namespace WEBPages.BasePageObject
             return ! WaitHelper.Try(
                 () => dialog.GetElement()
                     .ById(Locators.requiredFieldValidatorID)
-                    .ByAttribute(WEBUIautomation.Tags.TagAttributes.Style, Locators.noMesaageStyleValue));
+                    .ByAttribute(WEBUIautomation.Tags.TagAttributes.Style, Locators.noMesageStyleValue));
         }
 
         protected virtual WebElement btnOk

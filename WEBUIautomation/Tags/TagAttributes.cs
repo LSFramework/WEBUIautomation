@@ -44,6 +44,9 @@ namespace WEBUIautomation.Tags
         LocalString,
 
         [Description("alt")]
-        Alt
+        Alt,
+
+        [Description("tabindex")]
+        TabIndex
     }
 }

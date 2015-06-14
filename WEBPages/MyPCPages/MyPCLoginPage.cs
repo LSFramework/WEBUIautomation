@@ -92,7 +92,7 @@ namespace WEBPages.MyPCPages
 
         #endregion Complex Actions
 
-        void SwitchToPopup()
+        private void SwitchToPopup()
         {
             string popup = driver.GetNewWindow();
             driver.SwitchTo().Window(popup);

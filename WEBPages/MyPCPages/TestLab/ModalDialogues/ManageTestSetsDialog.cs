@@ -51,7 +51,7 @@ namespace WEBPages.MyPCPages
 
         public ManageTestSetsDialog SelectFolder(string folderName)
         {
-            dialog.FindTreeItemByText(folderName).Click();
+            dialog.FindTreeItemByName(folderName).Click();
             return this;
         }
 
@@ -63,7 +63,7 @@ namespace WEBPages.MyPCPages
 
         public ManageTestSetsDialog SelectTestSet(string testSetName)
         {
-            dialog.FindTreeItemByText(testSetName).Click();
+            dialog.FindTreeItemByName(testSetName).Click();
             return this;
         }
 

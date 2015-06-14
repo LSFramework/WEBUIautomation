@@ -8,7 +8,7 @@ namespace WEBUItests.MyPCTests.Test_0_Login
     /// <summary>
     /// Checks is user really logged in the project and domain were selected at LoginPage.
     /// </summary>
-    [TestFixture][LoginIfNotLogged]
+    [TestFixture]
     public class Test_0_Login : WEBUItest
     {
 

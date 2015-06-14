@@ -3,7 +3,7 @@
 namespace WEBPages.BasePageObject
 {
 
-    interface IFrame
+    public interface IFrame
     {
         /// <summary>
         /// The frame Url

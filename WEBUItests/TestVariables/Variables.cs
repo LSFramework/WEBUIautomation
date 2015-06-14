@@ -10,6 +10,8 @@ namespace WEBUItests.TestVariables
     /// </summary>
     public class Variables
     {
+        //private static Browsers browser;
+
         /// <summary>
         ///  A browser to be used under test  
         /// </summary>
@@ -17,9 +19,12 @@ namespace WEBUItests.TestVariables
         {
             get
             {
-                return Extensions.GetEnumFromString<Browsers>(Config.BrowsersSet.First());
-            //WebDriverBrowser.getBrowserFromString(Config.BrowsersSet.First()); } }
-            }}
+               // return browser;
+                  return Extensions.GetEnumFromString<Browsers>(Config.BrowsersSet.First());  
+            }
+           // set { browser = value; }
+
+        }
 
         /// <summary>
         /// to use for Test Lab tests
@@ -71,7 +76,13 @@ namespace WEBUItests.TestVariables
             /// <summary>
             /// Path to script .zip
             /// </summary>
-            public static string pathToScript = @"C:\ins\";
+            public static string pathToScript = "C:\\ins\\";
+
+
+            /// <summary>
+            /// Script's text Label shown in PC tree 
+            /// </summary>
+            public static string script = "CloudSanityScript";
 
         }
 

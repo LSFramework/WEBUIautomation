@@ -15,7 +15,7 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
     /// Creates a new Test Set Folder and a new Test Set
     /// </summary>
     [TestFixture][LoginIfNotLogged]
-    public class Test_1_TestLabCreateEntities:WEBUItest
+    public class Test_1_TestLabCreateEntities : WEBUItest
     {
         MainHead mainHead = new MainHead();
         TestLabPage testLabPage;
@@ -144,13 +144,6 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
             Assert.True(testLabPage.ViewOpened);       
         }
 
-        /// <summary>
-        /// Check selected test set name
-        /// </summary>
-        [Test]
-        public void Step_12_CheckTestSetSelected()
-        {
-            Assert.AreEqual(tsName, testLabPage.SelectedTestSet);
-        }
+
     }
 }

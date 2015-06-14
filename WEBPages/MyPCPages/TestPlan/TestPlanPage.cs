@@ -5,21 +5,21 @@ using WEBPages.BasePageObject;
 using WEBPages.Extensions;
 using WEBPages.ContentLocators;
 using WEBUIautomation.Utils;
+using OpenQA.Selenium;
 
 namespace WEBPages.MyPCPages
 {
     using Locators= WEBPages.ContentLocators.Locators.TestPlanPage;
-    using OpenQA.Selenium;
     
     public class TestPlanPage: MainTabBasePage
     {
-        #region The IMainTabContext members
+        #region The InitMainTabContext members
 
         protected override MainHead_Links   MenuHeader      { get { return MainHead_Links.TestManagement; } }
         protected override Perspectives     ViewName        { get { return Perspectives.TestPlan; } }
         protected override By               byKeyElement    { get { return Locators.byElement; } }
 
-        #endregion The IMainTabContext members
+        #endregion //The InitMainTabContext members
 
         #region Static Elements
 
@@ -46,11 +46,14 @@ namespace WEBPages.MyPCPages
         private WebElement btnPaste
         { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, Locators.btnPasteTitle); } }
 
-        private WebElement TreePanel
-        { get { return mainTab.GetElement().ById(Locators.treePanelID); } }
+        //private WebElement TreePanel
+        //{ get { return mainTab.GetElement().ById(Locators.treePanelID); } }
 
         private WebElement lblWindowTitle
-        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, context.ViewName.GetEnumDescription()); } }
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, ViewName.GetEnumDescription()); } }
+
+        private WebElement btnEditTest
+        { get { return mainTab.GetElement().ByAttribute(TagAttributes.Title, Locators.btnEditTest); } }
 
         #endregion Test Plan Tree toolbar buttons
 
@@ -75,23 +78,22 @@ namespace WEBPages.MyPCPages
 
         public WebElement FindTreeFolder(string folderName)
         {
-            return mainTab.FindTreeItemByText(folderName);
+            return mainTab.FindTreeItemByName(folderName);
         }
 
-        //public WebElement FindScript(string pathToScript)
-        //{ 
-        
-        //}
+        public WebElement FindScript(string scriptName)
+        {
+            return mainTab.FindTreeItemByName(scriptName);
+                //mainTab.GetElement().ByXPath(Locators.scriptXPath).ByText(scriptName);
+        }
 
+        
 
         #endregion Dynamic Elements
 
         #region Helpers
 
-        public bool IsFolderSelected(string folderName)
-        {
-            return folderName == mainTab.FindSelectedFolder();
-        }
+        
         
         #endregion Helpers
 
@@ -105,20 +107,23 @@ namespace WEBPages.MyPCPages
 
         public TestPlanPage SelectSubjectFolder()
         {
-            return SelectTreeItem(Locators.subjectFolderName);
+            // return SelectTreeItem(Locators.subjectFolderName);
+            mainTab.FindTreeItemByName(Locators.subjectFolderName).Click();            
+            return this;
         }
 
         public TestPlanPage SelectTreeItem(string treeItemName)
         {
-            mainTab.FindTreeItemByText(treeItemName).Click();
+            mainTab.FindTreeItemByName(treeItemName).Click();
             return this;
         }
 
-        public TestPlanPage TryExpandTreeNode(string nodeName)
+        public TestPlanPage SelectTreeItem(WebElement item)
         {
-             mainTab.TryExpandTreeFolder(nodeName);
-             return this;      
+            item.Click();
+            return this;
         }
+
 
         public UploadScriptDialog ClickUploadScriptBtn()
         {
@@ -132,9 +137,20 @@ namespace WEBPages.MyPCPages
             return new CreateTestDialog();
         }
 
+        public LoadTest EditLoadTest(string testFolderName, string testName)
+        {
+            mainTab.FindTreeItemByName(testFolderName).Click();
+            mainTab.TryExpandTreeFolder(testFolderName);
+            mainTab.FindTreeItemByName(testName).Click();
+            btnEditTest.Click();
+            LoadTest loadTest = new LoadTest(testName);
+            return loadTest;
+        }
+
+
         #endregion Single Actions
 
-        #region TestPlanPage Actions
+        #region Complex Actions
 
         /// <summary>
         /// Performs select folder in tree and click "Create New Folder" button
@@ -143,7 +159,7 @@ namespace WEBPages.MyPCPages
         /// <param name="parentFolderName"></param>
         public CreateTestFolderDialog OpenCreateNewFolderDialog(string parentFolderName)
         {
-            mainTab.FindTreeItemByText(parentFolderName).Click();           
+            mainTab.FindTreeItemByName(parentFolderName).Click();           
             return ClickCreateNewFolderBtn();
         }
 
@@ -154,7 +170,7 @@ namespace WEBPages.MyPCPages
         /// <param name="parentFolderName"></param>
         public UploadScriptDialog OpenUploadScriptDialog(string parentFolderName)
         {
-            mainTab.FindTreeItemByText(parentFolderName).Click();       
+            mainTab.FindTreeItemByName(parentFolderName).Click();       
             return ClickUploadScriptBtn();
         }
 
@@ -166,12 +182,11 @@ namespace WEBPages.MyPCPages
         /// <param name="testName"></param>
         public CreateTestDialog OpenCreateNewTestDialog(string parentFolderName)
         {
-            mainTab.FindTreeItemByText(parentFolderName).Click();       
+            mainTab.FindTreeItemByName(parentFolderName).Click();       
             return ClickCreateTestBtn();
-        }       
+        }
 
-        #endregion            
-    
-        
+        #endregion //Complex Actions
+
     }
 }

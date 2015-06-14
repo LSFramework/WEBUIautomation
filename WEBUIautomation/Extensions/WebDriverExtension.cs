@@ -14,6 +14,9 @@ namespace WEBUIautomation.Extensions
 
     public static partial class Extensions
     {
+
+
+
         public static object ExecuteJavaScript(this IWebDriverExt driver, string javaScript, params object[] args)
         {
             var javaScriptExecutor = (IJavaScriptExecutor)driver;
@@ -21,7 +24,23 @@ namespace WEBUIautomation.Extensions
             return javaScriptExecutor.ExecuteScript(javaScript, args);
         }
 
-        public static void WaitReadyState(this IWebDriverExt driver)
+
+        public static IWebDriverExt AcceptAlert(this IWebDriverExt driver)
+        {
+            try
+            {
+                driver.SwitchTo().Alert().Accept();
+                driver.SwitchTo().ActiveElement();
+            }
+            catch (NoAlertPresentException)
+            {
+
+            }
+            return driver;
+        }
+      
+
+        public static void WaitStaticDOM(this IWebDriverExt driver)
         {
             Func<bool> ready = () => driver.ExecuteJavaScript("return document.readyState").Equals("complete");
 
@@ -30,6 +49,14 @@ namespace WEBUIautomation.Extensions
                 WaitHelper.SpinWait(ready, TimeSpan.FromSeconds(10), driver.WaitProfile.PollingInterval);
             }
             catch { }
+        }
+
+
+        public static void WaitReadyState(this IWebDriverExt driver)
+        {
+            driver.WaitStaticDOM();
+
+            /// A wait for angular has to be here 
         }
       
         public static string GetNewWindow(this IWebDriverExt driver)
@@ -56,14 +83,11 @@ namespace WEBUIautomation.Extensions
                 IWebElement frame = driver.FindElement(by); 
                 driver.SwitchTo().Frame(frame);
                 driver.CurrentFrame = by;
+                driver.WaitReadyState();
             }
-            return driver;
-        }
 
-        public static void SwitchToFrame(this IWebDriverExt driver, IWebElement inlineFrame)
-        {
-            driver.SwitchTo().Frame(inlineFrame);
-        }                  
+            return driver;
+        }               
         
         public static void Highlight(this IWebDriverExt driver, IWebElement iWebElement, int ms = 20)
         {
@@ -77,19 +101,13 @@ namespace WEBUIautomation.Extensions
             catch (Exception) { }
         }            
         
+
         public static void DragAndDrop(this IWebDriverExt driver, IWebElement source, IWebElement destination)
         {
             (new Actions(driver))
                 .DragAndDrop(source, destination)
                 .Build()
                 .Perform();
-        }
-
-        public static bool TryFindElements(this IWebDriverExt driver, By by, out IEnumerable<IWebElement> collection)
-        {
-            driver.WaitReadyState();
-
-            return (driver as ISearchContext).TryFindElements(by, out collection, driver.WaitProfile.Timeout, driver.WaitProfile.PollingInterval);            
         }
 
 
@@ -107,14 +125,15 @@ namespace WEBUIautomation.Extensions
         }
 
         //Shutdown Driver
-        public static void Shutdown(this IWebDriverExt driver)
+        public static IWebDriverExt Shutdown(this IWebDriverExt driver)
         {
-            if (driver == null) return;
+            if (driver == null) return driver;
 
             Thread.Sleep(1000);
             driver.Quit();
             driver.Dispose();
             driver = null;
+            return driver;
         }
     }
 }
