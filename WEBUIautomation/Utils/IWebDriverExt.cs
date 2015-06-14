@@ -14,6 +14,7 @@ namespace WEBUIautomation.Utils
     //extended IWebDriver interface
     public interface IWebDriverExt : IWebDriver
     {
+
         WaitProfile WaitProfile { get; }
         By CurrentFrame { get; set; }
         string CurrentView { get; set; }
@@ -24,20 +25,25 @@ namespace WEBUIautomation.Utils
    
     public class FirefoxDriverExt : FirefoxDriver, IWebDriverExt
     {
+        public int PID;
         public By CurrentFrame { get; set; }
         public string CurrentView { get; set; }
         public WaitProfile WaitProfile { get; private set; }
 
-        public FirefoxDriverExt(FirefoxProfile profile) : base(profile)
+        public FirefoxDriverExt(FirefoxProfile profile ) :base(profile)
         {
             profile.SetPreference("profile", "default");
-            this.WaitProfile = new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(50));
+            this.WaitProfile = new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(100));
+            //this.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+            //this.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(10));
+            //this.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(2));
+ 
         }
     }
 
-    
     public class ChromeDriverExt : ChromeDriver, IWebDriverExt
     {
+
         public By CurrentFrame { get; set; }
         public string CurrentView { get; set; }
         public WaitProfile WaitProfile { get; private set; }
@@ -46,17 +52,20 @@ namespace WEBUIautomation.Utils
             : base(path, options, commandTimeout)
         {
             this.WaitProfile = waitProfile;
+     
         }
 
         public ChromeDriverExt()
             :this ( DirectoryHelper.ChromeDirectory(), 
                     new ChromeOptions(), TimeSpan.FromSeconds(10),
-                    new WaitProfile(TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(500))) { }
+                    new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(200))) { }
+                
     }
 
    
     public class InternetExplorerDriverExt : InternetExplorerDriver, IWebDriverExt
     {
+
         public By CurrentFrame { get; set; }
         public string CurrentView { get; set; }
         public WaitProfile WaitProfile { get; private set; }
@@ -70,7 +79,7 @@ namespace WEBUIautomation.Utils
         }
 
         public InternetExplorerDriverExt()
-            : this ( Directory.GetCurrentDirectory(), 
+            : this(DirectoryHelper.IEServerDirectory(), 
                     new InternetExplorerOptions
                     {
                         IntroduceInstabilityByIgnoringProtectedModeSettings = true,
@@ -79,13 +88,14 @@ namespace WEBUIautomation.Utils
                         EnableNativeEvents = true
                     }, 
                     new WaitProfile(TimeSpan.FromSeconds(10), 
-                    TimeSpan.FromMilliseconds(50))
+                    TimeSpan.FromMilliseconds(100))
             ) 
         { }
     }
 
     public class PhantomJSDriverExt : PhantomJSDriver, IWebDriverExt
     {
+
         public PhantomJSDriverExt(string path) : base(path) { }
         public By CurrentFrame { get; set; }
         public string CurrentView { get; set; }
@@ -93,7 +103,7 @@ namespace WEBUIautomation.Utils
     }
 
     public class EventFiringWebDriverExt : EventFiringWebDriver, IWebDriverExt
-    {      
+    {
         public EventFiringWebDriverExt(IWebDriver parentDriver) : base(parentDriver) { }
         public By CurrentFrame { get; set; }
         public string CurrentView { get; set; }

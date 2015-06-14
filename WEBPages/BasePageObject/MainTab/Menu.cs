@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
-namespace WEBPages.ContentLocators
+namespace WEBPages.BasePageObject
 {
     public enum MainHead_Links
     {
@@ -64,24 +59,5 @@ namespace WEBPages.ContentLocators
         CreateNew
     }
 
-    public enum DLTabs
-    { 
-        [Description("Summary")]
-        Summary,
-
-        [Description("Groups & Workload")]
-        GroupsAndWorkload,
-
-        [Description("Monitors")]
-        Monitors,
-
-        [Description("Topology")]
-        Topology,
-
-        [Description("Diagnostics")]
-        Diagnostics,
-
-        [Description("Test Runs Trend")]
-        TestRunsTrend
-    }
+   
 }

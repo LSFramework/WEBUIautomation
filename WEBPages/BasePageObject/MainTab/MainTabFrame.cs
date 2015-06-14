@@ -1,14 +1,13 @@
 ﻿using System;
 using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
-using WEBPages.ContentLocators;
 using OpenQA.Selenium;
 using WEBPages.MyPCPages;
 
 namespace WEBPages.BasePageObject
 {
     using Locators = ContentLocators.Locators.MainHeadPage;
-    using System.Diagnostics.Contracts;
+
     
     /// <summary>
     /// 
@@ -33,11 +32,6 @@ namespace WEBPages.BasePageObject
         public override string ViewLocator { get { return _tabContext.ViewName.GetEnumDescription(); } }
 
         #endregion FramePageBase implementation
-        
-        /// <summary>
-        /// To hide default constructor
-        /// </summary>
-        private MainTabFrame() { }
 
         /// <summary>
         /// Ctor to switch driver on the expected view in MainTab frame.
@@ -51,14 +45,13 @@ namespace WEBPages.BasePageObject
         /// <summary>
         /// Provides driver has been focused on the view.
         /// </summary>
-        public IWebDriverExt mainTab
-        { get {  return navigateTab(); } }
+        public IWebDriverExt mainTab { get {  return navigateTab(); } }
 
 
         /// <summary>
         /// Mechanism to switch driver to the view.
         /// </summary>
-        /// <exception cref="OpenQA.Selenium.NotFoundException">Thrown when a modal dialogue opened</exception>
+        /// <exception cref="OpenQA.Selenium.NotFoundException">Throws when a modal dialogue opened</exception>
         private IWebDriverExt navigateTab()
         {
             if (!IsDriverOnTheFrame())
@@ -69,20 +62,25 @@ namespace WEBPages.BasePageObject
                     if (driver.FindElement(_tabContext.byKeyElement).Displayed)
                     {
                         driver.CurrentView = ViewLocator;
+                        return driver;
                     }
-                    else throw new NotFoundException();
+                    else NavigateFromDefaultContent();
                 }
                 catch (Exception)
                 {
-                    driver.SwitchTo().DefaultContent();
-                    MainHead mainHead = new MainHead();
-                    if (mainHead.ModalOpened)
-                        throw new NotFoundException(Locators.strModalOpenedException);
-                    mainHead.ShowPerspective(_tabContext.MenuHeader, _tabContext.ViewName);
+                    NavigateFromDefaultContent();
                 }
             }
 
             return driver;
+        }
+
+        private void NavigateFromDefaultContent()
+        {
+            driver.SwitchTo().DefaultContent();
+            MainHead mainHead = new MainHead();
+
+            mainHead.ShowPerspective(_tabContext.MenuHeader, _tabContext.ViewName);
         }  
       
     }

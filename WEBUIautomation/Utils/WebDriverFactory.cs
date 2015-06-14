@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,33 @@ namespace WEBUIautomation.Utils
                     return new ChromeDriverExt();
 
                 case Browsers.firefox:
-                    return new FirefoxDriverExt(new FirefoxProfile());
-
+                    {
+                        return CreateFirefoxInstance();
+                    }
                 default:
-                    return new FirefoxDriverExt(new FirefoxProfile());
+                    {
+                        return CreateFirefoxInstance();
+                    }
             }
         }
+
+        private FirefoxDriverExt CreateFirefoxInstance()
+        {
+            IEnumerable<int> pidsBefore = Process.GetProcessesByName("firefox").Select(p => p.Id);
+
+            FirefoxDriverExt firefox = new FirefoxDriverExt(new FirefoxProfile());
+
+            IEnumerable<int> pidsAfter = Process.GetProcessesByName("firefox").Select(p => p.Id);
+
+            IEnumerable<int> newFirefoxPids = pidsAfter.Except(pidsBefore);
+
+             if( newFirefoxPids.Any())
+             {
+                 firefox.PID = newFirefoxPids.First();
+             }
+
+             return firefox;
+        }
+
     }
 }

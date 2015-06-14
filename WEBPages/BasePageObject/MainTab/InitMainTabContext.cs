@@ -6,7 +6,7 @@ namespace WEBPages.BasePageObject
     /// <summary>
     /// Implements required data to init a Main Tab view
     /// </summary>
-    public class InitMainTabContext : IMainTabContext
+    public class InitMainTabContext
     {
         /// <summary>
         /// The main tab menu item to select a child menu item e.g. "Test Management" 
@@ -22,12 +22,6 @@ namespace WEBPages.BasePageObject
         /// The key determinant element should be found by this locator to be sure that an expected view is really opened 
         /// </summary>
         public By byKeyElement { get; private set; }
-
-        /// <summary>
-        /// To hide default constructor
-        /// </summary>
-        private InitMainTabContext() { }
-
 
         /// <summary>
         /// Data defines navigation to tab 

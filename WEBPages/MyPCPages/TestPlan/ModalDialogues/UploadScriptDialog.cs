@@ -1,20 +1,17 @@
 ﻿using OpenQA.Selenium;
 using WEBPages.BasePageObject;
 using WEBUIautomation.WebElement;
-using WEBUIautomation.Extensions;
 using WEBPages.Extensions;
-using AutoItX3Lib;
+using WEBUIautomation.Wait;
+using System;
+using System.Windows.Forms;
 
 namespace WEBPages.MyPCPages
 {
-  
+    using Locators = ContentLocators.Locators.UploadScriptDialog;
+   
 
-using Locators = ContentLocators.Locators.UploadScriptDialog;
-    using System.Threading;
-    using WEBUIautomation.Wait;
-    using System;
-
-    public class UploadScriptDialog :   FirstLevelDialog
+    public class UploadScriptDialog : FirstLevelDialog
     {
         #region The dialog locators
 
@@ -28,6 +25,7 @@ using Locators = ContentLocators.Locators.UploadScriptDialog;
         protected override WebElement btnClose { get {return dialog.GetElement().ById(Locators.btnCloseId);} }
         
         private WebElement btnSelect { get { return dialog.GetElement().ByXPath(Locators.btnSelectXpath); } }
+
         private WebElement btnUpload { get { return dialog.GetElement().ById(Locators.btnUploadId); } }
        
         #endregion UI Web Elements
@@ -52,6 +50,7 @@ using Locators = ContentLocators.Locators.UploadScriptDialog;
         /// <returns></returns>
         public UploadScriptDialog ClickSelectBtn()
         {
+           
             btnSelect.ClickPerform();
             return this;
         }
@@ -59,7 +58,8 @@ using Locators = ContentLocators.Locators.UploadScriptDialog;
         public UploadScriptDialog ClickUploadBtn()
         {
             btnUpload.Click();
-            WaitHelper.MakeTry(
+            WaitHelper.WithTimeout(TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(200))
+                .WaitFor(
                 () => GetNotificationMessage().Contains("uploaded")                
                 );
             return this;
@@ -72,18 +72,13 @@ using Locators = ContentLocators.Locators.UploadScriptDialog;
         }
 
 
-        public UploadScriptDialog SelectScript(string pathToScript)
+        public void SelectScript(string pathToScript)
         {
-            return ClickSelectBtn().SendPathToWindow(pathToScript); 
+             ClickSelectBtn();
+             dialog.SendStringToWinDialog(pathToScript);
         }
 
-        private UploadScriptDialog SendPathToWindow(string path)
-        {
-            System.Windows.Forms.SendKeys.SendWait(path);
-            System.Windows.Forms.SendKeys.SendWait("{ENTER}");
-            return this;
-        }
-
+       
         #endregion Actions
     }
 }

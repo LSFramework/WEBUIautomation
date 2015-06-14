@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using WEBPages.MyPCPages;
+using WEBUIautomation.Utils;
 using WEBUItests.Base_Test;
+using WEBUItests.BrowserStack;
 
 namespace WEBUItests.MyPCTests.Start
 {
@@ -8,8 +10,8 @@ namespace WEBUItests.MyPCTests.Start
     /// <summary>
     /// Start Page Test
     /// </summary>
-    [TestFixture] [LoginIfNotLogged]
-    public class StartPage : WEBUItest
+    [TestFixture]
+    public class StartPage : BrowsersTestBase// WEBUItest
     {
         StartTab startTab;
        

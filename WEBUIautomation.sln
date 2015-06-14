@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBUIautomation", "WEBUIautomation\WEBUIautomation.csproj", "{B41AA1F1-F477-437B-9465-B2D99FF89EFD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBUItests", "WEBUItests\WEBUItests.csproj", "{550B5C1F-033B-4886-94EA-F4F07BCF88E3}"
@@ -17,25 +15,43 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B41AA1F1-F477-437B-9465-B2D99FF89EFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B41AA1F1-F477-437B-9465-B2D99FF89EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B41AA1F1-F477-437B-9465-B2D99FF89EFD}.Debug|x86.ActiveCfg = Debug|x86
+		{B41AA1F1-F477-437B-9465-B2D99FF89EFD}.Debug|x86.Build.0 = Debug|x86
 		{B41AA1F1-F477-437B-9465-B2D99FF89EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B41AA1F1-F477-437B-9465-B2D99FF89EFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B41AA1F1-F477-437B-9465-B2D99FF89EFD}.Release|x86.ActiveCfg = Release|x86
+		{B41AA1F1-F477-437B-9465-B2D99FF89EFD}.Release|x86.Build.0 = Release|x86
 		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Debug|x86.ActiveCfg = Debug|x86
+		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Debug|x86.Build.0 = Debug|x86
 		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Release|x86.ActiveCfg = Release|x86
+		{550B5C1F-033B-4886-94EA-F4F07BCF88E3}.Release|x86.Build.0 = Release|x86
 		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Debug|x86.ActiveCfg = Debug|x86
+		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Debug|x86.Build.0 = Debug|x86
 		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Release|x86.ActiveCfg = Release|x86
+		{8B2D8F04-9B50-48D0-8B19-76EE5804DDFF}.Release|x86.Build.0 = Release|x86
 		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Debug|x86.ActiveCfg = Debug|x86
+		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Debug|x86.Build.0 = Debug|x86
 		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Release|x86.ActiveCfg = Release|x86
+		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

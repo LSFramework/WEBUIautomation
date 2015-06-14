@@ -40,10 +40,16 @@ namespace WEBUIautomation.Tags
         [Description("ng-class")]
         NgClass,
 
+        [Description("ng-click")]
+        NgClick,
+
         [Description("local-string")]
         LocalString,
 
         [Description("alt")]
-        Alt
+        Alt,
+
+        [Description("tabindex")]
+        TabIndex
     }
 }

@@ -9,14 +9,19 @@ namespace WEBPages.BasePageObject
         {
             get
             {
-                if (!IsDriverOnTheFrame())
-                {
-                    driver.SwitchToFrame(FrameLocator);
-                    driver.CurrentView = ViewLocator;
-                }
-
-                return driver;
+                return Navigate();
             }
+        }
+
+        private IWebDriverExt Navigate()
+        {
+            if (!IsDriverOnTheFrame())
+            {
+                driver.SwitchToFrame(FrameLocator);
+                driver.CurrentView = ViewLocator;
+            }
+
+            return driver;
         } 
     }
 }

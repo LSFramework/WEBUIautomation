@@ -42,6 +42,7 @@ namespace WEBUIautomation.Extensions
 
         public static bool TryFindElements(this ISearchContext searcher, By by, out IEnumerable<IWebElement> collection, TimeSpan timeout, TimeSpan pollingInterval)
         {
+
             collection = new List<IWebElement>() as IEnumerable<IWebElement>;
            
                 if (searcher.TryFindElement(by, timeout, pollingInterval))
@@ -72,7 +73,6 @@ namespace WEBUIautomation.Extensions
             var collection = wait.Until<IReadOnlyCollection<IWebElement>>
                 (s =>
                     {
-                        Thread.Sleep(pollingInterval.Milliseconds/2);
                         var elements = s.FindElements(by);
                         if (elements.Count == 0)
                             return null;

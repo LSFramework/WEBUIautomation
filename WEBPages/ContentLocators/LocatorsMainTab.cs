@@ -12,89 +12,130 @@ namespace WEBPages.ContentLocators
     {
         public static class ALMMainPage
         {
-            public const string MyPCLink                = @"//a[text()='My Performance Center']";
+            public static readonly string MyPCLink = @"//a[text()='My Performance Center']";
         }
 
         public static class MyPCLoginPage
         {
-            public const string txtUserNameID           = "ctl00_PageContent_txtUserName";
-            public const string txtPasswordID           = "ctl00_PageContent_txtPassword";
-            public const string btnAuthenticateID       = "ctl00_PageContent_btnAuthenticate";
-            public const string ddlDomains_ArrowID      = "ctl00_PageContent_ddlDomains_Arrow";
-            public const string ddlDomains_InputID      = "ctl00_PageContent_ddlDomains_Input";
-            public const string ddlDomains_DropDownID   = "ctl00_PageContent_ddlDomains_DropDown";
-            public const string ddlProjects_ArrowID     = "ctl00_PageContent_ddlProjects_Arrow";
-            public const string ddlProjects_InputID     = "ctl00_PageContent_ddlProjects_Input";
-            public const string ddlProjects_DropDownID  = "ctl00_PageContent_ddlProjects_DropDown";
-            public const string btnLoginID              = "ctl00_PageContent_btnLogin";
+            public static readonly string txtUserNameID = "ctl00_PageContent_txtUserName";
+            public static readonly string txtPasswordID = "ctl00_PageContent_txtPassword";
+            public static readonly string btnAuthenticateID = "ctl00_PageContent_btnAuthenticate";
+            public static readonly string ddlDomains_ArrowID = "ctl00_PageContent_ddlDomains_Arrow";
+            public static readonly string ddlDomains_InputID = "ctl00_PageContent_ddlDomains_Input";
+            public static readonly string ddlDomains_DropDownID = "ctl00_PageContent_ddlDomains_DropDown";
+            public static readonly string ddlProjects_ArrowID = "ctl00_PageContent_ddlProjects_Arrow";
+            public static readonly string ddlProjects_InputID = "ctl00_PageContent_ddlProjects_Input";
+            public static readonly string ddlProjects_DropDownID = "ctl00_PageContent_ddlProjects_DropDown";
+            public static readonly string btnLoginID = "ctl00_PageContent_btnLogin";
         }
 
         public static class MainHeadPage
         {
-            public const string strModalOpenedException = "WebDriver can't get access to the MainHead page.  A modal dialogue is still opened.";
+            public static readonly string strModalOpenedException = "WebDriver can't get access to the MainHead page.  A modal dialogue is still opened.";
 
-            public const string ViewLocator             = "Main Head";
-            public const string FrameLocatorID          = "MastheadDiv";
-            public const string MainTabID               = "MainTab";       
+            public static readonly string ViewLocator = "Main Head";
+            public static readonly string FrameLocatorID = "MastheadDiv";
+            public static readonly string MainTabID = "MainTab";       
 
             public static By FrameLocator               = By.Id(FrameLocatorID);
             public static By MainTabFrame               = By.Id(MainTabID);
 
-            public const string lblUserXPath    = @".//span[contains(@local-string, 'hello')]/..";
-            public const string lblDomainXPath  = @".//span[contains(@local-string, 'domain')]/..";
-            public const string lblProjectXPath = @".//span[contains(@local-string, 'project')]/..";
-            public const string btnLogoutXPath  = @".//span[contains(@local-string, 'logout')]";
-            public const string tabHomeXPath    = @".//span[contains(@class, 'IconContainer IconHome')]";
-            public const string tabDLTXPath     = @".//span[contains(@class, 'IconContainer IconTest-Performance')]";
-            public const string btnCloseDLTXPath= @".//div[contains(@class, 'xButtonWrapper')]";
+            public static readonly string lblUserXPath = @".//span[contains(@local-string, 'hello')]/..";
+            public static readonly string lblDomainXPath = @".//span[contains(@local-string, 'domain')]/..";
+            public static readonly string lblProjectXPath = @".//span[contains(@local-string, 'project')]/..";
+            public static readonly string btnLogoutXPath = @".//span[contains(@local-string, 'logout')]";
+            public static readonly string tabHomeXPath =@".//div[@ng-click='ShowHome()']";
+             //   @".//span[contains(@class, 'IconContainer IconHome')]";
+            public static readonly string tabDLTXPath = @".//span[contains(@class, 'IconContainer IconTest-Performance')]";
+            public static readonly string btnCloseDLTXPath = @".//div[contains(@class, 'xButtonWrapper')]";
 
-            public const string btnRefreshXPath             = @".//div[contains(@ng-click, 'Refresh()')]";
-            public const string menuAutoRefreshClass        = "iconPadding iconPaddingDropdown";
-            public const string menuItemAutoRefreshOnText   = "Auto Refresh On";
-            public const string menuItemAutoRefreshOffText  = "Auto Refresh Off";
-            public const string ModalOpened                 = "ng-scope ng-animate modal-open";
-            public const string bodyXPath                   = "html/body";
+            public static readonly string btnRefreshXPath = @".//div[contains(@ng-click, 'Refresh()')]";
+            public static readonly string menuAutoRefreshClass = "iconPadding iconPaddingDropdown";
+            public static readonly string menuItemAutoRefreshOnText = "Auto Refresh On";
+            public static readonly string menuItemAutoRefreshOffText = "Auto Refresh Off";
+            public static readonly string ModalOpened = "ng-scope ng-animate modal-open";
+            public static readonly string bodyXPath = "html/body";
+
+            public static readonly string tabItemXPath = @".//div[@class='TabsItem']";
+
+
+            public static readonly string tabHomeSelectedClassValue = "Tab Tab-Selected";
+            public static readonly string hidenTabFrameClassValue = "DefaultPage ng-scope hide";
+            public static readonly string shownTabFrameClassValue = "DefaultPage ng-scope show";
+
+            /// <summary>
+            /// Returns XPath string to locate main DLT iframe
+            /// The string of the Xpath depends from test name and test ID 
+            /// which are available from mainHead dltTab Title value
+            /// </summary>
+            internal static string dltIFrameXPath(string fullTitleValue)
+            { 
+                return string.Format(@".//iframe[@name = '{0}']", fullTitleValue); 
+            }
+
+            internal static string runFrameXPath(string fullRunTitleValue)
+            {
+                return string.Format(@".//iframe[@name = '{0}']", fullRunTitleValue);
+            }
 
         }
 
         public static class StartTabPage
         {
-            public const string ViewLocator = "Start";
+            public static readonly string ViewLocator = "Start";
+            public static readonly string operationalHostsAmountXPath = "";
+
+            public static readonly string testLinkClassValue = "BigBoxTableItemWrapper_Title FloatLeft ng-binding";
+            public static readonly string runIdLinkNgClassValue = "SetSelectedRun(run.Id)";
+            public static readonly string lastModifiedTestNgClickValue = "EditTest(item.Id,item.Name)";
+
         }
 
         public static class TestLabPage
         {
-            const string UniqueElementXPath = @".//*[contains(@title, 'Manage Test Sets')]";
+            static readonly string UniqueElementXPath = @".//*[contains(@title, 'Manage Test Sets')]";
 
             public static By byElement = By.XPath(UniqueElementXPath);
 
-            public const string btnManageTestSetsValue  = "Manage Test Sets";
-            public const string btnAssignTestXPath      = @".//a[contains(@title, 'Assign Test to TestSet')]";
-            public const string btnRunTestXPath         = @".//img[contains(@alt, 'Run Test')]";
-            public const string filterByTestSetInputId  = "ctl00_PageContent_Toolbar_toolbar2_i0_SelectTestSetTree_ComboTree_Input"; 
+            public static readonly string btnManageTestSetsValue = "Manage Test Sets";
+            public static readonly string btnAssignTestXPath = @".//a[contains(@title, 'Assign Test to TestSet')]";
+            public static readonly string btnRunTestXPath = @".//img[contains(@alt, 'Run Test')]";
+            public static readonly string filterByTestSetInputId = "ctl00_PageContent_Toolbar_toolbar2_i0_SelectTestSetTree_ComboTree_Input"; 
+                                                                    
         }
 
         public static class TestPlanPage
         {
             public static By byElement= By.XPath(@".//*[contains(@title, 'Test Plan')]");
 
-            public const string subjectFolderName   = "Subject";
-            public const string txtFindNodeID1      = "ctl00_PageContent_WebPartManager";
-            public const string txtFindNodeID2      = "TestPlanTreeControl_GenericTreeView1_RadTextBox1";
-            public const string treePanelID         = "divTestPlanTree";
+            public static readonly string subjectFolderName = "Subject";
+            public static readonly string txtFindNodeID1 = "ctl00_PageContent_WebPartManager";
+            public static readonly string txtFindNodeID2 = "TestPlanTreeControl_GenericTreeView1_RadTextBox1";
+            public static readonly string treePanelID = "divTestPlanTree";
 
-            public const string btnUploadScriptTitle    = "Upload Script";
-            public const string btnCreateTestTitle      = "New Test" ;
-            public const string btnDeleteTitle          = "Delete"; 
-            public const string btnCopyTitle            = "Copy" ;
-            public const string btnCutTitle             =  "Cut";
-            public const string btnPasteTitle           = "Paste";
+            public static readonly string valTreePanel = "RadTreeView RadTreeView_HPX genericTreeView";
+
+            public static readonly string btnUploadScriptTitle = "Upload Script";
+            public static readonly string btnCreateTestTitle = "New Test";
+            public static readonly string btnDeleteTitle = "Delete";
+            public static readonly string btnCopyTitle = "Copy";
+            public static readonly string btnCutTitle = "Cut";
+            public static readonly string btnPasteTitle = "Paste";
+            public static readonly string btnEditTest = "Edit Test";
+
+            public static readonly string newFolderButtonClass = "newFolderButton";
+
+            public static readonly string selectedItemAttributeValue = "rtSelected";
+
+            public static readonly string selectedFolderXPath = @"//img[contains(@src, 'selected_folder')]/following-sibling::span";
+            public static readonly string performanceTestXPath = @"//img[contains(@src, 'test-performance.svg')]/following-sibling::span";
+            public static readonly string scriptXPath = @"//img[contains(@src, 'default_view-script.svg')]/following-sibling::span";
             
-            public const string newFolderButtonClass = "newFolderButton";
 
-            public const string selectedFolderXPath     = @"//img[contains(@src, 'selected_folder')]/following-sibling::span";
-            public const string performanceTestXPath    = @"//img[contains(@src, 'test-performance.svg')]/following-sibling::span";
-            public static string Menu;            
+            public static string TreeItemXPathByName(string treeItemName)
+            { 
+                return string.Format(".//span[@class='rtIn'][text()='{0}']", treeItemName); 
+            }
         }
 
         public static class TestRunsPage
@@ -127,16 +168,7 @@ namespace WEBPages.ContentLocators
             
         }
 
-        public static class DesignLoadTestFrame
-        {
-            public const string strModalOpenedException = MainHeadPage.strModalOpenedException;
-
-            public const string ViewLocator = "Design Load Test Tab";
-
-            public const string FrameLocatorXPath = @".//iframe[contains(@ng-src,'PreManageLoadTest.aspx')]";
-
-            public static By FrameLocator = By.XPath(FrameLocatorXPath);
-        }
+        
 
     }
 }

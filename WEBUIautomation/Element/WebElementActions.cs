@@ -63,10 +63,24 @@ namespace WEBUIautomation.WebElement
 
                 if (string.IsNullOrEmpty(value)) return;
 
-                Browser.ExecuteJavaScript(string.Format("arguments[0].value = \"{0}\";", value), element);
+                try
+                {
+                   // SendKeys("");
+                    SendKeys(value);  
+                    WaitHelper.Wait(Browser.WaitProfile.PollingInterval.Milliseconds);
+                }
+                catch
+                {
+                    Browser.ExecuteJavaScript(string.Format("arguments[0].value = \"{0}\";", value), element);
 
-                WaitHelper.Try(() => FireJQueryEvent(JavaScriptEvents.KeyUp));
+                    WaitHelper.Try(() => FireJQueryEvent(JavaScriptEvents.KeyUp));
+                }
+                finally
+                {
+                    ClearSearchResultCache();
+                }
             }
+
             get
             {
                 var element = FindSingle();
@@ -75,9 +89,18 @@ namespace WEBUIautomation.WebElement
             }
         }
 
+        private void SendKeys(string value, IWebElement element)
+        {
+            element.SendKeys(value);
+            Browser.WaitReadyState();
+            element = FindSingle();
+            if (element.Text != value)
+                throw new Exception();
+        }
+
         public int TextInt
         {
-            set { Text = value.ToString(CultureInfo.InvariantCulture); }
+            set { DoAction(()=>Text = value.ToString(CultureInfo.InvariantCulture)); }
             get { return Text.ToInt(); }
         }
 
@@ -89,6 +112,7 @@ namespace WEBUIautomation.WebElement
         #endregion
 
         #region Common methods        
+
 
         public bool IsEnabled()
         {
@@ -102,34 +126,50 @@ namespace WEBUIautomation.WebElement
 
         public bool Exists(TimeSpan timeSpan)
         {
-            return WaitHelper.SpinWait(Exists, timeSpan, TimeSpan.FromMilliseconds(200));
+
+            return WaitHelper.SpinWait(Exists, timeSpan, Browser.WaitProfile.PollingInterval);
         }
 
         public bool Exists(int seconds)
         {
-            return WaitHelper.SpinWait(Exists, TimeSpan.FromSeconds(seconds), TimeSpan.FromMilliseconds(200));
+            return WaitHelper.SpinWait(Exists, TimeSpan.FromSeconds(seconds), Browser.WaitProfile.PollingInterval);
         }
 
         public void Click(bool useJQuery = false)
         {
             if (useJQuery)
             {
-                Browser.ExecuteJavaScript("TBD js click event on element");
+               FireJQueryEvent(JavaScriptEvents.Click);
+               return;
             }
             
             DoAction( () => FindSingle().Click() );
 
         }
 
+       
+
         public void ClickPerform()
         {
-            Actions action  = new Actions(Browser);
-            action.MoveToElement(FindSingle()).Click().Build().Perform();
+            
+            Actions action = new Actions(Browser);
+
+            action.MoveToElement(FindSingle()).Perform();
+
+            action.ClickAndHold().Perform();
+
+            WaitHelper.Wait(Browser.WaitProfile.PollingInterval);
+
+            action.Release().Perform();
+          
+
+            ClearSearchResultCache();
         }
 
         public void Clear()
         {
             FindSingle().Clear();
+            ClearSearchResultCache();
         }
 
         public void SendKeys(string keys)
@@ -158,6 +198,9 @@ namespace WEBUIautomation.WebElement
             }
 
             Contract.Assert(element.Selected == value);
+
+            ClearSearchResultCache();
+
         }
 
         public void Select(string optionValue)
@@ -168,6 +211,8 @@ namespace WEBUIautomation.WebElement
         public void Select(int optionValue)
         {
             SelectCommon(optionValue.ToString(CultureInfo.InvariantCulture), SelectTypes.ByValue);
+            ClearSearchResultCache();
+
         }
 
         public void SelectByText(string optionText)
@@ -177,12 +222,45 @@ namespace WEBUIautomation.WebElement
 
         public void MouseOver()
         {
-           DoAction( () => FireJQueryEvent(FindSingle(), JavaScriptEvents.MouseOver) );
+        
+            FireJQueryEvent(FindSingle(), JavaScriptEvents.MouseOver);
+            
+            ClearSearchResultCache();
         }
 
+
+
+        // Summary:
+        //     Gets the value of the specified attribute for this element.
+        //
+        // Parameters:
+        //   attributeName:
+        //     The name of the attribute.
+        //
+        // Returns:
+        //     The attribute's current value. Returns a null if the value is not set.
+        //
+        // Exceptions:
+        //   OpenQA.Selenium.StaleElementReferenceException:
+        //     Thrown when the target element is no longer valid in the document DOM.
+        //
+        // Remarks:
+        //     The OpenQA.Selenium.IWebElement.GetAttribute(System.String) method will return
+        //     the current value of the attribute, even if the value has been modified after
+        //     the page has been loaded. Note that the value of the following attributes
+        //     will be returned even if there is no explicit attribute on the element: Attribute
+        //     nameValue returned if not explicitly specifiedValid element typescheckedcheckedCheck
+        //     BoxselectedselectedOptions in Select elementsdisableddisabledInput and other
+        //     UI elements
         public string GetAttribute(TagAttributes tagAttribute)
         {
-            return FindSingle().GetAttribute(tagAttribute.GetEnumDescription());
+            Browser.WaitReadyState(); /// Something wrong with the method
+                                      /// 
+            WaitHelper.Wait(1000); /// Waiting for attributes have been changed successfully
+                                
+            string attributeName = tagAttribute.GetEnumDescription();
+
+            return FindSingle().GetAttribute(attributeName);
         }
 
         #endregion
@@ -193,7 +271,8 @@ namespace WEBUIautomation.WebElement
         {
             var element = FindSingle();
 
-            Browser.SwitchToFrame(element);
+            _searcher = element as ISearchContext;
+           // Browser.SwitchToFrame(element);
         }
 
         public void CacheSearchResult()
@@ -365,7 +444,7 @@ namespace WEBUIautomation.WebElement
         private void FireJQueryEvent(IWebElement element, JavaScriptEvents javaScriptEvent)
         {
             var eventName = javaScriptEvent.GetEnumDescription();
-            Browser.ExecuteJavaScript(string.Format("$(arguments[0]).{0}();", eventName), element);
+            Browser.ExecuteJavaScript(string.Format("arguments[0].style.visibility='visible'; $(arguments[0]).{0}();", eventName), element);
         }
 
         private void MoveToVisible(IWebElement element)

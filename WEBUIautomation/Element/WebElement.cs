@@ -5,6 +5,7 @@ using System.Linq;
 using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
 using System.Collections.ObjectModel;
+using WEBUIautomation.Wait;
 
 namespace WEBUIautomation.WebElement
 {
@@ -16,11 +17,17 @@ namespace WEBUIautomation.WebElement
 
         private IList<IWebElement> _searchCache;
 
-        private IWebDriverExt Browser = Driver.Instance;
+        private IWebDriverExt Browser { get { return Driver.Instance; } }
         
         public WebElement()
             : this(Driver.Instance)
         { }
+
+        public WebElement ReturnFound()
+        {
+             FindSingle();
+             return this;
+        }
 
         private WebElement(ISearchContext searcher)
         {
@@ -29,6 +36,7 @@ namespace WEBUIautomation.WebElement
 
         private IWebElement FindSingle()
         {
+
                 return TryFindSingle();          
         }
        
@@ -41,6 +49,7 @@ namespace WEBUIautomation.WebElement
             catch (StaleElementReferenceException)
             {
                 ClearSearchResultCache();
+                WaitHelper.Wait(Browser.WaitProfile.PollingInterval.Milliseconds);
                 return FindSingleIWebElement();
             }
             catch (InvalidSelectorException)
@@ -84,8 +93,13 @@ namespace WEBUIautomation.WebElement
         }
 
         private IList<IWebElement> FindIWebElements()
-        { 
-            var resultEnumerable = new List<IWebElement>() as IEnumerable<IWebElement>;  
+        {
+            if (_searchCache != null)
+            {
+                return _searchCache;
+            }
+
+            var resultEnumerable = new List<IWebElement>() as IEnumerable<IWebElement>;
 
             bool found=_searcher.TryFindElements(_firstSelector, out resultEnumerable, Browser.WaitProfile.Timeout, Browser.WaitProfile.PollingInterval);
 
@@ -93,9 +107,11 @@ namespace WEBUIautomation.WebElement
                 throw new NoSuchElementException(string.Format("Can't find any element with given search criteria: {0}.",
                     SearchCriteriaToString()));
 
-            if (resultEnumerable.ToList().Count == 1) 
-                return resultEnumerable.ToList();
-            
+            if (resultEnumerable.ToList().Count == 1)
+            {
+                _searchCache = resultEnumerable.ToList();
+                return _searchCache;
+            }
             try
             {
                 resultEnumerable = FilterByVisibility(resultEnumerable).ToList();
@@ -110,22 +126,42 @@ namespace WEBUIautomation.WebElement
                 return new List<IWebElement>();
             }
 
-            return resultEnumerable.ToList();           
+            _searchCache = resultEnumerable.ToList();
+            return _searchCache;           
         }
 
         private WebElementNotFoundException WebElementNotFoundException
         {
             get
             {
-                return new WebElementNotFoundException(string.Format("Can't find single element with given search criteria: {0}.",
-                    SearchCriteriaToString()));
+                return new WebElementNotFoundException
+                    (string.Format("Can't find single element with given search criteria: {0}. Current driver frame is {1} , Current driver view is {2}",
+                    SearchCriteriaToString(), 
+                    Browser.CurrentFrame.ToString(), 
+                    Browser.CurrentView));
             }
         }
 
         public WebElement FindRelative()
         {
-            return new WebElement (this.FindSingle() as ISearchContext);              
-        }      
+            var searcher = FindSingle();
+
+            return new WebElement(searcher);              
+        }
+
+        public WebElement GetParent()
+        {
+            var searcher = FindSingle();
+
+            var element = new WebElement(searcher);
+            
+            element._firstSelector = By.XPath("..");
+            
+            element.FindSingle();
+            
+            return element;
+        }
+
 
         object ICloneable.Clone()
         {

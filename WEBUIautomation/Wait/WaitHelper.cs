@@ -49,9 +49,9 @@ namespace WEBUIautomation.Wait
                 {
                     TimeSpan sleepAmount = Min(_timeout - _stopwatch.Elapsed, _checkInterval);
                  
-                    if(sleepAmount>TimeSpan.Zero) Thread.Sleep(sleepAmount);
+                    if(sleepAmount > TimeSpan.Zero) Thread.Sleep(sleepAmount);
 
-                    if (sleepAmount < TimeSpan.Zero)
+                    if (sleepAmount <= TimeSpan.Zero)
                     {
                         _isSatisfied = false;
                         break;
@@ -128,9 +128,30 @@ namespace WEBUIautomation.Wait
 
 
 
+        /// <summary>
+        /// Repeats action 
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="condition"></param>
+        /// <param name="timeout"></param>
+        /// <param name="pollingInterval"></param>
+        /// <returns></returns>
+        public static bool ReTryActionForCondition
+            (Action action, Func<bool> condition, TimeSpan timeout, TimeSpan pollingInterval)
+        {
+            Func<bool> actionRelatedCondition=()=>Try(action) && condition() ?  true:  false;
+            
+            return SpinWait(actionRelatedCondition,timeout, pollingInterval);
+        }
+
         public static void Wait(int milliseconds)
         {
             Thread.Sleep(milliseconds);
+        }
+
+        public static void Wait(TimeSpan timeout)
+        {
+            Thread.Sleep(timeout);
         }
     }
 

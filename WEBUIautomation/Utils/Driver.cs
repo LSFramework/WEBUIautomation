@@ -21,15 +21,11 @@ namespace WEBUIautomation.Utils
         {
             lock (Instancelocker)
             {
-                instance.Shutdown();
+                instance = instance.Shutdown();
 
                 WebDriverFactory factory = new WebDriverFactory();
                 
-                instance = factory.Create(browser);
-                  
-                instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
-                instance.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(10));
-                instance.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(2));                  
+                instance = factory.Create(browser);                                
             }
         }
     }

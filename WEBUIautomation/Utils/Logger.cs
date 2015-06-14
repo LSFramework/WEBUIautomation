@@ -40,7 +40,7 @@ namespace WEBUIautomation.Utils
                         logStream.WriteLine(DateTime.Now.ToString() + " <font color='red'><b>" + sMessage + "</b></font><br>");
                         break;
                     case msgType.Passed:
-                        logStream.WriteLine(DateTime.Now.ToString() + " <font color='green'><b>" + sMessage + "</b></font><br>");
+                        logStream.WriteLine("{0} <font color='green'><b>{1}</b></font><br>", DateTime.Now.ToString(), sMessage);
                         break;
                 }
 

@@ -5,11 +5,14 @@ using WEBUIautomation.WebElement;
 using WEBPages.BasePageObject;
 using WEBPages.Extensions;
 using WEBPages.ContentLocators;
+using System;
+using System.Diagnostics.Contracts;
 
 namespace WEBPages.MyPCPages
 {
     using Locators = WEBPages.ContentLocators.Locators.MainHeadPage;
-   
+    using WEBUIautomation.Wait;
+
     public class MainHead: FramePageBase
     {
         #region Page Locators      
@@ -20,16 +23,11 @@ namespace WEBPages.MyPCPages
 
         public override string ViewLocator { get { return Locators.ViewLocator; } }        
 
-        public bool PageCanGetFocus()
-        { 
-            return driver.CurrentFrame == FrameLocator || driver.CurrentFrame == MainTabFrame; 
-        }
-
         public bool ModalOpened
         {
             get
             {
-                WebElement body = new WebElement().ByXPath(Locators.bodyXPath);
+                WebElement body = mainPage.GetElement().ByXPath(Locators.bodyXPath);
                 return body.GetAttribute(WEBUIautomation.Tags.TagAttributes.Class) == Locators.ModalOpened;
             }
         }
@@ -38,17 +36,26 @@ namespace WEBPages.MyPCPages
         {
             get 
             {
-                if (driver.CurrentFrame != FrameLocator)
-                {   
-                    driver.SwitchToDefaultContent();
-                    if (ModalOpened)
-                        throw new NotFoundException(Locators.strModalOpenedException);
-                }
-                driver.CurrentView = ViewLocator;
-                return driver;            
+                return Navigate();           
             }
         }
 
+        private IWebDriverExt Navigate()
+        {
+            if (driver.CurrentFrame != FrameLocator)
+            {
+                driver.SwitchToDefaultContent();
+
+                if (ModalOpened)
+                {
+                    WaitHelper.WithTimeout(TimeSpan.FromSeconds(5)).WaitFor(() => !ModalOpened);
+                }
+            }
+
+            driver.CurrentView = ViewLocator;
+            
+            return driver;
+        }
 
         #endregion // Page Locator
 
@@ -68,11 +75,72 @@ namespace WEBPages.MyPCPages
 
         #region Main Head Tabs Elements Locators
 
-        private WebElement tabHome      { get { return mainPage.GetElement().ByXPath(Locators.tabHomeXPath); } }
+        private WebElement tabHome { get { return mainPage.GetElement().ByXPath(Locators.tabHomeXPath); } }
 
-        private WebElement btnCloseDLT  { get { return mainPage.GetElement().ByXPath(Locators.btnCloseDLTXPath); } }
+        public bool IsHomeTabShown
+        {
+            get
+            {
+                return tabHome.GetAttribute(WEBUIautomation.Tags.TagAttributes.Class) == Locators.tabHomeSelectedClassValue;
+            }
+        }
 
-        private WebElement tabDLT       { get { return mainPage.GetElement().ByXPath(Locators.tabDLTXPath); } }
+        private WebElement btnCloseDLT  { get { return mainPage.GetElement().ByXPath(Locators.btnCloseDLTXPath); } }        
+
+        public WebElement DltTab (string testName)
+        {
+            Contract.Assume(testName != string.Empty, "testName cannot be empty");
+
+            string testDltName = testName + " ";
+
+            return mainPage.GetElement()
+                .ByXPath(Locators.tabItemXPath)
+                .ByAttribute(WEBUIautomation.Tags.TagAttributes.Title, testDltName, false);
+        }
+
+        public bool IsDltShown(string testName)
+        {
+            string fullTitleValue =GetDltTabFullTitleValue(testName);
+           
+            WebElement dltFrame = mainPage.GetElement().ByXPath(Locators.dltIFrameXPath(fullTitleValue));
+
+            string currentDltFrameClassValue = dltFrame.GetAttribute(WEBUIautomation.Tags.TagAttributes.Class);
+
+            return  currentDltFrameClassValue == Locators.shownTabFrameClassValue;
+
+        }
+
+        public string GetDltTabFullTitleValue(string testName)
+        {
+            return DltTab(testName).GetAttribute(WEBUIautomation.Tags.TagAttributes.Title);
+        }
+
+        public WebElement TestExecutionTab(string runName)
+        {
+            Contract.Assume(runName != string.Empty, "runName cannot be empty");
+
+             string runTestName = runName + "_";
+
+             return mainPage.GetElement().ByTagName(WEBUIautomation.Tags.TagNames.Div).ByClass("TabsItem")
+                //.ByXPath(Locators.tabItemXPath)
+                .ByAttribute(WEBUIautomation.Tags.TagAttributes.Title, runTestName, false);
+        }
+
+        public string GetExecutionTabFullTitleValue(string runName)
+        {
+            return TestExecutionTab(runName).GetAttribute(WEBUIautomation.Tags.TagAttributes.Title);
+        }
+
+        public bool IsExecutionTabShown(string runName)
+        {
+            string fullRunTitleValue = GetExecutionTabFullTitleValue(runName);
+           
+            WebElement executionFrame = mainPage.GetElement().ByXPath(Locators.runFrameXPath(fullRunTitleValue));
+
+            string currentExecutionFrameClassValue = executionFrame.GetAttribute(WEBUIautomation.Tags.TagAttributes.Class);
+
+            return currentExecutionFrameClassValue == Locators.shownTabFrameClassValue;
+        }
 
         #endregion  Main Head Tabs Elements Locators
 
@@ -80,19 +148,21 @@ namespace WEBPages.MyPCPages
 
         #region Links
 
-        WebElement mhLink(MainHead_Links mhLink)
+        private WebElement mhLink(MainHead_Links mhLink)
         {
             return mainPage.GetElement().ByText(mhLink.GetEnumDescription());
         }
 
-        WebElement menu(Perspectives menuItem)
+        private WebElement menu(Perspectives menuItem)
         {
             return mainPage.GetElement().ByText(menuItem.GetEnumDescription());
         }
 
         #endregion Links
 
+        //
         #region Refresh Section
+
         /// <summary>
         /// Refresh Button
         /// </summary>
@@ -124,6 +194,7 @@ namespace WEBPages.MyPCPages
                     .ByText(Locators.menuItemAutoRefreshOnText);
             }
         }
+        
         /// <summary>
         /// Auto refresh Off
         /// </summary>
@@ -181,11 +252,15 @@ namespace WEBPages.MyPCPages
             tabHome.Click();
         }
 
-        public void ClickDLTTab()
+        public void ClickDLTTab(string testName)
         {
-            tabDLT.Click();
+            DltTab(testName).Click();
         }
 
+        public void ClickExecutionTab(string runName)
+        {
+            TestExecutionTab(runName).Click();
+        }
 
         #endregion Main Head Tabs Actions
 
@@ -206,9 +281,15 @@ namespace WEBPages.MyPCPages
 
         public void ShowPerspective(MainHead_Links menuHeader, Perspectives viewName)
         {
-            MenuHeaderMouseOver(menuHeader).MenuItemClick(viewName);
-            driver.SwitchToFrame(MainTabFrame);
-            driver.CurrentView = viewName.GetEnumDescription();
+            if (driver.CurrentView != viewName.GetEnumDescription())
+            {   
+                if (!IsHomeTabShown)
+                    tabHome.Click();
+            
+                MenuHeaderMouseOver(menuHeader).MenuItemClick(viewName);
+                driver.SwitchToFrame(MainTabFrame);
+                driver.CurrentView = viewName.GetEnumDescription();
+            }
         }
 
         public MainHead MenuHeaderMouseOver(MainHead_Links menuHeader)
