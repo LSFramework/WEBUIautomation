@@ -118,6 +118,10 @@
     <Compile Include="TestsDebug\WaitForTestRun.cs" />
     <Compile Include="Tests\Start\StartPage.cs" />
     <Compile Include="Tests\TestManagement\Dlt.cs" />
+    <Compile Include="TestsDebug\UploadScript.cs" />
+    <Compile Include="Tests\Start\StartPage.cs" />
+    <Compile Include="Tests\TestManagement\Dlt.cs" />
+    <Compile Include="Tests\TestManagement\Dlt_AddSLA.cs" />
     <Compile Include="TestVariables\Config.cs" />
     <Compile Include="Tests\Login.cs" />
     <Compile Include="Tests\Logout.cs" />

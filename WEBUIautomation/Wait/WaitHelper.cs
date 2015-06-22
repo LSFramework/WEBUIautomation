@@ -126,8 +126,6 @@ namespace WEBUIautomation.Wait
             return left.CompareTo(right) < 0 ? left : right;
         }
 
-
-
         /// <summary>
         /// Repeats action 
         /// </summary>

@@ -52,6 +52,8 @@ namespace WEBPages.Extensions
             WaitHelper.Try(() => parentElement.FindRelative().ByXPath(collapsed).Click());
         }
 
+       
+
         public static IWebDriverExt SwitchToDefaultContent(this IWebDriverExt driver)
         {
             driver.WaitReadyState();
