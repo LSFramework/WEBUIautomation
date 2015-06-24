@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBPages", "WEBPages\WEBPag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestResultGenerator", "TestResultGenerator\TestResultGenerator.csproj", "{9DCB8621-040A-4956-9DCA-5217FD857B5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{251DACBA-254C-4F16-A4F0-11257E47D394}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,12 @@ Global
 		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Release|x86.ActiveCfg = Release|x86
 		{9DCB8621-040A-4956-9DCA-5217FD857B5F}.Release|x86.Build.0 = Release|x86
+		{251DACBA-254C-4F16-A4F0-11257E47D394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{251DACBA-254C-4F16-A4F0-11257E47D394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{251DACBA-254C-4F16-A4F0-11257E47D394}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{251DACBA-254C-4F16-A4F0-11257E47D394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{251DACBA-254C-4F16-A4F0-11257E47D394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{251DACBA-254C-4F16-A4F0-11257E47D394}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

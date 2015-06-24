@@ -2,7 +2,6 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using WEBUIautomation.Utils;
@@ -11,19 +10,14 @@ using WEBUIautomation.Wait;
 
 namespace WEBUIautomation.Extensions
 {
-
     public static partial class Extensions
     {
-
-
-
         public static object ExecuteJavaScript(this IWebDriverExt driver, string javaScript, params object[] args)
         {
             var javaScriptExecutor = (IJavaScriptExecutor)driver;
 
             return javaScriptExecutor.ExecuteScript(javaScript, args);
         }
-
 
         public static IWebDriverExt AcceptAlert(this IWebDriverExt driver)
         {
@@ -39,7 +33,6 @@ namespace WEBUIautomation.Extensions
             return driver;
         }
       
-
         public static void WaitStaticDOM(this IWebDriverExt driver)
         {
             Func<bool> ready = () => driver.ExecuteJavaScript("return document.readyState").Equals("complete");
@@ -51,7 +44,6 @@ namespace WEBUIautomation.Extensions
             catch { }
         }
 
-
         public static void WaitReadyState(this IWebDriverExt driver)
         {
             driver.WaitStaticDOM();
@@ -62,6 +54,7 @@ namespace WEBUIautomation.Extensions
         public static string GetNewWindow(this IWebDriverExt driver)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            
             string window = wait.Until<string>
              (d =>
                 {   
@@ -101,7 +94,6 @@ namespace WEBUIautomation.Extensions
             catch (Exception) { }
         }            
         
-
         public static void DragAndDrop(this IWebDriverExt driver, IWebElement source, IWebElement destination)
         {
             (new Actions(driver))
@@ -110,21 +102,17 @@ namespace WEBUIautomation.Extensions
                 .Perform();
         }
 
-
-        //Maximize Browsers window
         public static void BrowserMaximize(this IWebDriverExt driver)
         {
             driver.Manage().Window.Maximize();
         }
 
-        //Set Browsers resolution
         public static void SetBrowserResolution(this IWebDriverExt driver, int width, int height)
         {
             driver.Manage().Window.Position = new Point(0, 0);
             driver.Manage().Window.Size = new Size(width, height);
         }
 
-        //Shutdown Driver
         public static IWebDriverExt Shutdown(this IWebDriverExt driver)
         {
             if (driver == null) return driver;

@@ -23,8 +23,8 @@ namespace WEBUItests.MyPCTests.Test_2_TestManagement_TestLab
         NewTestSetFolderDialog dlgCreateTestFolder;
         NewTestSetDialog dlgCreateTesSet;
 
-        string tsFolderName = Variables.TestLab.testSetFolderName;
-        string tsName = Variables.TestLab.testSetName;
+        string tsFolderName = StaticVariables.TestLab.testSetFolderName;
+        string tsName = StaticVariables.TestLab.testSetName;
 
         /// <summary>
         /// Navigate to Test Lab perspective

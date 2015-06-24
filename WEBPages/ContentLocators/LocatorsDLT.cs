@@ -28,6 +28,9 @@ namespace WEBPages.ContentLocators
             public static readonly By TabsFrameLocator = By.Id("tabs");
             public static readonly By WorkloadFrameLocator = By.Id("workload");
             public static readonly By ActionsFrameLocator = By.Id("actions");
+            public static readonly string firstPartXPathLocator = @".//ul[@class='rtsUL']/li[";
+            public static readonly string lastPartXPathLocator = "]";
+
             
         }
 
@@ -69,11 +72,12 @@ namespace WEBPages.ContentLocators
 
             public static readonly string TreeSlidingZone_ClientStateXPath = @"//*[@id='RAD_SPLITTER_PANE_CONTENT_ctl00_PageContent_TreePane']/input";
             public static string DockedValue="\"dockedPaneId\":\"ctl00_PageContent_TreeSlidingPane\"";       
-            public static string ExpandedValue="\"expandedPaneId\":\"ctl00_PageContent_TreeSlidingPane\"";            
-
+            public static string ExpandedValue="\"expandedPaneId\":\"ctl00_PageContent_TreeSlidingPane\"";  
 
             #endregion Locators to Tree Slider Pane
 
+            public static readonly string rowDurationXPath = @".//*[@id='ctl00_PageContent_Scheduler_SchedulerGrid_RowId2']/td[1]";
+            public static readonly string inputDuarationId = "ctl00_PageContent_Scheduler_SchedulerGrid_DayNTimeIntervalSecs";
 
 
         }

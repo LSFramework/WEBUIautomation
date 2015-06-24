@@ -3,8 +3,6 @@ using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
 using WEBPages.BasePageObject; 
 using WEBPages.Extensions;
-using WEBPages.ContentLocators;
-using WEBUIautomation.Utils;
 using OpenQA.Selenium;
 
 namespace WEBPages.MyPCPages

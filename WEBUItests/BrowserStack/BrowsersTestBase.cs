@@ -44,7 +44,7 @@ namespace WEBUItests
         {
             
             defaultBrowser = Extensions.GetEnumFromString<Browsers>(browser);
-            //Variables.BROWSER = defaultBrowser;
+            //StaticVariables.BROWSER = defaultBrowser;
 
             Logger.Log("Starting Test Set on " + defaultBrowser.GetEnumDescription(), Logger.msgType.Message);
 

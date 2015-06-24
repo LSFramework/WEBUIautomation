@@ -21,8 +21,8 @@ namespace WEBPages.MyPCPages.DesignLoadTest
             :base(loadTest)
         { }
 
-        private WebElement toolSLACreate { get { return workload.GetElement().ById(Locators.toolSLACreate); } }
-                     
+        private WebElement toolSLACreate 
+        { get { return workload.GetElement().ById(Locators.toolSLACreate); } }             
         
         public DltSummaryPage ClickAddNewSlaBtn()
         {

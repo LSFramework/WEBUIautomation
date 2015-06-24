@@ -1,16 +1,11 @@
 ﻿using OpenQA.Selenium;
-using System;
-using WEBUIautomation.Utils;
 using WEBUIautomation.WebElement;
-using WEBUIautomation.Extensions;
 using WEBPages.Extensions;
 using WEBPages.BasePageObject;
 
 namespace WEBPages.MyPCPages
 {
-
     using Locators = WEBPages.ContentLocators.Locators.CreateTestDialog;
-    using WEBPages.MyPCPages.DesignLoadTest;
 
     public class CreateTestDialog : FirstLevelDialog
     {
@@ -39,7 +34,6 @@ namespace WEBPages.MyPCPages
 
         WebElement btnHelp
         { get { return dialog.GetElement().ById(Locators.btnHelpID); } }
-
 
         #endregion UI Web Elements
 
@@ -71,11 +65,9 @@ namespace WEBPages.MyPCPages
             cmbTestSetTree.Click();
             dialog.TryExpandTreeFolder("Root");
             dialog.TryExpandTreeFolder(testSetFolder);
-            dialog.FindTreeItemByName(testSetName).Click();
-            
+            dialog.FindTreeItemByName(testSetName).Click();            
             return this;
         }
-
 
         public CreateTestDialog SelectFolder(string folderName)
         {

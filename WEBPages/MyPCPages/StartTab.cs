@@ -1,14 +1,12 @@
-﻿using OpenQA.Selenium;
-using WEBUIautomation.Extensions;
+﻿using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
 using WEBPages.Extensions;
 using WEBPages.BasePageObject;
-using WEBPages.ContentLocators;
+using WEBPages.MyPCPages.DesignLoadTest;
 
 namespace WEBPages.MyPCPages
 {
-    using Locators = ContentLocators.Locators.StartTabPage;
-    using WEBPages.MyPCPages.DesignLoadTest;
+    using Locators = ContentLocators.Locators.StartTabPage;   
   
     public class StartTab : MainHead
     {

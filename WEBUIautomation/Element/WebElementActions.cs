@@ -147,8 +147,6 @@ namespace WEBUIautomation.WebElement
 
         }
 
-       
-
         public void ClickPerform()
         {
             
@@ -449,13 +447,24 @@ namespace WEBUIautomation.WebElement
 
         private void MoveToVisible(IWebElement element)
         {
-            Browser.ExecuteJavaScript(String.Format("window.scrollTo(0,{0});", element.Location.Y));
-            Browser.ExecuteJavaScript("arguments[0].scrollIntoView(true);", element);
-            Browser.WaitReadyState();
+
+            try
+            {
+                Actions actions = new Actions(Browser);
+                actions.MoveToElement(element);
+                actions.Perform();
+                Browser.WaitReadyState();
+            }
+            catch
+            {
+                Browser.ExecuteJavaScript(String.Format("window.scrollTo(0,{0});", element.Location.Y));
+                //Browser.ExecuteJavaScript(String.Format("window.scrollBy(0,{0});", element.Location.Y));
+                Browser.ExecuteJavaScript("arguments[0].scrollIntoView(true);", element);
+                Browser.WaitReadyState();
+            }
         }
 
-        #endregion
-               
+        #endregion   
     }
 
     public enum JavaScriptEvents

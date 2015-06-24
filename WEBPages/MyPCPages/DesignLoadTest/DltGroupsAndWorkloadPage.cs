@@ -4,11 +4,10 @@ using WEBPages.Extensions;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.Wait;
 using WEBUIautomation.WebElement;
+using System;
 
 namespace WEBPages.MyPCPages.DesignLoadTest
 {
-
-    using System;
     using Locators = ContentLocators.Locators.DltGroupsAndWorkloadPage;
 
     public class DltGroupsAndWorkloadPage : WorkLoadBasePage
@@ -82,12 +81,16 @@ namespace WEBPages.MyPCPages.DesignLoadTest
 
         #endregion Workload Type Dialog private memebers
 
-
         #region Tree Sliding Panel private memebers
 
-        //The element from we can know is slider shown, hiden, docked
-        private WebElement TreeSlidingZone_ClientStateInput 
-        { get { return workload.GetElement().ByXPath(Locators.TreeSlidingZone_ClientStateXPath); } }
+        //The element from we know is slider shown, hiden, docked
+        private WebElement TreeSlidingZone_ClientStateInput
+        {
+            get
+            {
+                return workload.GetElement().ByXPath(Locators.TreeSlidingZone_ClientStateXPath);
+            }
+        }
 
         private bool SlidingDocked
         {
@@ -97,6 +100,7 @@ namespace WEBPages.MyPCPages.DesignLoadTest
                 return val.Contains(Locators.DockedValue);
             }
         }
+
         private bool SlidingExpanded
         {
             get
@@ -112,17 +116,8 @@ namespace WEBPages.MyPCPages.DesignLoadTest
             return SlidingExpanded;
         }
 
-
-
         public DltGroupsAndWorkloadPage OpenSlidingTreePanel()
         {
-            if (SlidingDocked) return this;
-
-            if (SlidingExpanded) return this;
-
-            //WaitHelper.WithTimeout(TimeSpan.FromSeconds(10), TimeSpan.FromMilliseconds(500))
-            //    .WaitFor(()=>ClickSelectTest());
-
             WaitHelper.ReTryActionForCondition(
                 ()=>btnSelectScripts.Click(), 
                 ()=>SlidingExpanded, 
@@ -131,7 +126,6 @@ namespace WEBPages.MyPCPages.DesignLoadTest
 
             return this;
         }
-
 
         #endregion Tree Slider Panel private memebers
 
@@ -148,15 +142,19 @@ namespace WEBPages.MyPCPages.DesignLoadTest
         { get { return workload.GetElement().ById(Locators.txtLoadGenerators); } }
 
         private WebElement btnCollapseScriptsSlidingPane
-        { get { return workload.GetElement().ById(Locators.btnCollapseScriptsSlidingPane); } } //
+        { get { return workload.GetElement().ById(Locators.btnCollapseScriptsSlidingPane); } }
 
+        private WebElement rowDuration
+        { get { return workload.GetElement().ByXPath(Locators.rowDurationXPath); } }
+
+        private WebElement inputDuaration
+        { get { return workload.GetElement().ById(Locators.inputDuarationId); } }
 
         private DltGroupsAndWorkloadPage btnWorkloadTypeClick()
         {
             btnWorkloadType.Click();
             return this;
         }
-
 
         public DltGroupsAndWorkloadPage AddScript(string folderName, string scriptName)
         {
@@ -183,17 +181,15 @@ namespace WEBPages.MyPCPages.DesignLoadTest
 
         public DltGroupsAndWorkloadPage AddNumberOfLGs(int number)
         {
-            //txtLoadGenerators.Click();
             txtLoadGenerators.TextInt = number;
             WaitHelper.ReTryActionForCondition(
-                ()=>txtLoadGenerators.TextInt= number, 
-                ( )=>txtLoadGenerators.TextInt==number,
+                ( )=>txtLoadGenerators.TextInt = number, 
+                ( )=>txtLoadGenerators.TextInt ==number,
                 TimeSpan.FromSeconds(10), 
                 TimeSpan.FromMilliseconds(500));
 
             return this;
         }
-
 
         public DltGroupsAndWorkloadPage CollapseScriptsSlidingPane()
         {
@@ -203,5 +199,13 @@ namespace WEBPages.MyPCPages.DesignLoadTest
             return this;
         }
 
+        public DltGroupsAndWorkloadPage SetDuration(TimeSpan duration)
+        {
+            string input = duration.ToString(@"dd\:hh\:mm\:ss");
+            this.rowDuration.Click();
+            inputDuaration.Text = input;
+
+            return this;
+        }
     }
 }

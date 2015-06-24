@@ -3,6 +3,9 @@ using System.IO;
 
 namespace WEBUIautomation.Utils
 {
+
+    ///To Be rewrited to NLog 
+    
     //Class for Logging Webdriver events
     public class Logger
     {
@@ -70,4 +73,7 @@ namespace WEBUIautomation.Utils
         }
          
     }
+
+
+    
 }

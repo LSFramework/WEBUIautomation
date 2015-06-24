@@ -1,10 +1,10 @@
 ﻿using WEBPages.BasePageObject;
 using WEBPages.MyPCPages.DesignLoadTest;
+
 namespace WEBPages.MyPCPages
 {
     public class TestPlanFunctionality:TestPlanPage
-    {
-        
+    {     
         public TestPlanPage CreateFolder(string folderName)
         {
           return SelectSubjectFolder()
@@ -38,7 +38,6 @@ namespace WEBPages.MyPCPages
 
             return new DLT(test);
         }
-
 
         public TestPlanPage UploadScript(string folderName, string pathToScript) 
         {

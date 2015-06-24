@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading;
-using System.Drawing;
 using WEBUIautomation.Extensions;
 
 namespace WEBUIautomation.Utils
@@ -10,6 +8,7 @@ namespace WEBUIautomation.Utils
         public static IWebDriverExt Instance 
         { 
             get { return instance ; } 
+
             set { instance = value; } 
         }
         

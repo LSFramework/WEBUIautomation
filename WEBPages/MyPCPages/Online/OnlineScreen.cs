@@ -9,10 +9,8 @@ using WEBUIautomation.Extensions;
 
 namespace WEBPages.MyPCPages.Online
 {
-  
-using Locators = ContentLocators.Locators.Online;
+    using Locators = ContentLocators.Locators.Online;
  
-
     public class OnlineScreen : FramePageBase
     {
         public LoadTest LoadTest { get; private set; }
@@ -20,11 +18,10 @@ using Locators = ContentLocators.Locators.Online;
         private string runName { get { return LoadTest[TestAttributes.TestName]; } }
 
         public override string ViewLocator
-        {
-            get { return Locators.ViewLocator; }
-        }
+        { get { return Locators.ViewLocator; } }
 
-        public override By FrameLocator { get { return frameLocator(); } }
+        public override By FrameLocator 
+        { get { return frameLocator(); } }
 
         private By _frameLocator;
 
@@ -50,9 +47,6 @@ using Locators = ContentLocators.Locators.Online;
 
             return _frameLocator;
         }
-
-       
-
 
         public OnlineScreen(LoadTest loadTest)
         {

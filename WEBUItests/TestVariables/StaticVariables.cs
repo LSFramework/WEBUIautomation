@@ -8,7 +8,7 @@ namespace WEBUItests.TestVariables
     /// <summary>
     /// To use the same test variables between fixtures
     /// </summary>
-    public class Variables
+    public class StaticVariables
     {
         //private static Browsers browser;
 

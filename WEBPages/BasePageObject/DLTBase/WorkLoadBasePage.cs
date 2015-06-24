@@ -8,9 +8,7 @@ using WEBPages.MyPCPages.TestRunDialog;
 namespace WEBPages.BasePageObject
 {
     using Locators = ContentLocators.Locators.DltBasePage;
-   
-
-
+  
     public abstract class WorkLoadBasePage : IWorkLoadBasePage
     {
         protected abstract WorkloadMenu ViewName { get; }
@@ -18,19 +16,17 @@ namespace WEBPages.BasePageObject
 
         protected WorkloadContext context;
 
-        private DesignLoadTestFrame mainDltframe;
-        private IWebDriverExt actions { get { return mainDltframe.ActionsFrame; } }
-        
+        private DltMainFrame dltMainFrame;
+       
         protected WorkLoadBasePage(LoadTest loadTest)
         {
             context = new WorkloadContext(ViewName, byKeyElement);
-            mainDltframe = new DesignLoadTestFrame(loadTest);
-          
+            dltMainFrame = new DltMainFrame(loadTest);
         }
 
-      
-
-        protected IWebDriverExt workload { get { return mainDltframe.WorkloadFrame(context); } }       
+        private IWebDriverExt actions { get { return dltMainFrame.ActionsFrame; } }
+        
+        protected IWebDriverExt workload { get { return dltMainFrame.WorkloadFrame(context); } }       
 
         protected WebElement actionMessage { get { return actions.GetElement().ById(Locators.actionMessageId); } }
         protected WebElement btnSaveAndRun { get { return actions.GetElement().ById(Locators.btnSaveAndRunId); } }

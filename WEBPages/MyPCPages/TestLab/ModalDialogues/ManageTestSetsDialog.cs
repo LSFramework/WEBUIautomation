@@ -7,7 +7,6 @@ namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.ManageTestSetsDialog;
     
-
     /// <summary>
     /// Implements  actions for Manage Test Sets dialog
     /// </summary>
@@ -15,8 +14,11 @@ namespace WEBPages.MyPCPages
     {       
         #region The dialog locators
 
-        public override By FrameLocator { get { return Locators.FrameLocator; } }        
-        public override string ViewLocator { get { return Locators.ViewLocator; } }
+        public override By FrameLocator 
+        { get { return Locators.FrameLocator; } }        
+
+        public override string ViewLocator 
+        { get { return Locators.ViewLocator; } }
         
         #endregion The dialog locators
 
@@ -25,19 +27,24 @@ namespace WEBPages.MyPCPages
         /// <summary>
         /// returns name of a selected folder in tree.
         /// </summary>
-        public string SelectedFolder { get { return dialog.FindSelectedFolder(); } }
+        public string SelectedFolder 
+        { get { return dialog.FindSelectedFolder(); } }
 
         #endregion Properties
 
         #region UI Web Elements
 
-        private WebElement btnNewFolder { get { return dialog.GetElement().ByClass(Locators.btnNewFolderClassName, false); } }
+        private WebElement btnNewFolder 
+        { get { return dialog.GetElement().ByClass(Locators.btnNewFolderClassName, false); } }
 
-        private WebElement btnNewTestSet { get { return dialog.GetElement().ByClass(Locators.btnNewTestSetClassName, false); } }
+        private WebElement btnNewTestSet 
+        { get { return dialog.GetElement().ByClass(Locators.btnNewTestSetClassName, false); } }
 
-        private WebElement btnDelete { get { return dialog.GetElement().ByClass(Locators.btnDeleteItemClassName, false); } }
+        private WebElement btnDelete 
+        { get { return dialog.GetElement().ByClass(Locators.btnDeleteItemClassName, false); } }
 
-        private WebElement treeView { get { return dialog.GetElement().ById(Locators.treeViewID); } }
+        private WebElement treeView 
+        { get { return dialog.GetElement().ById(Locators.treeViewID); } }
 
         #endregion UI Web Elements
 

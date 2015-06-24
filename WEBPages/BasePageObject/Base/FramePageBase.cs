@@ -3,21 +3,27 @@
 
 namespace WEBPages.BasePageObject
 {
-
     public abstract class FramePageBase : DriverContainer, IFrame
     {
-        //Frame Url
+        /// <summary>
+        /// Frame Url
+        /// </summary>
         public string Url { get; protected set; }
 
-        //Name of Perspective view 
+        /// <summary>
+        /// Name of Perspective view 
+        /// </summary>
         public abstract string ViewLocator { get; }
 
-        //The locator of a frame contains HTML content of the view
+        /// <summary>
+        /// The locator of a frame contains HTML content of the view
+        /// </summary>
         public abstract By FrameLocator { get; }
 
-        // Returns true if an expected view is opened, otherwise returns false
-        public bool ViewOpened
-        { get { return driver.CurrentView == ViewLocator; } }
+        /// <summary>
+        /// Returns true if an expected view is opened, otherwise returns false
+        /// </summary>
+        public bool ViewOpened { get { return driver.CurrentView == ViewLocator; } }
 
         /// <summary>
         ///  Checks the driver is focused on the expected view

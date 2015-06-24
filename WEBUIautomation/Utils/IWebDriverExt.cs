@@ -14,7 +14,6 @@ namespace WEBUIautomation.Utils
     //extended IWebDriver interface
     public interface IWebDriverExt : IWebDriver
     {
-
         WaitProfile WaitProfile { get; }
         By CurrentFrame { get; set; }
         string CurrentView { get; set; }
@@ -22,7 +21,6 @@ namespace WEBUIautomation.Utils
 
     #region IWebDriverExt instances implementations for some browsers
 
-   
     public class FirefoxDriverExt : FirefoxDriver, IWebDriverExt
     {
         public int PID;
@@ -34,10 +32,6 @@ namespace WEBUIautomation.Utils
         {
             profile.SetPreference("profile", "default");
             this.WaitProfile = new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(100));
-            //this.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
-            //this.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(10));
-            //this.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(2));
- 
         }
     }
 
@@ -58,11 +52,11 @@ namespace WEBUIautomation.Utils
         public ChromeDriverExt()
             :this ( DirectoryHelper.ChromeDirectory(), 
                     new ChromeOptions(), TimeSpan.FromSeconds(10),
-                    new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(200))) { }
+                    new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(200))) 
+        { }
                 
     }
-
-   
+ 
     public class InternetExplorerDriverExt : InternetExplorerDriver, IWebDriverExt
     {
 
@@ -95,7 +89,6 @@ namespace WEBUIautomation.Utils
 
     public class PhantomJSDriverExt : PhantomJSDriver, IWebDriverExt
     {
-
         public PhantomJSDriverExt(string path) : base(path) { }
         public By CurrentFrame { get; set; }
         public string CurrentView { get; set; }

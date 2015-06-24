@@ -8,7 +8,6 @@ namespace WEBPages.BasePageObject
 {
     using Locators = ContentLocators.Locators.MainHeadPage;
 
-    
     /// <summary>
     /// 
     /// </summary>
@@ -59,6 +58,7 @@ namespace WEBPages.BasePageObject
                 try
                 {
                     driver.SwitchToFrame(FrameLocator);
+
                     if (driver.FindElement(_tabContext.byKeyElement).Displayed)
                     {
                         driver.CurrentView = ViewLocator;
@@ -77,7 +77,6 @@ namespace WEBPages.BasePageObject
 
         private void NavigateFromDefaultContent()
         {
-            driver.SwitchTo().DefaultContent();
             MainHead mainHead = new MainHead();
 
             mainHead.ShowPerspective(_tabContext.MenuHeader, _tabContext.ViewName);

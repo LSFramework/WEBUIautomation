@@ -4,24 +4,26 @@ using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
 using WEBPages.BasePageObject;
 using WEBPages.Extensions;
-using WEBPages.ContentLocators;
 using System;
 using System.Diagnostics.Contracts;
+using WEBUIautomation.Wait;
 
 namespace WEBPages.MyPCPages
 {
-    using Locators = WEBPages.ContentLocators.Locators.MainHeadPage;
-    using WEBUIautomation.Wait;
+    using Locators = WEBPages.ContentLocators.Locators.MainHeadPage;   
 
     public class MainHead: FramePageBase
     {
         #region Page Locators      
 
-        private By MainTabFrame { get { return Locators.MainTabFrame; } }
+        private By MainTabFrame 
+        { get { return Locators.MainTabFrame; } }
 
-        public override By FrameLocator { get { return Locators.FrameLocator; } }
+        public override By FrameLocator 
+        { get { return Locators.FrameLocator; } }
 
-        public override string ViewLocator { get { return Locators.ViewLocator; } }        
+        public override string ViewLocator 
+        { get { return Locators.ViewLocator; } }        
 
         public bool ModalOpened
         {

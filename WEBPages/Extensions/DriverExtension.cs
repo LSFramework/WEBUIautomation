@@ -59,6 +59,7 @@ namespace WEBPages.Extensions
             driver.WaitReadyState();
 
             driver.SwitchTo().DefaultContent();
+
             driver.CurrentFrame = By.Id(Locators.MainHeadPage.FrameLocatorID);
 
             driver.WaitReadyState();
@@ -76,7 +77,11 @@ namespace WEBPages.Extensions
             try
             {
                 //return new WebElement().ByXPath(Locators.TestPlanPage.selectedFolderXPath).NodeName;
-                return new WebElement().ByClass(Locators.TestPlanPage.selectedItemAttributeValue, false).FindRelative().ByTagName(WEBUIautomation.Tags.TagNames.Span).ByClass("rtIn").Text;
+                return new WebElement()
+                    .ByClass(Locators.TestPlanPage.selectedItemAttributeValue, false)
+                    .FindRelative().ByTagName(WEBUIautomation.Tags.TagNames.Span)
+                    .ByClass("rtIn")
+                    .Text;
             }
             catch
             {
@@ -96,7 +101,7 @@ namespace WEBPages.Extensions
 
             lock (locker)
             {
-                WaitHelper.Wait(driver.WaitProfile.PollingInterval.Milliseconds*2);
+                WaitHelper.Wait(500);
                 System.Windows.Forms.SendKeys.SendWait(stringToSend);
                 System.Windows.Forms.SendKeys.SendWait("~");
             }

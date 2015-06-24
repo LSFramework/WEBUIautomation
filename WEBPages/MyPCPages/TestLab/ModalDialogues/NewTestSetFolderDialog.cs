@@ -27,7 +27,6 @@ namespace WEBPages.MyPCPages
         
         #endregion UI Web Elements
 
-
         #region Actions
 
         /// <summary>
@@ -36,7 +35,6 @@ namespace WEBPages.MyPCPages
         /// <returns></returns>
         public string FolderName
         { get { return txtFolderName.Text; } }
-
 
         /// <summary>
         /// Action: performs typing the folderName string to folder name textbox
@@ -70,7 +68,6 @@ namespace WEBPages.MyPCPages
             return new ManageTestSetsDialog();
         }
               
-
         #endregion Actions
     }
 }

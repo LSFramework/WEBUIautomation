@@ -10,6 +10,7 @@ namespace WEBPages.MyPCPages.DesignLoadTest
     public class DLT
     {
         private DltGroupsAndWorkloadPage _workload;
+
         private DltSummaryPage _summary;
 
         private LoadTest _loadTest;

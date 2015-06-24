@@ -1,12 +1,8 @@
 ﻿using OpenQA.Selenium;
 using WEBUIautomation.Tags;
-using WEBUIautomation.Utils;
-using WEBUIautomation.Extensions;
 using WEBUIautomation.WebElement;
 using WEBPages.Extensions;
-using System;
 using WEBPages.BasePageObject;
-using WEBPages.ContentLocators;
 
 namespace WEBPages.MyPCPages
 {
@@ -16,9 +12,14 @@ namespace WEBPages.MyPCPages
     {
         #region The MainTabFrame members
 
-        protected override MainHead_Links MenuHeader { get { return MainHead_Links.TestManagement; } }
-        protected override Perspectives ViewName { get { return Perspectives.TestLab; } }
-        protected override By byKeyElement  { get { return Locators.byElement; } }
+        protected override MainHead_Links MenuHeader 
+        { get { return MainHead_Links.TestManagement; } }
+
+        protected override Perspectives ViewName 
+        { get { return Perspectives.TestLab; } }
+
+        protected override By byKeyElement  
+        { get { return Locators.byElement; } }
 
         #endregion The MainTabFrame members
 
@@ -38,7 +39,7 @@ namespace WEBPages.MyPCPages
 
          #endregion Elements Locators
 
-         /// <summary>
+        /// <summary>
         /// Action : Performs click Manage Test Sets button.
         /// Expected : A modal-dialog Manage Test Sets appears.
         /// </summary>

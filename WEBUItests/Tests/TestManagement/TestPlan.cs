@@ -16,15 +16,15 @@ namespace WEBUItests.MyPCTests.Test_3_TestManagement_TestPlan
        
         TestPlanFunctionality testPlanFunctionality;
 
-        string testSetName = Variables.TestLab.testSetName;
-        string testSetFolderName = Variables.TestLab.testSetFolderName;
+        string testSetName = StaticVariables.TestLab.testSetName;
+        string testSetFolderName = StaticVariables.TestLab.testSetFolderName;
 
-        string tFolderName  = Variables.TestPlan.testFolderName;
-        string sFolderName  = Variables.TestPlan.scriptFolderName;
-        string tName        = Variables.TestPlan.testName;
-        string scriptName   = Variables.TestPlan.scriptName;
-        string scriptOnDisk = Variables.TestPlan.pathToScript + Variables.TestPlan.scriptName;
-        string script       = Variables.TestPlan.script;
+        string tFolderName  = StaticVariables.TestPlan.testFolderName;
+        string sFolderName  = StaticVariables.TestPlan.scriptFolderName;
+        string tName        = StaticVariables.TestPlan.testName;
+        string scriptName   = StaticVariables.TestPlan.scriptName;
+        string scriptOnDisk = StaticVariables.TestPlan.pathToScript + StaticVariables.TestPlan.scriptName;
+        string script       = StaticVariables.TestPlan.script;
 
 
         /// <summary>

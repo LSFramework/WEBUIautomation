@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using WEBUIautomation.Utils;
 using WEBUIautomation.Extensions;
-using System.Collections.ObjectModel;
 using WEBUIautomation.Wait;
 
 namespace WEBUIautomation.WebElement
@@ -36,7 +35,6 @@ namespace WEBUIautomation.WebElement
 
         private IWebElement FindSingle()
         {
-
                 return TryFindSingle();          
         }
        
@@ -72,9 +70,7 @@ namespace WEBUIautomation.WebElement
 
         private IWebElement FindSingleIWebElement()
         {
-           
             var elements = FindIWebElements();
-
 
             if (!elements.Any())
                 throw WebElementNotFoundException;
@@ -161,7 +157,6 @@ namespace WEBUIautomation.WebElement
             
             return element;
         }
-
 
         object ICloneable.Clone()
         {

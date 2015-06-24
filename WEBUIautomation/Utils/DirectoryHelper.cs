@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using WEBUIautomation.Wait;
 
 namespace WEBUIautomation.Utils
@@ -15,9 +13,7 @@ namespace WEBUIautomation.Utils
             if (Directory.Exists(defaultDataFolder))
             {
                 WaitHelper.Try(() => DirectoryHelper.ForceDelete(defaultDataFolder));
-            }
-
-            //return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);  
+            }          
          
             return Directory.GetCurrentDirectory();            
         }
@@ -25,13 +21,10 @@ namespace WEBUIautomation.Utils
         public static string IEServerDirectory()
         {
             return Directory.GetCurrentDirectory();
-
-            //return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);    
         }
 
         public static void ForceDelete(string path)
         {
-
             if (!Directory.Exists(path))
             {
                 return;

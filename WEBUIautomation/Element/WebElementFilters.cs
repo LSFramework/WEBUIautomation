@@ -123,6 +123,7 @@ namespace WEBUIautomation.WebElement
                 By.XPath(string.Format("//*[contains(text(), \"{0}\")]", text));
 
             _firstSelector = _firstSelector ?? selector;
+
             _textSearchData = new TextSearchData { Text = text, ExactMatch = exactMatch };
 
             return this;
@@ -133,6 +134,7 @@ namespace WEBUIautomation.WebElement
             var xPath = exactMatch ?
                         string.Format(".//*[@{0}=\"{1}\"]", tagAttribute, attributeValue) :
                         string.Format(".//*[contains(@{0}, \"{1}\")]", tagAttribute, attributeValue);
+
             var selector = By.XPath(xPath);
 
             _firstSelector = _firstSelector ?? selector;

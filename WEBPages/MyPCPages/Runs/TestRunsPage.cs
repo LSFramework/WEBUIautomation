@@ -1,10 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WEBPages.ContentLocators;
 using WEBPages.BasePageObject;
 
 namespace WEBPages.MyPCPages
@@ -13,7 +7,6 @@ namespace WEBPages.MyPCPages
 
     public class TestRunsPage : MainTabBasePage
     {
-
         protected override MainHead_Links MenuHeader
         { get { return MainHead_Links.RunAnalysis; } }
 
@@ -21,8 +14,6 @@ namespace WEBPages.MyPCPages
         { get { return Perspectives.Runs; } }
 
         protected override By byKeyElement
-        {
-            get { return Locators.LeftLabel; }
-        }
+        { get { return Locators.LeftLabel; } }
     }
 }

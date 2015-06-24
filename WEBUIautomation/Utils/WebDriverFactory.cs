@@ -1,10 +1,7 @@
 ﻿using OpenQA.Selenium.Firefox;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WEBUIautomation.Utils
 {
@@ -21,13 +18,10 @@ namespace WEBUIautomation.Utils
                     return new ChromeDriverExt();
 
                 case Browsers.firefox:
-                    {
                         return CreateFirefoxInstance();
-                    }
-                default:
-                    {
-                        return CreateFirefoxInstance();
-                    }
+                  
+                default:                  
+                        return CreateFirefoxInstance();                   
             }
         }
 

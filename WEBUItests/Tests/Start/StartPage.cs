@@ -14,11 +14,12 @@ namespace WEBUItests.MyPCTests.Start
     public class StartPage : BrowsersTestBase// WEBUItest
     {
         StartTab startTab;
-       
+
         /// <summary>
         /// Navigate to Start Tab
         /// </summary>
         [Test]
+        [Description("Navigate to Start Tab")]
         public void Step_01_NavigateToStartTab()
         {
             startTab = new StartTab();
@@ -29,8 +30,8 @@ namespace WEBUItests.MyPCTests.Start
         /// Step_02_CheckTestingHosts
         /// </summary>
         public void Step_02_CheckTestingHosts()
-        { 
-     
+        {
+
         }
     }
 }

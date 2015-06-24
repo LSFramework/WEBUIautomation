@@ -14,26 +14,26 @@ namespace WEBUItests.MyPCTests.Test_4_DesignLoadTest
     /// DLT
     /// </summary>
     [TestFixture]
-    public class DesignLoadTest: WEBUItest
+    public class DesignLoadTest : WEBUItest
     {
 
-        #region Variables
+        #region StaticVariables
 
         TestPlanFunctionality testPlanFunctionality;
         DLT dlt;
 
-        string testSetName          = Variables.TestLab.testSetName;
-        string testSetFolderName    = Variables.TestLab.testSetFolderName;
+        string testSetName = StaticVariables.TestLab.testSetName;
+        string testSetFolderName = StaticVariables.TestLab.testSetFolderName;
 
-        string tFolderName          = Variables.TestPlan.testFolderName;
-        string sFolderName          = Variables.TestPlan.scriptFolderName;
-        string tName                = Variables.TestPlan.testName;
-        
-        string scriptZipName        = Variables.TestPlan.scriptName;
-        string scriptOnDisk         = Variables.TestPlan.pathToScript + Variables.TestPlan.scriptName;
-        string script               = Variables.TestPlan.script;
+        string testFolderName = StaticVariables.TestPlan.testFolderName;
+        string scriptFolderName = StaticVariables.TestPlan.scriptFolderName;
+        string testName = StaticVariables.TestPlan.testName;
 
-        #endregion Variables
+        string scriptZipName = StaticVariables.TestPlan.scriptName;
+        string scriptOnDisk = StaticVariables.TestPlan.pathToScript + StaticVariables.TestPlan.scriptName;
+        string script = StaticVariables.TestPlan.script;
+
+        #endregion StaticVariables
 
         #region TestSteps
 
@@ -44,7 +44,7 @@ namespace WEBUItests.MyPCTests.Test_4_DesignLoadTest
         public void Step_0_NavigateDltByCreatingTest()
         {
             testPlanFunctionality = new TestPlanFunctionality();
-            dlt = testPlanFunctionality.CreateTest(tFolderName, tName, testSetFolderName, testSetName);
+            dlt = testPlanFunctionality.CreateTest(testFolderName, testName, testSetFolderName, testSetName);
         }
 
 
@@ -73,7 +73,7 @@ namespace WEBUItests.MyPCTests.Test_4_DesignLoadTest
         [Test]
         public void Step_03_AddScriptToDlt()
         {
-            dlt.Workload.AddScript(sFolderName, script);
+            dlt.Workload.AddScript(scriptFolderName, script);
         }
 
 
@@ -137,7 +137,7 @@ namespace WEBUItests.MyPCTests.Test_4_DesignLoadTest
             StartRunDialog start = new StartRunDialog();
             start.StartRunTestIfAvailable();
 
-          //  WaitHelper.Wait(TimeSpan.FromMinutes(3).Milliseconds); // <=Sould be replaced for Initialization Form 
+            //  WaitHelper.Wait(TimeSpan.FromMinutes(3).Milliseconds); // <=Sould be replaced for Initialization Form 
 
 
             OnlineScreen online = new OnlineScreen(dlt.LoadTest);
@@ -158,7 +158,7 @@ namespace WEBUItests.MyPCTests.Test_4_DesignLoadTest
         /// 
         /// </summary>
         public void Step_12_SelectFinishedRun()
-        { 
+        {
             //
         }
 

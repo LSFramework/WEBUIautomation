@@ -7,7 +7,6 @@ using WEBPages.BasePageObject;
 namespace WEBPages.MyPCPages
 {
     using Locators = ContentLocators.Locators.NewTestSetDialog;
-    
 
     public class NewTestSetDialog : SecondLevelDialog
     {

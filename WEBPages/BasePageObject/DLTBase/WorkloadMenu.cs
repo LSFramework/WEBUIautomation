@@ -5,21 +5,21 @@ namespace WEBPages.BasePageObject
     public enum WorkloadMenu
     {
         [Description("Summary")]
-        Summary,
+        Summary=1,
 
         [Description("Groups & Workload")]
-        GroupsAndWorkload,
+        GroupsAndWorkload=2,
 
         [Description("Monitors")]
-        Monitors,
+        Monitors=3,
 
         [Description("Topology")]
-        Topology,
+        Topology=4,
 
         [Description("Diagnostics")]
-        Diagnostics,
+        Diagnostics=5,
 
         [Description("Test Runs Trend")]
-        TestRunsTrend
+        TestRunsTrend=6
     }
 }

@@ -2,7 +2,6 @@
 
 namespace WEBPages.BasePageObject
 {
-
     public interface IFrame
     {
         /// <summary>

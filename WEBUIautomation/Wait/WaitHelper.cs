@@ -13,8 +13,7 @@ namespace WEBUIautomation.Wait
 
         private WaitHelper(TimeSpan timeout)
             : this(timeout, TimeSpan.FromSeconds(1))
-        {
-        }
+        { }
 
         private WaitHelper(TimeSpan timeout, TimeSpan checkInterval)
         {
@@ -80,6 +79,8 @@ namespace WEBUIautomation.Wait
             {
                 throw new TimeoutException(message);
             }
+
+           
         }
 
         public static bool SpinWait(Func<bool> condition, TimeSpan timeout)

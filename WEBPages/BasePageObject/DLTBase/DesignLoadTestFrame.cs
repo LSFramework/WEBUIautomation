@@ -10,11 +10,32 @@ namespace WEBPages.BasePageObject
 {
     using Locators = ContentLocators.Locators.DesignLoadTestFrame;
 
+    
+    ///The DLT tab has comlex structure of frames, as below
+    ///|-------------------------------Main-Document----------------------------|
+    ///|                                                                        |
+    ///||------------------------------DLT Main Frame--------------------------||
+    ///|||----TabFrame----||-------------WorkloadFrame------------------------|||
+    ///|||                ||                                                  |||
+    ///|||                ||                                                  |||
+    ///|||                ||                                                  |||
+    ///|||                ||                                                  |||
+    ///|||                ||                                                  |||
+    ///|||                ||                                                  |||
+    ///|||                ||                                                  |||
+    ///|||                ||__________________________________________________|||
+    ///|||                ||-------------ActionsFrame-------------------------|||
+    ///|||                ||                                                  |||
+    ///|||                ||                                                  |||
+    ///|||________________||__________________________________________________|||
+    ///||______________________________________________________________________||
+    ///|________________________________________________________________________|
+
 
     /// <summary>
     /// Responsible for navigation to main Dlt frame by testName
     /// </summary>
-    public sealed class DesignLoadTestFrame : FramePageBase
+    public sealed class DltMainFrame : FramePageBase
     {
         #region LoadTest
 
@@ -36,7 +57,6 @@ namespace WEBPages.BasePageObject
 
         private string viewLocator()
         {
-
           return string.Format("{0} {1}", "DLT main tab", testName);
         }
 
@@ -48,7 +68,6 @@ namespace WEBPages.BasePageObject
         {
             if (_frameLocator == null)
             {
-                
                 string fullTitle = mainHead.GetDltTabFullTitleValue(testName);
 
                 if (fullTitle != string.Empty)
@@ -72,7 +91,7 @@ namespace WEBPages.BasePageObject
         /// Ctor
         /// </summary>
         /// <param name="loadTest"></param>
-        public DesignLoadTestFrame(LoadTest loadTest)
+        public DltMainFrame(LoadTest loadTest)
         {
             this.LoadTest = loadTest;
             this.Url = dltMainFrame.Url; 
@@ -113,7 +132,7 @@ namespace WEBPages.BasePageObject
             return driver;
         }
 
-        public IWebDriverExt WorkloadTabsFrame 
+        public IWebDriverExt TabsFrame 
         { 
             get 
             { 
@@ -126,19 +145,15 @@ namespace WEBPages.BasePageObject
 
         private void selectWorkloadTab(WorkloadMenu tab)
         {
-            string firstPartXPathLocator= @".//ul[@class='rtsUL']/li[";
-            int tabIndex = (int)tab + 1;
-            string lastPartXPathLocator = "]";
+            
+            int tabIndex = (int)tab;
 
-            string tabXPathLocator = string.Format("{0}{1}{2}", firstPartXPathLocator, tabIndex, lastPartXPathLocator);
+            string tabXPathLocator = string.Format("{0}{1}{2}", Locators.firstPartXPathLocator, tabIndex, Locators.lastPartXPathLocator);
 
-            WebElement tabListItem = WorkloadTabsFrame.GetElement().ByXPath(tabXPathLocator); ;
+            WebElement tabListItem = TabsFrame.GetElement().ByXPath(tabXPathLocator); ;
 
-            tabListItem.Click();
-        
+            tabListItem.Click();        
         }
-
-
 
         public IWebDriverExt WorkloadFrame (WorkloadContext context)
         {
@@ -146,7 +161,6 @@ namespace WEBPages.BasePageObject
 
             if (driver.CurrentView != viewName && driver.CurrentFrame != Locators.WorkloadFrameLocator)
             {
-                //WorkloadTabsFrame.GetElement().ByTagName(WEBUIautomation.Tags.TagNames.Span).ByText(viewName).Click();
                 selectWorkloadTab(context.ViewName);
                 dltMainFrame.SwitchToFrame(Locators.WorkloadFrameLocator);
                 driver.CurrentView = viewName;

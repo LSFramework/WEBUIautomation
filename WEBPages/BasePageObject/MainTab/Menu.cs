@@ -58,6 +58,4 @@ namespace WEBPages.BasePageObject
         [Description("Create New")]
         CreateNew
     }
-
-   
 }

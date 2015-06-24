@@ -14,7 +14,7 @@ namespace WEBUItests.MyPCTests.Test_5_RunningTest
 
 #pragma warning disable 1591
 
-    using Variables = WEBUItests.TestVariables.Variables;
+    using Variables = WEBUItests.TestVariables.StaticVariables;
 
     /// <summary>
     /// Running test from TestPlan

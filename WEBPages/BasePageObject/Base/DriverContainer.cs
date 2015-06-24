@@ -8,8 +8,9 @@ namespace WEBPages.BasePageObject
     /// </summary>
     public abstract class DriverContainer
     {
-        // Summary:
-        //      Provides access to WebDriver instanse
+        /// <summary>
+        /// Provides access to WebDriver instanse
+        /// </summary>
         protected IWebDriverExt driver { get { return Driver.Instance; } }
     }
 }

@@ -74,9 +74,13 @@ namespace WEBPages.Extensions
             this.liNodeElement = nodeElement;
         }
 
-        public string NodeName  
-        { get { return txtContainer.Text; 
-        } }
+        public string NodeName
+        {
+            get
+            {
+                return txtContainer.Text;
+            }
+        }
         
         public bool Expanded
         {
@@ -188,10 +192,10 @@ namespace WEBPages.Extensions
 
         public WebFolderNode Rename(string newName)
         {
-            if (!this.Selected)
+            if ( ! this.Selected)
                 this.txtContainer.Click();
 
-            if (!this.Editable)
+            if ( ! this.Editable)
                 this.txtContainer.Click();
 
             this.editField.Text = newName;

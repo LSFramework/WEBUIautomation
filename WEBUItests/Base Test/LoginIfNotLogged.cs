@@ -74,7 +74,7 @@ namespace WEBUItests.Base_Test
         /// </summary>
         public void DriverSetUp()
         {
-            Driver.Initialize(Variables.BROWSER);               
+            Driver.Initialize(StaticVariables.BROWSER);               
             Driver.Instance.BrowserMaximize();
         }
 
