@@ -49,12 +49,14 @@ namespace WEBPages.MyPCPages.SLA
 
         #endregion Measurments
 
-         public void SetSomeSLA()
+         public void SetTotalHitsStatusPerRun(int totalHits)
          {
              btnNext.Click();
              radioTotalHitsStatusPerRun.Click();
              btnNext.Click();
-             txtThreshold.TextInt=1000;
+             txtThreshold.ClickPerform();
+             txtThreshold.SendKeys(totalHits.ToString());
+                 //.TextInt = totalHits;
              btnNext.Click();
              WaitHelper.Wait(1000);
              btnNext.Click();

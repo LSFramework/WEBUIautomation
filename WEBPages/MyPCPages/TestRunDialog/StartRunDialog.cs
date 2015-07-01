@@ -5,6 +5,7 @@ using WEBUIautomation.WebElement;
 
 namespace WEBPages.MyPCPages.TestRunDialog
 {
+    using System;
     using Locators = ContentLocators.Locators.StartRunDialog;
 
     public class StartRunDialog: FirstLevelDialog
@@ -35,6 +36,10 @@ namespace WEBPages.MyPCPages.TestRunDialog
         {
             if (IsRunAvailable)
                 ClickRunButton();
+            else
+            {
+                throw new Exception("Unable to start test  " + lblAvailabilityResults.Text + lblMessage.Text);
+            }
                         
         }
         

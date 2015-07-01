@@ -52,6 +52,7 @@ namespace WEBUItests
             {
                 DriverSetUp(defaultBrowser);
                 DoLogin();
+                return;
             }
 
             if (mainHead.ModalOpened)

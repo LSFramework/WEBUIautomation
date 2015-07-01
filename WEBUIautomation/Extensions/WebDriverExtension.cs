@@ -82,7 +82,7 @@ namespace WEBUIautomation.Extensions
             return driver;
         }               
         
-        public static void Highlight(this IWebDriverExt driver, IWebElement iWebElement, int ms = 20)
+        public static void Highlight(this IWebDriverExt driver, IWebElement iWebElement, int ms = 100)
         {
             try
             {

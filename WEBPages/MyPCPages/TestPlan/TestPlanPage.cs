@@ -122,7 +122,6 @@ namespace WEBPages.MyPCPages
             return this;
         }
 
-
         public UploadScriptDialog ClickUploadScriptBtn()
         {
             btnUploadScript.Click();
@@ -144,7 +143,6 @@ namespace WEBPages.MyPCPages
             LoadTest loadTest = new LoadTest(testName);
             return loadTest;
         }
-
 
         #endregion Single Actions
 

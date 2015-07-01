@@ -6,7 +6,7 @@ namespace WEBPages.BasePageObject
 {
 
     /// <summary>
-    /// Responds for naviagtion to first level dalogs
+    /// Responds for navigation to first level dalogs
     /// </summary>
     public abstract class FirstLevelDialog : Dialog
     {

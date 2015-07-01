@@ -329,6 +329,17 @@ namespace WEBUItests.Sanity
             StartTab startTab = new StartTab();
         }
 
+
+        /// <summary>
+        /// Click refresh button to see last run info.
+        /// </summary>
+        [Test]
+        public void Step_27_RefreshStartTabInfo()
+        {
+            mainHead.ClickRefresh();
+            WaitHelper.Wait(2000);
+        }
+
         /// <summary>
         /// Performs click on logout button
         /// </summary>

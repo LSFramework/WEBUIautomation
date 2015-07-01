@@ -31,7 +31,7 @@ namespace WEBUIautomation.Utils
         public FirefoxDriverExt(FirefoxProfile profile ) :base(profile)
         {
             profile.SetPreference("profile", "default");
-            this.WaitProfile = new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(100));
+            this.WaitProfile = new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(200));
         }
     }
 
@@ -51,7 +51,7 @@ namespace WEBUIautomation.Utils
 
         public ChromeDriverExt()
             :this ( DirectoryHelper.ChromeDirectory(), 
-                    new ChromeOptions(), TimeSpan.FromSeconds(10),
+                    new ChromeOptions(), TimeSpan.FromSeconds(20),
                     new WaitProfile(TimeSpan.FromSeconds(20), TimeSpan.FromMilliseconds(200))) 
         { }
                 
@@ -81,8 +81,8 @@ namespace WEBUIautomation.Utils
                         InitialBrowserUrl = "about:blank",
                         EnableNativeEvents = true
                     }, 
-                    new WaitProfile(TimeSpan.FromSeconds(10), 
-                    TimeSpan.FromMilliseconds(100))
+                    new WaitProfile(TimeSpan.FromSeconds(20), 
+                    TimeSpan.FromMilliseconds(200))
             ) 
         { }
     }

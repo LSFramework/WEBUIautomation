@@ -53,6 +53,7 @@ namespace WEBUIautomation.WebElement
 
                 if (element.TagName == TagNames.Input.GetEnumDescription() || element.TagName == TagNames.TextArea.GetEnumDescription())
                 {
+                    element.Click();
                     element.Clear();
                 }
                 else

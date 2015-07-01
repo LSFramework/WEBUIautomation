@@ -24,7 +24,13 @@ namespace WEBUIautomation.Utils
 
                 WebDriverFactory factory = new WebDriverFactory();
                 
-                instance = factory.Create(browser);                                
+                instance = factory.Create(browser);
+                if (browser == Browsers.ie)
+                {
+                    instance.Shutdown();
+                    instance = factory.Create(browser);
+                }
+             
             }
         }
     }

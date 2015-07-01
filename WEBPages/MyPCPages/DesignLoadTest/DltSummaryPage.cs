@@ -4,6 +4,7 @@ using WEBPages.Extensions;
 using WEBUIautomation.WebElement;
 using WEBUIautomation.Extensions;
 using WEBUIautomation.Utils;
+using System.Linq;
 
 namespace WEBPages.MyPCPages.DesignLoadTest
 {
@@ -34,8 +35,11 @@ namespace WEBPages.MyPCPages.DesignLoadTest
         {
             var driver = Driver.Instance;
             string popup = driver.GetNewWindow();
+
             driver.SwitchTo().Window(popup);
-            driver.SwitchToDefaultContent();
+           // driver.SwitchToDefaultContent();
+            driver.WaitStaticDOM();
+
             return new ServiceLevelAgreementPage();
         }
 
@@ -44,7 +48,7 @@ namespace WEBPages.MyPCPages.DesignLoadTest
         /// </summary>
         public void SetSLA()
         {
-           ClickAddNewSlaBtn().SwitchToSLAPopup().SetSomeSLA();
+           ClickAddNewSlaBtn().SwitchToSLAPopup().SetTotalHitsStatusPerRun(1000);
         }
 
 

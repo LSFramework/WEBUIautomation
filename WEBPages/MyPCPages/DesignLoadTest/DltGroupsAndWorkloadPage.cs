@@ -181,14 +181,30 @@ namespace WEBPages.MyPCPages.DesignLoadTest
 
         public DltGroupsAndWorkloadPage AddNumberOfLGs(int number)
         {
-            txtLoadGenerators.TextInt = number;
-            WaitHelper.ReTryActionForCondition(
-                ( )=>txtLoadGenerators.TextInt = number, 
-                ( )=>txtLoadGenerators.TextInt ==number,
-                TimeSpan.FromSeconds(10), 
-                TimeSpan.FromMilliseconds(500));
+            txtLoadGenerators.ClickPerform();
+           // SetLGNumViaTextInt(number);
+            SetLGNumViaSendKeys(number);
 
             return this;
+        }
+
+        private void SetLGNumViaSendKeys(int number)
+        {
+            WaitHelper.ReTryActionForCondition(
+                () => txtLoadGenerators.SendKeys(number.ToString()),
+                () => txtLoadGenerators.TextInt == number,
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromMilliseconds(500));
+        }
+
+        private void SetLGNumViaTextInt(int number)
+        {
+           // txtLoadGenerators.TextInt = number;
+            WaitHelper.ReTryActionForCondition(
+                () => txtLoadGenerators.TextInt = number,
+                () => txtLoadGenerators.TextInt == number,
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromMilliseconds(500));
         }
 
         public DltGroupsAndWorkloadPage CollapseScriptsSlidingPane()
