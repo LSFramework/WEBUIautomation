@@ -3,7 +3,7 @@ using WEBUIautomation.WebElement;
 using WEBPages.Extensions;
 using WEBUIautomation.Wait;
 using System;
-using WEBUIautomation.Utils;
+using WEBUIautomation;
 using OpenQA.Selenium;
 using WEBUIautomation.Extensions;
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using WEBUIautomation.Utils;
+using WEBUIautomation;
 using WEBUIautomation.Extensions;
 using OpenQA.Selenium;
 using WEBPages.MyPCPages;

@@ -3,7 +3,7 @@ using WEBPages.BasePageObject;
 using WEBPages.Extensions;
 using WEBUIautomation.WebElement;
 using WEBUIautomation.Extensions;
-using WEBUIautomation.Utils;
+using WEBUIautomation;
 using System.Linq;
 
 namespace WEBPages.MyPCPages.DesignLoadTest

@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using WEBUIautomation.Extensions;
 using System;
-using WEBUIautomation.Utils;
+using WEBUIautomation;
 using WEBPages.MyPCPages;
 using WEBPages.Extensions;
 using WEBUIautomation.WebElement;

@@ -1,7 +1,7 @@
 ﻿using System;
 using WEBUIautomation.Extensions;
 
-namespace WEBUIautomation.Utils
+namespace WEBUIautomation
 {
     public class Driver
     {

@@ -16,7 +16,7 @@ namespace WEBUIautomation.WebElement
 
         private IList<IWebElement> _searchCache;
 
-        private IWebDriverExt Browser { get { return Driver.Instance; } }
+        private IWebDriverExt driver { get { return Driver.Instance; } }
         
         public WebElement()
             : this(Driver.Instance)
@@ -47,7 +47,7 @@ namespace WEBUIautomation.WebElement
             catch (StaleElementReferenceException)
             {
                 ClearSearchResultCache();
-                WaitHelper.Wait(Browser.WaitProfile.PollingInterval.Milliseconds);
+                WaitHelper.Wait(driver.WaitProfile.PollingInterval.Milliseconds);
                 return FindSingleIWebElement();
             }
             catch (InvalidSelectorException)
@@ -97,7 +97,7 @@ namespace WEBUIautomation.WebElement
 
             var resultEnumerable = new List<IWebElement>() as IEnumerable<IWebElement>;
 
-            bool found=_searcher.TryFindElements(_firstSelector, out resultEnumerable, Browser.WaitProfile.Timeout, Browser.WaitProfile.PollingInterval);
+            bool found=_searcher.TryFindElements(_firstSelector, out resultEnumerable, driver.WaitProfile.Timeout, driver.WaitProfile.PollingInterval);
 
             if (!found)
                 throw new NoSuchElementException(string.Format("Can't find any element with given search criteria: {0}.",
@@ -133,8 +133,8 @@ namespace WEBUIautomation.WebElement
                 return new WebElementNotFoundException
                     (string.Format("Can't find single element with given search criteria: {0}. Current driver frame is {1} , Current driver view is {2}",
                     SearchCriteriaToString(), 
-                    Browser.CurrentFrame.ToString(), 
-                    Browser.CurrentView));
+                    driver.CurrentFrame.ToString(), 
+                    driver.CurrentView));
             }
         }
 

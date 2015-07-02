@@ -142,13 +142,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="MyPackage.1.0.0.nuspec" />
-    <None Include="nuspec.2010.7.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="nuspec.2011.8.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

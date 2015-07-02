@@ -68,11 +68,11 @@ namespace WEBUIautomation.WebElement
                 {
                    // SendKeys("");
                     SendKeys(value);  
-                    WaitHelper.Wait(Browser.WaitProfile.PollingInterval.Milliseconds);
+                    WaitHelper.Wait(driver.WaitProfile.PollingInterval.Milliseconds);
                 }
                 catch
                 {
-                    Browser.ExecuteJavaScript(string.Format("arguments[0].value = \"{0}\";", value), element);
+                    driver.ExecuteJavaScript(string.Format("arguments[0].value = \"{0}\";", value), element);
 
                     WaitHelper.Try(() => FireJQueryEvent(JavaScriptEvents.KeyUp));
                 }
@@ -93,7 +93,7 @@ namespace WEBUIautomation.WebElement
         private void SendKeys(string value, IWebElement element)
         {
             element.SendKeys(value);
-            Browser.WaitReadyState();
+            driver.WaitReadyState();
             element = FindSingle();
             if (element.Text != value)
                 throw new Exception();
@@ -107,7 +107,7 @@ namespace WEBUIautomation.WebElement
 
         public string InnerHtml
         {
-            get { return Browser.ExecuteJavaScript("return arguments[0].innerHTML;", FindSingle()).ToString(); }
+            get { return driver.ExecuteJavaScript("return arguments[0].innerHTML;", FindSingle()).ToString(); }
         }
 
         #endregion
@@ -128,12 +128,12 @@ namespace WEBUIautomation.WebElement
         public bool Exists(TimeSpan timeSpan)
         {
 
-            return WaitHelper.SpinWait(Exists, timeSpan, Browser.WaitProfile.PollingInterval);
+            return WaitHelper.SpinWait(Exists, timeSpan, driver.WaitProfile.PollingInterval);
         }
 
         public bool Exists(int seconds)
         {
-            return WaitHelper.SpinWait(Exists, TimeSpan.FromSeconds(seconds), Browser.WaitProfile.PollingInterval);
+            return WaitHelper.SpinWait(Exists, TimeSpan.FromSeconds(seconds), driver.WaitProfile.PollingInterval);
         }
 
         public void Click(bool useJQuery = false)
@@ -151,13 +151,13 @@ namespace WEBUIautomation.WebElement
         public void ClickPerform()
         {
             
-            Actions action = new Actions(Browser);
+            Actions action = new Actions(driver);
 
             action.MoveToElement(FindSingle()).Perform();
 
             action.ClickAndHold().Perform();
 
-            WaitHelper.Wait(Browser.WaitProfile.PollingInterval);
+            WaitHelper.Wait(driver.WaitProfile.PollingInterval);
 
             action.Release().Perform();
           
@@ -253,7 +253,7 @@ namespace WEBUIautomation.WebElement
         //     UI elements
         public string GetAttribute(TagAttributes tagAttribute)
         {
-            Browser.WaitReadyState(); /// Something wrong with the method
+            driver.WaitReadyState(); /// Something wrong with the method
                                       /// 
             WaitHelper.Wait(1000); /// Waiting for attributes have been changed successfully
                                 
@@ -271,7 +271,7 @@ namespace WEBUIautomation.WebElement
             var element = FindSingle();
 
             _searcher = element as ISearchContext;
-           // Browser.SwitchToFrame(element);
+           // driver.SwitchToFrame(element);
         }
 
         public void CacheSearchResult()
@@ -289,7 +289,7 @@ namespace WEBUIautomation.WebElement
             var source = FindSingle();
             var dest = destination.FindSingle();
 
-            Browser.DragAndDrop(source, dest);
+            driver.DragAndDrop(source, dest);
         }
 
         public void FireJQueryEvent(JavaScriptEvents javaScriptEvent)
@@ -354,7 +354,7 @@ namespace WEBUIautomation.WebElement
                     var element = FindSingle();
                     if (element.Enabled && element.Displayed)
                     {
-                        Browser.Highlight(element);
+                        driver.Highlight(element);
                         return true;
                     }
                     else
@@ -369,7 +369,7 @@ namespace WEBUIautomation.WebElement
                 }
             };
 
-            WaitHelper.SpinWait(readyForAction, Browser.WaitProfile.Timeout, Browser.WaitProfile.PollingInterval);
+            WaitHelper.SpinWait(readyForAction, driver.WaitProfile.Timeout, driver.WaitProfile.PollingInterval);
 
             try
             {
@@ -384,7 +384,7 @@ namespace WEBUIautomation.WebElement
             {
                 if (e.Message.Contains("Element is not clickable"))
                 {
-                    WaitHelper.SpinWait(readyForAction, Browser.WaitProfile.Timeout, Browser.WaitProfile.PollingInterval);
+                    WaitHelper.SpinWait(readyForAction, driver.WaitProfile.Timeout, driver.WaitProfile.PollingInterval);
                     WaitHelper.Try(action);
                 }
             }
@@ -406,8 +406,8 @@ namespace WEBUIautomation.WebElement
             finally
             {
                 ClearSearchResultCache();
-                Thread.Sleep(Browser.WaitProfile.PollingInterval.Milliseconds / 2);
-                Browser.WaitReadyState();
+                Thread.Sleep(driver.WaitProfile.PollingInterval.Milliseconds / 2);
+                driver.WaitReadyState();
             }
         }
 
@@ -443,7 +443,7 @@ namespace WEBUIautomation.WebElement
         private void FireJQueryEvent(IWebElement element, JavaScriptEvents javaScriptEvent)
         {
             var eventName = javaScriptEvent.GetEnumDescription();
-            Browser.ExecuteJavaScript(string.Format("arguments[0].style.visibility='visible'; $(arguments[0]).{0}();", eventName), element);
+            driver.ExecuteJavaScript(string.Format("arguments[0].style.visibility='visible'; $(arguments[0]).{0}();", eventName), element);
         }
 
         private void MoveToVisible(IWebElement element)
@@ -451,17 +451,17 @@ namespace WEBUIautomation.WebElement
 
             try
             {
-                Actions actions = new Actions(Browser);
+                Actions actions = new Actions(driver);
                 actions.MoveToElement(element);
                 actions.Perform();
-                Browser.WaitReadyState();
+                driver.WaitReadyState();
             }
             catch
             {
-                Browser.ExecuteJavaScript(String.Format("window.scrollTo(0,{0});", element.Location.Y));
-                //Browser.ExecuteJavaScript(String.Format("window.scrollBy(0,{0});", element.Location.Y));
-                Browser.ExecuteJavaScript("arguments[0].scrollIntoView(true);", element);
-                Browser.WaitReadyState();
+                driver.ExecuteJavaScript(String.Format("window.scrollTo(0,{0});", element.Location.Y));
+                //driver.ExecuteJavaScript(String.Format("window.scrollBy(0,{0});", element.Location.Y));
+                driver.ExecuteJavaScript("arguments[0].scrollIntoView(true);", element);
+                driver.WaitReadyState();
             }
         }
 

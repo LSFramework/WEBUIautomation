@@ -12,7 +12,6 @@ using WEBUItests.Base_Test;
 
 namespace WEBUItests
 {
-
     /// <summary>
     /// The fixture to generate another fixtures
     /// </summary>
@@ -47,19 +46,26 @@ namespace WEBUItests
             //StaticVariables.BROWSER = defaultBrowser;
 
             Logger.Log("Starting Test Set on " + defaultBrowser.GetEnumDescription(), Logger.msgType.Message);
-
-            if (Driver.Instance == null)
+            try
             {
-                DriverSetUp(defaultBrowser);
-                DoLogin();
-                return;
-            }
+                if (Driver.Instance == null)
+                {
+                    DriverSetUp(defaultBrowser);
+                    DoLogin();
+                    return;
+                }
 
-            if (mainHead.ModalOpened)
+                if (mainHead.ModalOpened)
+                {
+                    DriverCleanup();
+                    DriverSetUp(defaultBrowser);
+                    DoLogin();
+                }
+            }
+            catch
             {
                 DriverCleanup();
-                DriverSetUp(defaultBrowser);
-                DoLogin();
+                throw;
             }
         }
 
@@ -83,7 +89,7 @@ namespace WEBUItests
         /// <summary>
         /// Shutdown WebDriver
         /// </summary>
-        public void DriverCleanup()
+        private void DriverCleanup()
         {
           Driver.Instance =  Driver.Instance.Shutdown();
         }
@@ -125,7 +131,7 @@ namespace WEBUItests
         [TestFixtureTearDown]
         public void Cleanup()
         {
-            Driver.Instance= Driver.Instance.Shutdown();
+            DriverCleanup();
         }
     }
 }

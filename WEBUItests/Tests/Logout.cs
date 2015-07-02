@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WEBPages.MyPCPages;
-using WEBUIautomation.Utils;
+using WEBUIautomation;
 using WEBUItests.Base_Test;
 
 namespace WEBUItests.MyPCTests.Test_Last_Logout

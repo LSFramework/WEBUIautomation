@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using WEBUIautomation.Utils;
+using WEBUIautomation;
 using WEBUIautomation.WebElement;
 using WEBPages.Extensions;
 using WEBPages.BasePageObject.DLTBase;

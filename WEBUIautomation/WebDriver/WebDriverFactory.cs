@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace WEBUIautomation.Utils
+namespace WEBUIautomation
 {
     public class WebDriverFactory
     {
@@ -42,6 +42,5 @@ namespace WEBUIautomation.Utils
 
              return firefox;
         }
-
     }
 }

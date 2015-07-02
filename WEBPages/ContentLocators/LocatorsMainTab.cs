@@ -100,8 +100,7 @@ namespace WEBPages.ContentLocators
             public static readonly string btnManageTestSetsValue = "Manage Test Sets";
             public static readonly string btnAssignTestXPath = @".//a[contains(@title, 'Assign Test to TestSet')]";
             public static readonly string btnRunTestXPath = @".//img[contains(@alt, 'Run Test')]";
-            public static readonly string filterByTestSetInputId = "ctl00_PageContent_Toolbar_toolbar2_i0_SelectTestSetTree_ComboTree_Input"; 
-                                                                    
+            public static readonly string filterByTestSetInputId = "ctl00_PageContent_Toolbar_toolbar2_i0_SelectTestSetTree_ComboTree_Input";                                                                     
         }
 
         public static class TestPlanPage

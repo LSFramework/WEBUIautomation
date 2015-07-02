@@ -7,11 +7,14 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Events;
 using System;
 using System.IO;
+using WEBUIautomation.Utils;
 using WEBUIautomation.Wait;
 
-namespace WEBUIautomation.Utils
+namespace WEBUIautomation
 {
-    //extended IWebDriver interface
+    /// <summary>
+    /// Extended IWebDriver interface
+    /// </summary>
     public interface IWebDriverExt : IWebDriver
     {
         WaitProfile WaitProfile { get; }

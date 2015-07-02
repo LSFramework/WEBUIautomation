@@ -7,7 +7,7 @@ using WEBPages.MyPCPages;
 using WEBPages.MyPCPages.DesignLoadTest;
 using WEBPages.MyPCPages.Online;
 using WEBPages.MyPCPages.TestRunDialog;
-using WEBUIautomation.Utils;
+using WEBUIautomation;
 using WEBUIautomation.Wait;
 using WEBUItests.Base_Test;
 using WEBUItests.TestVariables;

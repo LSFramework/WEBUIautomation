@@ -5,7 +5,8 @@ using WEBUIautomation.WebElement;
 
 namespace WEBPages.BasePageObject
 {
-   
+
+    using WEBUIautomation;
     using Locators = ContentLocators.Locators.BaseDialog;
 
     public abstract class Dialog : FramePageBase

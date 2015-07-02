@@ -8,7 +8,7 @@ using WEBUIautomation.Wait;
 
 namespace WEBUIautomation.Extensions
 {
-    public static class ISearchContextExtension
+    public static partial class ISearchContextExtension
     {
         public static bool TryFindElement(this ISearchContext searcher, By by)
         {

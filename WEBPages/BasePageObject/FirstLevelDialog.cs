@@ -1,4 +1,4 @@
-﻿using WEBUIautomation.Utils;
+﻿using WEBUIautomation;
 using WEBUIautomation.Extensions;
 using WEBPages.Extensions;
 
